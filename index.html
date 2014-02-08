@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+		<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+
+		<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/ui-bootstrap-tpls-0.10.0.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="js/controller/root.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body class="container-fluid">
+		<div ng-controller="RootCtrl" class="row login-form">
+			<div class="col-lg-4"></div>
+			<form class="form-horizontal col-lg-4" role="form">
+				<div class="form-group">
+					<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-6">
+						<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+					<div class="col-sm-6">
+						<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">
+							Sign in
+						</button>
+						<button type="submit" class="btn btn-default">
+							Register
+						</button>
+					</div>
+				</div>
+			</form>
+			<div class="col-lg-4"></div>
+		</div>
+	</body>
+	<footer></footer>
+</html>
