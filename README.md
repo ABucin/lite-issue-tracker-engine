@@ -5,5 +5,6 @@ Repository for the issue tracker application.
 
 #### Technology stack
 
+* AngularJS 1.2.12
 * Bootstrap 3.1
-* jQuery 2.1.0
+* Font Awesome 4.0.3
