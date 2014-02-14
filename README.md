@@ -10,4 +10,4 @@ Repository for the issue tracker application.
 * Font Awesome 4.0.3
 * D3.js 3.4.1
 * Cubism.js 1.0.0
-* Highcharts.js 3.0.9
+* -Highcharts.js 3.0.9-
