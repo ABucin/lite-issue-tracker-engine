@@ -8,6 +8,9 @@ function($routeProvider) {
     }).when('/dashboard', {
         templateUrl : 'partials/dashboard.html',
         controller: 'DashboardCtrl'
+    }).when('/tasks', {
+        templateUrl : 'partials/tasks.html',
+        controller: 'TasksCtrl'
     }).otherwise({
         redirectTo : '/login',
         controller: 'RootCtrl'
@@ -17,15 +20,10 @@ function($routeProvider) {
 app.controller('RootCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.auth = false;
-
-    $scope.redirect = function() {
-        $location.path('/dashboard');
+    
+    $scope.navigate = function(url) {
+        $location.path('/' + url);
     };
 
-}]);
-
-app.controller('DashboardCtrl', ['$scope', '$rootScope', '$location',
-function($scope, $rootScope, $location) {
-    $rootScope.auth = true;
 }]);
 
