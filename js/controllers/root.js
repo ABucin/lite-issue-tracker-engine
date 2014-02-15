@@ -11,6 +11,9 @@ function($routeProvider) {
     }).when('/tasks', {
         templateUrl : 'partials/tasks.html',
         controller: 'TasksCtrl'
+    }).when('/bugs', {
+        templateUrl : 'partials/bugs.html',
+        controller: 'BugsCtrl'
     }).when('/profile', {
         templateUrl : 'partials/profile.html',
         controller: 'ProfileCtrl'
