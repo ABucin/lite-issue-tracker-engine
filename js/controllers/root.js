@@ -11,6 +11,9 @@ function($routeProvider) {
     }).when('/tasks', {
         templateUrl : 'partials/tasks.html',
         controller: 'TasksCtrl'
+    }).when('/profile', {
+        templateUrl : 'partials/profile.html',
+        controller: 'ProfileCtrl'
     }).otherwise({
         redirectTo : '/login',
         controller: 'RootCtrl'
