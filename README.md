@@ -7,7 +7,7 @@ Repository for the issue tracker application.
 
 * Angular.js 1.2.12
 * Bootstrap 3.1.1
-* Font Awesome 4.0.3
-* D3.js 3.4.1
 * Cubism.js 1.0.0
-* Highcharts.js 3.0.9
+* D3.js 3.4.1
+* Font Awesome 4.0.3
+* jQuery 2.1.0

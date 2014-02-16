@@ -32,4 +32,3 @@ function($scope, $rootScope, $location) {
     };
 
 }]);
-
