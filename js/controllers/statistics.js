@@ -8,17 +8,14 @@ function($scope, $rootScope, $location) {
                 type: 'line'
             },
             title: {
-                text: 'Monthly Average Temperature'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: 'Logged Hours'
             },
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
             },
             yAxis: {
                 title: {
-                    text: 'Temperature (°C)'
+                    text: 'Hours'
                 }
             },
             tooltip: {
@@ -40,11 +37,14 @@ function($scope, $rootScope, $location) {
                 enabled: false
             },
             series: [{
-                name: 'Tokyo',
-                data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                name: 'mlawrence',
+                data: [3, 5, 9, 8, 3]
             }, {
-                name: 'London',
-                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                name: 'athompson',
+                data: [3, 4, 8, 11, 2]
+            }, {
+                name: 'psmith',
+                data: [8, 8, 4, 2, 4]
             }]
         });
     };
@@ -55,13 +55,10 @@ function($scope, $rootScope, $location) {
                 type: 'bar'
             },
             title: {
-                text: 'Historic World Population by Region'
-            },
-            subtitle: {
-                text: 'Source: Wikipedia.org'
+                text: 'Ticket Completion by User'
             },
             xAxis: {
-                categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+                categories: ['psmith', 'athompson', 'mlawrence'],
                 title: {
                     text: null
                 }
@@ -69,15 +66,12 @@ function($scope, $rootScope, $location) {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Population (millions)',
+                    text: 'Amount',
                     align: 'high'
                 },
                 labels: {
                     overflow: 'justify'
                 }
-            },
-            tooltip: {
-                valueSuffix: ' millions'
             },
             plotOptions: {
                 bar: {
@@ -101,14 +95,11 @@ function($scope, $rootScope, $location) {
                 enabled: false
             },
             series: [{
-                name: 'Year 1800',
-                data: [107, 31, 635, 203, 2]
+                name: 'Bug',
+                data: [15, 31, 12]
             }, {
-                name: 'Year 1900',
-                data: [133, 156, 947, 408, 6]
-            }, {
-                name: 'Year 2008',
-                data: [973, 914, 4054, 732, 34]
+                name: 'Task',
+                data: [13, 16, 5]
             }]
         });
     };
@@ -116,19 +107,15 @@ function($scope, $rootScope, $location) {
     $scope.chart3 = function() {
         $('#chart3').highcharts({
             chart: {
-                type: 'scatter',
-                zoomType: 'xy'
+                type: 'scatter'
             },
             title: {
-                text: 'Height Versus Weight of 507 Individuals by Gender'
-            },
-            subtitle: {
-                text: 'Source: Heinz  2003'
+                text: 'Effort vs. Estimation of 507 Tasks by Type'
             },
             xAxis: {
                 title: {
                     enabled: true,
-                    text: 'Height (cm)'
+                    text: 'Effort (hrs.)'
                 },
                 startOnTick: true,
                 endOnTick: true,
@@ -136,7 +123,7 @@ function($scope, $rootScope, $location) {
             },
             yAxis: {
                 title: {
-                    text: 'Weight (kg)'
+                    text: 'Estimation (hrs.)'
                 }
             },
             legend: {
@@ -169,7 +156,7 @@ function($scope, $rootScope, $location) {
                     },
                     tooltip: {
                         headerFormat: '<b>{series.name}</b><br>',
-                        pointFormat: '{point.x} cm, {point.y} kg'
+                        pointFormat: '{point.x} hrs. est., {point.y} hrs. eff.'
                     }
                 }
             },
@@ -177,7 +164,7 @@ function($scope, $rootScope, $location) {
                 enabled: false
             },
             series: [{
-                name: 'Female',
+                name: 'Bugs',
                 color: 'rgba(223, 83, 83, .5)',
                 data: [[161.2, 51.6], [167.5, 59.0], [159.5, 49.2], [157.0, 63.0], [155.8, 53.6],
                     [170.0, 59.0], [159.1, 47.6], [166.0, 69.8], [176.2, 66.8], [160.2, 75.2],
@@ -233,7 +220,7 @@ function($scope, $rootScope, $location) {
                     [176.5, 71.8], [164.4, 55.5], [160.7, 48.6], [174.0, 66.4], [163.8, 67.3]]
     
             }, {
-                name: 'Male',
+                name: 'Tasks',
                 color: 'rgba(119, 152, 191, .5)',
                 data: [[174.0, 65.6], [175.3, 71.8], [193.5, 80.7], [186.5, 72.6], [187.2, 78.8],
                     [181.5, 74.8], [184.0, 86.4], [184.5, 78.4], [175.0, 62.0], [184.0, 81.6],

@@ -26,10 +26,13 @@ function($scope, $rootScope, $location) {
                     }
                 }
             },
+            credits: {
+                enabled: false
+            },
             series : [{
                 type : 'pie',
                 name : 'Assigned tickets',
-                data : [['mlawrence', 5], ['athompson', 3], ['jsmith', 4]]
+                data : [['mlawrence', 5], ['athompson', 3], ['psmith', 4]]
             }]
         });
     };
