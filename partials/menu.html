@@ -4,7 +4,7 @@
 			<a class="navbar-brand">Issue Tracker</a>
 			<ul class="nav navbar-nav">
 				<li class='toggleable'>
-					<a ng-click="navigate('dashboard')"><i class="fa fa-dashboard"></i>Dashboard</a>
+					<a ng-click="navigate('dashboard')"><i class="fa fa-home"></i>Dashboard</a>
 				</li>
 				<li class='toggleable'>
 					<a ng-click="navigate('tasks')"><i class="fa fa-tasks"></i>Tasks</a>
@@ -14,6 +14,9 @@
 				</li>
 				<li class='toggleable'>
 					<a ng-click="navigate('statistics')"><i class="fa fa-bar-chart-o"></i>Statistics</a>
+				</li>
+				<li class='toggleable'>
+					<a ng-click="navigate('')"><i class="fa fa-users"></i>Team</a>
 				</li>
 				<li class='toggleable'>
 					<a ng-click="navigate('profile')"><i class="fa fa-user"></i>Profile</a>
@@ -26,8 +29,8 @@
 				</div>
 			</form>
 			<ul class="nav navbar-nav">
-				<li class='toggleable'>
-					<a ng-click=""><i class="fa fa-desktop"></i>Logout</a>
+				<li>
+					<a ng-click="logout()"><i class="fa fa-power-off"></i>Logout</a>
 				</li>
 			</ul>
 		</div>

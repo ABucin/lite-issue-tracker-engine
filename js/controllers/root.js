@@ -4,34 +4,38 @@ app.config(['$routeProvider',
 function($routeProvider) {
     $routeProvider.when('/login', {
         templateUrl : 'partials/login.html',
-        controller: 'RootCtrl'
+        controller : 'RootCtrl'
     }).when('/dashboard', {
         templateUrl : 'partials/dashboard.html',
-        controller: 'DashboardCtrl'
+        controller : 'DashboardCtrl'
     }).when('/tasks', {
         templateUrl : 'partials/tasks.html',
-        controller: 'TasksCtrl'
+        controller : 'TasksCtrl'
     }).when('/bugs', {
         templateUrl : 'partials/bugs.html',
-        controller: 'BugsCtrl'
+        controller : 'BugsCtrl'
     }).when('/statistics', {
         templateUrl : 'partials/statistics.html',
-        controller: 'StatisticsCtrl'
+        controller : 'StatisticsCtrl'
     }).when('/profile', {
         templateUrl : 'partials/profile.html',
-        controller: 'ProfileCtrl'
+        controller : 'ProfileCtrl'
     }).otherwise({
         redirectTo : '/login',
-        controller: 'RootCtrl'
+        controller : 'RootCtrl'
     });
 }]);
 
 app.controller('RootCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.auth = false;
-    
+
     $scope.navigate = function(url) {
         $location.path('/' + url);
     };
 
-}]);
+    $scope.logout = function() {
+        $location.path('/login');
+        $rootScope.auth = false;
+    };
+}]); 

@@ -1,6 +1,8 @@
 a{cursor: pointer;}
 
-.toggleable > a > i.fa {margin-right: 5px;}
+/*body{background-color: #C0C0C0}*/
+
+.nav > li > a > i.fa {margin-right: 5px;}
 
 .table > tbody > tr > td, .table > thead > tr > th {border-left: 1px dashed #DDDDDD;}
 .table > tbody > tr > td {border-top: none;}
