@@ -20,6 +20,9 @@ function($routeProvider) {
     }).when('/profile', {
         templateUrl : 'partials/profile.html',
         controller : 'ProfileCtrl'
+    }).when('/team', {
+        templateUrl : 'partials/team.html',
+        controller : 'TeamCtrl'
     }).otherwise({
         redirectTo : '/login',
         controller : 'RootCtrl'
