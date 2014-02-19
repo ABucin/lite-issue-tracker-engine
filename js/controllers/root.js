@@ -23,6 +23,9 @@ function($routeProvider) {
     }).when('/team', {
         templateUrl : 'partials/team.html',
         controller : 'TeamCtrl'
+    }).when('/settings', {
+        templateUrl : 'partials/settings.html',
+        controller : 'SettingsCtrl'
     }).otherwise({
         redirectTo : '/login',
         controller : 'RootCtrl'
