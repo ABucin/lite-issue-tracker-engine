@@ -9,5 +9,7 @@ a{cursor: pointer;}
 .table > tbody > tr > td i {padding-left: 5px;}
 .table > thead i {padding-left: 5px;}
 
+.panel-body > .label {padding: 2px 4px;}
+
 .label .fa {padding-left: 5px;}
 .login-form {padding-top: 10%;}
