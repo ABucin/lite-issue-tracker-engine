@@ -6,6 +6,7 @@ Repository for the issue tracker application.
 #### Technology stack
 
 * Angular.js 1.2.12
+* Angular.js Bootstrap Directives 0.10
 * Bootstrap 3.1.1
 * Cubism.js 1.0.0
 * D3.js 3.4.1
