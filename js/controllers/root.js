@@ -32,16 +32,44 @@ function($routeProvider) {
     });
 }]);
 
-app.controller('RootCtrl', ['$scope', '$rootScope', '$location',
-function($scope, $rootScope, $location) {
+app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http',
+function($scope, $rootScope, $location, $http) {
     $rootScope.auth = false;
+
+    $rootScope.bugs = [];
+    $rootScope.tasks = [];
+
+
+    $scope.fetchUserData = function() {
+        $http({
+            method : 'GET',
+            url : '/issue-tracker/data/main.json'
+        }).success(function(data) {
+            $rootScope.bugs = data.bugs;
+            $rootScope.tasks = data.tasks;
+        }).error(function(data, status) {
+            alert(status + " : " + data);
+        });
+    }; 
+
 
     $scope.navigate = function(url) {
         $location.path('/' + url);
     };
 
+    /**
+     * Applies padding to the page body for displaying the menu correctly.
+     * This depends on whether or not we are logged in to the dashboard.
+     */
+    $scope.togglePadding = function() {
+        return ($rootScope.auth === true) ? "body-menu-padding" : "";
+    };
+
+    /*
+     * Logs out the current user.
+     */
     $scope.logout = function() {
         $location.path('/login');
         $rootScope.auth = false;
     };
-}]); 
+}]);

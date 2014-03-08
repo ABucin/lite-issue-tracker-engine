@@ -1,6 +1,9 @@
-a{cursor: pointer;}
+.body-menu-padding { padding-top: 70px; }
 
-/*body{background-color: #C0C0C0}*/
+
+.panel-body div[ng-repeat*="in"] {display: inline-block; padding: 3px 6px; margin: 2px;}
+
+a{cursor: pointer;}
 
 .nav > li > a > i.fa {margin-right: 5px;}
 
@@ -8,8 +11,6 @@ a{cursor: pointer;}
 .table > tbody > tr > td {border-top: none;}
 .table > tbody > tr > td i {padding-left: 5px;}
 .table > thead i {padding-left: 5px;}
-
-.panel-body > .label {padding: 2px 4px;}
 
 .label .fa {padding-left: 5px;}
 .login-form {padding-top: 10%;}

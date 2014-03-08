@@ -1,6 +1,7 @@
 app.controller('DashboardCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.auth = true;
+    
     $scope.chart = function() {
         $('#chart').highcharts({
             chart : {

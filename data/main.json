@@ -1,0 +1,40 @@
+{
+	"bugs": [
+		{
+			"code": "BG-15",
+			"title": "Email Validation Not Working",
+			"status": "open"
+		}, {
+			"code": "BG-21",
+			"title": "Authentication Whitespace Handling",
+			"status": "open"
+		}, {
+			"code": "BG-5",
+			"title": "Registration Page Header Missing",
+			"status": "open"
+		}, {
+			"code": "BG-8",
+			"title": "Minor CSS Alignment Bug",
+			"status": "open"
+		}
+	],
+	"tasks": [
+		{
+			"code": "TA-21",
+			"title": "Implement User Registration Mechanism",
+			"status": "open"
+		}, {
+			"code": "TA-15",
+			"title": "Review Currency Conversion Code",
+			"status": "open"
+		}, {
+			"code": "TA-4",
+			"title": "Plan Review Meeting",
+			"status": "open"
+		}, {
+			"code": "TA-8",
+			"title": "Implement User Password Reset Functionality",
+			"status": "open"
+		}
+	]
+}
