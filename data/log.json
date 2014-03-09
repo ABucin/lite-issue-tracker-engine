@@ -3,16 +3,19 @@
 		{
 			"user": "mlawrence",
 			"action": "commented",
-			"target": "TA-92"
+			"target": "TA-92",
+			"targetType":"task"
 		}, {
 			"user": "athompson",
 			"action": "logged",
 			"amount": 5,
-			"target": "BG-32"
+			"target": "BG-32",
+			"targetType":"bug"
 		}, {
 			"user": "psmith",
 			"action": "deleted",
-			"target": "TA-2"
+			"target": "TA-2",
+			"targetType":"task"
 		}
 	]
 }

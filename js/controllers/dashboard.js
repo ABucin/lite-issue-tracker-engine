@@ -18,7 +18,7 @@ function($scope, $rootScope, $location) {
                 plotShadow : false
             },
             title : {
-                text : 'Workload'
+                text : ''
             },
             tooltip : {
                 pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
