@@ -38,7 +38,7 @@ function($scope, $rootScope, $location, $http) {
 
     $rootScope.bugs = [];
     $rootScope.tasks = [];
-
+    $rootScope.logEntries = [];
 
     $scope.fetchUserData = function() {
         $http({
@@ -52,6 +52,16 @@ function($scope, $rootScope, $location, $http) {
         });
     }; 
 
+    $scope.fetchLogData = function() {
+        $http({
+            method : 'GET',
+            url : '/issue-tracker/data/log.json'
+        }).success(function(data) {
+            $rootScope.logEntries = data.entries;
+        }).error(function(data, status) {
+            alert(status + " : " + data);
+        });
+    }; 
 
     $scope.navigate = function(url) {
         $location.path('/' + url);

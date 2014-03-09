@@ -1,4 +1,4 @@
-<div class="panel" ng-init="fetchUserData()">
+<div class="panel">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="panel panel-default">
@@ -32,9 +32,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Burndown Chart
-					<span class="pull-right"><i class="fa fa-times"></i></span>
+					<span class="pull-right"><i class="fa fa-times" data-toggle="collapse" data-target="#panel-burndown"></i></span>
 				</div>
-				<div class="panel-body" id="chart" ng-init="chart()">
+				<div class="panel-body" id="panel-burndown" ng-init="chart()">
 				</div>
 			</div>
 		</div>
@@ -42,12 +42,12 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Activity
-					<span class="pull-right"><i class="fa fa-times"></i></span>
+					<span class="pull-right"><i class="fa fa-times" data-toggle="collapse" data-target="#panel-activity"></i></span>
 				</div>
-				<div class="panel-body">
-					<p><span class="badge alert-success">mlawrence</span> commented on <span class="badge alert-info">IS-342</span></p>
-					<p><span class="badge alert-success">athompson</span> logged <strong>5 hrs.</strong> on <span class="badge alert-danger">BG-318</span></p>
-					<p><span class="badge alert-success">psmith</span> deleted <span class="badge alert-info">IS-331</span></p>
+				<div class="panel-body" id="panel-activity">
+					<p ng-repeat="entry in logEntries">
+						<span class="badge alert-success">{{entry.user}}</span>{{entry.action}} <strong ng-show="entry.amount">{{entry.amount}} hrs.</strong> on <span class="badge alert-info">{{entry.target}}</span>
+					</p>
 				</div>
 			</div>
 		</div>
