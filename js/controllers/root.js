@@ -34,10 +34,11 @@ function($routeProvider) {
 
 app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http',
 function($scope, $rootScope, $location, $http) {
+    $rootScope.username = "abucin";
+    
     $rootScope.auth = false;
 
-    $rootScope.bugs = [];
-    $rootScope.tasks = [];
+    $rootScope.tickets = [];
     $rootScope.logEntries = [];
 
     /**
@@ -54,8 +55,7 @@ function($scope, $rootScope, $location, $http) {
             method : 'GET',
             url : '/issue-tracker/data/main.json'
         }).success(function(data) {
-            $rootScope.bugs = data.bugs;
-            $rootScope.tasks = data.tasks;
+            $rootScope.tickets = data.tickets;
         }).error(function(data, status) {
             alert(status + " : " + data);
         });

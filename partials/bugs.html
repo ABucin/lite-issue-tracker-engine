@@ -9,11 +9,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="bug in bugs">
+			<!-- <tr ng-repeat="bug in bugs">
 				<td><span ng-if="bug.status === 'created'" class="label label-danger">{{bug.code}} | {{bug.title}}</span></td>
 				<td><span ng-if="bug.status === 'in_progress'" class="label label-danger">{{bug.code}} | {{bug.title}}</span></td>
 				<td><span ng-if="bug.status === 'testing'" class="label label-danger">{{bug.code}} | {{bug.title}}</span></td>
 				<td><span ng-if="bug.status === 'fixed'" class="label label-danger">{{bug.code}} | {{bug.title}}</span></td>
+			</tr> -->
+			
+			<tr ng-repeat="ticket in tickets | filter:'bug'" ng-if="ticket.owner === username || displayAll">
+				<td><ticket ng-if="ticket.status === 'created'"></ticket></td>
+				<td><ticket ng-if="ticket.status === 'in_progress'"></ticket></td>
+				<td><ticket ng-if="ticket.status === 'testing'"></ticket></td>
+				<td><ticket ng-if="ticket.status === 'fixed'"></ticket></td>
 			</tr>
 		</tbody>
 	</table>
@@ -25,14 +32,14 @@
 
 	<div class="dropdown">
 		<button type="button" class="btn btn-default btn-xs dropdown-toggle" id="bugsMenu" data-toggle="dropdown">
-			<i class="fa fa-filter"></i> Filter
+			<i class="fa fa-filter"></i> Filter <span class="caret"></span>
 		</button>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="bugsMenu">
+		<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="bugsMenu">
 			<li role="presentation">
-				<a role="menuitem" tabindex="-1" href="#">All</a>
+				<a role="menuitem" tabindex="-1" ng-click="displayAll = true">All</a>
 			</li>
 			<li role="presentation">
-				<a role="menuitem" tabindex="-1" href="#">Mine</a>
+				<a role="menuitem" tabindex="-1" ng-click="displayAll = false">Mine</a>
 			</li>
 		</ul>
 	</div>

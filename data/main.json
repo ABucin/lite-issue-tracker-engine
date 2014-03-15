@@ -1,44 +1,83 @@
 {
-	"bugs": [
+	"tickets": [
 		{
 			"code": "BG-15",
 			"title": "Email Validation Not Working",
-			"status": "testing"
+			"status": "testing",
+			"owner": "abucin",
+			"type": "bug"
 		}, {
 			"code": "BG-21",
 			"title": "Authentication Whitespace Handling",
-			"status": "created"
+			"status": "created",
+			"owner": "abucin",
+			"type": "bug"
 		}, {
 			"code": "BG-5",
 			"title": "Registration Page Header Missing",
-			"status": "fixed"
+			"status": "fixed",
+			"owner": "abucin",
+			"type": "bug"
 		}, {
 			"code": "BG-8",
 			"title": "Minor CSS Alignment Bug",
-			"status": "in_progress"
-		}
-	],
-	"tasks": [
-		{
+			"status": "in_progress",
+			"owner": "abucin",
+			"type": "bug"
+		}, {
+			"code": "BG-221",
+			"title": "Fix CSS button padding",
+			"status": "in_progress",
+			"owner": "psmith",
+			"type": "bug"
+		} , {
 			"code": "TA-21",
 			"title": "Implement User Registration Mechanism",
-			"status": "testing"
+			"status": "testing",
+			"owner": "abucin",
+			"type": "task"
 		}, {
 			"code": "TA-15",
 			"title": "Review Currency Conversion Code",
-			"status": "created"
+			"status": "created",
+			"owner": "abucin",
+			"type": "task"
 		}, {
 			"code": "TA-4",
 			"title": "Plan Review Meeting",
-			"status": "in_progress"
+			"status": "in_progress",
+			"owner": "abucin",
+			"type": "task"
 		}, {
 			"code": "TA-8",
 			"title": "Implement User Password Reset Functionality",
-			"status": "created"
+			"status": "created",
+			"owner": "abucin",
+			"type": "task"
 		}, {
 			"code": "TA-10",
 			"title": "Revoke Domain Credentials",
-			"status": "done"
+			"status": "done",
+			"owner": "abucin",
+			"type": "task"
+		}, {
+			"code": "TA-110",
+			"title": "Add Colour Palette",
+			"status": "done",
+			"owner": "psmith",
+			"type": "task"
+		} , {
+			"code": "TA-130",
+			"title": "Remove Redundant Tests",
+			"status": "in_progress",
+			"owner": "mlawrence",
+			"type": "task"
+		} , {
+			"code": "BG-130",
+			"title": "Remove Redundant Tests",
+			"status": "done",
+			"owner": "mlawrence",
+			"type": "bug"
 		}
 	]
 }
