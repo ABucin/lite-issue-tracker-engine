@@ -10,7 +10,10 @@ a{cursor: pointer;}
 .table > tbody > tr > td, .table > thead > tr > th {border-left: 1px dashed #DDDDDD;}
 .table > tbody > tr > td {border-top: none;}
 .table > tbody > tr > td i {padding-left: 5px;}
+.table > thead > tr > th {margin-bottom: 10px; font-weight: 100; text-align: center; min-width: 25%;}
 .table > thead i {padding-left: 5px;}
 
 .label .fa {padding-left: 5px;}
 .login-form {padding-top: 10%;}
+
+button[data-target*='-modal'] {margin: 5px 0;}

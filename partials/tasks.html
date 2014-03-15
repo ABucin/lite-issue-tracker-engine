@@ -1,39 +1,42 @@
-<table class="table table-condensed">
-	<thead>
-		<tr>
-			<th>Created</th>
-			<th>In Progress</th>
-			<th>Testing</th>
-			<th>Done</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><span class="label label-info">IS-312 | Plan Review Meeting<i class="fa fa-check"></i></span></td>
-			<td><span class="label label-info">IS-218 | Remove CHF currency<i class="fa fa-check"></i></span></td>
-			<td><span class="label label-info">IS-437 | Add French Localization<i class="fa fa-check"></i></span></td>
-			<td><span class="label label-info">IS-121 | Clean up login code<i class="fa fa-check"></i></span></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><span class="label label-info">IS-772 | Implement User Password Reset Functionality<i class="fa fa-check"></i></span></td>
-			<td></td>
-			<td><span class="label label-info">IS-224 | Configure Web Environment<i class="fa fa-check"></i></span></td>
-		</tr>
-	</tbody>
-</table>
-<div data-toggle="modal" data-target="#ticket-modal">
-	<i class="fa fa-plus-circle"></i> Create Task
+<div class="col-lg-11">
+	<table class="table table-condensed table-hover">
+		<thead>
+			<tr>
+				<th>Created</th>
+				<th>In Progress</th>
+				<th>Testing</th>
+				<th>Done</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="task in tasks">
+				<td><span ng-if="task.status === 'created'" class="label label-info">{{task.code}} | {{task.title}}</span></td>
+				<td><span ng-if="task.status === 'in_progress'" class="label label-info">{{task.code}} | {{task.title}}</span></td>
+				<td><span ng-if="task.status === 'testing'" class="label label-info">{{task.code}} | {{task.title}}</span></td>
+				<td><span ng-if="task.status === 'done'" class="label label-info">{{task.code}} | {{task.title}}</span></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-<div class="radio-inline">
-	<label>
-		<input type="radio">
-		All </label>
-</div>
-<div class="radio-inline">
-	<label>
-		<input type="radio">
-		Mine </label>
+
+<div class="col-lg-1">
+	<button data-toggle="modal" data-target="#ticket-modal" type="button" class="btn btn-default btn-xs">
+		<i class="fa fa-plus"></i> Create Task
+	</button>
+
+	<div class="dropdown">
+		<button type="button" class="btn btn-default btn-xs dropdown-toggle" id="tasksMenu" data-toggle="dropdown">
+			<i class="fa fa-filter"></i> Filter
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="tasksMenu">
+			<li role="presentation">
+				<a role="menuitem" tabindex="-1" href="#">All</a>
+			</li>
+			<li role="presentation">
+				<a role="menuitem" tabindex="-1" href="#">Mine</a>
+			</li>
+		</ul>
+	</div>
 </div>
 
 <!-- Modal dialog code -->

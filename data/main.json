@@ -3,38 +3,42 @@
 		{
 			"code": "BG-15",
 			"title": "Email Validation Not Working",
-			"status": "open"
+			"status": "testing"
 		}, {
 			"code": "BG-21",
 			"title": "Authentication Whitespace Handling",
-			"status": "open"
+			"status": "created"
 		}, {
 			"code": "BG-5",
 			"title": "Registration Page Header Missing",
-			"status": "open"
+			"status": "fixed"
 		}, {
 			"code": "BG-8",
 			"title": "Minor CSS Alignment Bug",
-			"status": "open"
+			"status": "in_progress"
 		}
 	],
 	"tasks": [
 		{
 			"code": "TA-21",
 			"title": "Implement User Registration Mechanism",
-			"status": "open"
+			"status": "testing"
 		}, {
 			"code": "TA-15",
 			"title": "Review Currency Conversion Code",
-			"status": "open"
+			"status": "created"
 		}, {
 			"code": "TA-4",
 			"title": "Plan Review Meeting",
-			"status": "open"
+			"status": "in_progress"
 		}, {
 			"code": "TA-8",
 			"title": "Implement User Password Reset Functionality",
-			"status": "open"
+			"status": "created"
+		}, {
+			"code": "TA-10",
+			"title": "Revoke Domain Credentials",
+			"status": "done"
 		}
 	]
 }

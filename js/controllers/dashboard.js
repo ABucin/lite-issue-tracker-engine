@@ -1,17 +1,9 @@
 app.controller('DashboardCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.auth = true;
-    
-    /**
-     * What happens when this page is loaded. 
-     */
-    angular.element(document).ready(function () {
-        $scope.fetchUserData();
-        $scope.fetchLogData();
-    });
-    
+        
     $scope.chart = function() {
-        $('#panel-burndown').highcharts({
+        $('#panel-workload').highcharts({
             chart : {
                 plotBackgroundColor : null,
                 plotBorderWidth : null,

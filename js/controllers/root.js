@@ -40,6 +40,15 @@ function($scope, $rootScope, $location, $http) {
     $rootScope.tasks = [];
     $rootScope.logEntries = [];
 
+    /**
+     * TODO - Disable this when there is a DB
+     * What happens when every page is loaded. 
+     */
+    angular.element(document).ready(function () {
+        $scope.fetchUserData();
+        $scope.fetchLogData();
+    });
+
     $scope.fetchUserData = function() {
         $http({
             method : 'GET',
