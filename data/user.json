@@ -1,0 +1,29 @@
+{
+	"users": [
+		{
+			"username": "psmith",
+			"role": "tester",
+			"tasks": 7,
+			"estimatedTime": 200,
+			"loggedTime": 300
+		} , {
+			"username": "athompson",
+			"role": "developer",
+			"tasks": 2,
+			"estimatedTime": 15,
+			"loggedTime": 85
+		} , {
+			"username": "mlawrence",
+			"role": "developer",
+			"tasks": 5,
+			"estimatedTime": 70,
+			"loggedTime": 30
+		} , {
+			"username": "abucin",
+			"role": "admin",
+			"tasks": 0,
+			"estimatedTime": 200,
+			"loggedTime": 200
+		}
+	]
+}

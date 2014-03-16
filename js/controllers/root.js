@@ -36,21 +36,25 @@ app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http',
 function($scope, $rootScope, $location, $http) {
     $rootScope.username = "abucin";
     
+    $rootScope.maxUserTasks = 10;
+    
     $rootScope.auth = false;
 
     $rootScope.tickets = [];
     $rootScope.logEntries = [];
+    $rootScope.users = [];
 
     /**
      * TODO - Disable this when there is a DB
      * What happens when every page is loaded. 
      */
     angular.element(document).ready(function () {
-        $scope.fetchUserData();
+        $scope.fetchMainData();
         $scope.fetchLogData();
+        $scope.fetchUserData();
     });
 
-    $scope.fetchUserData = function() {
+    $scope.fetchMainData = function() {
         $http({
             method : 'GET',
             url : '/issue-tracker/data/main.json'
@@ -67,6 +71,17 @@ function($scope, $rootScope, $location, $http) {
             url : '/issue-tracker/data/log.json'
         }).success(function(data) {
             $rootScope.logEntries = data.entries;
+        }).error(function(data, status) {
+            alert(status + " : " + data);
+        });
+    }; 
+    
+    $scope.fetchUserData = function() {
+        $http({
+            method : 'GET',
+            url : '/issue-tracker/data/user.json'
+        }).success(function(data) {
+            $rootScope.users = data.users;
         }).error(function(data, status) {
             alert(status + " : " + data);
         });

@@ -16,4 +16,4 @@ a{cursor: pointer;}
 .label .fa {padding-left: 5px;}
 .login-form {padding-top: 10%;}
 
-button[data-target*='-modal'] {margin: 5px 0;}
+.sidebar button[data-target*='-modal'] {margin: 5px 0;}
