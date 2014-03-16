@@ -41,10 +41,10 @@ app.directive('time', function($rootScope) {
             scope.loggedValue = 10 - scope.estimatedValue;
         },
         template : "<div class='progress'>"+
-                        "<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='{{loggedValue}}' aria-valuemin='0' aria-valuemax='10' style='width: {{loggedWidth}}%;'>"+
+                        "<div class='progress-bar progress-bar-success' role='progressbar' tooltip-placement='top' tooltip='Logged Time' aria-valuenow='{{loggedValue}}' aria-valuemin='0' aria-valuemax='10' style='width: {{loggedWidth}}%;'>"+
                             "{{user.loggedTime}}h"+
                         "</div>"+
-                        "<div class='progress-bar progress-bar-danger' role='progressbar' aria-valuenow='{{estimatedValue}}' aria-valuemin='0' aria-valuemax='10' style='width: {{estimatedWidth}}%;'>"+
+                        "<div class='progress-bar progress-bar-danger' role='progressbar' tooltip-placement='top' tooltip='Estimated Time' aria-valuenow='{{estimatedValue}}' aria-valuemin='0' aria-valuemax='10' style='width: {{estimatedWidth}}%;'>"+
                             "{{user.estimatedTime}}h"+
                         "</div>"+
                    " </div>"
