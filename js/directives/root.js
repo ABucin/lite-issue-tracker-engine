@@ -11,7 +11,7 @@ app.directive('ticket', function($rootScope) {
         if(tAttr.task === undefined) {
             type = "label-danger";
         }
-        return "<span class='label " + type + "'>{{ticket.code}} | {{ticket.title}}</span>";
+        return "<div class='label " + type + "'>{{ticket.code}} | {{ticket.title}}</div>";
     }
     
     return {

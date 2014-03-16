@@ -1,6 +1,6 @@
 .body-menu-padding { padding-top: 70px; }
 
-.panel-heading > span> i[data-toggle*="collapse"] {cursor: pointer}
+.panel-heading > span > i[data-toggle*="collapse"] {cursor: pointer}
 .panel-body div[ng-repeat*="in"] {display: inline-block; padding: 3px 6px; margin: 2px;}
 
 a{cursor: pointer;}
