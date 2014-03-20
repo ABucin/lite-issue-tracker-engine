@@ -35,10 +35,12 @@ function($routeProvider) {
 app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http',
 function($scope, $rootScope, $location, $http) {
     $rootScope.username = "abucin";
+    $rootScope.createAction = "";
     
     $rootScope.maxUserTasks = 10;
     
     $rootScope.auth = false;
+    $scope.displayAll = true;
 
     $rootScope.tickets = [];
     $rootScope.logEntries = [];

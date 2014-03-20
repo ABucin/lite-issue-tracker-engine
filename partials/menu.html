@@ -3,16 +3,31 @@
 		<div class="navbar-header">
 			<a class="navbar-brand">Issue Tracker</a>
 			<ul class="nav navbar-nav">
-				<li class="active">
-					<a class="fa fa-bars"></a>
+				<li>
+					<a class="fa fa-bars" data-toggle="dropdown"></a>
+					<ul class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="tasksMenu">
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#ticket-modal">{{createAction}}</a>
+						</li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation" class="dropdown-header">
+							Filtering
+						</li>
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" ng-click="displayAll = true">All <i ng-show="displayAll" class="fa fa-check"></i></a>
+						</li>
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" ng-click="displayAll = false">Mine <i ng-show="!displayAll" class="fa fa-check"></i></a>
+						</li>
+					</ul>
 				</li>
 				<li class='toggleable'>
 					<a ng-click="navigate('dashboard')"><i class="fa fa-home"></i>Dashboard</a>
 				</li>
 				<li class='toggleable'>
 					<a ng-click="navigate('tasks')"><i class="fa fa-tasks"></i>Tasks</a>
-				</li>
-				<li class='toggleable'>
+				</li>             
+                <li class='toggleable'>
 					<a ng-click="navigate('bugs')"><i class="fa fa-bug"></i>Bugs</a>
 				</li>
 				<li class='toggleable'>

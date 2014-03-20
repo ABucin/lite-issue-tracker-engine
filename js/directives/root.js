@@ -1,10 +1,3 @@
-app.directive('trackerMenu', function() {
-    return {
-        restrict : 'E',
-        templateUrl : "partials/menu.html"
-    };
-});
-
 app.directive('ticket', function($rootScope) {
     function templateFunction(tElem, tAttr) {
         var type = "label-info";
