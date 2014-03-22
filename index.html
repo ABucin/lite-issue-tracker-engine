@@ -8,9 +8,9 @@
 	<body ng-class="togglePadding()" ng-controller="RootCtrl">
 
 		<tracker-menu></tracker-menu>
-		
+
 		<div class="container-fluid">
-			<ng-view></ng-view>
+			<ng-view secured></ng-view>
 		</div>
 
 		<script src="js/vendor/jquery.min.js"></script>
@@ -21,7 +21,7 @@
 		<script src="js/vendor/cubism.v1.js"></script>
 		<script src="js/vendor/highcharts.js"></script>
 		<script src="js/vendor/bootstrap.min.js"></script>
-		
+
 		<script src="js/controllers/root.js"></script>
 		<script src="js/controllers/dashboard.js"></script>
 		<script src="js/controllers/tasks.js"></script>
@@ -30,13 +30,13 @@
 		<script src="js/controllers/statistics.js"></script>
 		<script src="js/controllers/team.js"></script>
 		<script src="js/controllers/settings.js"></script>
-		
+
 		<script src="js/directives/root.js"></script>
 		<script src="js/directives/menu.js"></script>
 		<script src="js/directives/team.js"></script>
-		
+
 		<script src="js/directives/vendor/drag-drop.js"></script>
-		
+
 		<script src="js/filters/root.js"></script>
 	</body>
 	<footer>

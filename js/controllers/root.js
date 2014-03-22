@@ -36,9 +36,9 @@ app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http',
 function($scope, $rootScope, $location, $http) {
     $rootScope.username = "abucin";
     $rootScope.createAction = "";
-    
+
     $rootScope.maxUserTasks = 10;
-    
+
     $rootScope.auth = false;
     $rootScope.canFilter = false;
     $scope.displayAll = true;
@@ -49,7 +49,7 @@ function($scope, $rootScope, $location, $http) {
 
     /**
      * TODO - Disable this when there is a DB
-     * What happens when every page is loaded. 
+     * What happens when every page is loaded.
      */
     angular.element(document).ready(function () {
         $scope.fetchMainData();
@@ -66,7 +66,7 @@ function($scope, $rootScope, $location, $http) {
         }).error(function(data, status) {
             alert(status + " : " + data);
         });
-    }; 
+    };
 
     $scope.fetchLogData = function() {
         $http({
@@ -77,8 +77,8 @@ function($scope, $rootScope, $location, $http) {
         }).error(function(data, status) {
             alert(status + " : " + data);
         });
-    }; 
-    
+    };
+
     $scope.fetchUserData = function() {
         $http({
             method : 'GET',
@@ -88,7 +88,7 @@ function($scope, $rootScope, $location, $http) {
         }).error(function(data, status) {
             alert(status + " : " + data);
         });
-    }; 
+    };
 
     $scope.navigate = function(url) {
         $location.path('/' + url);
@@ -100,6 +100,14 @@ function($scope, $rootScope, $location, $http) {
      */
     $scope.togglePadding = function() {
         return ($rootScope.auth === true) ? "body-menu-padding" : "";
+    };
+
+    /*
+     * Logs in the current user.
+     */
+    $scope.login = function() {
+        $location.path('/dashboard');
+        $rootScope.auth = true;
     };
 
     /*

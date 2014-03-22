@@ -39,9 +39,9 @@
 				</div>
 				<div class="panel-body" id="panel-activity">
 					<p ng-repeat="entry in logEntries">
-						<span class="badge alert-success">{{entry.user}}</span> {{entry.action}} 
-						<strong ng-show="entry.amount">{{entry.amount}} hrs.</strong> 
-						<span ng-hide="entry.action === 'deleted'">on</span> 
+						<span class="badge alert-success">{{entry.user}}</span> {{entry.action}}
+						<strong ng-show="entry.amount">{{entry.amount}} hrs.</strong>
+						<span ng-hide="entry.action === 'deleted'">on</span>
 						<span class="badge" ng-class="entry.targetType === 'bug' ? 'alert-danger' : 'alert-info'">{{entry.target}}</span>
 					</p>
 				</div>

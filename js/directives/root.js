@@ -6,10 +6,10 @@ app.directive('ticket', function($rootScope) {
         }
         return "<div class='label " + type + "'>{{ticket.code}} | {{ticket.title}}</div>";
     }
-    
+
     return {
         restrict : 'E',
-        link : function(scope, element, attribute) {
+        link : function(scope, element, attr) {
             if (scope.ticket.owner !== $rootScope.username) {
                 var fillColor = element.css('background-color');
                 var textColor = element.css('color');
@@ -22,5 +22,16 @@ app.directive('ticket', function($rootScope) {
         },
         replace : true,
         template : templateFunction
+    };
+});
+
+app.directive('secured', function($rootScope, $location){
+    return {
+        restrict : 'A',
+        link : function(scope, element, attr) {
+            if($rootScope.auth === false){
+                $location.path('/login');
+            }
+        }
     };
 });
