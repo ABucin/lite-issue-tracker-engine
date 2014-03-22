@@ -9,14 +9,14 @@
 						<li role="presentation">
 							<a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#ticket-modal">{{createAction}}</a>
 						</li>
-						<li role="presentation" class="divider"></li>
-						<li role="presentation" class="dropdown-header">
+						<li role="presentation" class="divider" ng-show="canFilter"></li>
+						<li role="presentation" class="dropdown-header" ng-show="canFilter">
 							Filtering
 						</li>
-						<li role="presentation">
+						<li role="presentation" ng-show="canFilter">
 							<a role="menuitem" tabindex="-1" ng-click="displayAll = true">All <i ng-show="displayAll" class="fa fa-check"></i></a>
 						</li>
-						<li role="presentation">
+						<li role="presentation" ng-show="canFilter">
 							<a role="menuitem" tabindex="-1" ng-click="displayAll = false">Mine <i ng-show="!displayAll" class="fa fa-check"></i></a>
 						</li>
 					</ul>
@@ -26,8 +26,8 @@
 				</li>
 				<li class='toggleable'>
 					<a ng-click="navigate('tasks')"><i class="fa fa-tasks"></i>Tasks</a>
-				</li>             
-                <li class='toggleable'>
+				</li>
+				<li class='toggleable'>
 					<a ng-click="navigate('bugs')"><i class="fa fa-bug"></i>Bugs</a>
 				</li>
 				<li class='toggleable'>

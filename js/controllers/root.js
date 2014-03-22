@@ -40,6 +40,7 @@ function($scope, $rootScope, $location, $http) {
     $rootScope.maxUserTasks = 10;
     
     $rootScope.auth = false;
+    $rootScope.canFilter = false;
     $scope.displayAll = true;
 
     $rootScope.tickets = [];

@@ -1,6 +1,7 @@
 app.controller('StatisticsCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.auth = true;
+    $rootScope.canFilter = false;
     
     $scope.chart = function(){
         $('#chart').highcharts({
