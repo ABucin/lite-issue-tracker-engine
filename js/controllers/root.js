@@ -17,9 +17,6 @@ function($routeProvider) {
     }).when('/statistics', {
         templateUrl : 'partials/statistics.html',
         controller : 'StatisticsCtrl'
-    }).when('/profile', {
-        templateUrl : 'partials/profile.html',
-        controller : 'ProfileCtrl'
     }).when('/team', {
         templateUrl : 'partials/team.html',
         controller : 'TeamCtrl'
@@ -106,15 +103,15 @@ function($scope, $rootScope, $location, $http) {
      * Logs in the current user.
      */
     $scope.login = function() {
-        $location.path('/dashboard');
         $rootScope.auth = true;
+        $scope.navigate('dashboard');
     };
 
     /*
      * Logs out the current user.
      */
     $scope.logout = function() {
-        $location.path('/login');
         $rootScope.auth = false;
+        $scope.navigate('login');
     };
 }]);

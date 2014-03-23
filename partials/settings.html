@@ -1,25 +1,66 @@
-<div class="row panel">
-	<div class="col-lg-4"></div>
-	<div class="col-lg-4">
+<div class="row">
+	<div class="col-lg-2">
 		<form role="form">
+			<h3>Avatar</h3>
+			<div class="col-sm-12 form-group">
+				<img src="./img/profile.jpg" class="img-responsive img-thumbnail" />
+			</div>
 			<h3>Dashboard</h3>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox">
-					Display User Activity </label>
-			</div>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox">
-					Display User List </label>
-			</div>
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-success">
+					<i class="fa fa-check fa-fw"></i> Display User Activity
+				</li>
+				<li class="list-group-item list-group-item-success">
+					<i class="fa fa-check fa-fw"></i> Display User List
+				</li>
+			</ul>
 			<h3>Team</h3>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox">
-					Display User Role </label>
-			</div>
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-success">
+					<i class="fa fa-check fa-fw"></i> Display User Role
+				</li>
+				<li class="list-group-item list-group-item-success">
+					<i class="fa fa-check fa-fw"></i> Display User Estimates
+				</li>
+				<li class="list-group-item list-group-item-danger">
+					<i class="fa fa-times fa-fw"></i> Display User Email
+				</li>
+			</ul>
 		</form>
 	</div>
-	<div class="col-lg-4"></div>
+	<div class="col-lg-3">
+		<form role="form">
+			<h3>Profile</h3>
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-warning">
+					<i class="fa fa-edit fa-fw"></i> First Name: <strong>Andrei</strong>
+				</li>
+				<li class="list-group-item list-group-item-warning">
+					<i class="fa fa-edit fa-fw"></i> Last Name: <strong>Bucin</strong>
+				</li>
+				<li class="list-group-item list-group-item-warning">
+					<i class="fa fa-edit fa-fw"></i> Email Address: <strong>abucin@gmail.com</strong>
+				</li>
+				<li class="list-group-item list-group-item-info">
+					<label for="user-project">Project</label>
+					<select class="form-control input-sm" id="user-project">
+						<option>issue-tracker</option>
+						<option>email-client</option>
+					</select>
+				</li>
+				<li class="list-group-item form-group list-group-item-info">
+					<label for="user-project">Role</label>
+					<select class="form-control input-sm" id="user-role">
+						<option>Admin</option>
+						<option>Product Owner</option>
+						<option>Developer</option>
+						<option>Tester</option>
+					</select>
+				</li>
+				<li class="list-group-item list-group-item-danger">
+					<i class="fa fa-refresh fa-fw"></i> <strong>Reset Password</strong>
+				</li>
+			</ul>
+		</form>
+	</div>
 </div>

@@ -1,6 +1,7 @@
 app.controller('DashboardCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.canFilter = false;
+    $rootScope.auth = true;
 
     $scope.chart = function() {
         $('#panel-workload').highcharts({
