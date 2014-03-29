@@ -34,7 +34,7 @@ function($scope, $rootScope, $location) {
             series : [{
                 type : 'pie',
                 name : 'Assigned tickets',
-                data : [['mlawrence', 5], ['athompson', 3], ['psmith', 4]]
+                data : [['mlawrence', 5], ['athompson', 3], ['psmith', 4], ['rgreen', 5], ['abucin', 2]]
             }]
         });
     };

@@ -3,27 +3,38 @@
 		{
 			"username": "psmith",
 			"role": "tester",
+			"project": "email-client",
 			"tasks": 7,
 			"estimatedTime": 200,
 			"loggedTime": 300
 		} , {
 			"username": "athompson",
 			"role": "developer",
+			"project": "email-client",
 			"tasks": 2,
 			"estimatedTime": 15,
 			"loggedTime": 85
 		} , {
 			"username": "mlawrence",
 			"role": "developer",
+			"project": "issue-tracker",
 			"tasks": 5,
 			"estimatedTime": 70,
 			"loggedTime": 30
 		} , {
 			"username": "abucin",
 			"role": "admin",
+			"project": "email-client",
 			"tasks": 0,
 			"estimatedTime": 200,
 			"loggedTime": 200
+		}, {
+			"username": "rgreen",
+			"role": "tester",
+			"project": "issue-tracker",
+			"tasks": 3,
+			"estimatedTime": 150,
+			"loggedTime": 260
 		}
 	]
 }
