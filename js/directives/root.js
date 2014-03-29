@@ -35,3 +35,20 @@ app.directive('secured', function($rootScope, $location){
         }
     };
 });
+
+app.directive('collapsibleIcon', function(){
+    return {
+        restrict : 'A',
+        link : function(scope, element, attr) {
+            element.on('click', function(event) {
+                if(element.hasClass("fa-minus") && element.parent().parent().parent().children().hasClass('collapse')){
+                    element.toggleClass("fa-minus", false);
+                    element.toggleClass("fa-plus", true);
+                } else {
+                    element.toggleClass("fa-minus", true);
+                    element.toggleClass("fa-plus", false);
+                }
+            });
+        }
+    };
+});
