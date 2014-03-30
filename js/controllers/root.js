@@ -111,7 +111,7 @@ function($scope, $rootScope, $location, $http) {
         var data = {};
         if (type === 'task') {
             angular.copy($scope.task, data);     
-        } else {
+        } else if (type === 'bug') {
             angular.copy($scope.bug, data);
         }
         $rootScope.tickets.push(data);
