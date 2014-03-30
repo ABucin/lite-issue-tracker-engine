@@ -91,6 +91,32 @@ function($scope, $rootScope, $location, $http) {
         $location.path('/' + url);
     };
 
+    $scope.task = {
+            code: "XX-01",
+            title: "",
+            status: "created",
+            owner: "abucin",
+            type: "task"
+    };
+
+    $scope.bug = {
+            code: "XX-02",
+            title: "",
+            status: "created",
+            owner: "abucin",
+            type: "bug"
+    };
+
+    $scope.addTicket = function(type) {
+        var data = {};
+        if (type === 'task') {
+            angular.copy($scope.task, data);     
+        } else {
+            angular.copy($scope.bug, data);
+        }
+        $rootScope.tickets.push(data);
+    }; 
+
     /**
      * Applies padding to the page body for displaying the menu correctly.
      * This depends on whether or not we are logged in to the dashboard.

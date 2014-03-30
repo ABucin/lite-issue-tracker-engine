@@ -26,7 +26,7 @@
 			"type": "bug"
 		}, {
 			"code": "BG-221",
-			"title": "Fix CSS button padding",
+			"title": "Fix CSS Button Padding",
 			"status": "in_progress",
 			"owner": "psmith",
 			"type": "bug"
