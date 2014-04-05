@@ -25,3 +25,5 @@ nav .navbar-nav > li > a.fa-bars:hover { background-color: #E7E7E7; }
 .sidebar button[data-target*='-modal'] {margin: 5px 0;}
 
 .list-group-item { padding: 5px 10px; }
+
+#t { background-color: #2f7ed8; }
