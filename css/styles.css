@@ -1,7 +1,9 @@
+/* Fixes the antialiasing in Google Chrome. */
+body { -webkit-font-smoothing: antialiased; }
+
 .body-menu-padding { padding-top: 70px; }
 
 .panel-heading > span > i[data-toggle*="collapse"] {cursor: pointer}
-.panel-body div[ng-repeat*="in"] {display: inline-block; padding: 3px 6px; margin: 2px;}
 
 a{cursor: pointer;}
 
@@ -13,12 +15,12 @@ nav .navbar-nav > li > a.fa-bars:hover { background-color: #E7E7E7; }
 .table > tbody > tr > td, .table > thead > tr > th {border-left: 1px dashed #DDDDDD; vertical-align: middle;}
 .table > tbody > tr > td {border-top: none;}
 .table > tbody > tr > td i {padding-left: 5px;}
+.table > tbody > tr > td > div.progress { margin-bottom: 0; }
 
 .table > thead > tr > th {margin-bottom: 10px; font-weight: 100; text-align: center; min-width: 20%;}
 .table > thead i {padding-left: 5px;}
 
-.table > tbody > tr > td > div.progress { margin-bottom: 0; }
-
+.label:hover { cursor: pointer;}
 .label .fa {padding-left: 5px;}
 .login-form {padding-top: 10%;}
 
@@ -26,4 +28,14 @@ nav .navbar-nav > li > a.fa-bars:hover { background-color: #E7E7E7; }
 
 .list-group-item { padding: 5px 10px; }
 
-#t { background-color: #2f7ed8; }
+.ticket, .log { font-family: "roboto"; display: inline-block; margin: 3px;}
+.ticket:hover, .log:hover {  cursor: pointer; }
+.ticket-bug { background-color: #CB1F26; }
+.ticket-task { background-color: #21579D; }
+.ticket-code, .log { color: white; font-weight: bold; font-size: 75%; border-radius: .3em; padding: 3px 0 3px 6px;}
+.ticket-title { position: relative; left: 1px; background-color: #C3C2B8 ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
+.log { background-color: #3F424B; padding: 3px 0px 3px 6px; display: table; vertical-align: middle; }
+.log span:last-child { border-radius: 0 .3em .3em 0; }
+.log-user { background-color: #C3C2B8 ; color: black; padding: 3px 6px; margin: 0 0px 0 6px; }
+.log-target { color: white; padding: 3px 6px; }
+.log-amount, .log-comment { margin-left: 6px; padding-right: 6px; }

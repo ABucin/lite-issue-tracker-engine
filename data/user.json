@@ -35,6 +35,11 @@
 			"tasks": 3,
 			"estimatedTime": 150,
 			"loggedTime": 260
+		}, {
+			"username": "tmarceau",
+			"role": "client",
+			"project": "issue-tracker",
+			"tasks": 1
 		}
 	]
 }
