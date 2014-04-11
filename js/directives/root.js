@@ -12,13 +12,7 @@ app.directive('ticket', function($rootScope) {
         restrict : 'E',
         link : function(scope, element, attr) {
             if (scope.ticket.owner !== $rootScope.username) {
-                var fillColor = element.css('background-color');
-                var textColor = element.css('color');
-                element.css({
-                    "color" : fillColor,
-                    "background-color" : textColor,
-                    "border" : "1px solid " + fillColor
-                });
+                element.css({"background-color": "#3F424B"});
             }
         },
         replace : true,
