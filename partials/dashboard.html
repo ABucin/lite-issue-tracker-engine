@@ -8,7 +8,7 @@
                         <i class="fa fa-minus" data-toggle="collapse" data-target="#panel-workload" collapsible-icon></i>
                     </span>
                 </div>
-                <div class="panel-body" id="panel-workload">
+                <div class="panel-body panel-body-dashboard collapse in" id="panel-workload">
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
                         <i class="fa fa-minus" data-toggle="collapse" data-target="#panel-tasks" collapsible-icon></i>
                     </span>
                 </div>
-                <div id="panel-tasks" class="panel-body collapse in">
+                <div id="panel-tasks" class="panel-body panel-body-dashboard collapse in">
                     <div class="ticket ticket-task ticket-code" ng-repeat="ticket in tickets | filter:'task' | filter: username">
                         {{ticket.code}}<span class="ticket-title">{{ticket.title}}</span>
                     </div>
@@ -33,7 +33,7 @@
                         <i class="fa fa-minus" data-toggle="collapse" data-target="#panel-bugs" collapsible-icon></i>
                     </span>
                 </div>
-                <div id="panel-bugs" class="panel-body collapse in">
+                <div id="panel-bugs" class="panel-body panel-body-dashboard collapse in">
                     <div class="ticket ticket-bug ticket-code" ng-repeat="ticket in tickets | filter:'bug' | filter: username">
                         {{ticket.code}}<span class="ticket-title">{{ticket.title}}</span>
                     </div>
@@ -46,7 +46,7 @@
                         <i class="fa fa-minus" data-toggle="collapse" data-target="#panel-activity" collapsible-icon></i>
                     </span>
                 </div>
-                <div class="panel-body" id="panel-activity">
+                <div class="panel-body panel-body-dashboard collapse in" id="panel-activity">
                     <div class="log" ng-repeat="entry in logEntries">
                         <i class="fa fa-fw fa-{{entry.action}}"></i><span class="log-user">{{entry.user}}</span><span class="log-target ticket-{{entry.targetType}}">{{entry.target}}</span><span class="log-amount" ng-if="entry.amount">{{entry.amount}} hrs.</span><span class="log-comment" ng-if="entry.comment">{{entry.comment}}</span>
                     </div>

@@ -25,17 +25,22 @@ nav .navbar-nav > li > a.fa-bars:hover { background-color: #E7E7E7; }
 .label .fa {padding-left: 5px;}
 .login-form {padding-top: 10%;}
 
+.panel-body-dashboard { padding: 5px; }
+/*
+.panel-heading { padding-left: 10px; }
+*/
+
 .sidebar button[data-target*='-modal'] {margin: 5px 0;}
 
 .list-group-item { padding: 5px 10px; }
 
-.ticket, .log { font-family: "roboto"; display: inline-block; margin: 3px; line-height: normal;}
+.ticket, .log { font-family: "roboto"; display: inline-block; margin: 3px; line-height: normal; }
 .ticket:hover, .log:hover {  cursor: pointer; }
 .ticket-bug { background-color: #CB1F26; }
 .ticket-task { background-color: #21579D; }
 .ticket-code, .log { color: white; font-weight: bold; font-size: 75%; border-radius: .3em; padding: 0px 0 0px 6px; display: inline-flex; align-items: center; }
 .ticket-title {position: relative; left: 1px; background-color: #C3C2B8 ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
-.log { background-color: #3F424B; padding: 3px 0px 3px 6px; display: table; vertical-align: middle; }
+.log { background-color: #3F424B; padding: 3px 0px 3px 6px; display: table; vertical-align: middle; margin: 6px 3px; }
 .log span:last-child { border-radius: 0 .3em .3em 0; }
 .log-user { background-color: #C3C2B8 ; color: black; padding: 3px 6px; margin: 0 0px 0 6px; }
 .log-target { color: white; padding: 3px 6px; }
