@@ -60,8 +60,8 @@
 				<form class="form-horizontal" role="form">
 					<div class="form-group">
 						<div class="col-md-12">
-							<label for="taskName">Title</label>
-							<input id="taskName" type="text" class="form-control" placeholder="Name" ng-model="bug.title">
+							<label for="taskTitle">Title</label>
+							<input id="taskTitle" type="text" class="form-control" placeholder="Title" ng-model="bug.title">
 						</div>
 					</div>
 					<div class="form-group">
@@ -70,6 +70,12 @@
 							<textarea id="taskDescription" class="form-control"></textarea>
 						</div>
 					</div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label for="taskEstimate">Initial Estimate</label>
+                            <input id="taskEstimate" type="number" class="form-control" placeholder="0" />
+                        </div>
+                    </div>
 					<div class="form-group">
 						<div class="col-md-12">
 							<label for="taskAssignee">Assignee</label>
@@ -82,7 +88,7 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">
 					Cancel
 				</button>
-				<button type="button" class="btn btn-primary" ng-click="addTicket('bug')">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addTicket('bug')">
 					Create
 				</button>
 			</div>

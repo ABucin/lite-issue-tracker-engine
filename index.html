@@ -5,11 +5,11 @@
 		<link rel="stylesheet" href="css/styles.css"/>
 		<link rel="stylesheet" href="css/utils.css"/>
 	</head>
-	<body ng-class="togglePadding()" ng-controller="RootCtrl">
+	<body ng-controller="RootCtrl">
 
 		<tracker-menu></tracker-menu>
 
-		<div class="container-fluid">
+		<div class="container-fluid" ng-class="togglePadding()">
 			<ng-view secured></ng-view>
 		</div>
 

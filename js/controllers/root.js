@@ -194,6 +194,7 @@ function ($scope, $rootScope, $location, $http) {
                 angular.copy($scope.bug, data);
             }
             $rootScope.tickets.push(data);
+            $rootScope.createdTickets.push(data);
         };
 
         /**

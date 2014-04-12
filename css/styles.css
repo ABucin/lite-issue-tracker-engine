@@ -1,7 +1,7 @@
 /* Fixes the antialiasing in Google Chrome. */
 body { -webkit-font-smoothing: antialiased; }
 
-.body-menu-padding { padding-top: 70px; }
+.body-menu-padding { margin-top: 70px; }
 
 .panel-heading > span > i[data-toggle*="collapse"] {cursor: pointer}
 
@@ -33,8 +33,8 @@ nav .navbar-nav > li > a.fa-bars:hover { background-color: #E7E7E7; }
 .ticket:hover, .log:hover {  cursor: pointer; }
 .ticket-bug { background-color: #CB1F26; }
 .ticket-task { background-color: #21579D; }
-.ticket-code, .log { color: white; font-weight: bold; font-size: 75%; border-radius: .3em; padding: 3px 0 3px 6px;}
-.ticket-title { position: relative; left: 1px; background-color: #C3C2B8 ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
+.ticket-code, .log { color: white; font-weight: bold; font-size: 75%; border-radius: .3em; padding: 0px 0 0px 6px; display: inline-flex; align-items: center; }
+.ticket-title {position: relative; left: 1px; background-color: #C3C2B8 ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
 .log { background-color: #3F424B; padding: 3px 0px 3px 6px; display: table; vertical-align: middle; }
 .log span:last-child { border-radius: 0 .3em .3em 0; }
 .log-user { background-color: #C3C2B8 ; color: black; padding: 3px 6px; margin: 0 0px 0 6px; }
