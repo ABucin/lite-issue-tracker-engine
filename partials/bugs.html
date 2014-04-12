@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-12">
-		<table class="table table-condensed table-hover">
+		<table class="table table-condensed">
 			<thead>
 				<tr>
 					<th>Created</th>
@@ -10,13 +10,37 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="ticket in tickets | filter:'bug'" ng-if="ticket.owner === username || displayAll">
-					<td><ticket ng-if="ticket.status === 'created'"></ticket></td>
-					<td><ticket ng-if="ticket.status === 'in_progress'"></ticket></td>
-					<td><ticket ng-if="ticket.status === 'testing'"></ticket></td>
-					<td><ticket ng-if="ticket.status === 'fixed'"></ticket></td>
-				</tr>
-			</tbody>
+                <tr>
+                    <td>
+                        <ul>
+                            <li ng-repeat="ticket in createdTickets | filter:'bug'">
+                                <ticket ng-if="ticket.owner === username || displayAll"></ticket>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li ng-repeat="ticket in inProgressTickets | filter:'bug'">
+                                <ticket ng-if="ticket.owner === username || displayAll"></ticket>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li ng-repeat="ticket in testingTickets | filter:'bug'">
+                                <ticket ng-if="ticket.owner === username || displayAll"></ticket>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li ng-repeat="ticket in doneTickets | filter:'bug'">
+                                <ticket ng-if="ticket.owner === username || displayAll"></ticket>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
 		</table>
 	</div>
 </div>
@@ -36,7 +60,7 @@
 				<form class="form-horizontal" role="form">
 					<div class="form-group">
 						<div class="col-md-12">
-							<label for="taskName">Name</label>
+							<label for="taskName">Title</label>
 							<input id="taskName" type="text" class="form-control" placeholder="Name" ng-model="bug.title">
 						</div>
 					</div>
