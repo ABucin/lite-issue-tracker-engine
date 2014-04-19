@@ -1,4 +1,4 @@
-var app = angular.module('issueTracker', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('issueTracker', ['ngRoute']);
 
 app.config(['$routeProvider',
 function ($routeProvider) {
@@ -143,7 +143,7 @@ function ($scope, $rootScope, $location, $http) {
         $scope.fetchLogData = function () {
             $http({
                 method: 'GET',
-                url: '/data/log.json'
+                url: '/itracker/api/log'
             }).success(function (data) {
                 $rootScope.logEntries = data.entries;
             }).error(function (data, status) {
@@ -154,7 +154,7 @@ function ($scope, $rootScope, $location, $http) {
         $scope.fetchUserData = function () {
             $http({
                 method: 'GET',
-                url: '/data/user.json'
+                url: '/itracker/api/user'
             }).success(function (data) {
                 $rootScope.users = data.users;
                 for (var i in data.users) {

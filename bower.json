@@ -1,0 +1,27 @@
+{
+	"name": "issue-tracker",
+	"version": "0.1.0",
+	"dependencies": {
+		"requirejs": "latest",
+		"angular": "latest",
+		"angular-route": "latest",
+		"jquery": "latest"
+	},
+	"homepage": "https://github.com/ABucin/issue-tracker",
+	"authors": [
+    "Andrei Bucin <abucin@gmail.com>"
+  ],
+	"description": "Application which allows project task management.",
+	"moduleType": [
+    "node"
+  ],
+	"license": "MIT",
+	"ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/vendor",
+    "test",
+    "tests"
+  ]
+}
