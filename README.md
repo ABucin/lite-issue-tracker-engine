@@ -16,4 +16,4 @@ Repository for the issue tracker application.
   * Express
 
 #### Starting Server
-`node server.js`
+In the application folder type: `node server.js`
