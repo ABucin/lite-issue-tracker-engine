@@ -3,7 +3,7 @@ issue-tracker
 
 Repository for the issue tracker application.
 
-#### Technology stack
+#### Technology Stack
 
 * Angular.js 1.2.16
 * Angular.js Bootstrap Directives 0.10
@@ -13,4 +13,7 @@ Repository for the issue tracker application.
 * Font Awesome 4.0.3
 * jQuery 2.1.0
 * Node.js v0.10.26
-** Express
+  * Express
+
+#### Starting Server
+`node server.js`
