@@ -103,7 +103,7 @@ function ($scope, $rootScope, $location, $http) {
         $scope.fetchMainData = function () {
             $http({
                 method: 'GET',
-                url: '/data/main.json'
+                url: '/itracker/api/main'
             }).success(function (data) {
                 $rootScope.tickets = data.tickets;
 
@@ -136,7 +136,7 @@ function ($scope, $rootScope, $location, $http) {
                     }
                 }
             }).error(function (data, status) {
-                alert(status + " : " + data);
+            	alert(status + " : " + data);
             });
         };
 

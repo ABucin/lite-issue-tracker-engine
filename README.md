@@ -12,3 +12,5 @@ Repository for the issue tracker application.
 * D3.js 3.4.1
 * Font Awesome 4.0.3
 * jQuery 2.1.0
+* Node.js v0.10.26
+** Express
