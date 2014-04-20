@@ -2,7 +2,6 @@
 	"name": "issue-tracker",
 	"version": "0.1.0",
 	"dependencies": {
-		"requirejs": "latest",
 		"angular": "latest",
 		"angular-route": "latest",
 		"jquery": "latest"
