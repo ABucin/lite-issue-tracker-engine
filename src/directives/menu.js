@@ -13,6 +13,6 @@ app.directive('toggleable', function(){
                 element.parent().children().toggleClass('active', false);
                 element.toggleClass('active', true);
             });
-        } 
+        }
     };
 });

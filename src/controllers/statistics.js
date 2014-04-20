@@ -2,7 +2,7 @@ app.controller('StatisticsCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.auth = true;
     $rootScope.canFilter = false;
-    
+
     $scope.chart = function(){
         $('#chart').highcharts({
             chart: {
@@ -40,7 +40,7 @@ function($scope, $rootScope, $location) {
             series: $rootScope.loggedHoursData
         });
     };
-    
+
     $scope.chart2 = function(){
          $('#chart2').highcharts({
             chart: {
@@ -152,4 +152,4 @@ function($scope, $rootScope, $location) {
             series: $rootScope.scatterData
         });
     };
-}]); 
+}]);

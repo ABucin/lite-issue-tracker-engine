@@ -1,2 +1,2 @@
 @echo off
-node ./js/server/server.js
+node ./server.js

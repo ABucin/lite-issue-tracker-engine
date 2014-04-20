@@ -9,7 +9,7 @@ var dataService = require('./server-data');
 /*
  * Set the path to the index.html file.
  */
-server.use(express.static(__dirname + './../../'));
+server.use(express.static(__dirname));
 
 server.get('/itracker/api/main', function (req, res) {
 	res.send(dataService.getMainData());

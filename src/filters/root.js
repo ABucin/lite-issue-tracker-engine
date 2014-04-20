@@ -1,5 +1,5 @@
 /**
- * Capitalizes a word. 
+ * Capitalizes a word.
  */
 app.filter('capitalize', function() {
     return function(input) {

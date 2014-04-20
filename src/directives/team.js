@@ -21,8 +21,8 @@ app.directive('overhead', function($rootScope) {
                 scope.width = scope.user.tasks * 10;
             }
         },
-        template : "<div class='progress'>" + 
-        "<div class='progress-bar progress-bar-{{color}}' role='progressbar' aria-valuenow='{{user.tasks}}' aria-valuemin='0' aria-valuemax='10' " 
+        template : "<div class='progress'>" +
+        "<div class='progress-bar progress-bar-{{color}}' role='progressbar' aria-valuenow='{{user.tasks}}' aria-valuemin='0' aria-valuemax='10' "
         + "style='width: {{width}}%;'>{{tasksLabel}}/10</div></div>"
     };
 });

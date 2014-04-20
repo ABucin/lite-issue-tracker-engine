@@ -1,44 +1,28 @@
 <html ng-app="issueTracker">
-	<head>
-		<link rel="stylesheet" href="css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="css/styles.css"/>
-		<link rel="stylesheet" href="css/utils.css"/>
-	</head>
-	<body ng-controller="RootCtrl">
 
-		<tracker-menu></tracker-menu>
+<head>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/utils.css" />
+</head>
 
-		<div class="container-fluid" ng-class="togglePadding()">
-			<ng-view secured></ng-view>
-		</div>
+<body ng-controller="RootCtrl">
 
-	</body>
-	<footer>
-		<div class="row">
-			<small class="col-sm-12 text-center">Copyright &copy; 2014 Andrei Bucin, All rights reserved.</small>
-		</div>
+	<tracker-menu></tracker-menu>
 
-		<script src="js/vendor/jquery/dist/jquery.min.js"></script>
-		<script src="js/vendor/angular/angular.min.js"></script>
-		<script src="js/vendor/angular-route/angular-route.min.js"></script>
-		<script src="js/vendor/highcharts.js"></script>
-		<script src="js/vendor/bootstrap.min.js"></script>
+	<div class="container-fluid" ng-class="togglePadding()">
+		<ng-view secured></ng-view>
+	</div>
 
-		<script src="js/controllers/root.js"></script>
-		<script src="js/controllers/dashboard.js"></script>
-		<script src="js/controllers/tasks.js"></script>
-		<script src="js/controllers/bugs.js"></script>
-		<script src="js/controllers/statistics.js"></script>
-		<script src="js/controllers/team.js"></script>
-		<script src="js/controllers/settings.js"></script>
+</body>
+<footer>
+	<div class="row">
+		<small class="col-sm-12 text-center">Copyright &copy; 2014 Andrei Bucin, All rights reserved.</small>
+	</div>
 
-		<script src="js/directives/root.js"></script>
-		<script src="js/directives/menu.js"></script>
-		<script src="js/directives/team.js"></script>
+	<script src="dist/issue-tracker-libs.min.js"></script>
+	<script src="dist/issue-tracker.min.js"></script>
+</footer>
 
-		<script src="js/directives/vendor/drag-drop.js"></script>
-
-		<script src="js/filters/root.js"></script>
-	</footer>
 </html>
