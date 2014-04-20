@@ -17,13 +17,17 @@ Repository for the issue tracker application.
   * Grunt
   	* Uglify
 	* Concat
-  * Mongo
+	* Watch
+  * Mongoose
+* MongoDB 2.6 Standard
 
 #### Development Setup
 
 1. Run `git clone https://github.com/ABucin/issue-tracker.git` to get the files.
 2. Install Node.js from `http://nodejs.org/` .
-3. Open a console using `Shift + right-click on project folder > Open command window here` .
-4. Run `install.sh` or `install.bat` .
-5. Start the server by using `start_server.sh` or `start_server.bat` .
-6. To access the application, go to `http://localhost:3000/index.html` in your favourite browser.
+3. Install MongoDB from `http://www.mongodb.org/downloads` .
+4. Open a console using `Shift + right-click on project folder > Open command window here` .
+5. Run `install.sh` or `install.bat` .
+6. Start the server by using `start_server.sh` or `start_server.bat` .
+7. For Windows, start the database server by using `start_db_server.bat` . For Linux, use the `mongo` command.
+8. To access the application, go to `http://localhost:3000/index.html` in your favourite browser.

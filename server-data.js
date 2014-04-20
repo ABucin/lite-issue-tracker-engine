@@ -1,3 +1,42 @@
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/issuetracker');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback() {
+
+	var ticketSchema = mongoose.Schema({
+		key: Number,
+		code: String,
+		title: String,
+		status: String,
+		owner: String,
+		type: String,
+		description: String
+	});
+
+	var Ticket = mongoose.model("Ticket", ticketSchema);
+
+	var tick = new Ticket({
+		code: "BG-15",
+		title: "Email Validation Not Working",
+		status: "testing",
+		owner: "abucin",
+		type: "bug",
+		description: "The email validation is broken for several users."
+	});
+
+	tick.save(function (err, tick) {
+		if (err) return console.error(err);
+	});
+
+	Ticket.find(function (err, tickets) {
+		if (err) return console.error(err);
+		console.log(tickets);
+	});
+
+});
+
 /**
  * Temp file which stores server data until a DB is created.
  */
@@ -104,30 +143,30 @@ var logData = {
 			"user": "mlawrence",
 			"action": "comment",
 			"target": "TA-92",
-			"targetType":"task",
-            "comment":"I think this feature should be implemented in the next sprint."
+			"targetType": "task",
+			"comment": "I think this feature should be implemented in the next sprint."
 		}, {
 			"user": "athompson",
 			"action": "clock-o",
 			"amount": 5,
 			"target": "BG-32",
-			"targetType":"bug"
+			"targetType": "bug"
 		}, {
 			"user": "psmith",
 			"action": "times",
 			"target": "TA-2",
-			"targetType":"task"
+			"targetType": "task"
 		}, {
 			"user": "athompson",
 			"action": "pencil",
 			"target": "BG-32",
-			"targetType":"bug"
+			"targetType": "bug"
 		}, {
 			"user": "athompson",
 			"action": "comment",
 			"target": "BG-32",
-			"targetType":"bug",
-            "comment":"Bug fixed in commit 3d6h4."
+			"targetType": "bug",
+			"comment": "Bug fixed in commit 3d6h4."
 		}
 	]
 };
@@ -141,21 +180,21 @@ var userData = {
 			"tasks": 7,
 			"estimatedTime": 200,
 			"loggedTime": 300
-		} , {
+		}, {
 			"username": "athompson",
 			"role": "developer",
 			"project": "email-client",
 			"tasks": 2,
 			"estimatedTime": 15,
 			"loggedTime": 85
-		} , {
+		}, {
 			"username": "mlawrence",
 			"role": "developer",
 			"project": "issue-tracker",
 			"tasks": 5,
 			"estimatedTime": 70,
 			"loggedTime": 30
-		} , {
+		}, {
 			"username": "abucin",
 			"role": "admin",
 			"project": "email-client",
@@ -178,14 +217,14 @@ var userData = {
 	]
 };
 
-exports.getMainData = function() {
+exports.getMainData = function () {
 	return mainData;
 };
 
-exports.getLogData = function() {
+exports.getLogData = function () {
 	return logData;
 };
 
-exports.getUserData = function() {
+exports.getUserData = function () {
 	return userData;
 };
