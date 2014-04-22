@@ -105,33 +105,33 @@ function ($scope, $rootScope, $location, $http) {
 				method: 'GET',
 				url: '/itracker/api/tickets'
 			}).success(function (data) {
-				$rootScope.tickets = data.tickets;
+				$rootScope.tickets = data;
 
-				for (var i in data.tickets) {
-					switch (data.tickets[i].status) {
+				for (var i in data) {
+					switch (data[i].status) {
 					case "created":
 						{
-							$rootScope.createdTickets.push(data.tickets[i]);
+							$rootScope.createdTickets.push(data[i]);
 							break;
 						}
 					case "in_progress":
 						{
-							$rootScope.inProgressTickets.push(data.tickets[i]);
+							$rootScope.inProgressTickets.push(data[i]);
 							break;
 						}
 					case "testing":
 						{
-							$rootScope.testingTickets.push(data.tickets[i]);
+							$rootScope.testingTickets.push(data[i]);
 							break;
 						}
 					case "done":
 						{
-							$rootScope.doneTickets.push(data.tickets[i]);
+							$rootScope.doneTickets.push(data[i]);
 							break;
 						}
 					default:
 						{
-							$rootScope.doneTickets.push(data.tickets[i]);
+							$rootScope.doneTickets.push(data[i]);
 						}
 					}
 				}
@@ -145,7 +145,7 @@ function ($scope, $rootScope, $location, $http) {
 				method: 'GET',
 				url: '/itracker/api/logs'
 			}).success(function (data) {
-				$rootScope.logEntries = data.entries;
+				$rootScope.logEntries = data;
 			}).error(function (data, status) {
 				alert(status + " : " + data);
 			});
@@ -156,9 +156,9 @@ function ($scope, $rootScope, $location, $http) {
 				method: 'GET',
 				url: '/itracker/api/users'
 			}).success(function (data) {
-				$rootScope.users = data.users;
-				for (var i in data.users) {
-					$rootScope.workloadData.push([data.users[i].username, data.users[i].tasks]);
+				$rootScope.users = data;
+				for (var i in data) {
+					$rootScope.workloadData.push([data[i].username, data[i].tasks]);
 				}
 				$rootScope.dashboardChart();
 			}).error(function (data, status) {

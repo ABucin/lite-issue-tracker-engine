@@ -28,9 +28,7 @@ exports.getAllTickets = function () {
 		persistedTickets = tickets;
 	});
 
-	return {
-		tickets: persistedTickets
-	};
+	return persistedTickets;
 };
 
 exports.getAllLogs = function () {
@@ -41,9 +39,7 @@ exports.getAllLogs = function () {
 		persistedLogs = logs;
 	});
 
-	return {
-		entries: persistedLogs
-	};
+	return persistedLogs;
 };
 
 exports.getAllUsers = function () {
@@ -54,7 +50,5 @@ exports.getAllUsers = function () {
 		persistedUsers = users;
 	});
 
-	return {
-		users: persistedUsers
-	};
+	return persistedUsers;
 };
