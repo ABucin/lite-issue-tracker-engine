@@ -4,23 +4,28 @@ var server = express();
 /**
  * Required files.
  */
-var dataService = require('./server-data');
+var persistenceService = require('./service/persistence');
+
+/*
+ * Add default data to database.
+ */
+persistenceService.populateDb();
 
 /*
  * Set the path to the index.html file.
  */
-server.use(express.static(__dirname));
+server.use(express.static(__dirname + "./../"));
 
 server.get('/itracker/api/tickets', function (req, res) {
-	res.send(dataService.getTicketData());
+	res.send(persistenceService.getAllTickets());
 });
 
 server.get('/itracker/api/logs', function (req, res) {
-	res.send(dataService.getLogData());
+	res.send(persistenceService.getAllLogs());
 });
 
 server.get('/itracker/api/users', function (req, res) {
-	res.send(dataService.getUserData());
+	res.send(persistenceService.getAllUsers());
 });
 
 server.listen(3000);
