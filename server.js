@@ -11,15 +11,15 @@ var dataService = require('./server-data');
  */
 server.use(express.static(__dirname));
 
-server.get('/itracker/api/main', function (req, res) {
-	res.send(dataService.getMainData());
+server.get('/itracker/api/tickets', function (req, res) {
+	res.send(dataService.getTicketData());
 });
 
-server.get('/itracker/api/log', function (req, res) {
+server.get('/itracker/api/logs', function (req, res) {
 	res.send(dataService.getLogData());
 });
 
-server.get('/itracker/api/user', function (req, res) {
+server.get('/itracker/api/users', function (req, res) {
 	res.send(dataService.getUserData());
 });
 

@@ -95,15 +95,15 @@ function ($scope, $rootScope, $location, $http) {
 		 * What happens when every page is loaded.
 		 */
 		angular.element(document).ready(function () {
-			$scope.fetchMainData();
+			$scope.fetchTicketData();
 			$scope.fetchLogData();
 			$scope.fetchUserData();
 		});
 
-		$scope.fetchMainData = function () {
+		$scope.fetchTicketData = function () {
 			$http({
 				method: 'GET',
-				url: '/itracker/api/main'
+				url: '/itracker/api/tickets'
 			}).success(function (data) {
 				$rootScope.tickets = data.tickets;
 
@@ -143,7 +143,7 @@ function ($scope, $rootScope, $location, $http) {
 		$scope.fetchLogData = function () {
 			$http({
 				method: 'GET',
-				url: '/itracker/api/log'
+				url: '/itracker/api/logs'
 			}).success(function (data) {
 				$rootScope.logEntries = data.entries;
 			}).error(function (data, status) {
@@ -154,7 +154,7 @@ function ($scope, $rootScope, $location, $http) {
 		$scope.fetchUserData = function () {
 			$http({
 				method: 'GET',
-				url: '/itracker/api/user'
+				url: '/itracker/api/users'
 			}).success(function (data) {
 				$rootScope.users = data.users;
 				for (var i in data.users) {

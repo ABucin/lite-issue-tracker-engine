@@ -5,6 +5,8 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 var persistedTickets = [];
+var persistedUsers = [];
+var persistedLogs = [];
 
 var ticketSchema = mongoose.Schema({
 	code: {
@@ -21,7 +23,10 @@ var ticketSchema = mongoose.Schema({
 		required: true
 	},
 	owner: {
-		type: String
+		type: String,
+		required: true
+		/*,
+		ref: "User"*/
 	},
 	type: {
 		type: String,
@@ -32,11 +37,72 @@ var ticketSchema = mongoose.Schema({
 	}
 });
 
+var userSchema = mongoose.Schema({
+	username: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	role: {
+		type: String,
+		required: true
+	},
+	project: {
+		type: String,
+		required: true
+	},
+	tasks: {
+		type: Number,
+		default: 0
+	},
+	estimatedTime: {
+		type: Number,
+		default: 0
+	},
+	loggedTime: {
+		type: Number,
+		default: 0
+	}
+});
+
+var logSchema = mongoose.Schema({
+	user: {
+		type: String,
+		required: true,
+		/*ref:"User"*/
+	},
+	action: {
+		type: String,
+		required: true
+	},
+	target: {
+		type: String,
+		required: true,
+		/*ref:"Ticket"*/
+	},
+	targetType: {
+		type: String,
+		required: true
+	},
+	comment: {
+		type: String
+	},
+	amount: {
+		type: Number
+	}
+});
+
 var Ticket = mongoose.model("Ticket", ticketSchema);
+var User = mongoose.model("User", userSchema);
+var Log = mongoose.model("Log", logSchema);
+
 /**
  * Flushes ticket collection and adds some default data.
  */
+Log.collection.drop();
 Ticket.collection.drop();
+User.collection.drop();
+
 Ticket.create([
 	{
 		code: "BG-15",
@@ -119,18 +185,66 @@ Ticket.create([
 		code: "TA-130",
 		title: "Remove Redundant Tests",
 		status: "in_progress",
-		owner: "mlawrence",
+		owner: "psmith",
 		type: "task",
 		description: "Remove tests that are not used."
 		}, {
 		code: "BG-130",
 		title: "Syntax Highlighting Broken",
 		status: "done",
-		owner: "mlawrence",
+		owner: "psmith",
 		type: "bug",
 		description: "See title."
 		}
 	]);
+
+User.create([{
+	username: "psmith",
+	role: "tester",
+	project: "email-client",
+	tasks: 7,
+	estimatedTime: 200,
+	loggedTime: 300
+		}, {
+	username: "abucin",
+	role: "admin",
+	project: "email-client",
+	tasks: 5,
+	estimatedTime: 200,
+	loggedTime: 200
+		}]);
+
+Log.create([
+	{
+		user: "abucin",
+		action: "comment",
+		target: "TA-92",
+		targetType: "task",
+		comment: "I think this feature should be implemented in the next sprint."
+		}, {
+		user: "abucin",
+		action: "clock-o",
+		amount: 5,
+		target: "BG-32",
+		targetType: "bug"
+		}, {
+		user: "psmith",
+		action: "times",
+		target: "TA-2",
+		targetType: "task"
+		}, {
+		user: "psmith",
+		action: "pencil",
+		target: "BG-32",
+		targetType: "bug"
+		}, {
+		user: "abucin",
+		action: "comment",
+		target: "BG-32",
+		targetType: "bug",
+		comment: "Bug fixed in commit 3d6h4."
+		}
+]);
 
 db.once('open', function callback() {
 
@@ -139,101 +253,32 @@ db.once('open', function callback() {
 		persistedTickets = tickets;
 	});
 
+	User.find(function (err, users) {
+		if (err) return console.error(err);
+		persistedUsers = users;
+	});
+
+	Log.find(function (err, logs) {
+		if (err) return console.error(err);
+		persistedLogs = logs;
+	});
+
 });
 
-/**
- * Temp file which stores server data until a DB is created.
- */
-var logData = {
-	"entries": [
-		{
-			"user": "mlawrence",
-			"action": "comment",
-			"target": "TA-92",
-			"targetType": "task",
-			"comment": "I think this feature should be implemented in the next sprint."
-		}, {
-			"user": "athompson",
-			"action": "clock-o",
-			"amount": 5,
-			"target": "BG-32",
-			"targetType": "bug"
-		}, {
-			"user": "psmith",
-			"action": "times",
-			"target": "TA-2",
-			"targetType": "task"
-		}, {
-			"user": "athompson",
-			"action": "pencil",
-			"target": "BG-32",
-			"targetType": "bug"
-		}, {
-			"user": "athompson",
-			"action": "comment",
-			"target": "BG-32",
-			"targetType": "bug",
-			"comment": "Bug fixed in commit 3d6h4."
-		}
-	]
-};
-
-var userData = {
-	"users": [
-		{
-			"username": "psmith",
-			"role": "tester",
-			"project": "email-client",
-			"tasks": 7,
-			"estimatedTime": 200,
-			"loggedTime": 300
-		}, {
-			"username": "athompson",
-			"role": "developer",
-			"project": "email-client",
-			"tasks": 2,
-			"estimatedTime": 15,
-			"loggedTime": 85
-		}, {
-			"username": "mlawrence",
-			"role": "developer",
-			"project": "issue-tracker",
-			"tasks": 5,
-			"estimatedTime": 70,
-			"loggedTime": 30
-		}, {
-			"username": "abucin",
-			"role": "admin",
-			"project": "email-client",
-			"tasks": 0,
-			"estimatedTime": 200,
-			"loggedTime": 200
-		}, {
-			"username": "rgreen",
-			"role": "tester",
-			"project": "issue-tracker",
-			"tasks": 3,
-			"estimatedTime": 150,
-			"loggedTime": 260
-		}, {
-			"username": "tmarceau",
-			"role": "client",
-			"project": "issue-tracker",
-			"tasks": 1
-		}
-	]
-};
-
-exports.getMainData = function () {
+exports.getTicketData = function () {
 	return {
 		tickets: persistedTickets
 	};
 };
 
 exports.getLogData = function () {
-	return logData;
+	return {
+		entries: persistedLogs
+	};
 };
 
 exports.getUserData = function () {
-	return userData;
+	return {
+		users: persistedUsers
+	};
 };
