@@ -20,34 +20,23 @@ exports.populateDb = function () {
 	return populationService.populateDb();
 }
 
-exports.getAllTickets = function () {
-	schemaService.getTicket().find(function (err, tickets) {
-		if (err) {
-			return console.error(err);
-		}
-		persistedTickets = tickets;
-	});
-
-	return persistedTickets;
-};
-
-exports.getAllLogs = function () {
-	schemaService.getLog().find(function (err, logs) {
-		if (err) {
-			return console.error(err);
-		}
-		persistedLogs = logs;
-	});
-
-	return persistedLogs;
-};
-
 exports.getAllUsers = function () {
 	schemaService.getUser().find(function (err, users) {
 		if (err) {
 			return console.error(err);
 		}
 		persistedUsers = users;
+	});
+
+	return persistedUsers;
+};
+
+exports.getUser = function (username) {
+	schemaService.getUser().findOne({'username' : username}, function (err, user) {
+		if (err) {
+			return console.error(err);
+		}
+		persistedUsers = [user];
 	});
 
 	return persistedUsers;

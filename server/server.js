@@ -17,15 +17,19 @@ persistenceService.populateDb();
 server.use(express.static(__dirname + "./../"));
 
 server.get('/itracker/api/tickets', function (req, res) {
-	res.send(persistenceService.getAllTickets());
+	//res.send(persistenceService.getAllTickets());
 });
 
 server.get('/itracker/api/logs', function (req, res) {
-	res.send(persistenceService.getAllLogs());
+	//res.send(persistenceService.getAllLogs());
 });
 
 server.get('/itracker/api/users', function (req, res) {
 	res.send(persistenceService.getAllUsers());
+});
+
+server.get('/itracker/api/users?:uname', function (req, res) {
+	res.send(persistenceService.getUser(req.query.uname));
 });
 
 server.listen(3000);

@@ -95,72 +95,69 @@ function ($scope, $rootScope, $location, $http) {
 		 * What happens when every page is loaded.
 		 */
 		angular.element(document).ready(function () {
-			$scope.fetchTicketData();
-			$scope.fetchLogData();
 			$scope.fetchUserData();
 		});
 
 		$scope.fetchTicketData = function () {
-			$http({
-				method: 'GET',
-				url: '/itracker/api/tickets'
-			}).success(function (data) {
-				$rootScope.tickets = data;
+			for (var i in $rootScope.users) {
+				var data = $rootScope.users[i].tickets;
 
-				for (var i in data) {
-					switch (data[i].status) {
+				for (var j in data) {
+					data[j].username = $rootScope.users[i].username;
+					$rootScope.tickets.push(data[j]);
+					switch (data[j].status) {
 					case "created":
 						{
-							$rootScope.createdTickets.push(data[i]);
+							$rootScope.createdTickets.push(data[j]);
 							break;
 						}
 					case "in_progress":
 						{
-							$rootScope.inProgressTickets.push(data[i]);
+							$rootScope.inProgressTickets.push(data[j]);
 							break;
 						}
 					case "testing":
 						{
-							$rootScope.testingTickets.push(data[i]);
+							$rootScope.testingTickets.push(data[j]);
 							break;
 						}
 					case "done":
 						{
-							$rootScope.doneTickets.push(data[i]);
+							$rootScope.doneTickets.push(data[j]);
 							break;
 						}
 					default:
 						{
-							$rootScope.doneTickets.push(data[i]);
+							$rootScope.doneTickets.push(data[j]);
 						}
 					}
 				}
-			}).error(function (data, status) {
-				alert(status + " : " + data);
-			});
+			}
 		};
 
 		$scope.fetchLogData = function () {
-			$http({
-				method: 'GET',
-				url: '/itracker/api/logs'
-			}).success(function (data) {
-				$rootScope.logEntries = data;
-			}).error(function (data, status) {
-				alert(status + " : " + data);
-			});
+			for (var i in $rootScope.users) {
+				for (var j in $rootScope.users[i].logs)
+					$rootScope.users[i].logs[j].username = $rootScope.users[i].username;
+					$rootScope.logEntries.push($rootScope.users[i].logs[j]);
+			}
 		};
 
 		$scope.fetchUserData = function () {
 			$http({
 				method: 'GET',
 				url: '/itracker/api/users'
+				//				params: {
+				//					uname: $rootScope.username
+				//				}
 			}).success(function (data) {
 				$rootScope.users = data;
 				for (var i in data) {
-					$rootScope.workloadData.push([data[i].username, data[i].tasks]);
+					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
 				}
 				$rootScope.dashboardChart();
+				$scope.fetchTicketData();
+				$scope.fetchLogData();
 			}).error(function (data, status) {
 				alert(status + " : " + data);
 			});

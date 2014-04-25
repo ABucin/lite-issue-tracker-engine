@@ -1,35 +1,59 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var ticketSchema = mongoose.Schema({
+var TicketSchema = new Schema({
 	code: {
 		type: String,
-		unique: true,
-		required: true
+		required: true,
+		trim: true,
+		unique: true
 	},
 	title: {
 		type: String,
-		required: true
+		required: true,
+		trim: true
 	},
 	status: {
 		type: String,
 		required: true
-	},
-	owner: {
-		type: String,
-		required: true
-		/*,
-		ref: "User"*/
 	},
 	type: {
 		type: String,
 		required: true
 	},
 	description: {
-		type: String
+		type: String,
+		trim: true
 	}
 });
 
-var userSchema = mongoose.Schema({
+var LogSchema = new Schema({
+	action: {
+		type: String,
+		required: true
+	},
+	target: {
+		type: String,
+		required: true
+	},
+	targetType: {
+		type: String,
+		required: true
+	},
+	comment: {
+		type: String
+	},
+	amount: {
+		type: Number,
+		default: 0
+	},
+	date: {
+		type: Date,
+		default: Date.now
+	}
+});
+
+var UserSchema = new Schema({
 	username: {
 		type: String,
 		required: true,
@@ -43,10 +67,8 @@ var userSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	tasks: {
-		type: Number,
-		default: 0
-	},
+	tickets: [TicketSchema],
+	logs: [LogSchema],
 	estimatedTime: {
 		type: Number,
 		default: 0
@@ -57,45 +79,18 @@ var userSchema = mongoose.Schema({
 	}
 });
 
-var logSchema = mongoose.Schema({
-	user: {
-		type: String,
-		required: true,
-		/*ref:"User"*/
-	},
-	action: {
-		type: String,
-		required: true
-	},
-	target: {
-		type: String,
-		required: true,
-		/*ref:"Ticket"*/
-	},
-	targetType: {
-		type: String,
-		required: true
-	},
-	comment: {
-		type: String
-	},
-	amount: {
-		type: Number
-	}
-});
+var Ticket = mongoose.model("Ticket", TicketSchema);
+var User = mongoose.model("User", UserSchema);
+var Log = mongoose.model("Log", LogSchema);
 
-var Ticket = mongoose.model("Ticket", ticketSchema);
-var User = mongoose.model("User", userSchema);
-var Log = mongoose.model("Log", logSchema);
-
-exports.getTicket = function() {
+exports.getTicket = function () {
 	return Ticket;
 };
 
-exports.getUser = function() {
+exports.getUser = function () {
 	return User;
 };
 
-exports.getLog = function() {
+exports.getLog = function () {
 	return Log;
 };

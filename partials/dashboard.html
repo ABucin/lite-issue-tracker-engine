@@ -48,7 +48,7 @@
                 </div>
                 <div class="panel-body panel-body-dashboard collapse in" id="panel-activity">
                     <div class="log" ng-repeat="entry in logEntries">
-                        <i class="fa fa-fw fa-{{entry.action}}"></i><span class="log-user">{{entry.user}}</span><span class="log-target ticket-{{entry.targetType}}">{{entry.target}}</span><span class="log-amount" ng-if="entry.amount">{{entry.amount}} hrs.</span><span class="log-comment" ng-if="entry.comment">{{entry.comment}}</span>
+                        <i class="fa fa-fw fa-{{entry.action}}"></i><span class="log-user">{{entry.username}}</span><span class="log-target ticket-{{entry.targetType}}">{{entry.target}}</span><span class="log-amount" ng-if="entry.amount">{{entry.amount}} hrs.</span><span class="log-comment" ng-if="entry.comment">{{entry.comment}}</span>
                     </div>
                 </div>
             </div>
