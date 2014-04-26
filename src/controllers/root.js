@@ -99,48 +99,7 @@ function ($scope, $rootScope, $location, $http) {
 		});
 
 		$scope.fetchTicketData = function () {
-			for (var i in $rootScope.users) {
-				var data = $rootScope.users[i].tickets;
 
-				for (var j in data) {
-					data[j].username = $rootScope.users[i].username;
-					$rootScope.tickets.push(data[j]);
-					switch (data[j].status) {
-					case "created":
-						{
-							$rootScope.createdTickets.push(data[j]);
-							break;
-						}
-					case "in_progress":
-						{
-							$rootScope.inProgressTickets.push(data[j]);
-							break;
-						}
-					case "testing":
-						{
-							$rootScope.testingTickets.push(data[j]);
-							break;
-						}
-					case "done":
-						{
-							$rootScope.doneTickets.push(data[j]);
-							break;
-						}
-					default:
-						{
-							$rootScope.doneTickets.push(data[j]);
-						}
-					}
-				}
-			}
-		};
-
-		$scope.fetchLogData = function () {
-			for (var i in $rootScope.users) {
-				for (var j in $rootScope.users[i].logs)
-					$rootScope.users[i].logs[j].username = $rootScope.users[i].username;
-					$rootScope.logEntries.push($rootScope.users[i].logs[j]);
-			}
 		};
 
 		$scope.fetchUserData = function () {
@@ -154,9 +113,49 @@ function ($scope, $rootScope, $location, $http) {
 				$rootScope.users = data;
 				for (var i in data) {
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
+
+					var tickets = $rootScope.users[i].tickets;
+					var logs = $rootScope.users[i].logs;
+
+					for (var j in tickets) {
+						tickets[j].username = $rootScope.users[i].username;
+						$rootScope.tickets.push(tickets[j]);
+						switch (tickets[j].status) {
+						case "created":
+							{
+								$rootScope.createdTickets.push(tickets[j]);
+								break;
+							}
+						case "in_progress":
+							{
+								$rootScope.inProgressTickets.push(tickets[j]);
+								break;
+							}
+						case "testing":
+							{
+								$rootScope.testingTickets.push(tickets[j]);
+								break;
+							}
+						case "done":
+							{
+								$rootScope.doneTickets.push(tickets[j]);
+								break;
+							}
+						default:
+							{
+								$rootScope.doneTickets.push(tickets[j]);
+							}
+						}
+					}
+
+					for (var j in logs) {
+						logs[j].username = $rootScope.users[i].username;
+						$rootScope.logEntries.push(logs[j]);
+					}
 				}
+
 				$rootScope.dashboardChart();
-				$scope.fetchTicketData();
+
 				$scope.fetchLogData();
 			}).error(function (data, status) {
 				alert(status + " : " + data);
@@ -171,7 +170,7 @@ function ($scope, $rootScope, $location, $http) {
 			code: "XX-01",
 			title: "",
 			status: "created",
-			owner: "abucin",
+			username: "abucin",
 			type: "task"
 		};
 
@@ -179,7 +178,7 @@ function ($scope, $rootScope, $location, $http) {
 			code: "XX-02",
 			title: "",
 			status: "created",
-			owner: "abucin",
+			username: "abucin",
 			type: "bug"
 		};
 

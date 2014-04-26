@@ -11,7 +11,7 @@ app.directive('ticket', function($rootScope) {
     return {
         restrict : 'E',
         link : function(scope, element, attr) {
-            if (scope.ticket.owner !== $rootScope.username) {
+            if (scope.ticket.username !== $rootScope.username) {
                 element.css({"background-color": "#3F424B"});
             }
         },
