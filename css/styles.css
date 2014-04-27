@@ -26,9 +26,8 @@ nav .navbar-nav > li > a.fa-bars:hover { background-color: #E7E7E7; }
 .login-form {padding-top: 10%;}
 
 .panel-body-dashboard { padding: 5px; }
-/*
-.panel-heading { padding-left: 10px; }
-*/
+
+.panel-heading span i{ line-height: 1.5; }
 
 .sidebar button[data-target*='-modal'] {margin: 5px 0;}
 
