@@ -98,10 +98,6 @@ function ($scope, $rootScope, $location, $http) {
 			$scope.fetchUserData();
 		});
 
-		$scope.fetchTicketData = function () {
-
-		};
-
 		$scope.fetchUserData = function () {
 			$http({
 				method: 'GET',
@@ -155,8 +151,6 @@ function ($scope, $rootScope, $location, $http) {
 				}
 
 				$rootScope.dashboardChart();
-
-				$scope.fetchLogData();
 			}).error(function (data, status) {
 				alert(status + " : " + data);
 			});

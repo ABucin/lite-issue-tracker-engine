@@ -13,9 +13,9 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="user in users">
-					<td><span class="badge alert-success">{{user.username}}</span></td>
-					<td><span class="badge alert-info">{{user.role | capitalize}}</span></td>
-					<td><span class="badge alert-warning">{{user.project}}</span></td>
+					<td><span>{{user.username}}</span></td>
+					<td><span>{{user.role | capitalize}}</span></td>
+					<td><span>{{user.project}}</span></td>
 					<td><overhead tasks="user.tasks"></overhead></td>
 					<td><time></time></td>
 					<td><i class='fa fa-times'></i></td>
