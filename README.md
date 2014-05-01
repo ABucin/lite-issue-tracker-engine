@@ -19,6 +19,7 @@ Repository for the issue tracker application.
 	* Concat
 	* Watch
   * Mongoose
+  * Body-Parser
 * MongoDB 2.6 Standard
 
 #### Development Setup
