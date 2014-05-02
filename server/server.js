@@ -25,16 +25,16 @@ router.route('/users/:uname/tickets')
 		res.json(persistenceService.getTickets(req.params.uname));
 	});
 
-router.route('/logs').get(function (err, req, res) {
+router.route('/logs').get(function (req, res) {
 	//res.send(persistenceService.getAllLogs());
 });
 
 router.route('/users')
-	.get(function (err, req, res) {
+	.get(function (req, res) {
 		res.json(persistenceService.getAllUsers());
 	});
 
-router.route('/users?:uname').get(function (err, req, res) {
+router.route('/users?:uname').get(function (req, res) {
 	res.json(persistenceService.getUser(req.query.uname));
 });
 

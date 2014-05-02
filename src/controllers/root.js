@@ -163,16 +163,14 @@ function ($scope, $rootScope, $location, $http) {
 		$scope.task = {
 			code: "XX-01",
 			title: "",
-			status: "created",
-			username: "abucin",
+			description: "",
 			type: "task"
 		};
 
 		$scope.bug = {
 			code: "XX-02",
 			title: "",
-			status: "created",
-			username: "abucin",
+			description: "",
 			type: "bug"
 		};
 
@@ -183,8 +181,15 @@ function ($scope, $rootScope, $location, $http) {
 			} else if (type === 'bug') {
 				angular.copy($scope.bug, data);
 			}
-			$rootScope.tickets.push(data);
-			$rootScope.createdTickets.push(data);
+
+			$http({
+				method: 'POST',
+				url: '/itracker/api/users/' + $rootScope.username + '/tickets',
+				data: data
+			}).success(function (data) {
+				$rootScope.tickets.push(data);
+				$rootScope.createdTickets.push(data);
+			});
 		};
 
 		/**
