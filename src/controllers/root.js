@@ -167,6 +167,10 @@ function ($scope, $rootScope, $location, $http) {
 			type: "task"
 		};
 
+		$rootScope.updatedTask = {};
+
+		$rootScope.updatedBug = {};
+
 		$rootScope.bug = {
 			code: "XX-02",
 			title: "",

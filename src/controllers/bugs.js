@@ -5,5 +5,4 @@ function($scope, $rootScope, $location) {
     $rootScope.createAction = "Report Bug";
 
 	$scope.isEditing = false;
-	$scope.updatedBug = {};
 }]);

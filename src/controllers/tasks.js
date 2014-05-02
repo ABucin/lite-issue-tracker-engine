@@ -5,5 +5,4 @@ function($scope, $rootScope, $location) {
     $rootScope.createAction = "Create Task";
 
 	$scope.isEditing = false;
-	$scope.updatedTask = {};
 }]);

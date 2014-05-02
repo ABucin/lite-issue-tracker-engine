@@ -20,14 +20,15 @@ app.directive('ticket', function ($rootScope) {
 				scope.isEditing = true;
 				// display the clicked ticket data in the modal
 				if (scope.ticket.type === "task") {
-					if (scope.updatedTask.code === null || scope.ticket.code !== scope.updatedTask.code) {
-						angular.copy(scope.ticket, scope.updatedTask);
+					if ($rootScope.updatedTask.code === null || scope.ticket.code !== $rootScope.updatedTask.code) {
+						angular.copy(scope.ticket, $rootScope.updatedTask);
 					}
-				} else {
-					if (scope.updatedBug.code === null || scope.ticket.code !== scope.updatedBug.code) {
-						angular.copy(scope.ticket, scope.updatedBug);
+				} else if (scope.ticket.type === "bug") {
+					if ($rootScope.updatedBug.code === null || scope.ticket.code !== $rootScope.updatedBug.code) {
+						angular.copy(scope.ticket, $rootScope.updatedBug);
 					}
 				}
+				scope.$apply();
 			});
 		},
 		replace: true,

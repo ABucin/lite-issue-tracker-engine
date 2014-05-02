@@ -48,7 +48,7 @@
 <!-- Ticket creation modal -->
 
 <div class="modal fade" id="ticket-creation-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -73,7 +73,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <label for="taskEstimate">Initial Estimate</label>
-                            <input id="taskEstimate" type="number" class="form-control" placeholder="0" />
+                            <input id="taskEstimate" type="number" min="0" class="form-control" placeholder="0" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -102,7 +102,7 @@
 <!-- Ticket preview modal -->
 
 <div class="modal fade" id="ticket-preview-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -110,7 +110,7 @@
                 </button>
                 <h4 class="modal-title">Edit Task</h4>
             </div>
-            <div class="modal-body">{{updatedTask | json}}
+            <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <div class="col-md-12">
