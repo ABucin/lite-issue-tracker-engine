@@ -160,14 +160,14 @@ function ($scope, $rootScope, $location, $http) {
 			$location.path('/' + url);
 		};
 
-		$scope.task = {
+		$rootScope.task = {
 			code: "XX-01",
 			title: "",
 			description: "",
 			type: "task"
 		};
 
-		$scope.bug = {
+		$rootScope.bug = {
 			code: "XX-02",
 			title: "",
 			description: "",
@@ -177,9 +177,9 @@ function ($scope, $rootScope, $location, $http) {
 		$scope.addTicket = function (type) {
 			var data = {};
 			if (type === 'task') {
-				angular.copy($scope.task, data);
+				angular.copy($rootScope.task, data);
 			} else if (type === 'bug') {
-				angular.copy($scope.bug, data);
+				angular.copy($rootScope.bug, data);
 			}
 
 			$http({
