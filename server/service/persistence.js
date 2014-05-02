@@ -16,12 +16,15 @@ var persistedTickets = [];
 var persistedUsers = [];
 var persistedLogs = [];
 
+var Ticket = schemaService.getTicket();
+var User = schemaService.getUser();
+
 exports.populateDb = function () {
 	return populationService.populateDb();
 }
 
 exports.getAllUsers = function () {
-	schemaService.getUser().find(function (err, users) {
+	User.find(function (err, users) {
 		if (err) {
 			return console.error(err);
 		}
@@ -32,7 +35,7 @@ exports.getAllUsers = function () {
 };
 
 exports.getUser = function (username) {
-	schemaService.getUser().findOne({
+	User.findOne({
 		'username': username
 	}, function (err, user) {
 		if (err) {
@@ -44,8 +47,42 @@ exports.getUser = function (username) {
 	return persistedUsers;
 };
 
-exports.persistTicket = function (username, ticket) {
-	var persistedTicket = new schemaService.getTicket()({
+exports.updateTicket = function (id, username, ticket) {
+	// save the ticket and check for errors
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			return console.error(err);
+		}
+
+		for (var i in user.tickets) {
+			if (user.tickets[i]._id == id) {
+				if (ticket.title != null) {
+					user.tickets[i].title = ticket.title;
+				}
+				if (ticket.status != null) {
+					user.tickets[i].status = ticket.status;
+				}
+				if (ticket.description != null) {
+					user.tickets[i].description = ticket.description;
+				}
+				break;
+			}
+		}
+
+		user.save(function (err) {
+			if (err) {
+				return console.error(err);
+			}
+		});
+	});
+
+	return ticket;
+};
+
+exports.createTicket = function (username, ticket) {
+	var persistedTicket = new Ticket({
 		code: ticket.code,
 		title: ticket.title,
 		status: 'created',
@@ -54,7 +91,7 @@ exports.persistTicket = function (username, ticket) {
 	}); // create a new instance of the Ticket model
 
 	// save the ticket and check for errors
-	schemaService.getUser().findOne({
+	User.findOne({
 		'username': username
 	}, function (err, user) {
 		if (err) {
@@ -67,14 +104,14 @@ exports.persistTicket = function (username, ticket) {
 			if (err) {
 				return console.error(err);
 			}
-		});;
+		});
 	});
 
 	return persistedTicket;
-}
+};
 
 exports.getTickets = function (username) {
-	schemaService.getUser().findOne({
+	User.findOne({
 		'username': username
 	}, function (err, user) {
 		if (err) {
@@ -84,4 +121,4 @@ exports.getTickets = function (username) {
 	});
 
 	return persistedUsers;
-}
+};

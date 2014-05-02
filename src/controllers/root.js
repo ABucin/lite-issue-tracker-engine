@@ -196,6 +196,28 @@ function ($scope, $rootScope, $location, $http) {
 			});
 		};
 
+		$scope.updateTicket = function (type) {
+			var data = {};
+			if (type === 'task') {
+				angular.copy($rootScope.updatedTask, data);
+			} else if (type === 'bug') {
+				angular.copy($rootScope.updatedBug, data);
+			}
+
+			$http({
+				method: 'PUT',
+				url: '/itracker/api/users/' + $rootScope.username + '/tickets/' + data._id,
+				data: data
+			}).success(function (data) {
+				for (var i in $rootScope.tickets) {
+					if ($rootScope.tickets[i]._id == data._id) {
+						angular.copy(data, $rootScope.tickets[i]);
+						break;
+					}
+				}
+			});
+		};
+
 		/**
 		 * Applies padding to the page body for displaying the menu correctly.
 		 * This depends on whether or not we are logged in to the dashboard.

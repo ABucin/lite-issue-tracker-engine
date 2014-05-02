@@ -19,23 +19,30 @@ persistenceService.populateDb();
 
 router.route('/users/:uname/tickets')
 	.post(function (req, res) {
-		res.json(persistenceService.persistTicket(req.params.uname, req.body));
+		res.json(persistenceService.createTicket(req.params.uname, req.body));
 	})
 	.get(function (req, res) {
 		res.json(persistenceService.getTickets(req.params.uname));
 	});
 
-router.route('/logs').get(function (req, res) {
-	//res.send(persistenceService.getAllLogs());
-});
+router.route('/users/:uname/tickets/:id')
+	.put(function (req, res) {
+		res.json(persistenceService.updateTicket(req.params.id, req.params.uname, req.body));
+	});
+
+router.route('/logs')
+	.get(function (req, res) {
+		//res.send(persistenceService.getAllLogs());
+	});
 
 router.route('/users')
 	.get(function (req, res) {
 		res.json(persistenceService.getAllUsers());
 	});
 
-router.route('/users?:uname').get(function (req, res) {
-	res.json(persistenceService.getUser(req.query.uname));
-});
+router.route('/users?:uname')
+	.get(function (req, res) {
+		res.json(persistenceService.getUser(req.query.uname));
+	});
 
 console.log('Listening on port ' + port + '...');
