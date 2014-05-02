@@ -1,44 +1,41 @@
 var express = require('express');
-var server = express();
 var bodyParser = require('body-parser');
+var server = express();
 var port = 3000;
 var router = express.Router();
 
-// configure server to use bodyParser()
-// this will let us get the data from a POST
-server.use(bodyParser());
-server.use('/itracker/api', router);
-
-/**
- * Required files.
- */
+// Required files.
 var persistenceService = require('./service/persistence');
 
-/*
- * Add default data to database.
- */
-persistenceService.populateDb();
-
-/*
- * Set the path to the index.html file.
- */
+server.use(bodyParser());
+server.use('/itracker/api', router);
+// Set the path to the index.html file.
 server.use(express.static(__dirname + "./../"));
 
-router.route('/tickets').get(function (req, res) {
-	//res.send(persistenceService.getAllTickets());
-});
+server.listen(port);
 
-router.route('/logs').get(function (req, res) {
+// Add default data to database.
+persistenceService.populateDb();
+
+router.route('/users/:uname/tickets')
+	.post(function (req, res) {
+		res.json(persistenceService.persistTicket(req.params.uname, req.body));
+	})
+	.get(function (req, res) {
+		res.json(persistenceService.getTickets(req.params.uname));
+	});
+
+router.route('/logs').get(function (err, req, res) {
 	//res.send(persistenceService.getAllLogs());
 });
 
-router.route('/users').get(function (req, res) {
-	res.send(persistenceService.getAllUsers());
+router.route('/users')
+	.get(function (err, req, res) {
+		res.json(persistenceService.getAllUsers());
+	});
+
+router.route('/users?:uname').get(function (err, req, res) {
+	res.json(persistenceService.getUser(req.query.uname));
 });
 
-router.route('/users?:uname').get(function (req, res) {
-	res.send(persistenceService.getUser(req.query.uname));
-});
-
-server.listen(port);
 console.log('Listening on port ' + port + '...');

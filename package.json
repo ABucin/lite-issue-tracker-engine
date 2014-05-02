@@ -1,29 +1,29 @@
 {
-	"name": "issue-tracker",
-	"version": "0.1.0",
-	"description": "Application which allows project task management.",
-	"main": "root.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ABucin/issue-tracker.git"
-	},
-	"author": "Andrei Bucin",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/ABucin/issue-tracker/issues"
-	},
-	"homepage": "https://github.com/ABucin/issue-tracker",
-	"devDependencies": {
-		"grunt": "^0.4.4",
-		"grunt-contrib-uglify": "^0.4.0",
-		"grunt-contrib-concat": "^0.4.0",
-		"grunt-contrib-watch": "^0.6.1",
-		"express": "^4.0.0",
-		"passport": "^0.2.0",
-		"mongoose": "^3.8.8",
-		"body-parser": "^1.0.1"
-	}
+  "name": "issue-tracker",
+  "version": "0.1.0",
+  "description": "Application which allows project task management.",
+  "main": "root.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ABucin/issue-tracker.git"
+  },
+  "author": "Andrei Bucin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ABucin/issue-tracker/issues"
+  },
+  "homepage": "https://github.com/ABucin/issue-tracker",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-watch": "*",
+    "express": "*",
+    "passport": "*",
+    "mongoose": "*",
+    "body-parser": "*"
+  }
 }

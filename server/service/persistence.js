@@ -32,7 +32,9 @@ exports.getAllUsers = function () {
 };
 
 exports.getUser = function (username) {
-	schemaService.getUser().findOne({'username' : username}, function (err, user) {
+	schemaService.getUser().findOne({
+		'username': username
+	}, function (err, user) {
 		if (err) {
 			return console.error(err);
 		}
@@ -41,3 +43,45 @@ exports.getUser = function (username) {
 
 	return persistedUsers;
 };
+
+exports.persistTicket = function (username, ticket) {
+	var persistedTicket = new schemaService.getTicket()({
+		code: ticket.code,
+		title: ticket.title,
+		status: 'created',
+		type: ticket.type,
+		description: ticket.description
+	}); // create a new instance of the Ticket model
+
+	// save the ticket and check for errors
+	schemaService.getUser().findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			return console.error(err);
+		}
+
+		user.tickets.push(persistedTicket);
+
+		user.save(function (err) {
+			if (err) {
+				return console.error(err);
+			}
+		});;
+	});
+
+	return persistedTicket;
+}
+
+exports.getTickets = function (username) {
+	schemaService.getUser().findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			return console.error(err);
+		}
+		persistedUsers = [user.tickets];
+	});
+
+	return persistedUsers;
+}
