@@ -5,7 +5,7 @@ app.directive('ticket', function ($rootScope) {
 		if (tAttr.task === undefined) {
 			type = "bug";
 		}
-		return "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-" + type + "'>{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}</span><i class='fa fa-times' ng-show='isDeleting && ticket.username === username'></i></div>"
+		return "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-" + type + "'>{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='isDeleting && ticket.username === username'></i></span></div>"
 	}
 
 	return {
@@ -17,6 +17,8 @@ app.directive('ticket', function ($rootScope) {
 				});
 			}
 			element.find('i').on('click', function (event) {
+				event.preventDefault();
+				event.stopPropagation();
 				scope.deleteTicket(scope.ticket.key);
 			});
 			element.on('click', function (event) {
