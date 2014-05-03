@@ -38,7 +38,8 @@ function ($scope, $rootScope, $location, $http) {
 
 		$rootScope.auth = false;
 		$rootScope.canFilter = false;
-		$scope.displayAll = true;
+		$rootScope.isDeleting = false;
+		$rootScope.displayAll = true;
 
 		$rootScope.tickets = [];
 		$rootScope.logEntries = [];
@@ -48,6 +49,23 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.inProgressTickets = [];
 		$rootScope.testingTickets = [];
 		$rootScope.doneTickets = [];
+
+		$rootScope.updatedTask = {};
+		$rootScope.updatedBug = {};
+
+		$rootScope.task = {
+			code: "XX-01",
+			title: "",
+			description: "",
+			type: "task"
+		};
+
+		$rootScope.bug = {
+			code: "XX-02",
+			title: "",
+			description: "",
+			type: "bug"
+		};
 
 		$rootScope.loggedHoursData = [{
 			name: 'mlawrence',
@@ -107,6 +125,10 @@ function ($scope, $rootScope, $location, $http) {
 				//				}
 			}).success(function (data) {
 				$rootScope.users = data;
+				$rootScope.workloadData = [];
+				$rootScope.tickets = [];
+				$rootScope.logEntries = [];
+
 				for (var i in data) {
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
 
@@ -160,24 +182,6 @@ function ($scope, $rootScope, $location, $http) {
 			$location.path('/' + url);
 		};
 
-		$rootScope.task = {
-			code: "XX-01",
-			title: "",
-			description: "",
-			type: "task"
-		};
-
-		$rootScope.updatedTask = {};
-
-		$rootScope.updatedBug = {};
-
-		$rootScope.bug = {
-			code: "XX-02",
-			title: "",
-			description: "",
-			type: "bug"
-		};
-
 		$scope.addTicket = function (type) {
 			var data = {};
 			if (type === 'task') {
@@ -212,6 +216,20 @@ function ($scope, $rootScope, $location, $http) {
 				for (var i in $rootScope.tickets) {
 					if ($rootScope.tickets[i]._id == data._id) {
 						angular.copy(data, $rootScope.tickets[i]);
+						break;
+					}
+				}
+			});
+		};
+
+		$scope.deleteTicket = function (id) {
+			$http({
+				method: 'DELETE',
+				url: '/itracker/api/users/' + $rootScope.username + '/tickets/' + id
+			}).success(function () {
+				for (var i in $rootScope.tickets) {
+					if ($rootScope.tickets[i]._id == id) {
+						$rootScope.tickets.splice(i, 1);
 						break;
 					}
 				}

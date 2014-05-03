@@ -28,6 +28,9 @@ router.route('/users/:uname/tickets')
 router.route('/users/:uname/tickets/:id')
 	.put(function (req, res) {
 		res.json(persistenceService.updateTicket(req.params.id, req.params.uname, req.body));
+	})
+	.delete(function (req, res) {
+		res.json(persistenceService.deleteTicket(req.params.id, req.params.uname));
 	});
 
 router.route('/logs')

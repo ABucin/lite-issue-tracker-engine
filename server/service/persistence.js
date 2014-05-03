@@ -16,6 +16,8 @@ var persistedTickets = [];
 var persistedUsers = [];
 var persistedLogs = [];
 
+var deletedTicket = {};
+
 var Ticket = schemaService.getTicket();
 var User = schemaService.getUser();
 
@@ -79,6 +81,31 @@ exports.updateTicket = function (id, username, ticket) {
 	});
 
 	return ticket;
+};
+
+exports.deleteTicket = function (id, username) {
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			return console.error(err);
+		}
+
+		for (var i in user.tickets) {
+			if (user.tickets[i]._id == id) {
+				user.tickets.splice(i, 1);
+				break;
+			}
+		}
+
+		user.save(function (err) {
+			if (err) {
+				return console.error(err);
+			}
+		});
+	});
+
+	return deletedTicket;
 };
 
 exports.createTicket = function (username, ticket) {

@@ -5,7 +5,7 @@ app.directive('ticket', function ($rootScope) {
 		if (tAttr.task === undefined) {
 			type = "bug";
 		}
-		return "<div class='ticket ticket-code ticket-" + type + "'  data-toggle='modal' data-target='#ticket-preview-modal' >{{ticket.code}}<span class='ticket-title'>{{ticket.title}}</span></div>"
+		return "<div class='ticket ticket-code ticket-" + type + "'>{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}</span><i class='fa fa-times' ng-show='isDeleting && ticket.username === username'></i></div>"
 	}
 
 	return {
@@ -16,6 +16,9 @@ app.directive('ticket', function ($rootScope) {
 					"background-color": "#3F424B"
 				});
 			}
+			element.find('i').on('click', function(event){
+				scope.deleteTicket(scope.ticket._id);
+			});
 			element.on('click', function (event) {
 				scope.isEditing = true;
 				// display the clicked ticket data in the modal
