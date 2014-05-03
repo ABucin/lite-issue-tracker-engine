@@ -5,7 +5,7 @@ app.directive('ticket', function ($rootScope) {
 		if (tAttr.task === undefined) {
 			type = "bug";
 		}
-		return "<div class='ticket ticket-code ticket-" + type + "'>{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}</span><i class='fa fa-times' ng-show='isDeleting && ticket.username === username'></i></div>"
+		return "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-" + type + "'>{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}</span><i class='fa fa-times' ng-show='isDeleting && ticket.username === username'></i></div>"
 	}
 
 	return {
@@ -16,7 +16,7 @@ app.directive('ticket', function ($rootScope) {
 					"background-color": "#3F424B"
 				});
 			}
-			element.find('i').on('click', function(event){
+			element.find('i').on('click', function (event) {
 				scope.deleteTicket(scope.ticket.key);
 			});
 			element.on('click', function (event) {
@@ -32,6 +32,21 @@ app.directive('ticket', function ($rootScope) {
 					}
 				}
 				scope.$apply();
+			});
+
+			element[0].addEventListener('drop', function (e) {
+				scope.ticket.status = element.parent().attr("status");
+				if (scope.ticket.type === "task") {
+					if ($rootScope.updatedTask.code === null || scope.ticket.code !== $rootScope.updatedTask.code) {
+						angular.copy(scope.ticket, $rootScope.updatedTask);
+					}
+				} else if (scope.ticket.type === "bug") {
+					if ($rootScope.updatedBug.code === null || scope.ticket.code !== $rootScope.updatedBug.code) {
+						angular.copy(scope.ticket, $rootScope.updatedBug);
+					}
+				}
+				scope.$apply();
+				scope.updateTicket(scope.ticket.type);
 			});
 		},
 		replace: true,

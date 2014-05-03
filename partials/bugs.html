@@ -13,28 +13,28 @@
                 <tr>
                     <td>
                         <ul>
-                            <li ng-repeat="ticket in createdTickets | filter:'bug'">
+                            <li ng-repeat="ticket in createdTickets | filter:'bug'" droppable status="created">
                                 <ticket ng-if="ticket.username === username || displayAll"></ticket>
                             </li>
                         </ul>
                     </td>
                     <td>
                         <ul>
-                            <li ng-repeat="ticket in inProgressTickets | filter:'bug'">
+                            <li ng-repeat="ticket in inProgressTickets | filter:'bug'" droppable status="in_progress">
                                 <ticket ng-if="ticket.username === username || displayAll"></ticket>
                             </li>
                         </ul>
                     </td>
                     <td>
                         <ul>
-                            <li ng-repeat="ticket in testingTickets | filter:'bug'">
+                            <li ng-repeat="ticket in testingTickets | filter:'bug'" droppable status="testing">
                                 <ticket ng-if="ticket.username === username || displayAll"></ticket>
                             </li>
                         </ul>
                     </td>
                     <td>
                         <ul>
-                            <li ng-repeat="ticket in doneTickets | filter:'bug'">
+                            <li ng-repeat="ticket in doneTickets | filter:'bug'" droppable status="done">
                                 <ticket ng-if="ticket.username === username || displayAll"></ticket>
                             </li>
                         </ul>
