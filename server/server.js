@@ -25,12 +25,12 @@ router.route('/users/:uname/tickets')
 		res.json(persistenceService.getTickets(req.params.uname));
 	});
 
-router.route('/users/:uname/tickets/:id')
+router.route('/users/:uname/tickets/:key')
 	.put(function (req, res) {
-		res.json(persistenceService.updateTicket(req.params.id, req.params.uname, req.body));
+		res.json(persistenceService.updateTicket(req.params.key, req.params.uname, req.body));
 	})
 	.delete(function (req, res) {
-		res.json(persistenceService.deleteTicket(req.params.id, req.params.uname));
+		res.json(persistenceService.deleteTicket(req.params.key, req.params.uname));
 	});
 
 router.route('/logs')

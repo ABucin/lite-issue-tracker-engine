@@ -11,6 +11,7 @@ db.once('open', function callback() {
 
 var populationService = require("./population");
 var schemaService = require('./schema');
+var utilsService = require('./utils');
 
 var persistedTickets = [];
 var persistedUsers = [];
@@ -49,7 +50,7 @@ exports.getUser = function (username) {
 	return persistedUsers;
 };
 
-exports.updateTicket = function (id, username, ticket) {
+exports.updateTicket = function (key, username, ticket) {
 	// save the ticket and check for errors
 	User.findOne({
 		'username': username
@@ -59,7 +60,7 @@ exports.updateTicket = function (id, username, ticket) {
 		}
 
 		for (var i in user.tickets) {
-			if (user.tickets[i]._id == id) {
+			if (user.tickets[i].key == key) {
 				if (ticket.title != null) {
 					user.tickets[i].title = ticket.title;
 				}
@@ -83,7 +84,7 @@ exports.updateTicket = function (id, username, ticket) {
 	return ticket;
 };
 
-exports.deleteTicket = function (id, username) {
+exports.deleteTicket = function (key, username) {
 	User.findOne({
 		'username': username
 	}, function (err, user) {
@@ -92,7 +93,7 @@ exports.deleteTicket = function (id, username) {
 		}
 
 		for (var i in user.tickets) {
-			if (user.tickets[i]._id == id) {
+			if (user.tickets[i].key == key) {
 				user.tickets.splice(i, 1);
 				break;
 			}
@@ -109,13 +110,15 @@ exports.deleteTicket = function (id, username) {
 };
 
 exports.createTicket = function (username, ticket) {
-	var persistedTicket = new Ticket({
+	var ticketData = {
+		key: utilsService.generateKey(),
 		code: ticket.code,
 		title: ticket.title,
 		status: 'created',
 		type: ticket.type,
 		description: ticket.description
-	}); // create a new instance of the Ticket model
+	};
+	var persistedTicket = new Ticket(ticketData); // create a new instance of the Ticket model
 
 	// save the ticket and check for errors
 	User.findOne({
@@ -134,7 +137,7 @@ exports.createTicket = function (username, ticket) {
 		});
 	});
 
-	return persistedTicket;
+	return ticketData;
 };
 
 exports.getTickets = function (username) {

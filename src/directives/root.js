@@ -17,7 +17,7 @@ app.directive('ticket', function ($rootScope) {
 				});
 			}
 			element.find('i').on('click', function(event){
-				scope.deleteTicket(scope.ticket._id);
+				scope.deleteTicket(scope.ticket.key);
 			});
 			element.on('click', function (event) {
 				scope.isEditing = true;

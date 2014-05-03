@@ -210,11 +210,11 @@ function ($scope, $rootScope, $location, $http) {
 
 			$http({
 				method: 'PUT',
-				url: '/itracker/api/users/' + $rootScope.username + '/tickets/' + data._id,
+				url: '/itracker/api/users/' + $rootScope.username + '/tickets/' + data.key,
 				data: data
 			}).success(function (data) {
 				for (var i in $rootScope.tickets) {
-					if ($rootScope.tickets[i]._id == data._id) {
+					if ($rootScope.tickets[i].key == data.key) {
 						angular.copy(data, $rootScope.tickets[i]);
 						break;
 					}
@@ -222,13 +222,13 @@ function ($scope, $rootScope, $location, $http) {
 			});
 		};
 
-		$scope.deleteTicket = function (id) {
+		$scope.deleteTicket = function (key) {
 			$http({
 				method: 'DELETE',
-				url: '/itracker/api/users/' + $rootScope.username + '/tickets/' + id
+				url: '/itracker/api/users/' + $rootScope.username + '/tickets/' + key
 			}).success(function () {
 				for (var i in $rootScope.tickets) {
-					if ($rootScope.tickets[i]._id == id) {
+					if ($rootScope.tickets[i].key == key) {
 						$rootScope.tickets.splice(i, 1);
 						break;
 					}

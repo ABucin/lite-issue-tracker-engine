@@ -2,6 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TicketSchema = new Schema({
+	key: {
+		type: String,
+		required: true,
+		unique: true
+	},
 	code: {
 		type: String,
 		required: true,
@@ -28,6 +33,11 @@ var TicketSchema = new Schema({
 });
 
 var LogSchema = new Schema({
+	key: {
+		type: String,
+		required: true,
+		unique: true
+	},
 	action: {
 		type: String,
 		required: true
@@ -54,6 +64,11 @@ var LogSchema = new Schema({
 });
 
 var UserSchema = new Schema({
+	key: {
+		type: String,
+		required: true,
+		unique: true
+	},
 	username: {
 		type: String,
 		required: true,
