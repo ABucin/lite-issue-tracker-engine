@@ -52,6 +52,7 @@ function ($scope, $rootScope, $location, $http) {
 
 		$rootScope.updatedTask = {};
 		$rootScope.updatedBug = {};
+		$rootScope.copiedEntity = {};
 
 		$rootScope.task = {
 			code: "XX-01",
@@ -224,7 +225,7 @@ function ($scope, $rootScope, $location, $http) {
 				case "created":
 					{
 						for (var i in $rootScope.createdTickets) {
-							if ($rootScope.createdTickets[i].key = data.key) {
+							if ($rootScope.createdTickets[i].key == data.key) {
 								angular.copy(data, $rootScope.createdTickets[i]);
 								break;
 							}
@@ -234,7 +235,7 @@ function ($scope, $rootScope, $location, $http) {
 				case "in_progress":
 					{
 						for (var i in $rootScope.inProgressTickets) {
-							if ($rootScope.inProgressTickets[i].key = data.key) {
+							if ($rootScope.inProgressTickets[i].key == data.key) {
 								angular.copy(data, $rootScope.inProgressTickets[i]);
 								break;
 							}
@@ -244,7 +245,7 @@ function ($scope, $rootScope, $location, $http) {
 				case "testing":
 					{
 						for (var i in $rootScope.testingTickets) {
-							if ($rootScope.testingTickets[i].key = data.key) {
+							if ($rootScope.testingTickets[i].key == data.key) {
 								angular.copy(data, $rootScope.testingTickets[i]);
 								break;
 							}
@@ -254,7 +255,7 @@ function ($scope, $rootScope, $location, $http) {
 				case "done":
 					{
 						for (var i in $rootScope.doneTickets) {
-							if ($rootScope.doneTickets[i].key = data.key) {
+							if ($rootScope.doneTickets[i].key == data.key) {
 								angular.copy(data, $rootScope.doneTickets[i]);
 								break;
 							}
@@ -264,7 +265,7 @@ function ($scope, $rootScope, $location, $http) {
 				default:
 					{
 						for (var i in $rootScope.doneTickets) {
-							if ($rootScope.doneTickets[i].key = data.key) {
+							if ($rootScope.doneTickets[i].key == data.key) {
 								angular.copy(data, $rootScope.doneTickets[i]);
 								break;
 							}
@@ -293,7 +294,7 @@ function ($scope, $rootScope, $location, $http) {
 				case "created":
 					{
 						for (var i in $rootScope.createdTickets) {
-							if ($rootScope.createdTickets[i].key = key) {
+							if ($rootScope.createdTickets[i].key == key) {
 								$rootScope.createdTickets.splice(i, 1);
 								break;
 							}
@@ -303,7 +304,7 @@ function ($scope, $rootScope, $location, $http) {
 				case "in_progress":
 					{
 						for (var i in $rootScope.inProgressTickets) {
-							if ($rootScope.inProgressTickets[i].key = key) {
+							if ($rootScope.inProgressTickets[i].key == key) {
 								$rootScope.inProgressTickets.splice(i, 1);
 								break;
 							}
@@ -313,7 +314,7 @@ function ($scope, $rootScope, $location, $http) {
 				case "testing":
 					{
 						for (var i in $rootScope.testingTickets) {
-							if ($rootScope.testingTickets[i].key = key) {
+							if ($rootScope.testingTickets[i].key == key) {
 								$rootScope.testingTickets.splice(i, 1);
 								break;
 							}
@@ -323,7 +324,7 @@ function ($scope, $rootScope, $location, $http) {
 				case "done":
 					{
 						for (var i in $rootScope.doneTickets) {
-							if ($rootScope.doneTickets[i].key = key) {
+							if ($rootScope.doneTickets[i].key == key) {
 								$rootScope.doneTickets.splice(i, 1);
 								break;
 							}
@@ -333,7 +334,7 @@ function ($scope, $rootScope, $location, $http) {
 				default:
 					{
 						for (var i in $rootScope.doneTickets) {
-							if ($rootScope.doneTickets[i].key = key) {
+							if ($rootScope.doneTickets[i].key == key) {
 								$rootScope.doneTickets.splice(i, 1);;
 								break;
 							}

@@ -23,11 +23,11 @@ app.directive('ticket', function ($rootScope) {
 				scope.isEditing = true;
 				// display the clicked ticket data in the modal
 				if (scope.ticket.type === "task") {
-					if ($rootScope.updatedTask.code === null || scope.ticket.code !== $rootScope.updatedTask.code) {
+					if ($rootScope.updatedTask.code === null || scope.ticket.key !== $rootScope.updatedTask.key) {
 						angular.copy(scope.ticket, $rootScope.updatedTask);
 					}
 				} else if (scope.ticket.type === "bug") {
-					if ($rootScope.updatedBug.code === null || scope.ticket.code !== $rootScope.updatedBug.code) {
+					if ($rootScope.updatedBug.code === null || scope.ticket.key !== $rootScope.updatedBug.key) {
 						angular.copy(scope.ticket, $rootScope.updatedBug);
 					}
 				}
@@ -35,18 +35,18 @@ app.directive('ticket', function ($rootScope) {
 			});
 
 			element[0].addEventListener('drop', function (e) {
-				scope.ticket.status = element.parent().attr("status");
-				if (scope.ticket.type === "task") {
-					if ($rootScope.updatedTask.code === null || scope.ticket.code !== $rootScope.updatedTask.code) {
-						angular.copy(scope.ticket, $rootScope.updatedTask);
-					}
-				} else if (scope.ticket.type === "bug") {
-					if ($rootScope.updatedBug.code === null || scope.ticket.code !== $rootScope.updatedBug.code) {
-						angular.copy(scope.ticket, $rootScope.updatedBug);
-					}
+				$rootScope.copiedEntity.status = element.parent().attr("status");
+				if ($rootScope.copiedEntity.type === "task") {
+					angular.copy($rootScope.copiedEntity, $rootScope.updatedTask);
+				} else if ($rootScope.copiedEntity.type === "bug") {
+					angular.copy($rootScope.copiedEntity, $rootScope.updatedBug);
 				}
 				scope.$apply();
-				scope.updateTicket(scope.ticket.type);
+				scope.updateTicket($rootScope.copiedEntity.type);
+			});
+
+			element[0].addEventListener('dragstart', function (e) {
+				angular.copy(scope.ticket, $rootScope.copiedEntity);
 			});
 		},
 		replace: true,
