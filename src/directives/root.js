@@ -37,7 +37,7 @@ app.directive('ticket', function ($rootScope) {
 			});
 
 			element[0].addEventListener('drop', function (e) {
-				$rootScope.copiedEntity.status = element.parent().attr("status");
+				$rootScope.copiedEntity.status = element.parent().parent().attr("status");
 				if ($rootScope.copiedEntity.type === "task") {
 					angular.copy($rootScope.copiedEntity, $rootScope.updatedTask);
 				} else if ($rootScope.copiedEntity.type === "bug") {

@@ -11,30 +11,30 @@
 			</thead>
 			<tbody>
                 <tr>
-                    <td>
-                        <ul>
-                            <li ng-repeat="ticket in createdTickets | filter:'bug'" droppable status="created">
+                    <td highlightable>
+                        <ul status="created">
+                            <li ng-repeat="ticket in createdTickets | filter:'bug'" droppable>
                                 <ticket ng-if="ticket.username === username || displayAll"></ticket>
                             </li>
                         </ul>
                     </td>
-                    <td>
-                        <ul>
-                            <li ng-repeat="ticket in inProgressTickets | filter:'bug'" droppable status="in_progress">
+                    <td highlightable>
+                        <ul status="in_progress">
+                            <li ng-repeat="ticket in inProgressTickets | filter:'bug'" droppable>
                                 <ticket ng-if="ticket.username === username || displayAll"></ticket>
                             </li>
                         </ul>
                     </td>
-                    <td>
-                        <ul>
-                            <li ng-repeat="ticket in testingTickets | filter:'bug'" droppable status="testing">
+                    <td highlightable>
+                        <ul status="testing">
+                            <li ng-repeat="ticket in testingTickets | filter:'bug'" droppable>
                                 <ticket ng-if="ticket.username === username || displayAll"></ticket>
                             </li>
                         </ul>
                     </td>
-                    <td>
-                        <ul>
-                            <li ng-repeat="ticket in doneTickets | filter:'bug'" droppable status="done">
+                    <td highlightable>
+                        <ul status="done">
+                            <li ng-repeat="ticket in doneTickets | filter:'bug'" droppable>
                                 <ticket ng-if="ticket.username === username || displayAll"></ticket>
                             </li>
                         </ul>

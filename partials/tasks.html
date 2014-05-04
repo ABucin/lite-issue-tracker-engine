@@ -12,29 +12,29 @@
 			<tbody>
 				<tr>
 					<td highlightable>
-						<ul>
-							<li ng-repeat="ticket in createdTickets | filter:'task'" droppable status="created">
+						<ul status="created">
+							<li ng-repeat="ticket in createdTickets | filter:'task'" droppable>
 								<ticket task ng-if="ticket.username === username || displayAll"></ticket>
 							</li>
 						</ul>
 					</td>
 					<td highlightable>
-						<ul>
-							<li ng-repeat="ticket in inProgressTickets | filter:'task'" droppable status="in_progress">
+						<ul status="in_progress">
+							<li ng-repeat="ticket in inProgressTickets | filter:'task'" droppable>
 								<ticket task ng-if="ticket.username === username || displayAll"></ticket>
 							</li>
 						</ul>
 					</td>
 					<td highlightable>
-						<ul>
-							<li ng-repeat="ticket in testingTickets | filter:'task'" droppable status="testing">
+						<ul status="testing">
+							<li ng-repeat="ticket in testingTickets | filter:'task'" droppable>
 								<ticket task ng-if="ticket.username === username || displayAll"></ticket>
 							</li>
 						</ul>
 					</td>
 					<td highlightable>
-						<ul>
-							<li ng-repeat="ticket in doneTickets | filter:'task'" droppable status="done">
+						<ul status="done">
+							<li ng-repeat="ticket in doneTickets | filter:'task'" droppable>
 								<ticket task ng-if="ticket.username === username || displayAll"></ticket>
 							</li>
 						</ul>
@@ -108,14 +108,16 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
-				<h4 class="modal-title"><h4 class="modal-title">{{updatedTask.username === username ? 'Edit Task' : 'Preview Task'}}</h4></h4>
+				<h4 class="modal-title">{{updatedTask.username === username ? 'Edit Task' : 'Preview Task'}}</h4>
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal" role="form">
 					<div class="form-group">
 						<div class="col-md-12">
-							<label for="taskTitle">Title</label>
-							<input id="taskTitle" type="text" class="form-control" placeholder="Title" ng-model="updatedTask.title">
+							<div class="input-group">
+								<span class="input-group-addon">Title</span>
+								<input type="text" class="form-control" placeholder="Title" ng-model="updatedTask.title">
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -125,27 +127,34 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-md-12">
-							<label for="taskEstimate">Initial Estimate</label>
-							<input id="taskEstimate" type="number" class="form-control" min="0" placeholder="0" />
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon">Initial</span>
+								<input type="number" class="form-control" min="0" step="0.5" placeholder="0" />
+								<span class="input-group-addon">hrs.</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon">Total</span>
+								<input type="text" class="form-control" disabled="true">
+								<span class="input-group-addon">hrs.</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon">Logged</span>
+								<input type="number" class="form-control" min="0" step="0.5" placeholder="0" />
+								<span class="input-group-addon">hrs.</span>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-md-3">
-							<label for="taskTotalTime">Total Time</label>
-							<input id="taskTotalTime" type="text" class="form-control" disabled="true">
-						</div>
-					</div>
-					<div class="form-group">
 						<div class="col-md-12">
-							<label for="taskLoggedTime">Logged Time</label>
-							<input id="taskLoggedTime" type="number" class="form-control" min="0" placeholder="0" />
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-md-12">
-							<label for="taskAssignee">Assignee</label>
-							<input id="taskAssignee" type="text" class="form-control" placeholder="Assignee">
+							<div class="input-group">
+								<span class="input-group-addon">Assignee</span>
+								<input type="text" class="form-control" ng-model="ticket.user" />
+							</div>
 						</div>
 					</div>
 				</form>
