@@ -8,7 +8,7 @@
 					<th>Project</th>
 					<th>Overhead</th>
 					<th>Logged vs. Estimated</th>
-					<th></th>
+					<th ng-show="isDeleting"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -18,7 +18,7 @@
 					<td><span>{{user.project}}</span></td>
 					<td><overhead tasks="user.tasks"></overhead></td>
 					<td><time></time></td>
-					<td><i class='fa fa-times'></i></td>
+					<td ng-show="isDeleting"><i class='fa fa-times'></i></td>
 				</tr>
 			</tbody>
 		</table>

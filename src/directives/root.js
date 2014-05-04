@@ -67,6 +67,33 @@ app.directive('secured', function ($rootScope, $location) {
 	};
 });
 
+app.directive('highlightable', function () {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			element[0].addEventListener('dragenter', function (e) {
+				element.css({"background-color":"#e6e6e6"});
+			});
+
+			element[0].addEventListener('dragover', function (e) {
+				element.css({"background-color":"#e6e6e6"});
+			});
+
+			element[0].addEventListener('dragleave', function (e) {
+				element.css({"background-color":"#fff"});
+			});
+
+			element[0].addEventListener('drop', function (e) {
+				element.css({"background-color":"#fff"});
+			});
+
+			element[0].addEventListener('dragend', function (e) {
+				element.css({"background-color":"#fff"});
+			});
+		}
+	};
+});
+
 app.directive('collapsibleIcon', function () {
 	return {
 		restrict: 'A',

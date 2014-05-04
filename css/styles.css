@@ -46,3 +46,5 @@ nav .navbar-nav > li > a.fa-bars:hover { background-color: #E7E7E7; }
 .log-target { color: white; padding: 3px 6px; }
 .log-amount, .log-comment { margin-left: 6px; padding-right: 6px; }
 .log-timestamp { display: inline; }
+
+.table-team tbody {font-family: Roboto; font-size: 85%; font-weight: 500; }

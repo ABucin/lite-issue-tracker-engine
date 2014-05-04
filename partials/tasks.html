@@ -11,28 +11,28 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>
+					<td highlightable>
 						<ul>
 							<li ng-repeat="ticket in createdTickets | filter:'task'" droppable status="created">
 								<ticket task ng-if="ticket.username === username || displayAll"></ticket>
 							</li>
 						</ul>
 					</td>
-					<td>
+					<td highlightable>
 						<ul>
 							<li ng-repeat="ticket in inProgressTickets | filter:'task'" droppable status="in_progress">
 								<ticket task ng-if="ticket.username === username || displayAll"></ticket>
 							</li>
 						</ul>
 					</td>
-					<td>
+					<td highlightable>
 						<ul>
 							<li ng-repeat="ticket in testingTickets | filter:'task'" droppable status="testing">
 								<ticket task ng-if="ticket.username === username || displayAll"></ticket>
 							</li>
 						</ul>
 					</td>
-					<td>
+					<td highlightable>
 						<ul>
 							<li ng-repeat="ticket in doneTickets | filter:'task'" droppable status="done">
 								<ticket task ng-if="ticket.username === username || displayAll"></ticket>
