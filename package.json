@@ -24,6 +24,7 @@
     "express": "*",
     "passport": "*",
     "mongoose": "*",
-    "body-parser": "*"
+    "body-parser": "*",
+    "underscore": "*"
   }
 }

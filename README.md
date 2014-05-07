@@ -20,6 +20,7 @@ Repository for the issue tracker application.
 	* Watch
   * Mongoose
   * Body-Parser
+  * Underscore
 * MongoDB 2.6 Standard
 
 #### Development Setup

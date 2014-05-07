@@ -35,7 +35,7 @@ router.route('/users/:uname/tickets/:key')
 
 router.route('/logs')
 	.get(function (req, res) {
-		//res.send(persistenceService.getAllLogs());
+		res.send(persistenceService.getAllLogs());
 	});
 
 router.route('/users')

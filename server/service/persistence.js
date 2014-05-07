@@ -1,6 +1,8 @@
 var dbURI = 'mongodb://localhost/issuetracker';
 
 var mongoose = require('mongoose');
+var _ = require('underscore')._;
+
 mongoose.connect(dbURI);
 
 var db = mongoose.connection;
@@ -148,6 +150,24 @@ exports.getTickets = function (username) {
 			return console.error(err);
 		}
 		persistedUsers = [user.tickets];
+	});
+
+	return persistedUsers;
+};
+
+exports.getAllLogs = function () {
+	User.find().sort('-timestamp').exec(function (err, users) {
+		if (err) {
+			return console.error(err);
+		}
+
+		var logs = [];
+
+		_.each(users, function(e, i, list){
+			logs = _.union(logs, e.logs);
+		});
+
+		persistedUsers = logs;
 	});
 
 	return persistedUsers;
