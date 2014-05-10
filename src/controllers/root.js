@@ -35,6 +35,7 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.createAction = "";
 
 		$rootScope.maxUserTasks = 10;
+		$rootScope.latestTicketCode = 0;
 
 		$rootScope.auth = false;
 		$rootScope.canFilter = false;
@@ -51,21 +52,25 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.doneTickets = [];
 
 		$rootScope.updatedTask = {};
+		$rootScope.deletedTask = {};
 		$rootScope.updatedBug = {};
+		$rootScope.deletedBug = {};
 		$rootScope.copiedEntity = {};
 
 		$rootScope.task = {
-			code: "XX-01",
 			title: "",
 			description: "",
-			type: "task"
+			type: "task",
+			estimatedTime: 0,
+			loggedTime: 0
 		};
 
 		$rootScope.bug = {
-			code: "XX-02",
 			title: "",
 			description: "",
-			type: "bug"
+			type: "bug",
+			estimatedTime: 0,
+			loggedTime: 0
 		};
 
 		$rootScope.loggedHoursData = [{

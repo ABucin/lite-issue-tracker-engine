@@ -8,9 +8,8 @@ var TicketSchema = new Schema({
 		unique: true
 	},
 	code: {
-		type: String,
+		type: Number,
 		required: true,
-		trim: true,
 		unique: true
 	},
 	title: {
@@ -29,6 +28,14 @@ var TicketSchema = new Schema({
 	description: {
 		type: String,
 		trim: true
+	},
+	estimatedTime : {
+		type: Number,
+		default: 0
+	},
+	loggedTime : {
+		type: Number,
+		default: 0
 	}
 });
 

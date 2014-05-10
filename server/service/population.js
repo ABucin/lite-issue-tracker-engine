@@ -25,67 +25,69 @@ exports.populateDb = function () {
 		project: "email-client",
 		tickets: [{
 			key: utilsService.generateKey(),
-			code: "BG-1",
+			code: 1,
 			title: "Email Validation Not Working",
 			status: "testing",
 			type: "bug",
 			description: "The email validation is broken for several users."
 		}, {
 			key: utilsService.generateKey(),
-			code: "BG-2",
+			code: 2,
 			title: "Authentication Whitespace Handling",
 			status: "created",
 			type: "bug",
 			description: "The authentication ignores whitespace."
 		}, {
 			key: utilsService.generateKey(),
-			code: "BG-3",
+			code: 3,
 			title: "Registration Page Header Missing",
 			status: "fixed",
 			type: "bug",
 			description: "The registration page does not contain any headers."
 		}, {
 			key: utilsService.generateKey(),
-			code: "BG-4",
+			code: 4,
 			title: "Minor CSS Alignment Bug",
 			status: "in_progress",
 			type: "bug",
 			description: "The logo is misaligned in IE6."
 		}, {
 			key: utilsService.generateKey(),
-			code: "TA-1",
+			code: 5,
 			title: "Implement User Registration Mechanism",
 			status: "testing",
 			type: "task",
 			description: "Create a secure mechanism for registering an account."
 		}, {
 			key: utilsService.generateKey(),
-			code: "TA-2",
+			code: 6,
 			title: "Review Currency Conversion Code",
 			status: "created",
 			type: "task",
-			description: "See title."
+			description: "See title.",
+			loggedTime: 8
 		}, {
 			key: utilsService.generateKey(),
-			code: "TA-3",
+			code: 7,
 			title: "Plan Review Meeting",
 			status: "in_progress",
 			type: "task",
 			description: "This Thursday at 10:00."
 		}, {
 			key: utilsService.generateKey(),
-			code: "TA-4",
+			code: 8,
 			title: "Implement User Password Reset Functionality",
 			status: "created",
 			type: "task",
 			description: "Create a secure mechanism for resetting a password for an account."
 		}, {
 			key: utilsService.generateKey(),
-			code: "TA-5",
+			code: 9,
 			title: "Revoke Domain Credentials",
 			status: "done",
 			type: "task",
-			description: "Revoke domain credentials for inactive users."
+			description: "Revoke domain credentials for inactive users.",
+			loggedTime: 3
 		}],
 		logs: [{
 			key: utilsService.generateKey(),
@@ -109,32 +111,34 @@ exports.populateDb = function () {
 		project: "email-client",
 		tickets: [{
 			key: utilsService.generateKey(),
-			code: "TA-6",
+			code: 10,
 			title: "Add Colour Palette",
 			status: "done",
 			type: "task",
 			description: "Create a colour palette for the website."
 		}, {
 			key: utilsService.generateKey(),
-			code: "TA-7",
+			code: 11,
 			title: "Remove Redundant Tests",
 			status: "in_progress",
 			type: "task",
 			description: "Remove tests that are not used."
 		}, {
 			key: utilsService.generateKey(),
-			code: "BG-5",
+			code: 12,
 			title: "Syntax Highlighting Broken",
 			status: "done",
 			type: "bug",
-			description: "See title."
+			description: "See title.",
+			loggedTime: 6
 		}, {
 			key: utilsService.generateKey(),
-			code: "BG-6",
+			code: 13,
 			title: "Fix CSS Button Padding",
 			status: "in_progress",
 			type: "bug",
-			description: "The login button has extra padding."
+			description: "The login button has extra padding.",
+			loggedTime: 5
 		}],
 		logs: [{
 			key: utilsService.generateKey(),

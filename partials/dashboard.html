@@ -22,7 +22,7 @@
 				</div>
 				<div id="panel-tasks" class="panel-body panel-body-dashboard collapse in">
 					<div class="ticket ticket-task ticket-code" ng-repeat="ticket in tickets | filter:'task' | filter: username">
-						{{ticket.code}}
+						TA-{{ticket.code}}
 						<span class="ticket-title">{{ticket.title}}</span>
 					</div>
 				</div>
@@ -36,7 +36,7 @@
 				</div>
 				<div id="panel-bugs" class="panel-body panel-body-dashboard collapse in">
 					<div class="ticket ticket-bug ticket-code" ng-repeat="ticket in tickets | filter:'bug' | filter: username">
-						{{ticket.code}}
+						BG-{{ticket.code}}
 						<span class="ticket-title">{{ticket.title}}</span>
 					</div>
 				</div>

@@ -2,10 +2,12 @@ app.directive('ticket', function ($rootScope) {
 
 	function templateFunction(tElem, tAttr) {
 		var type = "task";
+		var codePrefix = "TA-";
 		if (tAttr.task === undefined) {
 			type = "bug";
+			codePrefix = "BG-";
 		}
-		return "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-" + type + "'>{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='isDeleting && ticket.username === username'></i></span></div>"
+		return "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-" + type + "'>" + codePrefix + "{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='isDeleting && ticket.username === username'></i></span></div>"
 	}
 
 	return {
@@ -19,7 +21,8 @@ app.directive('ticket', function ($rootScope) {
 			element.find('i').on('click', function (event) {
 				event.preventDefault();
 				event.stopPropagation();
-				scope.deleteTicket(scope.ticket.key);
+				$rootScope.deletedTask.key = scope.ticket.key;
+				$('#ticket-delete-modal').modal('show');
 			});
 			element.on('click', function (event) {
 				scope.isEditing = true;

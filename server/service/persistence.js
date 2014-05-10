@@ -62,6 +62,12 @@ exports.updateTicket = function (key, username, ticket, res) {
 				if (ticket.description != null) {
 					user.tickets[i].description = ticket.description;
 				}
+				if (ticket.loggedTime != null) {
+					user.tickets[i].loggedTime = ticket.loggedTime;
+				}
+				if (ticket.estimatedTime != null) {
+					user.tickets[i].estimatedTime = ticket.estimatedTime;
+				}
 				break;
 			}
 		}
@@ -96,20 +102,20 @@ exports.deleteTicket = function (key, username, res) {
 			}
 		});
 
-		res.json(deletedTicket);
+		res.json(user);
 	});
 };
 
 exports.createTicket = function (username, ticket, res) {
 	var ticketData = {
 		key: utilsService.generateKey(),
-		code: ticket.code,
 		title: ticket.title,
 		status: 'created',
 		type: ticket.type,
-		description: ticket.description
+		description: ticket.description,
+		loggedTime: ticket.loggedTime,
+		estimatedTime: ticket.estimatedTime
 	};
-	var persistedTicket = new Ticket(ticketData); // create a new instance of the Ticket model
 
 	// save the ticket and check for errors
 	User.findOne({
@@ -119,15 +125,33 @@ exports.createTicket = function (username, ticket, res) {
 			return console.error(err);
 		}
 
-		user.tickets.push(persistedTicket);
-
-		user.save(function (err) {
+		User.find(function (err, users) {
 			if (err) {
 				return console.error(err);
 			}
+
+			var tickets = [];
+
+			_.each(users, function (e, i, list) {
+				tickets = _.union(tickets, e.tickets);
+			});
+
+			var latestTicket = _.max(tickets, function (ticket) {
+				return ticket.code;
+			});
+
+			ticketData.code = latestTicket.code + 1;
+			user.tickets.push(new Ticket(ticketData));
+
+			user.save(function (err) {
+				if (err) {
+					return console.error(err);
+				}
+
+				res.json(ticketData);
+			});
 		});
 
-		res.json(ticketData);
 	});
 };
 
