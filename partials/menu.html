@@ -3,7 +3,7 @@
 		<div class="navbar-header">
 			<a class="navbar-brand">Issue Tracker</a>
 			<ul class="nav navbar-nav">
-				<li>
+				<li class="text-center">
 					<a class="fa fa-bars" data-toggle="dropdown"></a>
 					<ul class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="tasksMenu">
 						<li role="presentation">
@@ -28,6 +28,8 @@
 						</li>
 					</ul>
 				</li>
+			</ul>
+			<ul class="nav navbar-nav collapse navbar-collapse">
 				<li class='toggleable'>
 					<a ng-click="navigate('dashboard')">
 						<i class="fa fa-home"></i>Dashboard</a>
@@ -53,7 +55,7 @@
 						<i class="fa fa-cog"></i>Settings</a>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav collapse navbar-collapse">
 				<li>
 					<a ng-click="logout()">
 						<i class="fa fa-power-off"></i>Logout</a>
