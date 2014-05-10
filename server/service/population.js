@@ -161,9 +161,9 @@ exports.populateDb = function () {
 
 	firstUser.save(function (err) {
 		if (err) return console.error(err); // we should handle this
-	});
-	secondUser.save(function (err) {
-		if (err) return console.error(err); // we should handle this
-	});
 
+		secondUser.save(function (err) {
+			if (err) return console.error(err); // we should handle this
+		});
+	});
 };
