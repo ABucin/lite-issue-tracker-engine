@@ -21,7 +21,9 @@ nav.navbar ul.navbar-nav > li.toggleable:hover, nav.navbar .navbar-nav > li.togg
 .list-group-item { padding: 5px 10px; }
 
 .modal-dialog {font-family: 'Roboto'; font-weight: normal;}
+.modal-dialog form {margin-bottom: 0;}
 .modal-header { padding: 10px 15px; }
+.modal-footer { margin-top: 0; }
 
 .table {background-color: #fff;}
 .table > thead > tr > th {margin-bottom: 10px; font-weight: 100; text-align: center; min-width: 20%; border-bottom: 1px solid #DDDDDD;}

@@ -62,7 +62,8 @@ function ($scope, $rootScope, $location, $http) {
 			description: "",
 			type: "task",
 			estimatedTime: 0,
-			loggedTime: 0
+			loggedTime: 0,
+			creator: $rootScope.username
 		};
 
 		$rootScope.bug = {
@@ -70,7 +71,8 @@ function ($scope, $rootScope, $location, $http) {
 			description: "",
 			type: "bug",
 			estimatedTime: 0,
-			loggedTime: 0
+			loggedTime: 0,
+			creator: $rootScope.username
 		};
 
 		$rootScope.loggedHoursData = [{
@@ -381,7 +383,7 @@ function ($scope, $rootScope, $location, $http) {
 					plotShadow: false
 				},
 				title: {
-					text: ''
+					text: 'Assigned Tickets'
 				},
 				tooltip: {
 					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -389,13 +391,12 @@ function ($scope, $rootScope, $location, $http) {
 				plotOptions: {
 					pie: {
 						allowPointSelect: true,
+						size: '100%',
 						cursor: 'pointer',
 						dataLabels: {
-							enabled: true,
-							color: '#000000',
-							connectorColor: '#000000',
-							format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-						}
+							enabled: false
+						},
+                    showInLegend: true
 					}
 				},
 				credits: {

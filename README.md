@@ -22,6 +22,7 @@ Repository for the issue tracker application.
   * Body-Parser
   * Underscore
 * MongoDB 2.6 Standard
+* Highcharts.js 4.0.1
 
 #### Development Setup
 

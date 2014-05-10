@@ -36,6 +36,11 @@ var TicketSchema = new Schema({
 	loggedTime : {
 		type: Number,
 		default: 0
+	},
+	creator: {
+		type: String,
+		required: true,
+		unique: true
 	}
 });
 

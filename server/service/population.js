@@ -29,35 +29,40 @@ exports.populateDb = function () {
 			title: "Email Validation Not Working",
 			status: "testing",
 			type: "bug",
-			description: "The email validation is broken for several users."
+			description: "The email validation is broken for several users.",
+			creator: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 2,
 			title: "Authentication Whitespace Handling",
 			status: "created",
 			type: "bug",
-			description: "The authentication ignores whitespace."
+			description: "The authentication ignores whitespace.",
+			creator: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 3,
 			title: "Registration Page Header Missing",
 			status: "fixed",
 			type: "bug",
-			description: "The registration page does not contain any headers."
+			description: "The registration page does not contain any headers.",
+			creator: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 4,
 			title: "Minor CSS Alignment Bug",
 			status: "in_progress",
 			type: "bug",
-			description: "The logo is misaligned in IE6."
+			description: "The logo is misaligned in IE6.",
+			creator: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 5,
 			title: "Implement User Registration Mechanism",
 			status: "testing",
 			type: "task",
-			description: "Create a secure mechanism for registering an account."
+			description: "Create a secure mechanism for registering an account.",
+			creator: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 6,
@@ -65,21 +70,24 @@ exports.populateDb = function () {
 			status: "created",
 			type: "task",
 			description: "See title.",
-			loggedTime: 8
+			loggedTime: 8,
+			creator: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 7,
 			title: "Plan Review Meeting",
 			status: "in_progress",
 			type: "task",
-			description: "This Thursday at 10:00."
+			description: "This Thursday at 10:00.",
+			creator: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 8,
 			title: "Implement User Password Reset Functionality",
 			status: "created",
 			type: "task",
-			description: "Create a secure mechanism for resetting a password for an account."
+			description: "Create a secure mechanism for resetting a password for an account.",
+			creator: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 9,
@@ -87,7 +95,8 @@ exports.populateDb = function () {
 			status: "done",
 			type: "task",
 			description: "Revoke domain credentials for inactive users.",
-			loggedTime: 3
+			loggedTime: 3,
+			creator: "psmith"
 		}],
 		logs: [{
 			key: utilsService.generateKey(),
@@ -115,14 +124,16 @@ exports.populateDb = function () {
 			title: "Add Colour Palette",
 			status: "done",
 			type: "task",
-			description: "Create a colour palette for the website."
+			description: "Create a colour palette for the website.",
+			creator: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 11,
 			title: "Remove Redundant Tests",
 			status: "in_progress",
 			type: "task",
-			description: "Remove tests that are not used."
+			description: "Remove tests that are not used.",
+			creator: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 12,
@@ -130,7 +141,8 @@ exports.populateDb = function () {
 			status: "done",
 			type: "bug",
 			description: "See title.",
-			loggedTime: 6
+			loggedTime: 6,
+			creator: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 13,
@@ -138,7 +150,8 @@ exports.populateDb = function () {
 			status: "in_progress",
 			type: "bug",
 			description: "The login button has extra padding.",
-			loggedTime: 5
+			loggedTime: 5,
+			creator: "abucin"
 		}],
 		logs: [{
 			key: utilsService.generateKey(),
