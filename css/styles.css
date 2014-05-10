@@ -1,50 +1,36 @@
 /* Fixes the antialiasing in Google Chrome. */
-body { -webkit-font-smoothing: antialiased; }
-
-.body-menu-padding { margin-top: 70px; }
-
-.panel-heading > span > i[data-toggle*="collapse"] {cursor: pointer}
+body { -webkit-font-smoothing: antialiased; background-image: url('../img/bg.png'); }
 
 a{cursor: pointer;}
 
-.nav > li > a > i.fa {margin-right: 5px;}
-
-nav a.fa-bars { background-color: #E7E7E7; margin: 0 5px; }
-nav .navbar-nav > li > a.fa-bars:hover { background-color: #E7E7E7; }
-
+.table-team > tbody {font-family: Roboto; font-size: 85%; font-weight: 500; }
 .table-team > tbody > tr > td { margin: 3px; }
-
-.table > tbody > tr > td, .table > thead > tr > th {border-left: 1px dashed #DDDDDD; vertical-align: top;}
-.table > tbody > tr > td {border-top: none; padding: 0 6px;}
-.table > tbody > tr > td i {padding-left: 5px;}
-.table > tbody > tr > td > div.progress { margin-bottom: 0; }
-.table > tbody > tr > td > ul { list-style: none; margin-top: 3px; padding: 0;}
-.table > thead > tr > th {margin-bottom: 10px; font-weight: 100; text-align: center; min-width: 20%;}
-.table > thead i {padding-left: 5px;}
 
 .label .fa {padding-left: 5px;}
 .login-form {padding-top: 10%;}
 
-.panel-body-dashboard { padding: 5px; }
-
-.panel-heading span i{ line-height: 1.5; }
-
-.sidebar button[data-target*='-modal'] {margin: 5px 0;}
-
-.list-group-item { padding: 5px 10px; }
-
-.ticket, .log, .log-timestamp { font-family: "roboto"; display: inline-block; margin: 3px; line-height: normal; font-size: 75%; font-weight: bold; }
-.ticket:hover, .log:hover {  cursor: pointer; }
+/**
+ * Ticket CSS.
+ */
+.ticket, .log, .log-timestamp { font-family: "Roboto"; display: inline-block; margin: 3px; line-height: normal; font-size: 75%; font-weight: 500; letter-spacing: 0.25;}
+.ticket:hover, .log:hover { cursor: pointer; }
 .ticket-bug { background-color: #CB1F26; }
 .ticket-task { background-color: #21579D; }
 .ticket-code { color: white; border-radius: .3em; padding: 0px 0 0px 6px; display: inline-flex; align-items: center; }
 .ticket-title {position: relative; left: 1px; background-color: #C3C2B8 ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
 
-.log { border-radius: .3em; color: white; background-color: #3F424B; padding: 3px 0px 3px 6px; vertical-align: middle; margin: 3px 3px; align-items: center; }
+/**
+ * Log entry CSS.
+ */
+.log { border-radius: .3em; color: white; background-color: #3F424B; padding: 3px 0px 3px 6px; vertical-align: middle; margin: 3px 3px; align-items: center; font-weight: 500; letter-spacing: 0.5;}
 .log span:last-child { border-radius: 0 .3em .3em 0; }
 .log-user { background-color: #C3C2B8; color: black; padding: 3px 6px; margin: 0 0px 0 3px; }
 .log-target { color: white; padding: 3px 6px; }
 .log-amount, .log-comment { margin-left: 6px; padding-right: 6px; }
 .log-timestamp { display: inline; }
 
-.table-team tbody {font-family: Roboto; font-size: 85%; font-weight: 500; }
+/**
+ * Utils.
+ */
+.center-y {vertical-align: middle;}
+.center-x {text-align: center;}

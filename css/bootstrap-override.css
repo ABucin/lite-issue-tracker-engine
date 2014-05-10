@@ -1,0 +1,33 @@
+.body-menu-padding { margin-top: 60px; }
+
+nav.navbar {border-color: #ddd; min-height: 40px;}
+nav.navbar > .container-fluid {background-color: #ededed;}
+nav.navbar .navbar-brand {padding: 10px; height: 40px; font-size: 97%; font-family: "Roboto";}
+nav.navbar li > a.fa-bars:hover { background-color: #ccc; }
+nav.navbar a.fa-bars { background-color: #ccc; margin: 0 3px; }
+nav.navbar ul.nav > li {margin: 0 3px;}
+nav.navbar ul.nav > li > a {padding: 10px;}
+nav.navbar ul.nav > li > a > i.fa {margin-right: 5px;}
+nav.navbar ul.navbar-nav > li.toggleable:hover, nav.navbar .navbar-nav > li.toggleable.active > a, nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {background-color: #ccc;}
+
+.panel-heading > span > i[data-toggle*="collapse"] {cursor: pointer; line-height: 1.5;}
+
+.panel.ng-scope {background-color: transparent;}
+.panel-body-dashboard { padding: 5px; }
+.panel > .panel-heading {background-color: #ededed;}
+
+.sidebar button[data-target*='-modal'] {margin: 5px 0;}
+
+.list-group-item { padding: 5px 10px; }
+
+.modal-dialog {font-family: 'Roboto'; font-weight: normal;}
+.modal-header { padding: 10px 15px; }
+
+.table {background-color: #fff;}
+.table > thead > tr > th {margin-bottom: 10px; font-weight: 100; text-align: center; min-width: 20%; border-bottom: 1px solid #DDDDDD;}
+.table > tbody > tr > td, .table > thead > tr > th {border-left: 1px dashed #DDDDDD; vertical-align: top;}
+.table > tbody > tr > td {border-top: none; padding: 0 6px;}
+.table > tbody > tr > td i {padding-left: 5px;}
+.table > tbody > tr > td > div.progress { margin-bottom: 0; }
+.table > tbody > tr > td > ul { list-style: none; margin-top: 3px; padding: 0;}
+.table > thead > i {padding-left: 5px;}
