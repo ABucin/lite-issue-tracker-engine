@@ -15,12 +15,6 @@ var populationService = require("./population");
 var schemaService = require('./schema');
 var utilsService = require('./utils');
 
-var persistedTickets = [];
-var persistedUsers = [];
-var persistedLogs = [];
-
-var deletedTicket = {};
-
 var Ticket = schemaService.getTicket();
 var User = schemaService.getUser();
 
@@ -28,31 +22,27 @@ exports.populateDb = function () {
 	return populationService.populateDb();
 }
 
-exports.getAllUsers = function () {
+exports.getAllUsers = function (res) {
 	User.find(function (err, users) {
 		if (err) {
 			return console.error(err);
 		}
-		persistedUsers = users;
+		res.json(users);
 	});
-
-	return persistedUsers;
 };
 
-exports.getUser = function (username) {
+exports.getUser = function (username, res) {
 	User.findOne({
 		'username': username
 	}, function (err, user) {
 		if (err) {
 			return console.error(err);
 		}
-		persistedUsers = [user];
+		res.json([user]);
 	});
-
-	return persistedUsers;
 };
 
-exports.updateTicket = function (key, username, ticket) {
+exports.updateTicket = function (key, username, ticket, res) {
 	// save the ticket and check for errors
 	User.findOne({
 		'username': username
@@ -80,13 +70,12 @@ exports.updateTicket = function (key, username, ticket) {
 			if (err) {
 				return console.error(err);
 			}
+			res.json(ticket);
 		});
 	});
-
-	return ticket;
 };
 
-exports.deleteTicket = function (key, username) {
+exports.deleteTicket = function (key, username, res) {
 	User.findOne({
 		'username': username
 	}, function (err, user) {
@@ -106,12 +95,12 @@ exports.deleteTicket = function (key, username) {
 				return console.error(err);
 			}
 		});
-	});
 
-	return deletedTicket;
+		res.json(deletedTicket);
+	});
 };
 
-exports.createTicket = function (username, ticket) {
+exports.createTicket = function (username, ticket, res) {
 	var ticketData = {
 		key: utilsService.generateKey(),
 		code: ticket.code,
@@ -137,25 +126,23 @@ exports.createTicket = function (username, ticket) {
 				return console.error(err);
 			}
 		});
-	});
 
-	return ticketData;
+		res.json(ticketData);
+	});
 };
 
-exports.getTickets = function (username) {
+exports.getTickets = function (username, res) {
 	User.findOne({
 		'username': username
 	}, function (err, user) {
 		if (err) {
 			return console.error(err);
 		}
-		persistedUsers = [user.tickets];
+		res.json([user.tickets]);
 	});
-
-	return persistedUsers;
 };
 
-exports.getAllLogs = function () {
+exports.getAllLogs = function (res) {
 	User.find().sort('-timestamp').exec(function (err, users) {
 		if (err) {
 			return console.error(err);
@@ -163,12 +150,10 @@ exports.getAllLogs = function () {
 
 		var logs = [];
 
-		_.each(users, function(e, i, list){
+		_.each(users, function (e, i, list) {
 			logs = _.union(logs, e.logs);
 		});
 
-		persistedUsers = logs;
+		res.json(logs);
 	});
-
-	return persistedUsers;
 };

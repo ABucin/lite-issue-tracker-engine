@@ -19,33 +19,33 @@ persistenceService.populateDb();
 
 router.route('/users/:uname/tickets')
 	.post(function (req, res) {
-		res.json(persistenceService.createTicket(req.params.uname, req.body));
+		persistenceService.createTicket(req.params.uname, req.body, res);
 	})
 	.get(function (req, res) {
-		res.json(persistenceService.getTickets(req.params.uname));
+		persistenceService.getTickets(req.params.uname, res);
 	});
 
 router.route('/users/:uname/tickets/:key')
 	.put(function (req, res) {
-		res.json(persistenceService.updateTicket(req.params.key, req.params.uname, req.body));
+		persistenceService.updateTicket(req.params.key, req.params.uname, req.body, res);
 	})
 	.delete(function (req, res) {
-		res.json(persistenceService.deleteTicket(req.params.key, req.params.uname));
+		persistenceService.deleteTicket(req.params.key, req.params.uname, res);
 	});
 
 router.route('/logs')
 	.get(function (req, res) {
-		res.send(persistenceService.getAllLogs());
+		persistenceService.getAllLogs(res);
 	});
 
 router.route('/users')
 	.get(function (req, res) {
-		res.json(persistenceService.getAllUsers());
+		persistenceService.getAllUsers(res);
 	});
 
 router.route('/users?:uname')
 	.get(function (req, res) {
-		res.json(persistenceService.getUser(req.query.uname));
+		persistenceService.getUser(req.query.uname, res);
 	});
 
 console.log('Listening on port ' + port + '...');
