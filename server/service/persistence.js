@@ -25,7 +25,7 @@ exports.populateDb = function () {
 exports.getAllUsers = function (res) {
 	User.find(function (err, users) {
 		if (err) {
-			return console.error(err);
+			res.send(500, err);
 		}
 		res.json(users);
 	});
@@ -36,7 +36,7 @@ exports.getUser = function (username, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			return console.error(err);
+			res.send(500, err);
 		}
 		res.json([user]);
 	});
@@ -48,7 +48,7 @@ exports.updateTicket = function (key, username, ticket, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			return console.error(err);
+			res.send(500, err);
 		}
 
 		for (var i in user.tickets) {
@@ -74,7 +74,7 @@ exports.updateTicket = function (key, username, ticket, res) {
 
 		user.save(function (err) {
 			if (err) {
-				return console.error(err);
+				res.send(500, err);
 			}
 			res.json(ticket);
 		});
@@ -86,7 +86,7 @@ exports.deleteTicket = function (key, username, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			return console.error(err);
+			res.send(500, err);
 		}
 
 		for (var i in user.tickets) {
@@ -98,7 +98,7 @@ exports.deleteTicket = function (key, username, res) {
 
 		user.save(function (err) {
 			if (err) {
-				return console.error(err);
+				res.send(500, err);
 			}
 		});
 
@@ -123,12 +123,12 @@ exports.createTicket = function (username, ticket, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			return console.error(err);
+			res.send(500, err);
 		}
 
 		User.find(function (err, users) {
 			if (err) {
-				return console.error(err);
+				res.send(500, err);
 			}
 
 			var tickets = [];
@@ -146,7 +146,7 @@ exports.createTicket = function (username, ticket, res) {
 
 			user.save(function (err) {
 				if (err) {
-					return console.error(err);
+					res.send(500, err);
 				}
 
 				res.json(ticketData);
@@ -161,7 +161,7 @@ exports.getTickets = function (username, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			return console.error(err);
+			res.send(500, err);
 		}
 		res.json([user.tickets]);
 	});
@@ -170,7 +170,7 @@ exports.getTickets = function (username, res) {
 exports.getAllLogs = function (res) {
 	User.find().sort('-timestamp').exec(function (err, users) {
 		if (err) {
-			return console.error(err);
+			res.send(500, err);
 		}
 
 		var logs = [];
@@ -180,5 +180,28 @@ exports.getAllLogs = function (res) {
 		});
 
 		res.json(logs);
+	});
+};
+
+exports.createUser = function (user, res) {
+	var userData = {
+		key: utilsService.generateKey(),
+		email: user.email,
+		username: user.email.split('@')[0],
+		password: user.password,
+		role: "user",
+		project: "issue-tracker",
+		tickets: [],
+		logs: []
+	};
+
+	var persistedUser = new User(userData);
+
+	persistedUser.save(function (err) {
+		if (err) {
+			res.send(500, err);
+		}
+
+		res.json({ message: 'User created!' });
 	});
 };

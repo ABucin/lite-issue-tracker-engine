@@ -41,6 +41,9 @@ router.route('/logs')
 router.route('/users')
 	.get(function (req, res) {
 		persistenceService.getAllUsers(res);
+	})
+	.post(function (req, res) {
+		persistenceService.createUser(req.body, res);
 	});
 
 router.route('/users?:uname')

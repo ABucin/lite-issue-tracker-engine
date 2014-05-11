@@ -21,6 +21,8 @@ exports.populateDb = function () {
 	var firstUser = new User({
 		key: utilsService.generateKey(),
 		username: "psmith",
+		email: "psmith@dummy.com",
+		password: "test",
 		role: "tester",
 		project: "email-client",
 		tickets: [{
@@ -116,6 +118,8 @@ exports.populateDb = function () {
 	var secondUser = new User({
 		key: utilsService.generateKey(),
 		username: "abucin",
+		email: "abucin@gmail.com",
+		password: "test",
 		role: "admin",
 		project: "email-client",
 		tickets: [{

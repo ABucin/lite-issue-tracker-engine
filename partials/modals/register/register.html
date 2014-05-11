@@ -1,0 +1,47 @@
+<!-- Modal dialog code -->
+
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">Register</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<div class="col-md-12">
+							<label for="registerEmail">Email Address</label>
+							<input id="registerEmail" type="email" class="form-control" placeholder="Email" ng-model="registrationData.email">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-12">
+							<label for="registerPassword">Password</label>
+							<input id="registerPassword" type="password" class="form-control" placeholder="Password" ng-model="registrationData.password">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-12">
+							<label for="registerConfirmedPassword">Confirmed Password</label>
+							<input id="registerConfirmedPassword" type="password" class="form-control" placeholder="Confirmed Password" ng-model="registrationData.confirmedPassword">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="registerUser()">
+					Submit
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

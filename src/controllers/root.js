@@ -75,6 +75,20 @@ function ($scope, $rootScope, $location, $http) {
 			creator: $rootScope.username
 		};
 
+		$rootScope.registrationData = {
+			email: "",
+			password: "",
+			confirmedPassword: "",
+		};
+
+		$scope.templates = [{
+				url: 'partials/modals/register/register.html'
+			},{
+				url: 'partials/modals/register/register-success.html'
+			}];
+		$scope.templateRegister = $scope.templates[0];
+		$scope.templateRegisterSuccess = $scope.templates[1];
+
 		$rootScope.loggedHoursData = [{
 			name: 'mlawrence',
 			data: [7, 8, 9, 8, 8]
@@ -373,6 +387,19 @@ function ($scope, $rootScope, $location, $http) {
 		$scope.logout = function () {
 			$rootScope.auth = false;
 			$scope.navigate('login');
+		};
+
+		$scope.registerUser = function() {
+			var data = {};
+			angular.copy($rootScope.registrationData, data);
+
+			$http({
+				method: 'POST',
+				url: '/itracker/api/users/',
+				data: data
+			}).success(function (data) {
+				$('#register-success-modal').modal('show');
+			});
 		};
 
 		$rootScope.dashboardChart = function () {
