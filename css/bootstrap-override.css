@@ -2,7 +2,7 @@
 
 nav.navbar {border-color: #ddd; min-height: 40px;}
 nav.navbar > .container-fluid {background-color: #ededed;}
-nav.navbar .navbar-brand {padding: 10px; height: 40px; font-size: 97%; font-family: "Roboto";}
+nav.navbar .navbar-brand {padding: 10px; height: 40px; font-size: 97%;}
 nav.navbar li > a.fa-bars:hover { background-color: #ccc; }
 nav.navbar a.fa-bars { background-color: #ccc; margin: 0 3px; }
 nav.navbar ul.nav > li {margin: 0 3px;}
@@ -20,13 +20,15 @@ nav.navbar ul.navbar-nav > li.toggleable:hover, nav.navbar .navbar-nav > li.togg
 
 .list-group-item { padding: 5px 10px; }
 
-.modal-dialog {font-family: 'Roboto'; font-weight: normal;}
+.label .fa {padding-left: 5px;}
+
+.modal-dialog {font-weight: normal;}
 .modal-dialog form {margin-bottom: 0;}
 .modal-header { padding: 10px 15px; }
 .modal-footer { margin-top: 0; }
 
 .table {background-color: #fff;}
-.table > thead > tr > th {margin-bottom: 10px; font-weight: 100; text-align: center; min-width: 20%; border-bottom: 1px solid #DDDDDD;}
+.table > thead > tr > th {margin-bottom: 10px; font-weight: 500; text-align: center; min-width: 20%; border-bottom: 1px solid #DDDDDD;}
 .table > tbody > tr > td, .table > thead > tr > th {border-left: 1px dashed #DDDDDD; vertical-align: top;}
 .table > tbody > tr > td {border-top: none; padding: 0 6px;}
 .table > tbody > tr > td i {padding-left: 5px;}

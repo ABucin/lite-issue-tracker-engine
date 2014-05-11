@@ -1,18 +1,17 @@
 /* Fixes the antialiasing in Google Chrome. */
-body { -webkit-font-smoothing: antialiased; background-image: url('../img/bg.png'); }
+body { -webkit-font-smoothing: antialiased; background-image: url('../img/bg.png'); font-family: "Roboto", "Helvetica", "Verdana";}
+body a{cursor: pointer;}
+body a:hover {text-decoration: none;}
 
-a{cursor: pointer;}
-
-.table-team > tbody {font-family: Roboto; font-size: 85%; font-weight: 500; }
+.table-team > tbody {font-size: 85%; font-weight: 500; }
 .table-team > tbody > tr > td { margin: 3px; }
 
-.label .fa {padding-left: 5px;}
 .login-form {padding-top: 10%;}
 
 /**
  * Ticket CSS.
  */
-.ticket, .log, .log-timestamp { font-family: "Roboto"; display: inline-block; margin: 3px; line-height: normal; font-size: 75%; font-weight: 500; letter-spacing: 0.25;}
+.ticket, .log, .log-timestamp { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500;}
 .ticket:hover, .log:hover { cursor: pointer; }
 .ticket-bug { background-color: #CB1F26; }
 .ticket-task { background-color: #21579D; }
@@ -22,10 +21,10 @@ a{cursor: pointer;}
 /**
  * Log entry CSS.
  */
-.log { border-radius: .3em; color: white; background-color: #3F424B; padding: 3px 0px 3px 6px; vertical-align: middle; margin: 3px 3px; align-items: center; font-weight: 500; letter-spacing: 0.5;}
+.log { border-radius: .3em; color: white; background-color: #3F424B; padding: 3px 0px 3px 6px; vertical-align: middle; margin: 3px 3px; align-items: center;}
 .log span:last-child { border-radius: 0 .3em .3em 0; }
 .log-user { background-color: #C3C2B8; color: black; padding: 3px 6px; margin: 0 0px 0 3px; }
-.log-target { color: white; padding: 3px 6px; }
+.log-target { color: white; padding: 3px 6px; margin-left: -3px; }
 .log-amount, .log-comment { margin-left: 6px; padding-right: 6px; }
 .log-timestamp { display: inline; }
 
