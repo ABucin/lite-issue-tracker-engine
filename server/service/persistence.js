@@ -184,6 +184,7 @@ exports.getAllLogs = function (res) {
 };
 
 exports.createUser = function (user, res) {
+	var errorResponse = [];
 	var userData = {
 		key: utilsService.generateKey(),
 		email: user.email,
@@ -195,13 +196,44 @@ exports.createUser = function (user, res) {
 		logs: []
 	};
 
+	if (!user.password.length) {
+		errorResponse.push({
+			message: 'Password must be provided.'
+		});
+	}
+
+	if (!user.email.length) {
+		errorResponse.push({
+			message: 'Email address must be provided.'
+		});
+	}
+
+	if (user.password !== user.repeatedPassword) {
+		errorResponse.push({
+			message: 'Passwords do not match.'
+		});
+	}
+
+	if (errorResponse.length) {
+		res.send(500, errorResponse);
+	}
+
 	var persistedUser = new User(userData);
 
 	persistedUser.save(function (err) {
 		if (err) {
-			res.send(500, err);
+			var errorResponse = [];
+			for (var k in err.errors) {
+				var message = err.errors[k].message.split("Path ")[1];
+				errorResponse.push({
+					message: message
+				});
+			}
+			res.send(500, errorResponse);
 		}
 
-		res.json({ message: 'User created!' });
+		res.json({
+			message: 'User created!'
+		});
 	});
 };

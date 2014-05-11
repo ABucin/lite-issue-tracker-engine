@@ -50,6 +50,7 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.inProgressTickets = [];
 		$rootScope.testingTickets = [];
 		$rootScope.doneTickets = [];
+		$rootScope.errors = [];
 
 		$rootScope.updatedTask = {};
 		$rootScope.deletedTask = {};
@@ -78,7 +79,7 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.registrationData = {
 			email: "",
 			password: "",
-			confirmedPassword: "",
+			confirmedPassword: ""
 		};
 
 		$scope.templates = [{
@@ -398,7 +399,11 @@ function ($scope, $rootScope, $location, $http) {
 				url: '/itracker/api/users/',
 				data: data
 			}).success(function (data) {
+				$rootScope.errors = [];
+				$("#register-modal").modal('hide');
 				$('#register-success-modal').modal('show');
+			}).error(function(data) {
+				$rootScope.errors = data;
 			});
 		};
 
