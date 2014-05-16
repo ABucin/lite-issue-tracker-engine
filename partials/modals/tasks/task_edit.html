@@ -37,7 +37,7 @@
 						<div class="col-lg-4">
 							<div class="input-group">
 								<span class="input-group-addon">Initial</span>
-								<input type="number" class="form-control" min="0" step="0.5" placeholder="0" ng-disabled="updatedTask.status !== 'created'" />
+								<input type="number" class="form-control" min="0" step="0.5" placeholder="0" ng-disabled="updatedTask.status !== 'created' || updatedTask.username !== username" />
 								<span class="input-group-addon">h</span>
 							</div>
 						</div>

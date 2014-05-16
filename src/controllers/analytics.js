@@ -1,4 +1,4 @@
-app.controller('StatisticsCtrl', ['$scope', '$rootScope', '$location',
+app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.auth = true;
     $rootScope.canFilter = false;

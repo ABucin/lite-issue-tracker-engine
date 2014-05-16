@@ -9,7 +9,7 @@ Repository for the issue tracker application.
 
 * Angular.js 1.2.16
 * Bootstrap 3.1.1
-* Font Awesome 4.0.3
+* Font Awesome 4.1.0
 * jQuery 2.1.0
 * Node.js v0.10.26
   * Express

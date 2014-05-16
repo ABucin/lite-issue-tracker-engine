@@ -14,9 +14,9 @@ function ($routeProvider) {
 		}).when('/bugs', {
 			templateUrl: 'partials/bugs.html',
 			controller: 'BugsCtrl'
-		}).when('/statistics', {
-			templateUrl: 'partials/statistics.html',
-			controller: 'StatisticsCtrl'
+		}).when('/analytics', {
+			templateUrl: 'partials/analytics.html',
+			controller: 'AnalyticsCtrl'
 		}).when('/team', {
 			templateUrl: 'partials/team.html',
 			controller: 'TeamCtrl'

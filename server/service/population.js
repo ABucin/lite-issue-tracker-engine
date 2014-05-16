@@ -85,7 +85,7 @@ exports.populateDb = function () {
 		}, {
 			key: utilsService.generateKey(),
 			code: 8,
-			title: "Implement User Password Reset Functionality",
+			title: "Implement User Password Reset",
 			status: "created",
 			type: "task",
 			description: "Create a secure mechanism for resetting a password for an account.",
