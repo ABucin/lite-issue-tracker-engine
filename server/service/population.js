@@ -76,14 +76,6 @@ exports.populateDb = function () {
 			creator: "psmith"
 		}, {
 			key: utilsService.generateKey(),
-			code: 7,
-			title: "Plan Review Meeting",
-			status: "in_progress",
-			type: "task",
-			description: "This Thursday at 10:00.",
-			creator: "abucin"
-		}, {
-			key: utilsService.generateKey(),
 			code: 8,
 			title: "Implement User Password Reset",
 			status: "created",
@@ -123,6 +115,14 @@ exports.populateDb = function () {
 		role: "admin",
 		project: "email-client",
 		tickets: [{
+			key: utilsService.generateKey(),
+			code: 7,
+			title: "Plan Review Meeting",
+			status: "in_progress",
+			type: "task",
+			description: "This Thursday at 10:00.",
+			creator: "abucin"
+		}, {
 			key: utilsService.generateKey(),
 			code: 10,
 			title: "Add Colour Palette",

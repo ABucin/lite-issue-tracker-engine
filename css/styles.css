@@ -6,6 +6,8 @@ body a:hover {text-decoration: none;}
 .table-team > tbody {font-size: 85%; font-weight: 500; }
 .table-team > tbody > tr > td { margin: 3px; }
 
+table > tbody > tr > td[status] {min-height: 50px;}
+
 .login-form {padding-top: 10%;}
 
 /**
