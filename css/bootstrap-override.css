@@ -26,6 +26,7 @@ nav.navbar li ul.dropdown-menu {font-size: 90%;}
 .modal-dialog {font-weight: normal;}
 .modal-dialog form {margin-bottom: 0;}
 .modal-header { padding: 10px 15px; }
+.modal-body .form-group:last-child {margin-bottom: 0;}
 .modal-footer { margin-top: 0; }
 
 .table {background-color: #fff;}

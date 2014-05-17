@@ -16,6 +16,7 @@ function ($scope, $rootScope, $location) {
 			{
 				url: 'partials/modals/tasks/task_delete.html'
 			}];
+
 		$scope.templateCreate = $scope.templates[0];
 		$scope.templateEdit = $scope.templates[1];
 		$scope.templateDelete = $scope.templates[2];
