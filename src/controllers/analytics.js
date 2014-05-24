@@ -2,6 +2,7 @@ app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location',
 function($scope, $rootScope, $location) {
     $rootScope.auth = true;
     $rootScope.canFilter = false;
+	$rootScope.onAnalytics = true;
 
     $scope.chart = function(){
         $('#chart').highcharts({

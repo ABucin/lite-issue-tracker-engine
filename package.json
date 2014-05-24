@@ -23,7 +23,7 @@
     "grunt-contrib-watch": "*",
     "express": "*",
     "passport": "*",
-    "mongoose": "*",
+    "mongoose": "3.8.11",
     "body-parser": "*",
     "underscore": "*"
   }

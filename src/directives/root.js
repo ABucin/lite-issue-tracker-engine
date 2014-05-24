@@ -55,6 +55,15 @@ app.directive('ticket', function ($rootScope) {
 	};
 });
 
+app.directive('resource', function ($rootScope) {
+	return {
+		restrict: 'E',
+		link: function (scope, element, attr) {
+			$scope.path = attr.path;
+		}
+	};
+});
+
 app.directive('ticketContainer', function ($rootScope) {
 	return {
 		restrict: 'A',

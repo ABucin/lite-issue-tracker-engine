@@ -8,10 +8,10 @@ mongoose.connect(dbURI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() {
-	console.log("Connection to DB established.");
+	console.log('Connection to DB established.');
 });
 
-var populationService = require("./population");
+var populationService = require('./population');
 var schemaService = require('./schema');
 var utilsService = require('./utils');
 
@@ -190,8 +190,8 @@ exports.createUser = function (user, res) {
 		email: user.email,
 		username: user.email.split('@')[0],
 		password: user.password,
-		role: "user",
-		project: "issue-tracker",
+		role: 'user',
+		project: 'issue-tracker',
 		tickets: [],
 		logs: []
 	};
@@ -224,7 +224,7 @@ exports.createUser = function (user, res) {
 		if (err) {
 			var errorResponse = [];
 			for (var k in err.errors) {
-				var message = err.errors[k].message.split("Path ")[1];
+				var message = err.errors[k].message.split('Path ')[1];
 				errorResponse.push({
 					message: message
 				});

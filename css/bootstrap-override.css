@@ -6,6 +6,7 @@ nav.navbar .navbar-brand {padding: 10px; height: 40px; font-size: 97%;}
 nav.navbar li > a.fa-bars:hover { background-color: #ccc; }
 nav.navbar a.fa-bars { background-color: #ccc; margin: 0 3px; }
 nav.navbar ul.nav > li {margin: 0 3px;}
+nav.navbar ul.nav > li .icon {padding-right: 5px;}
 nav.navbar ul.nav > li > a {padding: 10px;}
 nav.navbar ul.nav > li > a > i.fa {margin-right: 5px;}
 nav.navbar ul.navbar-nav > li.toggleable:hover, nav.navbar .navbar-nav > li.toggleable.active > a, nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {background-color: #ccc;}
@@ -31,8 +32,9 @@ nav.navbar li ul.dropdown-menu {font-size: 90%;}
 
 .table {background-color: #fff;}
 .table > thead > tr > th {margin-bottom: 10px; font-weight: 500; text-align: center; min-width: 20%; border-bottom: 1px solid #DDDDDD;}
+.table > tbody > tr > td:last-child, .table > thead > tr > th:last-child {border-right: 1px dashed #DDDDDD;}
 .table > tbody > tr > td, .table > thead > tr > th {border-left: 1px dashed #DDDDDD; vertical-align: top;}
-.table > tbody > tr > td {border-top: none; padding: 0 6px;}
+.table > tbody > tr > td {border-top: none; padding: 0;}
 .table > tbody > tr > td i {padding-left: 5px;}
 .table > tbody > tr > td > div.progress { margin-bottom: 0; }
 .table > thead > i {padding-left: 5px;}

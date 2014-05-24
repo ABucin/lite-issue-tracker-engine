@@ -41,6 +41,7 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.canFilter = false;
 		$rootScope.isDeleting = false;
 		$rootScope.displayAll = true;
+		$rootScope.onAnalytics = false;
 
 		$rootScope.tickets = [];
 		$rootScope.logEntries = [];
