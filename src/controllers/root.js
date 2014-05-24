@@ -65,7 +65,7 @@ function ($scope, $rootScope, $location, $http) {
 			type: "task",
 			estimatedTime: 0,
 			loggedTime: 0,
-			creator: $rootScope.username
+			owner: $rootScope.username
 		};
 
 		$rootScope.bug = {
@@ -74,7 +74,7 @@ function ($scope, $rootScope, $location, $http) {
 			type: "bug",
 			estimatedTime: 0,
 			loggedTime: 0,
-			creator: $rootScope.username
+			owner: $rootScope.username
 		};
 
 		$rootScope.registrationData = {
@@ -160,7 +160,7 @@ function ($scope, $rootScope, $location, $http) {
 					var logs = $rootScope.users[i].logs;
 
 					for (var j in tickets) {
-						tickets[j].username = $rootScope.users[i].username;
+						tickets[j].creator = $rootScope.users[i].username;
 						$rootScope.tickets.push(tickets[j]);
 						switch (tickets[j].status) {
 						case "created":

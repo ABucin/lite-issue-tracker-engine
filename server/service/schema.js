@@ -37,10 +37,8 @@ var TicketSchema = new Schema({
 		type: Number,
 		default: 0
 	},
-	creator: {
-		type: String,
-		required: true,
-		unique: true
+	owner: {
+		type: String
 	}
 });
 

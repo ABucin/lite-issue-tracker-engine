@@ -13,10 +13,12 @@ table > tbody > tr > td[status] {min-height: 50px;}
 /**
  * Ticket CSS.
  */
-.ticket, .log, .log-timestamp { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500;}
+.ticket, .log, .log-timestamp { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500; }
 .ticket:hover, .log:hover { cursor: pointer; }
 .ticket-bug { background-color: #CB1F26; }
 .ticket-task { background-color: #21579D; }
+.ticket-not-owned {background-color: #3F424B;}
+.ticket-code.ticket-unassigned { background-color: #E0E0E0; color: #3F424B;}
 .ticket-code { color: white; border-radius: .3em; padding: 0px 0 0px 6px; display: inline-flex; align-items: center; }
 .ticket-title {position: relative; left: 1px; background-color: #C3C2B8 ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
 

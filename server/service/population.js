@@ -32,7 +32,7 @@ exports.populateDb = function () {
 			status: "testing",
 			type: "bug",
 			description: "The email validation is broken for several users.",
-			creator: "psmith"
+			owner: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 2,
@@ -40,7 +40,7 @@ exports.populateDb = function () {
 			status: "created",
 			type: "bug",
 			description: "The authentication ignores whitespace.",
-			creator: "psmith"
+			owner: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 3,
@@ -48,7 +48,7 @@ exports.populateDb = function () {
 			status: "fixed",
 			type: "bug",
 			description: "The registration page does not contain any headers.",
-			creator: "psmith"
+			owner: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 4,
@@ -56,7 +56,7 @@ exports.populateDb = function () {
 			status: "in_progress",
 			type: "bug",
 			description: "The logo is misaligned in IE6.",
-			creator: "abucin"
+			owner: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 5,
@@ -64,7 +64,7 @@ exports.populateDb = function () {
 			status: "testing",
 			type: "task",
 			description: "Create a secure mechanism for registering an account.",
-			creator: "abucin"
+			owner: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 6,
@@ -73,7 +73,7 @@ exports.populateDb = function () {
 			type: "task",
 			description: "See title.",
 			loggedTime: 8,
-			creator: "psmith"
+			owner: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 8,
@@ -81,7 +81,7 @@ exports.populateDb = function () {
 			status: "created",
 			type: "task",
 			description: "Create a secure mechanism for resetting a password for an account.",
-			creator: "psmith"
+			owner: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 9,
@@ -90,7 +90,7 @@ exports.populateDb = function () {
 			type: "task",
 			description: "Revoke domain credentials for inactive users.",
 			loggedTime: 3,
-			creator: "psmith"
+			owner: "psmith"
 		}],
 		logs: [{
 			key: utilsService.generateKey(),
@@ -121,7 +121,7 @@ exports.populateDb = function () {
 			status: "in_progress",
 			type: "task",
 			description: "This Thursday at 10:00.",
-			creator: "abucin"
+			owner: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 10,
@@ -129,7 +129,7 @@ exports.populateDb = function () {
 			status: "done",
 			type: "task",
 			description: "Create a colour palette for the website.",
-			creator: "psmith"
+			owner: "psmith"
 		}, {
 			key: utilsService.generateKey(),
 			code: 11,
@@ -137,7 +137,7 @@ exports.populateDb = function () {
 			status: "in_progress",
 			type: "task",
 			description: "Remove tests that are not used.",
-			creator: "abucin"
+			owner: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 12,
@@ -146,7 +146,7 @@ exports.populateDb = function () {
 			type: "bug",
 			description: "See title.",
 			loggedTime: 6,
-			creator: "abucin"
+			owner: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			code: 13,
@@ -155,7 +155,15 @@ exports.populateDb = function () {
 			type: "bug",
 			description: "The login button has extra padding.",
 			loggedTime: 5,
-			creator: "abucin"
+			owner: "abucin"
+		},{
+			key: utilsService.generateKey(),
+			code: 14,
+			title: "Unassigned Ticket",
+			status: "testing",
+			type: "task",
+			description: "This ticket is not assigned to anyone.",
+			loggedTime: 0
 		}],
 		logs: [{
 			key: utilsService.generateKey(),

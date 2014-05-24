@@ -115,7 +115,7 @@ exports.createTicket = function (username, ticket, res) {
 		description: ticket.description,
 		loggedTime: ticket.loggedTime,
 		estimatedTime: ticket.estimatedTime,
-		creator: ticket.creator
+		owner: ticket.owner
 	};
 
 	// save the ticket and check for errors

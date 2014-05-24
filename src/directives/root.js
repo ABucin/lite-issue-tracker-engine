@@ -4,7 +4,6 @@ app.directive('ticket', function ($rootScope) {
 		var type = tAttr.type;
 		var codePrefix = "TA-";
 		if (type === "bug") {
-			type = "bug";
 			codePrefix = "BG-";
 		}
 		return "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-" + type + "'>" + codePrefix + "{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='isDeleting && ticket.username === username'></i></span></div>"
@@ -13,10 +12,11 @@ app.directive('ticket', function ($rootScope) {
 	return {
 		restrict: 'E',
 		link: function (scope, element, attr) {
-			if (scope.ticket.username !== $rootScope.username) {
-				element.css({
-					"background-color": "#3F424B"
-				});
+			console.log(scope.ticket.owner);
+			if (scope.ticket.owner === undefined) {
+				element.addClass("ticket-unassigned");
+			} else if (scope.ticket.owner !== $rootScope.username) {
+				element.addClass("ticket-not-owned");
 			}
 
 			element.find('i').on('click', function (event) {
@@ -43,7 +43,7 @@ app.directive('ticket', function ($rootScope) {
 
 			element[0].addEventListener('dragstart', function (e) {
 				// cannot drag and drop the tickets that are not assigned to current user
-				if (scope.ticket.username !== $rootScope.username) {
+				if (scope.ticket.owner !== $rootScope.username) {
 					e.preventDefault();
 				} else {
 					angular.copy(scope.ticket, $rootScope.copiedEntity);
