@@ -13,17 +13,23 @@ table > tbody > tr > td[status] {min-height: 50px;}
 /**
  * Chart Secondary Menu CSS
  */
-.chart-secondary-menu > li { vertical-align: middle; margin: 3px 0 3px 3px; padding: 2px;}
-.chart-secondary-menu > li:first-child { margin-top:0}
-.chart-secondary-menu > li:hover { background-color: #ccc; cursor: pointer;}
-.chart-secondary-menu > li > i.chart-icon { margin: 0 5px; }
-.chart-secondary-menu > li.active { background-color: #ccc; border-radius: .2em; }
+.chart-secondary-menu {border-right: 1px solid #DDDDDD;}
+.chart-secondary-menu > h4 { margin-top: 0;}
+.chart-secondary-menu > ul > li { vertical-align: middle; margin: 4px 0 4px 3px; padding: 2px;}
+.chart-secondary-menu > ul > li:first-child { margin-top:0; }
+.chart-secondary-menu > ul > li > i.chart-icon { margin: 0 5px; font-size: 18px; }
+.chart-secondary-menu > ul > li.active,
+.chart-secondary-menu > ul > li:hover { background-color: #ccc; border-radius: .2em; }
+.chart-secondary-menu > ul > li:hover { cursor: pointer;}
 
 /**
  * Ticket CSS.
  */
-.ticket, .log, .log-timestamp { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500; }
-.ticket:hover, .log:hover { cursor: pointer; }
+.ticket,
+.log,
+.log-timestamp { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500; }
+.ticket:hover,
+.log:hover { cursor: pointer; }
 .ticket-bug { background-color: #CB1F26; }
 .ticket-task { background-color: #21579D; }
 .ticket-not-owned {background-color: #3F424B;}
@@ -38,7 +44,8 @@ table > tbody > tr > td[status] {min-height: 50px;}
 .log span:last-child { border-radius: 0 .3em .3em 0; }
 .log-user { background-color: #C3C2B8; color: black; padding: 3px 6px; margin: 0 0px 0 3px; }
 .log-target { color: white; padding: 3px 6px; margin-left: -3px; }
-.log-amount, .log-comment { margin-left: 6px; padding-right: 6px; }
+.log-amount,
+.log-comment { margin-left: 6px; padding-right: 6px; }
 .log-timestamp { display: inline; }
 
 /**

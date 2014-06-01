@@ -1,7 +1,10 @@
 <div class="panel">
 	<div class="row">
-		<div class="col-lg-2">
-			<ul class="nav chart-secondary-menu" ng-init="fetchChartData('loggedHours')">
+		<div class="col-lg-2 chart-secondary-menu">
+			<h4>
+				Metrics
+			</h4>
+			<ul class="nav" ng-init="fetchChartData('loggedHours')">
 				<li class="toggleable active" ng-click="fetchChartData('loggedHours')"><i class="chart-icon ion-arrow-graph-up-right"></i>Logged Hours</li>
 				<li class="toggleable" ng-click="fetchChartData('ticketCompletion')"><i class="chart-icon ion-stats-bars"></i>Ticket Completion</li>
 				<li class="toggleable" ng-click="fetchChartData('effortEstimation')"><i class="chart-icon ion-ios7-keypad"></i>Effort vs. Estimation</li>

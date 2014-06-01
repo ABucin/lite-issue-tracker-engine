@@ -3,13 +3,17 @@
 nav.navbar {border-color: #ddd; min-height: 40px;}
 nav.navbar > .container-fluid {background-color: #ededed;}
 nav.navbar .navbar-brand {padding: 10px; height: 40px; font-size: 97%;}
-nav.navbar li > a.fa-bars:hover { background-color: #ccc; }
+nav.navbar li > a.fa-bars:hover,
+nav.navbar li.open > a.fa-bars:hover,
+nav.navbar li.open > a.fa-bars { background-color: #ccc; }
 nav.navbar a.fa-bars { background-color: #ccc; margin: 0 3px; }
 nav.navbar ul.nav > li {margin: 0 3px;}
 nav.navbar ul.nav > li .icon {padding-right: 5px;}
 nav.navbar ul.nav > li > a {padding: 10px;}
 nav.navbar ul.nav > li > a > i.fa {margin-right: 5px;}
-nav.navbar ul.navbar-nav > li.toggleable:hover, nav.navbar .navbar-nav > li.toggleable.active > a, nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {background-color: #ccc;}
+nav.navbar ul.navbar-nav > li.toggleable:hover,
+nav.navbar .navbar-nav > li.toggleable.active > a,
+nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {background-color: #ccc;}
 nav.navbar li ul.dropdown-menu {font-size: 90%;}
 
 .panel-heading > span > i[data-toggle*="collapse"] {cursor: pointer; line-height: 1.5;}
