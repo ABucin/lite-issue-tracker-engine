@@ -6,6 +6,7 @@ var router = express.Router();
 
 // Required files.
 var persistenceService = require('./service/persistence');
+var analyticsService = require('./service/analytics');
 
 server.use(bodyParser());
 server.use('/itracker/api', router);
@@ -38,6 +39,11 @@ router.route('/logs')
 		persistenceService.getAllLogs(res);
 	});
 
+router.route('/analytics?:type')
+.get(function (req, res) {
+	analyticsService.getChart(req.query.type, res);
+});
+
 router.route('/users')
 	.get(function (req, res) {
 		persistenceService.getAllUsers(res);
@@ -51,4 +57,4 @@ router.route('/users?:uname')
 		persistenceService.getUser(req.query.uname, res);
 	});
 
-console.log('Listening on port ' + port + '...');
+console.log('Server started. Listening on port ' + port + '...');

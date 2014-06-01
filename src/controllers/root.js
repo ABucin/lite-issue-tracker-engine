@@ -84,53 +84,12 @@ function ($scope, $rootScope, $location, $http) {
 		};
 
 		$scope.templates = [{
-				url: 'partials/modals/register/register.html'
-			},{
-				url: 'partials/modals/register/register-success.html'
+			url: 'partials/modals/register/register.html'
+			}, {
+			url: 'partials/modals/register/register-success.html'
 			}];
 		$scope.templateRegister = $scope.templates[0];
 		$scope.templateRegisterSuccess = $scope.templates[1];
-
-		$rootScope.loggedHoursData = [{
-			name: 'mlawrence',
-			data: [7, 8, 9, 8, 8, 3, 0]
- }, {
-			name: 'athompson',
-			data: [7, 6, 8, 11, 8, 2, 1]
- }, {
-			name: 'psmith',
-			data: [8, 8, 9, 8, 7, 0, 3]
- }];
-		$rootScope.ticketCompletionData = [{
-			name: 'Bug',
-			data: [15, 31, 12]
- }, {
-			name: 'Task',
-			data: [13, 16, 5]
- }];
-		$rootScope.scatterData = [{
-			type: 'line',
-			name: 'Regression Line',
-			data: [[20, 20], [100, 100]],
-			marker: {
-				enabled: false
-			},
-			states: {
-				hover: {
-					lineWidth: 0
-				}
-			},
-			enableMouseTracking: false
- }, {
-			name: 'Bugs',
-			color: 'rgba(223, 83, 83, .5)',
-			data: [[51, 51], [57, 59], [56, 49], [57, 63], [55, 53]]
-
- }, {
-			name: 'Tasks',
-			color: 'rgba(119, 152, 191, .5)',
-			data: [[74, 65], [75, 71], [93, 80], [86, 72], [87, 78], [81, 74], [84, 86], [84, 78], [75, 62], [84, 81]]
- }];
 
 		/**
 		 * TODO - Disable this when there is a DB
@@ -139,6 +98,19 @@ function ($scope, $rootScope, $location, $http) {
 		angular.element(document).ready(function () {
 			$scope.fetchUserData();
 		});
+
+		$rootScope.fetchChartData = function (type, elementId) {
+			var id = (elementId == null) ? "#chart" : "#" + elementId;
+			$http({
+				method: 'GET',
+				url: '/itracker/api/analytics',
+				params: {
+					type: type
+				}
+			}).success(function (data) {
+				$(id).highcharts(data);
+			});
+		};
 
 		$scope.fetchUserData = function () {
 			$http({
@@ -152,6 +124,7 @@ function ($scope, $rootScope, $location, $http) {
 				$rootScope.workloadData = [];
 				$rootScope.tickets = [];
 				$rootScope.logEntries = [];
+				$rootScope.fetchChartData('assignedTickets', 'panel-workload');
 
 				for (var i in data) {
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
@@ -195,8 +168,6 @@ function ($scope, $rootScope, $location, $http) {
 						$rootScope.logEntries.push(logs[j]);
 					}
 				}
-
-				$rootScope.dashboardChart();
 			}).error(function (data, status) {
 				alert(status + " : " + data);
 			});
@@ -391,7 +362,7 @@ function ($scope, $rootScope, $location, $http) {
 			$scope.navigate('login');
 		};
 
-		$scope.registerUser = function() {
+		$scope.registerUser = function () {
 			var data = {};
 			angular.copy($rootScope.registrationData, data);
 
@@ -403,43 +374,8 @@ function ($scope, $rootScope, $location, $http) {
 				$rootScope.errors = [];
 				$("#register-modal").modal('hide');
 				$('#register-success-modal').modal('show');
-			}).error(function(data) {
+			}).error(function (data) {
 				$rootScope.errors = data;
-			});
-		};
-
-		$rootScope.dashboardChart = function () {
-			$('#panel-workload').highcharts({
-				chart: {
-					plotBackgroundColor: null,
-					plotBorderWidth: null,
-					plotShadow: false
-				},
-				title: {
-					text: 'Assigned Tickets'
-				},
-				tooltip: {
-					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-				},
-				plotOptions: {
-					pie: {
-						allowPointSelect: true,
-						size: '100%',
-						cursor: 'pointer',
-						dataLabels: {
-							enabled: false
-						},
-                    showInLegend: true
-					}
-				},
-				credits: {
-					enabled: false
-				},
-				series: [{
-					type: 'pie',
-					name: 'Assigned tickets',
-					data: $rootScope.workloadData
-            }]
 			});
 		};
 }]);
