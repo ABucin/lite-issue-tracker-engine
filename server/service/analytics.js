@@ -1,5 +1,6 @@
 var bugColor = "#CB1F26";
 var taskColor = "#21579D";
+var chartFontWeight = "300";
 
 exports.getChart = function (type, res) {
 	var result = {};
@@ -37,7 +38,10 @@ var loggedHours = {
 		type: 'line'
 	},
 	title: {
-		text: 'Logged Hours'
+		text: 'Logged Hours',
+		style: {
+			fontWeight: chartFontWeight
+		}
 	},
 	xAxis: {
 		categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -84,7 +88,10 @@ var ticketCompletion = {
 	},
 	colors: [bugColor, taskColor],
 	title: {
-		text: 'Ticket Completion by User'
+		text: 'Ticket Completion by User',
+		style: {
+			fontWeight: chartFontWeight
+		}
 	},
 	xAxis: {
 		categories: ['psmith', 'athompson', 'mlawrence'],
@@ -139,7 +146,10 @@ var effortEstimation = {
 		type: 'scatter'
 	},
 	title: {
-		text: 'Effort vs. Estimation of Open Tickets by Type'
+		text: 'Effort vs. Estimation of Open Tickets by Type',
+		style: {
+			fontWeight: chartFontWeight
+		}
 	},
 	xAxis: {
 		allowDecimals: false,
@@ -229,7 +239,10 @@ var assignedTickets = {
 		plotShadow: false
 	},
 	title: {
-		text: 'Assigned Tickets'
+		text: 'Assigned Tickets',
+		style: {
+			fontWeight: chartFontWeight
+		}
 	},
 	tooltip: {
 		pointFormat: '{series.name}: <strong>{point.percentage:.1f}%</strong>'

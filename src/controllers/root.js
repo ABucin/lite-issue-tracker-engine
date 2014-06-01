@@ -97,6 +97,14 @@ function ($scope, $rootScope, $location, $http) {
 		 */
 		angular.element(document).ready(function () {
 			$scope.fetchUserData();
+
+			Highcharts.setOptions({
+				chart: {
+					style: {
+						fontFamily: "Roboto"
+					}
+				}
+			});
 		});
 
 		$rootScope.fetchChartData = function (type, elementId) {
