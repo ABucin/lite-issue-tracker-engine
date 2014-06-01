@@ -16,23 +16,24 @@ function($scope, $rootScope, $location) {
                 categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             yAxis: {
+				allowDecimals: false,
+				min: 0,
                 title: {
                     text: 'Hours'
                 }
             },
             tooltip: {
-                enabled: false,
-                formatter: function() {
-                    return '<b>'+ this.series.name +'</b><br/>'+
-                        this.x +': '+ this.y +'°C';
-                }
+				formatter: function() {
+					var suffix = (this.y === 1) ? ' hr.' : ' hrs.'
+					return this.y + suffix;
+				}
             },
             plotOptions: {
                 line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
+					marker: {
+						symbol: "circle"
+					},
+                    enableMouseTracking: true
                 }
             },
             credits: {

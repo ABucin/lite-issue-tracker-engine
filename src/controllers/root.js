@@ -93,13 +93,13 @@ function ($scope, $rootScope, $location, $http) {
 
 		$rootScope.loggedHoursData = [{
 			name: 'mlawrence',
-			data: [7, 8, 9, 8, 8]
+			data: [7, 8, 9, 8, 8, 3, 0]
  }, {
 			name: 'athompson',
-			data: [7, 6, 8, 11, 8]
+			data: [7, 6, 8, 11, 8, 2, 1]
  }, {
 			name: 'psmith',
-			data: [8, 8, 9, 8, 7]
+			data: [8, 8, 9, 8, 7, 0, 3]
  }];
 		$rootScope.ticketCompletionData = [{
 			name: 'Bug',

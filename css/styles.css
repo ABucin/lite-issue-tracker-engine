@@ -11,6 +11,15 @@ table > tbody > tr > td[status] {min-height: 50px;}
 .login-form {padding-top: 10%;}
 
 /**
+ * Chart Secondary Menu CSS
+ */
+.chart-secondary-menu > li { vertical-align: middle; margin: 3px 0 3px 3px; padding: 2px;}
+.chart-secondary-menu > li:first-child { margin-top:0}
+.chart-secondary-menu > li:hover { background-color: #ccc; cursor: pointer;}
+.chart-secondary-menu > li > i.chart-icon { margin: 0 5px; }
+.chart-secondary-menu > li.active { background-color: #ccc; border-radius: .2em; }
+
+/**
  * Ticket CSS.
  */
 .ticket, .log, .log-timestamp { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500; }
