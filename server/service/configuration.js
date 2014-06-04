@@ -10,6 +10,13 @@ exports.getConfig = function (type, res) {
 			};
 			break;
 		}
+		case "projects":
+			{
+				result = {
+					projects: ["issue-tracker", "email-client"]
+				};
+				break;
+			}
 	default:
 		{
 			break;
