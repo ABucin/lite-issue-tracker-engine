@@ -7,6 +7,7 @@ var router = express.Router();
 // Required files.
 var persistenceService = require('./service/persistence');
 var analyticsService = require('./service/analytics');
+var configurationService = require('./service/configuration');
 
 server.use(bodyParser());
 server.use('/itracker/api', router);
@@ -17,6 +18,22 @@ server.listen(port);
 
 // Add default data to database.
 persistenceService.populateDb();
+
+/**
+ * Users.
+ */
+router.route('/users')
+	.get(function (req, res) {
+		persistenceService.getAllUsers(res);
+	})
+	.post(function (req, res) {
+		persistenceService.createUser(req.body, res);
+	});
+
+router.route('/users?:uname')
+	.get(function (req, res) {
+		persistenceService.getUser(req.query.uname, res);
+	});
 
 router.route('/users/:uname/tickets')
 	.post(function (req, res) {
@@ -44,17 +61,9 @@ router.route('/analytics?:type')
 	analyticsService.getChart(req.query.type, res);
 });
 
-router.route('/users')
-	.get(function (req, res) {
-		persistenceService.getAllUsers(res);
-	})
-	.post(function (req, res) {
-		persistenceService.createUser(req.body, res);
-	});
-
-router.route('/users?:uname')
-	.get(function (req, res) {
-		persistenceService.getUser(req.query.uname, res);
-	});
+router.route('/config?:type')
+.get(function (req, res) {
+	configurationService.getConfig(req.query.type, res);
+});
 
 console.log('Server started. Listening on port ' + port + '...');

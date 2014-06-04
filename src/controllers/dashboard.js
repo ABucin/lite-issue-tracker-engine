@@ -3,4 +3,5 @@ function($scope, $rootScope, $location) {
     $rootScope.canFilter = false;
 	$rootScope.onAnalytics = false;
     $rootScope.auth = true;
+	$rootScope.fetchChartData('assignedTickets', 'panel-workload');
 }]);

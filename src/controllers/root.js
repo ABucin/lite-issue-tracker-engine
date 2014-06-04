@@ -58,6 +58,7 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.updatedBug = {};
 		$rootScope.deletedBug = {};
 		$rootScope.copiedEntity = {};
+		$rootScope.settingsData = {};
 
 		$rootScope.task = {
 			title: "",
@@ -120,6 +121,19 @@ function ($scope, $rootScope, $location, $http) {
 			});
 		};
 
+	$rootScope.fetchSettingsData = function (type) {
+		$http({
+			method: 'GET',
+			url: '/itracker/api/config',
+			params: {
+				type: type
+			}
+		}).success(function (data) {
+			$rootScope.settingsData = data;
+//			angular.copy($rootScope.settingsData, data);
+		});
+	};
+
 		$scope.fetchUserData = function () {
 			$http({
 				method: 'GET',
@@ -132,7 +146,6 @@ function ($scope, $rootScope, $location, $http) {
 				$rootScope.workloadData = [];
 				$rootScope.tickets = [];
 				$rootScope.logEntries = [];
-				$rootScope.fetchChartData('assignedTickets', 'panel-workload');
 
 				for (var i in data) {
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);

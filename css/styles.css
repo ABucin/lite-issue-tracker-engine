@@ -13,14 +13,15 @@ table > tbody > tr > td[status] {min-height: 50px;}
 /**
  * Chart Secondary Menu CSS
  */
-.chart-secondary-menu {border-right: 1px solid #DDDDDD;}
-.chart-secondary-menu > h4 { margin-top: 0;}
-.chart-secondary-menu > ul > li { vertical-align: middle; margin: 4px 0 4px 3px; padding: 2px;}
-.chart-secondary-menu > ul > li:first-child { margin-top:0; }
-.chart-secondary-menu > ul > li > i.chart-icon { margin: 0 5px; font-size: 18px; }
-.chart-secondary-menu > ul > li.active,
-.chart-secondary-menu > ul > li:hover { background-color: #ccc; border-radius: .2em; }
-.chart-secondary-menu > ul > li:hover { cursor: pointer;}
+.secondary-menu {border-right: 1px solid #DDDDDD;}
+.secondary-menu > h4 { margin-top: 0;}
+.secondary-menu > ul > li { vertical-align: middle; margin: 4px 0 4px 3px; padding: 2px;}
+.secondary-menu > ul > li:first-child { margin-top:0; }
+.secondary-menu > ul > li > i.chart-icon { margin: 0 5px; font-size: 18px; }
+.secondary-menu > ul > li > i.chart-icon.fa { font-size: 14px; }
+.secondary-menu > ul > li.active,
+.secondary-menu > ul > li:hover { background-color: #ccc; border-radius: .2em; }
+.secondary-menu > ul > li:hover { cursor: pointer;}
 
 /**
  * Ticket CSS.

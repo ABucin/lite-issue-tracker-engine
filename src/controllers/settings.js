@@ -3,4 +3,5 @@ function($scope, $rootScope, $location) {
     $rootScope.auth = true;
 	$rootScope.onAnalytics = false;
 	$rootScope.canFilter = false;
+	$rootScope.fetchSettingsData('profile');
 }]);

@@ -111,19 +111,19 @@ app.directive('highlightable', function () {
 
 			element[0].addEventListener('dragleave', function (e) {
 				element.css({
-					"background-color": "#fff"
+					"background-color": "transparent"
 				});
 			});
 
 			element[0].addEventListener('drop', function (e) {
 				element.css({
-					"background-color": "#fff"
+					"background-color": "transparent"
 				});
 			});
 
 			element[0].addEventListener('dragend', function (e) {
 				element.css({
-					"background-color": "#fff"
+					"background-color": "transparent"
 				});
 			});
 		}
