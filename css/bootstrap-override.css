@@ -1,4 +1,4 @@
-.body-menu-padding { margin-top: 60px; }
+.body-menu-padding { margin-top: 45px; }
 
 nav.navbar {border-color: #ddd; min-height: 40px;}
 nav.navbar > .container-fluid {background-color: #ededed;}
@@ -19,6 +19,10 @@ nav.navbar li ul.dropdown-menu {font-size: 90%;}
 .panel-heading > span > i[data-toggle*="collapse"] {cursor: pointer; line-height: 1.5;}
 
 .panel.ng-scope {background-color: transparent;}
+.panel.panel-dashboard,
+.panel.panel-analytics,
+.panel.panel-team,
+.panel.panel-settings {margin-top: 10px;}
 .panel-body-dashboard { padding: 5px; }
 .panel > .panel-heading {background-color: #ededed;}
 

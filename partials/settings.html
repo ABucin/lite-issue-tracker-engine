@@ -1,36 +1,37 @@
-<div class="row">
-	<div class="col-lg-2 secondary-menu">
-		<ul class="nav">
-			<li class="header">
-				Application
-			</li>
-			<li class="toggleable active" ng-click="fetchSettingsData('profile')"><i class="chart-icon fa fa-user"></i>Profile</li>
-			<li class="toggleable"><i class="chart-icon fa fa-th-large"></i>Dashboard</li>
-			<li class="toggleable"><i class="chart-icon fa fa-gear"></i>Administration</li>
-			<li class="header">
-			Project
-			</li>
-			<li class="toggleable" ng-click="fetchSettingsData('projects')"><i class="chart-icon fa fa-users"></i>Team</li>
-		</ul>
-	</div>
-	<div class="col-lg-3">
-		<form role="form">
-			<h4>Avatar</h4>
-			<div class="col-sm-12 form-group">
-				<img src="./img/profile.jpg" class="img-responsive img-thumbnail" />
-			</div>
-			<h4>Profile</h4>
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-edit fa-fw"></i> First Name: <strong>{{settingsData.firstName}}</strong>
+<div class="panel panel-settings">
+	<div class="row">
+		<div class="col-lg-2 secondary-menu">
+			<ul class="nav">
+				<li class="header">
+					Application
 				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-edit fa-fw"></i> Last Name: <strong>{{settingsData.lastName}}</strong>
+				<li class="toggleable active" ng-click="fetchSettingsData('profile')"><i class="chart-icon fa fa-user"></i>Profile</li>
+				<li class="toggleable"><i class="chart-icon fa fa-th-large"></i>Dashboard</li>
+				<li class="toggleable"><i class="chart-icon fa fa-gear"></i>Administration</li>
+				<li class="header">
+					Project
 				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-edit fa-fw"></i> Email Address: <strong>{{settingsData.email}}</strong>
-				</li>
-				<!--
+				<li class="toggleable" ng-click="fetchSettingsData('projects')"><i class="chart-icon fa fa-users"></i>Team</li>
+			</ul>
+		</div>
+		<div class="col-lg-3">
+			<form role="form">
+				<h4>Avatar</h4>
+				<div class="col-sm-12 form-group">
+					<img src="./img/profile.jpg" class="img-responsive img-thumbnail" />
+				</div>
+				<h4>Profile</h4>
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-warning">
+						<i class="fa fa-edit fa-fw"></i> First Name: <strong>{{settingsData.firstName}}</strong>
+					</li>
+					<li class="list-group-item list-group-item-warning">
+						<i class="fa fa-edit fa-fw"></i> Last Name: <strong>{{settingsData.lastName}}</strong>
+					</li>
+					<li class="list-group-item list-group-item-warning">
+						<i class="fa fa-edit fa-fw"></i> Email Address: <strong>{{settingsData.email}}</strong>
+					</li>
+					<!--
 				<li class="list-group-item list-group-item-info">
 					<label for="user-project">Project</label>
 					<select class="form-control input-sm" id="user-project">
@@ -51,8 +52,8 @@
 					<i class="fa fa-refresh fa-fw"></i> <strong>Reset Password</strong>
 				</li>
 -->
-			</ul>
-			<!--
+				</ul>
+				<!--
 			<h3>Dashboard</h3>
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-success">
@@ -63,7 +64,7 @@
 				</li>
 			</ul>
 -->
-			<!--
+				<!--
 			<h4>Team</h4>
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-success">
@@ -77,9 +78,9 @@
 				</li>
 			</ul>
 -->
-		</form>
-	</div>
-	<!--
+			</form>
+		</div>
+		<!--
 	<div class="col-lg-3">
 		<form role="form">
 			<h3>Available Projects</h3>
@@ -115,7 +116,7 @@
 		</form>
 	</div>
 -->
-	<!--
+		<!--
 	<div class="col-lg-3">
 		<form role="form">
 			<h3>Available Users</h3>
@@ -142,4 +143,5 @@
 		</form>
 	</div>
 -->
+	</div>
 </div>

@@ -1,14 +1,14 @@
 /* Fixes the antialiasing in Google Chrome. */
-body { -webkit-font-smoothing: antialiased; background-image: url('../img/bg.png'); font-family: "Roboto", "Helvetica", "Verdana";}
+body { -webkit-font-smoothing: antialiased; background-image: url('../img/bg.png'); font-family: "Roboto", "Helvetica", "Verdana"; margin-right: 15px;}
 body a{cursor: pointer;}
 body a:hover {text-decoration: none;}
-
-.table-team > tbody {font-size: 85%; font-weight: 500; }
-.table-team > tbody > tr > td { margin: 3px; }
 
 table > tbody > tr > td[status] {min-height: 50px;}
 
 .login-form {padding-top: 10%;}
+
+.dashboard-panel-right {padding-left: 0; padding-right: 0;}
+.dashboard-panel-right .panel {margin-bottom: 15px;}
 
 /**
  * Chart Secondary Menu CSS
