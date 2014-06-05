@@ -1,39 +1,41 @@
-<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<table class="table table-condensed">
-			<thead>
-				<tr>
-					<th>Created</th>
-					<th>In Progress</th>
-					<th>Testing</th>
-					<th>Done</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td highlightable status="created" droppable ticket-container>
-						<div ng-repeat="ticket in createdTickets | filter:'task'">
-							<ticket type="task" ng-if="ticket.username === username || displayAll"></ticket>
-						</div>
-					</td>
-					<td highlightable status="in_progress" droppable ticket-container>
-						<div ng-repeat="ticket in inProgressTickets | filter:'task'">
-							<ticket type="task" ng-if="ticket.username === username || displayAll"></ticket>
-						</div>
-					</td>
-					<td highlightable status="testing" droppable ticket-container>
-						<div ng-repeat="ticket in testingTickets | filter:'task'">
-							<ticket type="task" ng-if="ticket.username === username || displayAll"></ticket>
-						</div>
-					</td>
-					<td highlightable status="done" droppable ticket-container>
-						<div ng-repeat="ticket in doneTickets | filter:'task'">
-							<ticket type="task" ng-if="ticket.username === username || displayAll"></ticket>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+<div class="panel-tasks">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>Created</th>
+						<th>In Progress</th>
+						<th>Testing</th>
+						<th>Done</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td highlightable status="created" droppable ticket-container>
+							<div ng-repeat="ticket in createdTickets | filter:'task'">
+								<ticket type="task" ng-if="ticket.username === username || displayAll"></ticket>
+							</div>
+						</td>
+						<td highlightable status="in_progress" droppable ticket-container>
+							<div ng-repeat="ticket in inProgressTickets | filter:'task'">
+								<ticket type="task" ng-if="ticket.username === username || displayAll"></ticket>
+							</div>
+						</td>
+						<td highlightable status="testing" droppable ticket-container>
+							<div ng-repeat="ticket in testingTickets | filter:'task'">
+								<ticket type="task" ng-if="ticket.username === username || displayAll"></ticket>
+							</div>
+						</td>
+						<td highlightable status="done" droppable ticket-container>
+							<div ng-repeat="ticket in doneTickets | filter:'task'">
+								<ticket type="task" ng-if="ticket.username === username || displayAll"></ticket>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 
