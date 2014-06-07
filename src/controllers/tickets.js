@@ -1,5 +1,5 @@
-app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location',
-function ($scope, $rootScope, $location) {
+app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'ResourceService',
+function ($scope, $rootScope, $location, ResourceService) {
 		$rootScope.auth = true;
 		$rootScope.canFilter = true;
 		$rootScope.onAnalytics = false;
@@ -38,7 +38,7 @@ function ($scope, $rootScope, $location) {
 				$rootScope.tickets.push(data);
 				$rootScope.createdTickets.push(data);
 			};
-			$rootScope.postData('users/' + $rootScope.username + '/tickets', $scope.ticket, callback);
+			ResourceService.postData('users/' + $rootScope.username + '/tickets', $scope.ticket, callback);
 		};
 
 		$scope.updateTicket = function () {
@@ -103,7 +103,7 @@ function ($scope, $rootScope, $location) {
 				}
 			}
 
-			$rootScope.putData('users/' + $rootScope.username + '/tickets/' + data.key, $scope.updatedTicket, callback);
+			ResourceService.putData('users/' + $rootScope.username + '/tickets/' + data.key, $scope.updatedTicket, callback);
 		};
 
 		$scope.deleteTicket = function (key) {
@@ -170,6 +170,6 @@ function ($scope, $rootScope, $location) {
 					}
 				}
 			}
-			$rootScope.deleteData('users/' + $rootScope.username + '/tickets/' + key, callback);
+			ResourceService.deleteData('users/' + $rootScope.username + '/tickets/' + key, callback);
 		};
 }]);

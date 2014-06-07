@@ -1,13 +1,11 @@
-app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location',
-function ($scope, $rootScope, $location) {
+app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', 'ResourceService',
+function ($scope, $rootScope, $location, ResourceService) {
 		$rootScope.auth = true;
 		$rootScope.onAnalytics = false;
 		$rootScope.canFilter = false;
 
 		$scope.settingsData = {};
 		$scope.settingsTemplate = {};
-
-		$scope.fetchSettingsData('profile');
 
 		$scope.fetchSettingsData = function (type) {
 			$scope.settingsTemplate.url = 'partials/snippets/settings/' + type + '.html';
@@ -17,7 +15,7 @@ function ($scope, $rootScope, $location) {
 			var callback = function (data) {
 				$scope.settingsData = data;
 			};
-			$rootScope.getData('config', params, callback);
+			ResourceService.getData('config', params, callback);
 		};
 
 }]);

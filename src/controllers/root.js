@@ -29,8 +29,8 @@ function ($routeProvider) {
 		});
 }]);
 
-app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http',
-function ($scope, $rootScope, $location, $http) {
+app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', 'ResourceService',
+function ($scope, $rootScope, $location, $http, ResourceService) {
 		$rootScope.username = "abucin";
 		$rootScope.createAction = "";
 
@@ -84,37 +84,8 @@ function ($scope, $rootScope, $location, $http) {
 			});
 		});
 
-		$rootScope.getData = function (path, params, callback) {
-			$rootScope.resource('GET', path, params, null, callback);
-		};
-
-		$rootScope.postData = function (path, data, callback) {
-			$rootScope.resource('POST', path, null, data, callback);
-		};
-
-		$rootScope.putData = function (path, data, callback) {
-			$rootScope.resource('PUT', path, null, data, callback);
-		};
-
-		$rootScope.deleteData = function (path, callback) {
-			$rootScope.resource('DELETE', path, null, null, callback);
-		};
-
-		$rootScope.resource = function (method, path, params, data, callback) {
-			$http({
-				method: method,
-				url: '/itracker/api/' + path,
-				params: params,
-				data: data
-			}).success(function (data) {
-				callback(data);
-			}).error(function (data, status) {
-				$rootScope.errors = data;
-			});
-		};
-
 		$scope.fetchUserData = function () {
-			var callback = function(data) {
+			var callback = function (data) {
 				$rootScope.users = data;
 				$rootScope.workloadData = [];
 				$rootScope.tickets = [];
@@ -164,7 +135,7 @@ function ($scope, $rootScope, $location, $http) {
 				}
 			}
 
-			$rootScope.getData('users', null, callback);
+			ResourceService.getData('users', null, callback);
 		};
 
 		$scope.navigate = function (url) {
@@ -196,12 +167,12 @@ function ($scope, $rootScope, $location, $http) {
 		};
 
 		$scope.registerUser = function () {
-			var callback = function(data){
+			var callback = function (data) {
 				$rootScope.errors = [];
 				$("#register-modal").modal('hide');
 				$('#register-success-modal').modal('show');
 			};
 
-			$rootScope.postData('users', $rootScope.registrationData, callback);
+			ResourceService.postData('users', $rootScope.registrationData, callback);
 		};
 }]);
