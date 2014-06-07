@@ -44,41 +44,44 @@ exports.getUser = function (username, res) {
 
 exports.updateTicket = function (key, username, ticket, res) {
 	// save the ticket and check for errors
-	User.findOne({
-		'username': username
-	}, function (err, user) {
-		if (err) {
-			res.send(500, err);
-		}
-
-		for (var i in user.tickets) {
-			if (user.tickets[i].key == key) {
-				if (ticket.title != null) {
-					user.tickets[i].title = ticket.title;
-				}
-				if (ticket.status != null) {
-					user.tickets[i].status = ticket.status;
-				}
-				if (ticket.description != null) {
-					user.tickets[i].description = ticket.description;
-				}
-				if (ticket.loggedTime != null) {
-					user.tickets[i].loggedTime = ticket.loggedTime;
-				}
-				if (ticket.estimatedTime != null) {
-					user.tickets[i].estimatedTime = ticket.estimatedTime;
-				}
-				break;
-			}
-		}
-
-		user.save(function (err) {
+	User.find().exec(
+		function (err, users) {
 			if (err) {
 				res.send(500, err);
 			}
-			res.json(ticket);
-		});
-	});
+
+			_.each(users, function (user, i, list) {
+				_.each(user.tickets, function (el, ix, innerList) {
+					if (el.key == key) {
+
+						if (ticket.title != null) {
+							el.title = ticket.title;
+						}
+						if (ticket.status != null) {
+							el.status = ticket.status;
+						}
+						if (ticket.description != null) {
+							el.description = ticket.description;
+						}
+						if (ticket.loggedTime != null) {
+							el.loggedTime = ticket.loggedTime;
+						}
+						if (ticket.estimatedTime != null) {
+							el.estimatedTime = ticket.estimatedTime;
+						}
+						el.owner = ticket.owner;
+
+						user.save(function (err) {
+							if (err) {
+								res.send(500, err);
+							}
+							res.json(ticket);
+						});
+					}
+				});
+			});
+		}
+	);
 };
 
 exports.deleteTicket = function (key, username, res) {
@@ -87,20 +90,19 @@ exports.deleteTicket = function (key, username, res) {
 			res.send(500, err);
 		}
 
-		_.each(users, function (e, i, list) {
-			_.each(e.tickets, function (el, ix, innerList) {
-				if (el.key == key) {
-					e.tickets.splice(ix, 1);
-					e.save(function (err) {
+		_.each(users, function (user, i, list) {
+			_.each(user.tickets, function (ticket, ix, innerList) {
+				if (ticket.key == key) {
+					user.tickets.splice(ix, 1);
+					user.save(function (err) {
 						if (err) {
 							res.send(500, err);
 						}
+						res.json();
 					});
 				}
 			});
 		});
-
-		res.json();
 	});
 };
 

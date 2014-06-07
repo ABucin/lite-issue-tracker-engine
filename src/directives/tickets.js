@@ -2,17 +2,28 @@ app.directive('ticket', function ($rootScope) {
 	return {
 		restrict: 'E',
 		link: function (scope, element, attr) {
-			if (scope.ticket.owner === undefined) {
-				scope.ownStatus = "ticket-unassigned";
-			} else if (scope.ticket.owner !== $rootScope.username) {
-				scope.ownStatus = "ticket-not-owned";
+			var setOwnStatus = function () {
+				if (scope.ticket.owner === undefined || !scope.ticket.owner.length) {
+					scope.ownStatus = "ticket-unassigned";
+				} else if (scope.ticket.owner !== $rootScope.username) {
+					scope.ownStatus = "ticket-not-owned";
+				} else {
+					scope.ownStatus = "";
+				}
 			}
+
+			setOwnStatus();
 
 			element.find('i').on('click', function (event) {
 				event.preventDefault();
 				event.stopPropagation();
 				scope.deletedTicket.key = scope.ticket.key;
 				$('#ticket-delete-modal').modal('show');
+			});
+
+			// update the owner of the ticket (CSS-wise)
+			scope.$on('ticketUpdated', function (event) {
+				setOwnStatus();
 			});
 
 			element.on('click', function (event) {
