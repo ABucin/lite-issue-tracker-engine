@@ -6,8 +6,8 @@
 					Application
 				</li>
 				<li class="toggleable active" ng-click="fetchSettingsData('profile')"><i class="chart-icon fa fa-user"></i>Profile</li>
-				<li class="toggleable"><i class="chart-icon fa fa-th-large"></i>Dashboard</li>
-				<li class="toggleable"><i class="chart-icon fa fa-gear"></i>Administration</li>
+				<li class="toggleable" ng-click="fetchSettingsData('dashboard')"><i class="chart-icon fa fa-th-large"></i>Dashboard</li>
+				<li class="toggleable" ng-click="fetchSettingsData('administration')"><i class="chart-icon fa fa-gear"></i>Administration</li>
 				<li class="header">
 					Project
 				</li>
@@ -16,132 +16,8 @@
 		</div>
 		<div class="col-lg-3">
 			<form role="form">
-				<h4>Avatar</h4>
-				<div class="col-sm-12 form-group">
-					<img src="./img/profile.jpg" class="img-responsive img-thumbnail" />
-				</div>
-				<h4>Profile</h4>
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-warning">
-						<i class="fa fa-edit fa-fw"></i> First Name: <strong>{{settingsData.firstName}}</strong>
-					</li>
-					<li class="list-group-item list-group-item-warning">
-						<i class="fa fa-edit fa-fw"></i> Last Name: <strong>{{settingsData.lastName}}</strong>
-					</li>
-					<li class="list-group-item list-group-item-warning">
-						<i class="fa fa-edit fa-fw"></i> Email Address: <strong>{{settingsData.email}}</strong>
-					</li>
-					<!--
-				<li class="list-group-item list-group-item-info">
-					<label for="user-project">Project</label>
-					<select class="form-control input-sm" id="user-project">
-						<option>issue-tracker</option>
-						<option>email-client</option>
-					</select>
-				</li>
-				<li class="list-group-item form-group list-group-item-info">
-					<label for="user-project">Role</label>
-					<select class="form-control input-sm" id="user-role">
-						<option>Admin</option>
-						<option>Product Owner</option>
-						<option>Developer</option>
-						<option>Tester</option>
-					</select>
-				</li>
-				<li class="list-group-item list-group-item-danger">
-					<i class="fa fa-refresh fa-fw"></i> <strong>Reset Password</strong>
-				</li>
--->
-				</ul>
-				<!--
-			<h3>Dashboard</h3>
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-success">
-					<i class="fa fa-check fa-fw"></i> Display User Activity
-				</li>
-				<li class="list-group-item list-group-item-success">
-					<i class="fa fa-check fa-fw"></i> Display User List
-				</li>
-			</ul>
--->
-				<!--
-			<h4>Team</h4>
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-success">
-					<i class="fa fa-check fa-fw"></i> Display User Role
-				</li>
-				<li class="list-group-item list-group-item-success">
-					<i class="fa fa-check fa-fw"></i> Display User Estimates
-				</li>
-				<li class="list-group-item list-group-item-danger">
-					<i class="fa fa-times fa-fw"></i> Display User Email
-				</li>
-			</ul>
--->
+				<div ng-include="settingsTemplate.url"></div>
 			</form>
 		</div>
-		<!--
-	<div class="col-lg-3">
-		<form role="form">
-			<h3>Available Projects</h3>
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> issue-tracker
-				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> email-client
-				</li>
-				<li class="list-group-item list-group-item-success">
-					<i class="fa fa-plus fa-fw"></i> Add Project
-				</li>
-			</ul>
-			<h3>Available Roles</h3>
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-text">
-					<i class="fa fa-minus fa-fw"></i> Admin
-				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> Developer
-				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> Tester
-				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> Product Owner
-				</li>
-				<li class="list-group-item list-group-item-success">
-					<i class="fa fa-plus fa-fw"></i> Add Role
-				</li>
-			</ul>
-		</form>
-	</div>
--->
-		<!--
-	<div class="col-lg-3">
-		<form role="form">
-			<h3>Available Users</h3>
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-text">
-					<i class="fa fa-minus fa-fw"></i> abucin
-				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> psmith
-				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> athompson
-				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> mlawrence
-				</li>
-				<li class="list-group-item list-group-item-warning">
-					<i class="fa fa-times fa-fw"></i> rgreen
-				</li>
-				<li class="list-group-item list-group-item-success">
-					<i class="fa fa-plus fa-fw"></i> Add User
-				</li>
-			</ul>
-		</form>
-	</div>
--->
 	</div>
 </div>

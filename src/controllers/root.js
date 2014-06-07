@@ -59,6 +59,7 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.deletedBug = {};
 		$rootScope.copiedEntity = {};
 		$rootScope.settingsData = {};
+		$rootScope.settingsTemplate = {};
 
 		$rootScope.task = {
 			title: "",
@@ -122,6 +123,7 @@ function ($scope, $rootScope, $location, $http) {
 		};
 
 	$rootScope.fetchSettingsData = function (type) {
+		$rootScope.settingsTemplate.url = 'partials/snippets/settings/' + type + '.html';
 		$http({
 			method: 'GET',
 			url: '/itracker/api/config',
@@ -130,7 +132,6 @@ function ($scope, $rootScope, $location, $http) {
 			}
 		}).success(function (data) {
 			$rootScope.settingsData = data;
-//			angular.copy($rootScope.settingsData, data);
 		});
 	};
 

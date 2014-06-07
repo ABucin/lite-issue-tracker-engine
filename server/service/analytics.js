@@ -44,7 +44,8 @@ var loggedHours = {
 		}
 	},
 	xAxis: {
-		categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+		tickmarkPlacement: "on"
 	},
 	yAxis: {
 		allowDecimals: false,
