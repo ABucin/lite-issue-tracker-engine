@@ -82,27 +82,25 @@ exports.updateTicket = function (key, username, ticket, res) {
 };
 
 exports.deleteTicket = function (key, username, res) {
-	User.findOne({
-		'username': username
-	}, function (err, user) {
+	User.find().exec(function (err, users) {
 		if (err) {
 			res.send(500, err);
 		}
 
-		for (var i in user.tickets) {
-			if (user.tickets[i].key == key) {
-				user.tickets.splice(i, 1);
-				break;
-			}
-		}
-
-		user.save(function (err) {
-			if (err) {
-				res.send(500, err);
-			}
+		_.each(users, function (e, i, list) {
+			_.each(e.tickets, function (el, ix, innerList) {
+				if (el.key == key) {
+					e.tickets.splice(ix, 1);
+					e.save(function (err) {
+						if (err) {
+							res.send(500, err);
+						}
+					});
+				}
+			});
 		});
 
-		res.json(user);
+		res.json();
 	});
 };
 

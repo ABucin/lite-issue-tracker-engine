@@ -9,6 +9,8 @@ function ($scope, $rootScope, $location, ResourceService) {
 		$scope.isEditing = false;
 
 		$scope.updatedTicket = {};
+		$scope.deletedTicket = {};
+
 		$scope.ticket = {
 			title: "",
 			description: "",

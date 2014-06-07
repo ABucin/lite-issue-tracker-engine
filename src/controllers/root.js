@@ -49,7 +49,6 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 		$rootScope.doneTickets = [];
 		$rootScope.errors = [];
 
-		$rootScope.deletedTicket = {};
 		$rootScope.copiedEntity = {};
 
 		$rootScope.registrationData = {
