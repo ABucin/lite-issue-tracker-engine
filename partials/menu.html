@@ -5,7 +5,7 @@
 			<ul class="nav navbar-nav text-center">
 				<li>
 					<a class="fa fa-bars" data-toggle="dropdown"></a>
-					<ul class="dropdown-menu dropdown-menu-left text-left" role="menu" aria-labelledby="tasksMenu">
+					<ul class="dropdown-menu dropdown-menu-left text-left" role="menu" aria-labelledby="ticketsMenu">
 						<li role="presentation" ng-show="canFilter">
 							<a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#ticket-creation-modal">{{createAction}}</a>
 						</li>
@@ -51,12 +51,8 @@
 						<i class="fa fa-home"></i>Dashboard</a>
 				</li>
 				<li class='toggleable'>
-					<a ng-click="navigate('tasks')">
-						<i class="fa fa-tasks"></i>Tasks</a>
-				</li>
-				<li class='toggleable'>
-					<a ng-click="navigate('bugs')">
-						<i class="fa fa-bug"></i>Bugs</a>
+					<a ng-click="navigate('tickets')">
+						<i class="fa fa-ticket"></i>Tickets</a>
 				</li>
 				<li class='toggleable'>
 					<a ng-click="navigate('analytics')">

@@ -24,7 +24,7 @@ nav.navbar li ul.dropdown-menu {font-size: 90%;}
 .panel.panel-team,
 .panel.panel-settings {margin-top: 10px;}
 .panel-body-dashboard { padding: 5px; }
-.panel-bugs > .row > div, .panel-tasks > .row > div {padding-right: 0;}
+.panel-bugs > .row > div, .panel-tickets > .row > div {padding-right: 0;}
 .panel > .panel-heading {background-color: #ededed;}
 .panel.panel-dashboard .ticket {margin:3px;}
 

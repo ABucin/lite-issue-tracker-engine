@@ -1,5 +1,8 @@
 var app = angular.module('issueTracker', ['ngRoute']);
 
+/**
+ * Associates each route to a controller and a template.
+ */
 app.config(['$routeProvider',
 function ($routeProvider) {
 		$routeProvider.when('/login', {
@@ -8,12 +11,9 @@ function ($routeProvider) {
 		}).when('/dashboard', {
 			templateUrl: 'partials/dashboard.html',
 			controller: 'DashboardCtrl'
-		}).when('/tasks', {
-			templateUrl: 'partials/tasks.html',
-			controller: 'TasksCtrl'
-		}).when('/bugs', {
-			templateUrl: 'partials/bugs.html',
-			controller: 'BugsCtrl'
+		}).when('/tickets', {
+			templateUrl: 'partials/tickets.html',
+			controller: 'TicketsCtrl'
 		}).when('/analytics', {
 			templateUrl: 'partials/analytics.html',
 			controller: 'AnalyticsCtrl'
@@ -53,31 +53,11 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.doneTickets = [];
 		$rootScope.errors = [];
 
-		$rootScope.updatedTask = {};
-		$rootScope.deletedTask = {};
-		$rootScope.updatedBug = {};
-		$rootScope.deletedBug = {};
+		$rootScope.updatedTicket = {};
+		$rootScope.deletedTicket = {};
 		$rootScope.copiedEntity = {};
 		$rootScope.settingsData = {};
 		$rootScope.settingsTemplate = {};
-
-		$rootScope.task = {
-			title: "",
-			description: "",
-			type: "task",
-			estimatedTime: 0,
-			loggedTime: 0,
-			owner: $rootScope.username
-		};
-
-		$rootScope.bug = {
-			title: "",
-			description: "",
-			type: "bug",
-			estimatedTime: 0,
-			loggedTime: 0,
-			owner: $rootScope.username
-		};
 
 		$rootScope.registrationData = {
 			email: "",
@@ -93,13 +73,11 @@ function ($scope, $rootScope, $location, $http) {
 		$scope.templateRegister = $scope.templates[0];
 		$scope.templateRegisterSuccess = $scope.templates[1];
 
-		/**
-		 * TODO - Disable this when there is a DB
-		 * What happens when every page is loaded.
-		 */
 		angular.element(document).ready(function () {
+			// disable when user auth in place
 			$scope.fetchUserData();
 
+			// set Highcharts config options
 			Highcharts.setOptions({
 				chart: {
 					style: {
@@ -122,18 +100,18 @@ function ($scope, $rootScope, $location, $http) {
 			});
 		};
 
-	$rootScope.fetchSettingsData = function (type) {
-		$rootScope.settingsTemplate.url = 'partials/snippets/settings/' + type + '.html';
-		$http({
-			method: 'GET',
-			url: '/itracker/api/config',
-			params: {
-				type: type
-			}
-		}).success(function (data) {
-			$rootScope.settingsData = data;
-		});
-	};
+		$rootScope.fetchSettingsData = function (type) {
+			$rootScope.settingsTemplate.url = 'partials/snippets/settings/' + type + '.html';
+			$http({
+				method: 'GET',
+				url: '/itracker/api/config',
+				params: {
+					type: type
+				}
+			}).success(function (data) {
+				$rootScope.settingsData = data;
+			});
+		};
 
 		$scope.fetchUserData = function () {
 			$http({
@@ -199,13 +177,9 @@ function ($scope, $rootScope, $location, $http) {
 			$location.path('/' + url);
 		};
 
-		$scope.addTicket = function (type) {
+		$scope.addTicket = function () {
 			var data = {};
-			if (type === 'task') {
-				angular.copy($rootScope.task, data);
-			} else if (type === 'bug') {
-				angular.copy($rootScope.bug, data);
-			}
+			angular.copy($rootScope.ticket, data);
 
 			$http({
 				method: 'POST',
@@ -219,11 +193,7 @@ function ($scope, $rootScope, $location, $http) {
 
 		$scope.updateTicket = function (type) {
 			var data = {};
-			if (type === 'task') {
-				angular.copy($rootScope.updatedTask, data);
-			} else if (type === 'bug') {
-				angular.copy($rootScope.updatedBug, data);
-			}
+			angular.copy($rootScope.updatedTicket, data);
 
 			$http({
 				method: 'PUT',
