@@ -1,7 +1,6 @@
 app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', 'ResourceService',
 function ($scope, $rootScope, $location, ResourceService) {
 		$rootScope.auth = true;
-		$rootScope.onAnalytics = false;
 		$rootScope.canFilter = false;
 
 		$scope.settingsData = {};

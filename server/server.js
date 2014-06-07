@@ -7,7 +7,7 @@ var router = express.Router();
 // Required files.
 var persistenceService = require('./service/persistence');
 var analyticsService = require('./service/analytics');
-var configurationService = require('./service/configuration');
+var configurationService = require('./service/settings');
 
 server.use(bodyParser());
 server.use('/itracker/api', router);

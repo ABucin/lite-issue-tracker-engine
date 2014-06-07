@@ -29,19 +29,15 @@ function ($routeProvider) {
 		});
 }]);
 
-app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', 'ResourceService',
-function ($scope, $rootScope, $location, $http, ResourceService) {
+app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', 'ResourceService', 'UserService',
+function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 		$rootScope.username = "abucin";
-		$rootScope.createAction = "";
-
-		$rootScope.maxUserTasks = 10;
-		$rootScope.latestTicketCode = 0;
+		$rootScope.createAction = null;
 
 		$rootScope.auth = false;
 		$rootScope.canFilter = false;
 		$rootScope.isDeleting = false;
 		$rootScope.displayAll = true;
-		$rootScope.onAnalytics = false;
 
 		$rootScope.tickets = [];
 		$rootScope.logEntries = [];
@@ -57,9 +53,9 @@ function ($scope, $rootScope, $location, $http, ResourceService) {
 		$rootScope.copiedEntity = {};
 
 		$rootScope.registrationData = {
-			email: "",
-			password: "",
-			confirmedPassword: ""
+			email: null,
+			password: null,
+			confirmedPassword: null
 		};
 
 		$scope.templates = [{
@@ -84,63 +80,17 @@ function ($scope, $rootScope, $location, $http, ResourceService) {
 			});
 		});
 
-		$scope.fetchUserData = function () {
-			var callback = function (data) {
-				$rootScope.users = data;
-				$rootScope.workloadData = [];
-				$rootScope.tickets = [];
-				$rootScope.logEntries = [];
-
-				for (var i in data) {
-					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
-
-					var tickets = $rootScope.users[i].tickets;
-					var logs = $rootScope.users[i].logs;
-
-					for (var j in tickets) {
-						tickets[j].creator = $rootScope.users[i].username;
-						$rootScope.tickets.push(tickets[j]);
-						switch (tickets[j].status) {
-						case "created":
-							{
-								$rootScope.createdTickets.push(tickets[j]);
-								break;
-							}
-						case "in_progress":
-							{
-								$rootScope.inProgressTickets.push(tickets[j]);
-								break;
-							}
-						case "testing":
-							{
-								$rootScope.testingTickets.push(tickets[j]);
-								break;
-							}
-						case "done":
-							{
-								$rootScope.doneTickets.push(tickets[j]);
-								break;
-							}
-						default:
-							{
-								$rootScope.doneTickets.push(tickets[j]);
-							}
-						}
-					}
-
-					for (var j in logs) {
-						logs[j].username = $rootScope.users[i].username;
-						$rootScope.logEntries.push(logs[j]);
-					}
-				}
-			}
-
-			ResourceService.getData('users', null, callback);
-		};
-
 		$scope.navigate = function (url) {
 			$location.path('/' + url);
 		};
+
+		$scope.register = function () {
+			UserService.register($rootScope.registrationData);
+		};
+
+		$scope.fetchUserData = function () {
+			UserService.fetchUserData();
+		}
 
 		/**
 		 * Applies padding to the page body for displaying the menu correctly.
@@ -166,13 +116,4 @@ function ($scope, $rootScope, $location, $http, ResourceService) {
 			$scope.navigate('login');
 		};
 
-		$scope.registerUser = function () {
-			var callback = function (data) {
-				$rootScope.errors = [];
-				$("#register-modal").modal('hide');
-				$('#register-success-modal').modal('show');
-			};
-
-			ResourceService.postData('users', $rootScope.registrationData, callback);
-		};
 }]);

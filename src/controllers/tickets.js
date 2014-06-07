@@ -2,7 +2,6 @@ app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'ResourceSer
 function ($scope, $rootScope, $location, ResourceService) {
 		$rootScope.auth = true;
 		$rootScope.canFilter = true;
-		$rootScope.onAnalytics = false;
 		$rootScope.createAction = "Create Ticket";
 		$rootScope.deleteAction = "Delete Ticket";
 
