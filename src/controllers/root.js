@@ -53,11 +53,8 @@ function ($scope, $rootScope, $location, $http) {
 		$rootScope.doneTickets = [];
 		$rootScope.errors = [];
 
-		$rootScope.updatedTicket = {};
 		$rootScope.deletedTicket = {};
 		$rootScope.copiedEntity = {};
-		$rootScope.settingsData = {};
-		$rootScope.settingsTemplate = {};
 
 		$rootScope.registrationData = {
 			email: "",
@@ -87,40 +84,37 @@ function ($scope, $rootScope, $location, $http) {
 			});
 		});
 
-		$rootScope.fetchChartData = function (type, elementId) {
-			var id = (elementId == null) ? "#chart" : "#" + elementId;
-			$http({
-				method: 'GET',
-				url: '/itracker/api/analytics',
-				params: {
-					type: type
-				}
-			}).success(function (data) {
-				$(id).highcharts(data);
-			});
+		$rootScope.getData = function (path, params, callback) {
+			$rootScope.resource('GET', path, params, null, callback);
 		};
 
-		$rootScope.fetchSettingsData = function (type) {
-			$rootScope.settingsTemplate.url = 'partials/snippets/settings/' + type + '.html';
+		$rootScope.postData = function (path, data, callback) {
+			$rootScope.resource('POST', path, null, data, callback);
+		};
+
+		$rootScope.putData = function (path, data, callback) {
+			$rootScope.resource('PUT', path, null, data, callback);
+		};
+
+		$rootScope.deleteData = function (path, callback) {
+			$rootScope.resource('DELETE', path, null, null, callback);
+		};
+
+		$rootScope.resource = function (method, path, params, data, callback) {
 			$http({
-				method: 'GET',
-				url: '/itracker/api/config',
-				params: {
-					type: type
-				}
+				method: method,
+				url: '/itracker/api/' + path,
+				params: params,
+				data: data
 			}).success(function (data) {
-				$rootScope.settingsData = data;
+				callback(data);
+			}).error(function (data, status) {
+				$rootScope.errors = data;
 			});
 		};
 
 		$scope.fetchUserData = function () {
-			$http({
-				method: 'GET',
-				url: '/itracker/api/users'
-				//				params: {
-				//					uname: $rootScope.username
-				//				}
-			}).success(function (data) {
+			var callback = function(data) {
 				$rootScope.users = data;
 				$rootScope.workloadData = [];
 				$rootScope.tickets = [];
@@ -168,166 +162,13 @@ function ($scope, $rootScope, $location, $http) {
 						$rootScope.logEntries.push(logs[j]);
 					}
 				}
-			}).error(function (data, status) {
-				alert(status + " : " + data);
-			});
+			}
+
+			$rootScope.getData('users', null, callback);
 		};
 
 		$scope.navigate = function (url) {
 			$location.path('/' + url);
-		};
-
-		$scope.addTicket = function () {
-			var data = {};
-			angular.copy($rootScope.ticket, data);
-
-			$http({
-				method: 'POST',
-				url: '/itracker/api/users/' + $rootScope.username + '/tickets',
-				data: data
-			}).success(function (data) {
-				$rootScope.tickets.push(data);
-				$rootScope.createdTickets.push(data);
-			});
-		};
-
-		$scope.updateTicket = function (type) {
-			var data = {};
-			angular.copy($rootScope.updatedTicket, data);
-
-			$http({
-				method: 'PUT',
-				url: '/itracker/api/users/' + $rootScope.username + '/tickets/' + data.key,
-				data: data
-			}).success(function (data) {
-				for (var i in $rootScope.tickets) {
-					if ($rootScope.tickets[i].key == data.key) {
-						angular.copy(data, $rootScope.tickets[i]);
-						break;
-					}
-				}
-
-				switch (data.status) {
-				case "created":
-					{
-						for (var i in $rootScope.createdTickets) {
-							if ($rootScope.createdTickets[i].key == data.key) {
-								angular.copy(data, $rootScope.createdTickets[i]);
-								break;
-							}
-						}
-						break;
-					}
-				case "in_progress":
-					{
-						for (var i in $rootScope.inProgressTickets) {
-							if ($rootScope.inProgressTickets[i].key == data.key) {
-								angular.copy(data, $rootScope.inProgressTickets[i]);
-								break;
-							}
-						}
-						break;
-					}
-				case "testing":
-					{
-						for (var i in $rootScope.testingTickets) {
-							if ($rootScope.testingTickets[i].key == data.key) {
-								angular.copy(data, $rootScope.testingTickets[i]);
-								break;
-							}
-						}
-						break;
-					}
-				case "done":
-					{
-						for (var i in $rootScope.doneTickets) {
-							if ($rootScope.doneTickets[i].key == data.key) {
-								angular.copy(data, $rootScope.doneTickets[i]);
-								break;
-							}
-						}
-						break;
-					}
-				default:
-					{
-						for (var i in $rootScope.doneTickets) {
-							if ($rootScope.doneTickets[i].key == data.key) {
-								angular.copy(data, $rootScope.doneTickets[i]);
-								break;
-							}
-						}
-					}
-				}
-			});
-		};
-
-		$scope.deleteTicket = function (key) {
-			$http({
-				method: 'DELETE',
-				url: '/itracker/api/users/' + $rootScope.username + '/tickets/' + key
-			}).success(function () {
-				var deletedTicketStatus = "";
-
-				for (var i in $rootScope.tickets) {
-					if ($rootScope.tickets[i].key == key) {
-						deletedTicketStatus = $rootScope.tickets[i].status;
-						$rootScope.tickets.splice(i, 1);
-						break;
-					}
-				}
-
-				switch (deletedTicketStatus) {
-				case "created":
-					{
-						for (var i in $rootScope.createdTickets) {
-							if ($rootScope.createdTickets[i].key == key) {
-								$rootScope.createdTickets.splice(i, 1);
-								break;
-							}
-						}
-						break;
-					}
-				case "in_progress":
-					{
-						for (var i in $rootScope.inProgressTickets) {
-							if ($rootScope.inProgressTickets[i].key == key) {
-								$rootScope.inProgressTickets.splice(i, 1);
-								break;
-							}
-						}
-						break;
-					}
-				case "testing":
-					{
-						for (var i in $rootScope.testingTickets) {
-							if ($rootScope.testingTickets[i].key == key) {
-								$rootScope.testingTickets.splice(i, 1);
-								break;
-							}
-						}
-						break;
-					}
-				case "done":
-					{
-						for (var i in $rootScope.doneTickets) {
-							if ($rootScope.doneTickets[i].key == key) {
-								$rootScope.doneTickets.splice(i, 1);
-								break;
-							}
-						}
-						break;
-					}
-				default:
-					{
-						for (var i in $rootScope.doneTickets) {
-							if ($rootScope.doneTickets[i].key == key) {
-								$rootScope.doneTickets.splice(i, 1);;
-								break;
-							}
-						}
-					}
-				}
-			});
 		};
 
 		/**
@@ -355,19 +196,12 @@ function ($scope, $rootScope, $location, $http) {
 		};
 
 		$scope.registerUser = function () {
-			var data = {};
-			angular.copy($rootScope.registrationData, data);
-
-			$http({
-				method: 'POST',
-				url: '/itracker/api/users/',
-				data: data
-			}).success(function (data) {
+			var callback = function(data){
 				$rootScope.errors = [];
 				$("#register-modal").modal('hide');
 				$('#register-success-modal').modal('show');
-			}).error(function (data) {
-				$rootScope.errors = data;
-			});
+			};
+
+			$rootScope.postData('users', $rootScope.registrationData, callback);
 		};
 }]);

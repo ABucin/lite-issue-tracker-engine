@@ -11,7 +11,7 @@ app.directive('ticket', function ($rootScope) {
 			element.find('i').on('click', function (event) {
 				event.preventDefault();
 				event.stopPropagation();
-				$rootScope.deletedTask.key = scope.ticket.key;
+				$rootScope.deletedTicket.key = scope.ticket.key;
 				$('#ticket-delete-modal').modal('show');
 			});
 
@@ -46,7 +46,7 @@ app.directive('ticketContainer', function ($rootScope) {
 				$rootScope.copiedEntity.status = element.attr("status");
 				angular.copy($rootScope.copiedEntity, $rootScope.updatedTicket);
 				scope.$apply();
-				scope.updateTicket($rootScope.copiedEntity.type);
+				scope.updateTicket();
 			});
 		}
 	};
