@@ -1,12 +1,14 @@
-app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService',
-function ($scope, $rootScope, $location, TicketsService) {
+app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService', 'CommentsService',
+function ($scope, $rootScope, $location, TicketsService, CommentsService) {
 		$rootScope.auth = true;
 		$rootScope.canFilter = true;
-		$rootScope.createAction = "Create Ticket";
-		$rootScope.deleteAction = "Delete Ticket";
-
-		$scope.ownStatus = "";
 		$scope.isEditing = false;
+
+	$rootScope.createAction = "Create Ticket";
+		$rootScope.deleteAction = "Delete Ticket";
+		$scope.ownStatus = "";
+
+	$scope.comments = [];
 
 		$scope.updatedTicket = {};
 		$scope.deletedTicket = {};
@@ -24,6 +26,11 @@ function ($scope, $rootScope, $location, TicketsService) {
 			owner: $rootScope.username
 		};
 
+		$scope.comment = {
+			author: $rootScope.username,
+			content: ""
+		};
+
 		$scope.templates = [{
 				url: 'partials/modals/tickets/ticket_create.html'
 			},
@@ -37,6 +44,10 @@ function ($scope, $rootScope, $location, TicketsService) {
 		$scope.templateCreate = $scope.templates[0];
 		$scope.templateEdit = $scope.templates[1];
 		$scope.templateDelete = $scope.templates[2];
+
+		$scope.fetchComments = function(key) {
+			CommentsService.fetchComments(key, $scope.comments);
+		};
 
 		$scope.addTicket = function () {
 			TicketsService.addTicket($rootScope.username, $scope.ticket, $rootScope.tickets, $rootScope.createdTickets);

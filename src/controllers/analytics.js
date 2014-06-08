@@ -1,6 +1,6 @@
-app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location', '$http', 'AnalyticsService',
+app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location', 'AnalyticsService',
 
-function ($scope, $rootScope, $location, $http, AnalyticsService) {
+function ($scope, $rootScope, $location, AnalyticsService) {
 		$rootScope.auth = true;
 		$rootScope.canFilter = false;
 

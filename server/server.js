@@ -5,6 +5,7 @@ var port = 3000;
 var router = express.Router();
 
 // Required files.
+var populationService = require('./service/population');
 var persistenceService = require('./service/persistence');
 var analyticsService = require('./service/analytics');
 var configurationService = require('./service/settings');
@@ -17,7 +18,7 @@ server.use(express.static(__dirname + "./../"));
 server.listen(port);
 
 // Add default data to database.
-persistenceService.populateDb();
+populationService.populateDb();
 
 /**
  * Users.
@@ -30,9 +31,24 @@ router.route('/users')
 		persistenceService.createUser(req.body, res);
 	});
 
-router.route('/users?:uname')
+router.route('/users/:uname')
 	.get(function (req, res) {
-		persistenceService.getUser(req.query.uname, res);
+		persistenceService.getUser(req.params.uname, res);
+	});
+
+router.route('/tickets/:key/comments')
+	.get(function (req, res) {
+		persistenceService.getComments(req.params.key, res);
+	});
+
+router.route('/users/:uname/tickets/:key/comments')
+	.post(function (req, res) {
+		persistenceService.createComment(req.params.uname, req.params.key, req.body, res);
+	});
+
+router.route('/users/:uname/tickets/:ticketKey/comments/:key')
+	.put(function (req, res) {
+		persistenceService.updateComment(req.params.key, req.params.ticketKey, req.params.uname, req.body, res);
 	});
 
 router.route('/users/:uname/tickets')
@@ -57,13 +73,13 @@ router.route('/logs')
 	});
 
 router.route('/analytics?:type')
-.get(function (req, res) {
-	analyticsService.getChart(req.query.type, res);
-});
+	.get(function (req, res) {
+		analyticsService.getChart(req.query.type, res);
+	});
 
 router.route('/config?:type')
-.get(function (req, res) {
-	configurationService.getConfig(req.query.type, res);
-});
+	.get(function (req, res) {
+		configurationService.getConfig(req.query.type, res);
+	});
 
 console.log('Server started. Listening on port ' + port + '...');

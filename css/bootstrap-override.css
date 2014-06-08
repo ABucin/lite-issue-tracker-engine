@@ -39,6 +39,7 @@ nav.navbar li ul.dropdown-menu {font-size: 90%;}
 .modal-header { padding: 10px 15px; }
 .modal-body .form-group:last-child {margin-bottom: 0;}
 .modal-footer { margin-top: 0; }
+.modal-comments { border-bottom: 1px solid #E5E5E5; }
 
 .table {background-color: transparent;}
 .table > thead > tr > th {margin-bottom: 10px; font-weight: 300; text-align: center; min-width: 20%; border-bottom: 1px solid #DDDDDD;}

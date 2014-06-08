@@ -58,12 +58,37 @@
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer modal-comments">
 				<button type="button" class="btn btn-default" data-dismiss="modal">
 					Cancel
 				</button>
 				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateTicket()">
 					Save
+				</button>
+			</div>
+			<div class="modal-body modal-comments" ng-show="comments.length">
+				<div ng-repeat="c in comments" class="row">
+					<div class="col-lg-5">
+						<strong>{{c.author}}</strong><em> ({{c.timestamp}})</em>
+					</div>
+					<div class="col-lg-7">
+						<p>{{c.content}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<div class="col-lg-12">
+							<p>Posting as: <strong>{{comment.author}}</strong></p>
+							<textarea id="commentContent" class="form-control" ng-model="comment.content"></textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addComment()">
+					Add Comment
 				</button>
 			</div>
 		</div>

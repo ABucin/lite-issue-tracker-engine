@@ -11,16 +11,12 @@ db.once('open', function callback() {
 	console.log('Connection to DB established.');
 });
 
-var populationService = require('./population');
 var schemaService = require('./schema');
 var utilsService = require('./utils');
 
 var Ticket = schemaService.getTicket();
 var User = schemaService.getUser();
-
-exports.populateDb = function () {
-	return populationService.populateDb();
-}
+var Log = schemaService.getLog();
 
 exports.getAllUsers = function (res) {
 	User.find(function (err, users) {
@@ -101,14 +97,108 @@ exports.deleteTicket = function (key, username, res) {
 			_.each(user.tickets, function (ticket, ix, innerList) {
 				if (ticket.key == key) {
 					user.tickets.splice(ix, 1);
+				}
+			});
+
+			_.each(user.comments, function (comment, ix, innerList) {
+				if (comment.ticket == key) {
+					user.comments.splice(ix, 1);
+				}
+			});
+
+			user.save(function (err) {
+				if (err) {
+					res.send(500, err);
+				}
+				res.json();
+			});
+		});
+	});
+};
+
+exports.createComment = function (username, ticket, comment, res) {
+	var commentData = {
+		key: utilsService.generateKey(),
+		ticket: ticket,
+		content: comment.content,
+		author: comment.author
+	};
+
+	// save the comment and check for errors
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			res.send(500, err);
+		}
+
+		user.comments.push(new Comment(commentData));
+
+		user.save(function (err) {
+			if (err) {
+				res.send(500, err);
+			}
+			res.json(commentData);
+		});
+	});
+};
+
+exports.getComments = function (key, res) {
+	User.find().exec(function (err, users) {
+		if (err) {
+			res.send(500, err);
+		}
+		var comments = [];
+
+		_.each(users, function (user, i, list) {
+			_.each(user.comments, function (comment, ix, innerList) {
+				if (comment.ticket == key) {
+					var c = {
+						author: user.username,
+						ticket: comment.ticket,
+						timestamp: comment.timestamp,
+						content: comment.content
+					};
+					comments.push(c);
+				}
+			});
+		});
+		res.json(comments);
+	});
+};
+
+exports.updateComment = function (key, ticket, username, comment, res) {
+	// save the comment and check for errors
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		var errorResponse = [];
+		if (err) {
+			res.send(500, err);
+		}
+
+		_.each(user.comments, function (c, i, list) {
+			if (c.key == key && c.ticket = ticket) {
+
+				if (comment.content != null && comment.content.length) {
+					c.content = comment.content;
+				} else {
+					errorResponse.push({
+						message: 'Content must be provided.'
+					});
+				}
+
+				if (errorResponse.length) {
+					res.send(500, errorResponse);
+				} else {
 					user.save(function (err) {
 						if (err) {
 							res.send(500, err);
 						}
-						res.json();
+						res.json(c);
 					});
 				}
-			});
+			}
 		});
 	});
 };
@@ -230,12 +320,11 @@ exports.createUser = function (user, res) {
 	persistedUser.save(function (err) {
 		if (err) {
 			var errorResponse = [];
-			for (var k in err.errors) {
-				var message = err.errors[k].message.split('Path ')[1];
+			_.each(err.errors, function (e, i, l) {
 				errorResponse.push({
-					message: message
+					message: e.message.split('Path ')[1]
 				});
-			}
+			});
 			res.send(500, errorResponse);
 		}
 

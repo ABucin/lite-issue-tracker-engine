@@ -1,6 +1,6 @@
-app.service('TicketsService', ['$rootScope', '$http', 'ResourceService',
+app.service('TicketsService', ['$rootScope', 'ResourceService',
 
-	function ($rootScope, $http, ResourceService) {
+	function ($rootScope, ResourceService) {
 
 		this.addTicket = function (username, ticket, tickets, createdTickets) {
 			var callback = function (data) {

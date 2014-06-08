@@ -73,6 +73,26 @@ var LogSchema = new Schema({
 	}
 });
 
+var CommentSchema = new Schema({
+	key: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	content: {
+		type: String,
+		required: true
+	},
+	ticket: {
+		type: String,
+		required: true
+	},
+	timestamp: {
+		type: Date,
+		default: Date.now
+	}
+});
+
 var UserSchema = new Schema({
 	key: {
 		type: String,
@@ -103,6 +123,7 @@ var UserSchema = new Schema({
 	},
 	tickets: [TicketSchema],
 	logs: [LogSchema],
+	comments: [CommentSchema],
 	estimatedTime: {
 		type: Number,
 		default: 0
@@ -116,6 +137,7 @@ var UserSchema = new Schema({
 var Ticket = mongoose.model("Ticket", TicketSchema);
 var User = mongoose.model("User", UserSchema);
 var Log = mongoose.model("Log", LogSchema);
+var Comment = mongoose.model("Comment", CommentSchema);
 
 exports.getTicket = function () {
 	return Ticket;
@@ -127,4 +149,8 @@ exports.getUser = function () {
 
 exports.getLog = function () {
 	return Log;
+};
+
+exports.getComment = function () {
+	return Comment;
 };

@@ -7,6 +7,7 @@ var schemaService = require('./schema');
 var utilsService = require('./utils');
 var Log = schemaService.getLog();
 var Ticket = schemaService.getTicket();
+var Comment = schemaService.getComment();
 var User = schemaService.getUser();
 
 exports.populateDb = function () {
@@ -16,7 +17,10 @@ exports.populateDb = function () {
 	 */
 	Log.collection.drop();
 	Ticket.collection.drop();
+	Comment.collection.drop();
 	User.collection.drop();
+
+	var sampleTicketKey = utilsService.generateKey();
 
 	var firstUser = new User({
 		key: utilsService.generateKey(),
@@ -115,7 +119,7 @@ exports.populateDb = function () {
 		role: "admin",
 		project: "email-client",
 		tickets: [{
-			key: utilsService.generateKey(),
+			key: sampleTicketKey,
 			code: 7,
 			title: "Plan Review Meeting",
 			status: "in_progress",
@@ -156,7 +160,7 @@ exports.populateDb = function () {
 			description: "The login button has extra padding.",
 			loggedTime: 5,
 			owner: "abucin"
-		},{
+		}, {
 			key: utilsService.generateKey(),
 			code: 14,
 			title: "Unassigned Ticket",
@@ -183,6 +187,11 @@ exports.populateDb = function () {
 			target: "BG-5",
 			targetType: "bug",
 			comment: "Bug fixed in commit 3d6h4."
+		}],
+		comments: [{
+			key: utilsService.generateKey(),
+			content: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.",
+			ticket: sampleTicketKey
 		}],
 		estimatedTime: 200,
 		loggedTime: 200

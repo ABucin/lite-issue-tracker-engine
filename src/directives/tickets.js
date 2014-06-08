@@ -28,6 +28,7 @@ app.directive('ticket', function ($rootScope) {
 
 			element.on('click', function (event) {
 				scope.isEditing = true;
+				scope.fetchComments(scope.ticket.key);
 				// display the clicked ticket data in the modal
 				if (scope.updatedTicket.code === null || scope.ticket.key !== scope.updatedTicket.key) {
 					angular.copy(scope.ticket, scope.updatedTicket);
