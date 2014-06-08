@@ -10,10 +10,12 @@ app.service('TicketsService', ['$rootScope', '$http', 'ResourceService',
 			ResourceService.postData('users/' + username + '/tickets', ticket, callback);
 		};
 
-		this.updateTicket = function (key, username, updatedTicket, tickets, createdTickets, inProgressTickets, testingTickets, doneTickets) {
+		this.updateTicket = function (key, username, updatedTicket, tickets, createdTickets, inProgressTickets, testingTickets, doneTickets, loggedWork) {
 			var callback = function (data) {
 				for (var i in tickets) {
 					if (tickets[i].key == data.key) {
+						tickets[i].loggedTime += loggedWork;
+						updatedTicket.loggedTime = tickets[i].loggedTime;
 						angular.copy(data, tickets[i]);
 						$rootScope.$broadcast('ticketUpdated');
 						break;

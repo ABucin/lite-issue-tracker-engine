@@ -11,12 +11,16 @@ function ($scope, $rootScope, $location, TicketsService) {
 		$scope.updatedTicket = {};
 		$scope.deletedTicket = {};
 
+		$scope.loggedWork = {
+			amount: 0.0
+		};
+
 		$scope.ticket = {
 			title: "",
 			description: "",
 			type: "",
-			estimatedTime: 0,
-			loggedTime: 0,
+			estimatedTime: 0.0,
+			loggedTime: 0.0,
 			owner: $rootScope.username
 		};
 
@@ -39,7 +43,7 @@ function ($scope, $rootScope, $location, TicketsService) {
 		};
 
 		$scope.updateTicket = function () {
-			TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.username, $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets);
+			TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.username, $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
 		};
 
 		$scope.deleteTicket = function (key) {

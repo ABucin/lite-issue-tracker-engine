@@ -31,6 +31,7 @@ table > tbody > tr > td[status] {min-height: 50px;}
 .ticket:hover,
 .log:hover { cursor: pointer; }
 .ticket {margin: 6px 6px 0 6px;}
+.ticket .fa-times {color: #CB1F26;}
 .ticket-bug { background-color: #CB1F26; }
 .ticket-task { background-color: #21579D; }
 .ticket-not-owned {background-color: #3F424B;}

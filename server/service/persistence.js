@@ -46,6 +46,7 @@ exports.updateTicket = function (key, username, ticket, res) {
 	// save the ticket and check for errors
 	User.find().exec(
 		function (err, users) {
+			var errorResponse = [];
 			if (err) {
 				res.send(500, err);
 			}
@@ -54,14 +55,15 @@ exports.updateTicket = function (key, username, ticket, res) {
 				_.each(user.tickets, function (el, ix, innerList) {
 					if (el.key == key) {
 
-						if (ticket.title != null) {
+						if (ticket.title != null && ticket.title.length) {
 							el.title = ticket.title;
+						} else {
+							errorResponse.push({
+								message: 'Title must be provided.'
+							});
 						}
 						if (ticket.status != null) {
 							el.status = ticket.status;
-						}
-						if (ticket.description != null) {
-							el.description = ticket.description;
 						}
 						if (ticket.loggedTime != null) {
 							el.loggedTime = ticket.loggedTime;
@@ -69,14 +71,19 @@ exports.updateTicket = function (key, username, ticket, res) {
 						if (ticket.estimatedTime != null) {
 							el.estimatedTime = ticket.estimatedTime;
 						}
+						el.description = ticket.description;
 						el.owner = ticket.owner;
 
-						user.save(function (err) {
-							if (err) {
-								res.send(500, err);
-							}
-							res.json(ticket);
-						});
+						if (errorResponse.length) {
+							res.send(500, errorResponse);
+						} else {
+							user.save(function (err) {
+								if (err) {
+									res.send(500, err);
+								}
+								res.json(ticket);
+							});
+						}
 					}
 				});
 			});
