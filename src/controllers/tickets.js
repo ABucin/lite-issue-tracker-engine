@@ -6,8 +6,11 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService) {
 
 		$rootScope.createAction = "Create Ticket";
 		$rootScope.deleteAction = "Delete Ticket";
-		$scope.ownStatus = "";
+		$scope.status = {
+			isEditingComment: false
+		};
 		$scope.ownComment = "";
+		$scope.editedCommentKey = "";
 
 		$scope.comments = [];
 
@@ -51,12 +54,22 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService) {
 			CommentsService.addComment($rootScope.username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
 		}
 
-		$scope.deleteComment = function (key) {
-			CommentsService.deleteComment($rootScope.username, key, $scope.comments);
+		$scope.deleteComment = function (commentKey) {
+			CommentsService.deleteComment($rootScope.username, commentKey, $scope.comments, $scope.comment);
 		}
 
-		$scope.fetchComments = function (key) {
-			CommentsService.fetchComments(key, $scope.comments);
+		$scope.markForEdit = function (commentKey, commentContent) {
+			$scope.status.isEditingComment = true;
+			$scope.editedCommentKey = commentKey;
+			$scope.comment.content = commentContent;
+		};
+
+		$scope.editComment = function () {
+			CommentsService.editComment($rootScope.username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
+		}
+
+		$scope.fetchComments = function (commentKey) {
+			CommentsService.fetchComments(commentKey, $scope.comments);
 		};
 
 		$scope.addTicket = function () {

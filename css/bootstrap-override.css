@@ -40,7 +40,8 @@ nav.navbar li ul.dropdown-menu {font-size: 90%;}
 .modal-body .form-group:last-child {margin-bottom: 0;}
 .modal-footer { margin-top: 0; }
 .modal-comments { border-bottom: 1px solid #E5E5E5; }
-.modal-comments i.fa-times {cursor: pointer;}
+.modal-comments i.fa {cursor: pointer;}
+.modal-comments i.fa-edit {margin-right: 5px;}
 .modal-comments em {padding: 0 5px;}
 
 .table {background-color: transparent;}

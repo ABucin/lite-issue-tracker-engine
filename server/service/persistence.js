@@ -328,10 +328,11 @@ exports.updateComment = function (key, ticket, username, comment, res) {
 		}
 
 		_.each(user.comments, function (c, i, list) {
-			if (c.key == key && c.ticket = ticket) {
+			if (c.key == key && c.ticket == ticket) {
 
 				if (comment.content != null && comment.content.length) {
 					c.content = comment.content;
+					c.isEdited = true;
 				} else {
 					errorResponse.push({
 						message: 'Content must be provided.'

@@ -90,6 +90,10 @@ var CommentSchema = new Schema({
 	timestamp: {
 		type: Date,
 		default: Date.now
+	},
+	isEdited: {
+		type: Boolean,
+		default: false
 	}
 });
 
