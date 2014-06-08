@@ -36,6 +36,9 @@ router.route('/users/:uname')
 		persistenceService.getUser(req.params.uname, res);
 	});
 
+/**
+ * Comments.
+ */
 router.route('/tickets/:key/comments')
 	.get(function (req, res) {
 		persistenceService.getComments(req.params.key, res);
@@ -51,6 +54,14 @@ router.route('/users/:uname/tickets/:ticketKey/comments/:key')
 		persistenceService.updateComment(req.params.key, req.params.ticketKey, req.params.uname, req.body, res);
 	});
 
+router.route('/users/:uname/comments/:key')
+	.delete(function (req, res) {
+		persistenceService.deleteComment(req.params.key, req.params.uname, res);
+	});
+
+/**
+ * Tickets.
+ */
 router.route('/users/:uname/tickets')
 	.post(function (req, res) {
 		persistenceService.createTicket(req.params.uname, req.body, res);
@@ -67,16 +78,25 @@ router.route('/users/:uname/tickets/:key')
 		persistenceService.deleteTicket(req.params.key, req.params.uname, res);
 	});
 
+/**
+ * Logs.
+ */
 router.route('/logs')
 	.get(function (req, res) {
 		persistenceService.getAllLogs(res);
 	});
 
+/**
+ * Analytics.
+ */
 router.route('/analytics?:type')
 	.get(function (req, res) {
 		analyticsService.getChart(req.query.type, res);
 	});
 
+/**
+ * Settings.
+ */
 router.route('/config?:type')
 	.get(function (req, res) {
 		configurationService.getConfig(req.query.type, res);

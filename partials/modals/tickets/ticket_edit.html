@@ -68,10 +68,10 @@
 			</div>
 			<div class="modal-body modal-comments" ng-show="comments.length">
 				<div ng-repeat="c in comments" class="row">
-					<div class="col-lg-5">
-						<strong>{{c.author}}</strong><em> ({{c.timestamp}})</em>
+					<div class="col-lg-5" ng-class="(c.author == username)?'comment-author': ''">
+						<strong>{{c.author}}</strong><em>({{c.timestamp | date:'yyyy-MM-dd HH:mm:ss'}})</em><i class="fa fa-times" ng-click="deleteComment(c.key)" ng-show="c.author == username"></i>
 					</div>
-					<div class="col-lg-7">
+					<div class="col-lg-7" ng-class="(c.author == username)?'comment-author': ''">
 						<p>{{c.content}}</p>
 					</div>
 				</div>
@@ -80,14 +80,15 @@
 				<form class="form-horizontal" role="form">
 					<div class="form-group">
 						<div class="col-lg-12">
-							<p>Posting as: <strong>{{comment.author}}</strong></p>
+							<p>Posting as: <strong>{{comment.author}}</strong>
+							</p>
 							<textarea id="commentContent" class="form-control" ng-model="comment.content"></textarea>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addComment()">
+				<button type="button" class="btn btn-primary" ng-click="addComment()">
 					Add Comment
 				</button>
 			</div>

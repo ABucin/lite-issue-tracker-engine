@@ -17,7 +17,11 @@ var utilsService = require('./utils');
 var Ticket = schemaService.getTicket();
 var User = schemaService.getUser();
 var Log = schemaService.getLog();
+var Comment = schemaService.getComment();
 
+/**
+ * Users.
+ */
 exports.getAllUsers = function (res) {
 	User.find(function (err, users) {
 		if (err) {
@@ -35,6 +39,124 @@ exports.getUser = function (username, res) {
 			res.send(500, err);
 		}
 		res.json([user]);
+	});
+};
+
+exports.createUser = function (user, res) {
+	var errorResponse = [];
+	var userData = {
+		key: utilsService.generateKey(),
+		email: user.email,
+		username: user.email.split('@')[0],
+		password: user.password,
+		role: 'user',
+		project: 'issue-tracker',
+		tickets: [],
+		logs: []
+	};
+
+	if (!user.password.length) {
+		errorResponse.push({
+			message: 'Password must be provided.'
+		});
+	}
+
+	if (!user.email.length) {
+		errorResponse.push({
+			message: 'Email address must be provided.'
+		});
+	}
+
+	if (user.password !== user.repeatedPassword) {
+		errorResponse.push({
+			message: 'Passwords do not match.'
+		});
+	}
+
+	if (errorResponse.length) {
+		res.send(500, errorResponse);
+	}
+
+	var persistedUser = new User(userData);
+
+	persistedUser.save(function (err) {
+		if (err) {
+			var errorResponse = [];
+			_.each(err.errors, function (e, i, l) {
+				errorResponse.push({
+					message: e.message.split('Path ')[1]
+				});
+			});
+			res.send(500, errorResponse);
+		}
+
+		res.json({
+			message: 'User created!'
+		});
+	});
+};
+
+/**
+ * Tickets.
+ */
+exports.createTicket = function (username, ticket, res) {
+	var ticketData = {
+		key: utilsService.generateKey(),
+		title: ticket.title,
+		status: 'created',
+		type: ticket.type,
+		description: ticket.description,
+		loggedTime: ticket.loggedTime,
+		estimatedTime: ticket.estimatedTime,
+		owner: ticket.owner
+	};
+
+	// save the ticket and check for errors
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			res.send(500, err);
+		}
+
+		User.find(function (err, users) {
+			if (err) {
+				res.send(500, err);
+			}
+
+			var tickets = [];
+
+			_.each(users, function (e, i, list) {
+				tickets = _.union(tickets, e.tickets);
+			});
+
+			var latestTicket = _.max(tickets, function (ticket) {
+				return ticket.code;
+			});
+
+			ticketData.code = latestTicket.code + 1;
+			user.tickets.push(new Ticket(ticketData));
+
+			user.save(function (err) {
+				if (err) {
+					res.send(500, err);
+				}
+
+				res.json(ticketData);
+			});
+		});
+
+	});
+};
+
+exports.getTickets = function (username, res) {
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			res.send(500, err);
+		}
+		res.json([user.tickets]);
 	});
 };
 
@@ -116,12 +238,16 @@ exports.deleteTicket = function (key, username, res) {
 	});
 };
 
+/**
+ * Comments.
+ */
 exports.createComment = function (username, ticket, comment, res) {
 	var commentData = {
 		key: utilsService.generateKey(),
 		ticket: ticket,
 		content: comment.content,
-		author: comment.author
+		author: comment.author,
+		timestamp: new Date()
 	};
 
 	// save the comment and check for errors
@@ -143,6 +269,29 @@ exports.createComment = function (username, ticket, comment, res) {
 	});
 };
 
+exports.deleteComment = function (key, username, res) {
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			res.send(500, err);
+		}
+
+		_.each(user.comments, function (comment, ix, innerList) {
+			if (comment.key == key) {
+				user.comments.splice(ix, 1);
+			}
+		});
+
+		user.save(function (err) {
+			if (err) {
+				res.send(500, err);
+			}
+			res.json();
+		});
+	});
+};
+
 exports.getComments = function (key, res) {
 	User.find().exec(function (err, users) {
 		if (err) {
@@ -154,6 +303,7 @@ exports.getComments = function (key, res) {
 			_.each(user.comments, function (comment, ix, innerList) {
 				if (comment.ticket == key) {
 					var c = {
+						key: comment.key,
 						author: user.username,
 						ticket: comment.ticket,
 						timestamp: comment.timestamp,
@@ -203,67 +353,9 @@ exports.updateComment = function (key, ticket, username, comment, res) {
 	});
 };
 
-exports.createTicket = function (username, ticket, res) {
-	var ticketData = {
-		key: utilsService.generateKey(),
-		title: ticket.title,
-		status: 'created',
-		type: ticket.type,
-		description: ticket.description,
-		loggedTime: ticket.loggedTime,
-		estimatedTime: ticket.estimatedTime,
-		owner: ticket.owner
-	};
-
-	// save the ticket and check for errors
-	User.findOne({
-		'username': username
-	}, function (err, user) {
-		if (err) {
-			res.send(500, err);
-		}
-
-		User.find(function (err, users) {
-			if (err) {
-				res.send(500, err);
-			}
-
-			var tickets = [];
-
-			_.each(users, function (e, i, list) {
-				tickets = _.union(tickets, e.tickets);
-			});
-
-			var latestTicket = _.max(tickets, function (ticket) {
-				return ticket.code;
-			});
-
-			ticketData.code = latestTicket.code + 1;
-			user.tickets.push(new Ticket(ticketData));
-
-			user.save(function (err) {
-				if (err) {
-					res.send(500, err);
-				}
-
-				res.json(ticketData);
-			});
-		});
-
-	});
-};
-
-exports.getTickets = function (username, res) {
-	User.findOne({
-		'username': username
-	}, function (err, user) {
-		if (err) {
-			res.send(500, err);
-		}
-		res.json([user.tickets]);
-	});
-};
-
+/**
+ * Logs.
+ */
 exports.getAllLogs = function (res) {
 	User.find().sort('-timestamp').exec(function (err, users) {
 		if (err) {
@@ -277,59 +369,5 @@ exports.getAllLogs = function (res) {
 		});
 
 		res.json(logs);
-	});
-};
-
-exports.createUser = function (user, res) {
-	var errorResponse = [];
-	var userData = {
-		key: utilsService.generateKey(),
-		email: user.email,
-		username: user.email.split('@')[0],
-		password: user.password,
-		role: 'user',
-		project: 'issue-tracker',
-		tickets: [],
-		logs: []
-	};
-
-	if (!user.password.length) {
-		errorResponse.push({
-			message: 'Password must be provided.'
-		});
-	}
-
-	if (!user.email.length) {
-		errorResponse.push({
-			message: 'Email address must be provided.'
-		});
-	}
-
-	if (user.password !== user.repeatedPassword) {
-		errorResponse.push({
-			message: 'Passwords do not match.'
-		});
-	}
-
-	if (errorResponse.length) {
-		res.send(500, errorResponse);
-	}
-
-	var persistedUser = new User(userData);
-
-	persistedUser.save(function (err) {
-		if (err) {
-			var errorResponse = [];
-			_.each(err.errors, function (e, i, l) {
-				errorResponse.push({
-					message: e.message.split('Path ')[1]
-				});
-			});
-			res.send(500, errorResponse);
-		}
-
-		res.json({
-			message: 'User created!'
-		});
 	});
 };

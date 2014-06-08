@@ -107,6 +107,11 @@ exports.populateDb = function () {
 			target: "BG-3",
 			targetType: "bug"
 }],
+		comments: [{
+			key: utilsService.generateKey(),
+			content: "I think that the ticket should be marked as fixed.",
+			ticket: sampleTicketKey
+		}],
 		estimatedTime: 200,
 		loggedTime: 300
 	});
@@ -191,6 +196,10 @@ exports.populateDb = function () {
 		comments: [{
 			key: utilsService.generateKey(),
 			content: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.",
+			ticket: sampleTicketKey
+		},{
+			key: utilsService.generateKey(),
+			content: "That is correct. I will do it soon.",
 			ticket: sampleTicketKey
 		}],
 		estimatedTime: 200,

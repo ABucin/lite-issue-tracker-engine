@@ -4,11 +4,12 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService) {
 		$rootScope.canFilter = true;
 		$scope.isEditing = false;
 
-	$rootScope.createAction = "Create Ticket";
+		$rootScope.createAction = "Create Ticket";
 		$rootScope.deleteAction = "Delete Ticket";
 		$scope.ownStatus = "";
+		$scope.ownComment = "";
 
-	$scope.comments = [];
+		$scope.comments = [];
 
 		$scope.updatedTicket = {};
 		$scope.deletedTicket = {};
@@ -27,6 +28,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService) {
 		};
 
 		$scope.comment = {
+			key: "",
 			author: $rootScope.username,
 			content: ""
 		};
@@ -45,7 +47,15 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService) {
 		$scope.templateEdit = $scope.templates[1];
 		$scope.templateDelete = $scope.templates[2];
 
-		$scope.fetchComments = function(key) {
+		$scope.addComment = function () {
+			CommentsService.addComment($rootScope.username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
+		}
+
+		$scope.deleteComment = function (key) {
+			CommentsService.deleteComment($rootScope.username, key, $scope.comments);
+		}
+
+		$scope.fetchComments = function (key) {
 			CommentsService.fetchComments(key, $scope.comments);
 		};
 

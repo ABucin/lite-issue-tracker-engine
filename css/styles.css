@@ -22,6 +22,8 @@ table > tbody > tr > td[status] {min-height: 50px;}
 .secondary-menu > ul > li.active,
 .secondary-menu > ul > li.toggleable:hover { background-color: #ccc; border-radius: .2em; cursor: pointer; }
 
+.comment-author {color: #21579D;}
+
 /**
  * Ticket CSS.
  */
