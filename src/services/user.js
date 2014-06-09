@@ -15,7 +15,6 @@ app.service('UserService', ['$rootScope', 'ResourceService',
 				$rootScope.users = data;
 				$rootScope.workloadData = [];
 				$rootScope.tickets = [];
-				$rootScope.logEntries = [];
 
 				for (var i in data) {
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
@@ -52,11 +51,6 @@ app.service('UserService', ['$rootScope', 'ResourceService',
 								$rootScope.doneTickets.push(tickets[j]);
 							}
 						}
-					}
-
-					for (var j in logs) {
-						logs[j].username = $rootScope.users[i].username;
-						$rootScope.logEntries.push(logs[j]);
 					}
 				}
 			}

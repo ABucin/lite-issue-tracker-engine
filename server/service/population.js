@@ -100,12 +100,14 @@ exports.populateDb = function () {
 			key: utilsService.generateKey(),
 			action: "times",
 			target: "TA-2",
-			targetType: "task"
+			targetType: "task",
+			username: "psmith"
 }, {
 			key: utilsService.generateKey(),
 			action: "pencil",
 			target: "BG-3",
-			targetType: "bug"
+			targetType: "bug",
+			username: "psmith"
 }],
 		comments: [{
 			key: utilsService.generateKey(),
@@ -179,25 +181,28 @@ exports.populateDb = function () {
 			action: "comment",
 			target: "TA-7",
 			targetType: "task",
-			comment: "I think this feature should be implemented in the next sprint."
+			comment: "I think this feature should be implemented in the next sprint.",
+			username: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			action: "clock-o",
 			amount: 5,
 			target: "BG-6",
-			targetType: "bug"
+			targetType: "bug",
+			username: "abucin"
 		}, {
 			key: utilsService.generateKey(),
 			action: "comment",
 			target: "BG-5",
 			targetType: "bug",
-			comment: "Bug fixed in commit 3d6h4."
+			comment: "Bug fixed in commit 3d6h4.",
+			username: "abucin"
 		}],
 		comments: [{
 			key: utilsService.generateKey(),
 			content: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.",
 			ticket: sampleTicketKey
-		},{
+		}, {
 			key: utilsService.generateKey(),
 			content: "That is correct. I will do it soon.",
 			ticket: sampleTicketKey

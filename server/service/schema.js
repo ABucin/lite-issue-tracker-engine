@@ -29,11 +29,11 @@ var TicketSchema = new Schema({
 		type: String,
 		trim: true
 	},
-	estimatedTime : {
+	estimatedTime: {
 		type: Number,
 		default: 0
 	},
-	loggedTime : {
+	loggedTime: {
 		type: Number,
 		default: 0
 	},
@@ -66,6 +66,10 @@ var LogSchema = new Schema({
 	amount: {
 		type: Number,
 		default: 0
+	},
+	username: {
+		type: String,
+		required: true
 	},
 	timestamp: {
 		type: Date,

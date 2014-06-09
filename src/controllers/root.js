@@ -40,7 +40,6 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 		$rootScope.displayAll = true;
 
 		$rootScope.tickets = [];
-		$rootScope.logEntries = [];
 		$rootScope.users = [];
 		$rootScope.workloadData = [];
 		$rootScope.createdTickets = [];

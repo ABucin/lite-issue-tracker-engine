@@ -85,6 +85,9 @@ router.route('/logs')
 	.get(function (req, res) {
 		persistenceService.getAllLogs(res);
 	});
+router.route('/users/:uname/logs').get(function (req, res) {
+		persistenceService.createLog(req.params.uname, req.body, res);
+	});
 
 /**
  * Analytics.

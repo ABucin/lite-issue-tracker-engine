@@ -358,17 +358,57 @@ exports.updateComment = function (key, ticket, username, comment, res) {
  * Logs.
  */
 exports.getAllLogs = function (res) {
-	User.find().sort('-timestamp').exec(function (err, users) {
+	User.find()
+		.sort('-timestamp')
+		.limit(10)
+		.exec(function (err, users) {
+			if (err) {
+				res.send(500, err);
+			}
+
+			var logs = [];
+
+			_.each(users, function (e, i, list) {
+				logs = _.union(logs, e.logs);
+			});
+
+			logs.sort(function (a, b) {
+				if (a.timestamp < b.timestamp) return 1;
+				if (b.timestamp < a.timestamp) return -1;
+				return 0;
+			});
+
+			res.json(logs);
+		});
+};
+
+exports.createLog = function (username, log, res) {
+	var logData = {
+		key: utilsService.generateKey(),
+		action: log.action,
+		target: log.target,
+		targetType: log.targetType,
+		comment: log.comment,
+		amount: log.amount,
+		username: log.username,
+		timestamp: new Date()
+	};
+
+	// save the log and check for errors
+	User.findOne({
+		'username': username
+	}, function (err, user) {
 		if (err) {
 			res.send(500, err);
 		}
 
-		var logs = [];
+		user.logs.push(new Log(logData));
 
-		_.each(users, function (e, i, list) {
-			logs = _.union(logs, e.logs);
+		user.save(function (err) {
+			if (err) {
+				res.send(500, err);
+			}
+			res.json(logData);
 		});
-
-		res.json(logs);
 	});
 };
