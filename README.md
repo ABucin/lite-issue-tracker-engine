@@ -11,14 +11,14 @@ Repository for the issue tracker application.
 
 * Node.js v0.10.26
   * Express
+  	* Body-Parser
+  	* Passport
   * Bower
   * Grunt
   	* Uglify
 	* Concat
 	* Watch
   * Mongoose
-  * Body-Parser
-  * Passport
   * Underscore
 * MongoDB 2.6 Standard
 
