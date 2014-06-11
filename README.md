@@ -7,11 +7,8 @@ Repository for the issue tracker application.
 
 #### Technology Stack
 
-* Angular.js 1.2.16
-* Bootstrap 3.1.1
-* Font Awesome 4.1.0
-* Ionicons 1.4.1
-* jQuery 2.1.0
+##### Client Side
+
 * Node.js v0.10.26
   * Express
   * Bower
@@ -23,6 +20,14 @@ Repository for the issue tracker application.
   * Body-Parser
   * Underscore
 * MongoDB 2.6 Standard
+
+##### Server Side
+
+* Angular.js 1.2.16
+* Bootstrap 3.1.1
+* Font Awesome 4.1.0
+* Ionicons 1.4.1
+* jQuery 2.1.0
 * Highcharts.js 4.0.1
 
 #### Development Setup
