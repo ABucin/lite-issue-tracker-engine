@@ -80,6 +80,13 @@ var loggedHours = {
 	}, {
 		name: 'psmith',
 		data: [8, 8, 9, 8, 7, 0, 3]
+	},
+			{
+		name: 'jterrence',
+		data: [5, 9, 6, 4, 9, 9, 5]
+	},{
+		name: 'callen',
+		data: [8, 8, 8, 9, 6, 6, 9]
 	}]
 };
 
@@ -135,10 +142,10 @@ var ticketCompletion = {
 	},
 	series: [{
 		name: 'Bug',
-		data: [15, 31, 12]
+		data: [15, 8, 12]
 	}, {
 		name: 'Task',
-		data: [13, 16, 5]
+		data: [10, 16, 7]
 	}]
 };
 
@@ -209,7 +216,7 @@ var effortEstimation = {
 		{
 			type: 'line',
 			name: 'Regression Line',
-			data: [[20, 20], [100, 100]],
+			data: [[40, 40], [70, 70]],
 			color: '#555',
 			marker: {
 				enabled: false
@@ -223,12 +230,12 @@ var effortEstimation = {
 		}, {
 			name: 'Bugs',
 			color: 'rgba(203, 31, 38, .5)',
-			data: [[51, 51], [57, 59], [56, 49], [57, 63], [55, 53]]
+			data: [[54, 54], [57, 59], [56, 49], [57, 63], [55, 53], [49, 53], [50, 50]]
 
 		}, {
 			name: 'Tasks',
 			color: 'rgba(33, 87, 157, .5)',
-			data: [[74, 65], [75, 71], [93, 80], [86, 72], [87, 78], [81, 74], [84, 86], [84, 78], [75, 62], [84, 81]]
+			data: [[54, 56], [55, 51], [57, 50], [56, 52], [57, 58], [51, 54], [54, 56], [54, 60], [55, 62], [54, 61]]
 		}
 	]
 };
@@ -265,6 +272,6 @@ var assignedTickets = {
 	series: [{
 		type: 'pie',
 		name: 'Assigned tickets',
-		data: [["abucin", 3], ["psmith", 4]]
+		data: [["abucin", 4], ["psmith", 2], ["unassigned", 1]]
 	}]
 };
