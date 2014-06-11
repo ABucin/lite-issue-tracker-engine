@@ -7,7 +7,7 @@ Repository for the issue tracker application.
 
 #### Technology Stack
 
-##### Client Side
+##### Server Side
 
 * Node.js v0.10.26
   * Express
@@ -21,7 +21,7 @@ Repository for the issue tracker application.
   * Underscore
 * MongoDB 2.6 Standard
 
-##### Server Side
+##### Client Side
 
 * Angular.js 1.2.16
 * Bootstrap 3.1.1
