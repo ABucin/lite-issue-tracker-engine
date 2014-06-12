@@ -1,5 +1,5 @@
 /* Fixes the antialiasing in Google Chrome. */
-body { -webkit-font-smoothing: antialiased; background-image: url('../img/bg.png'); font-family: "Roboto", "Helvetica", "Verdana"; margin-right: 15px;}
+body { -webkit-font-smoothing: antialiased; background-image: url('../img/bg.png'); font-family: "Roboto", "Helvetica", "Verdana", sans-serif; margin-right: 15px;}
 body a{cursor: pointer;}
 body a:hover {text-decoration: none;}
 
@@ -41,6 +41,7 @@ table > tbody > tr > td[status] {min-height: 50px;}
 .ticket-code { color: white; border-radius: .3em; padding: 0px 0 0px 6px; display: inline-flex; align-items: center; }
 .ticket-title {position: relative; left: 1px; background-color: #C3C2B8 ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
 td > .ng-scope:last-child > .ticket {margin-bottom: 6px;}
+div[ng-repeat*='doneTickets'] .ticket .ticket-title {text-decoration: line-through; color: black;}
 
 /**
  * Log entry CSS.
