@@ -5,6 +5,10 @@ Repository for the issue tracker application.
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
+#### Versioning
+
+`<major>.<minor>.<patch>`
+
 #### Technology Stack
 
 ##### Server Side
