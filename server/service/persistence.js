@@ -11,13 +11,13 @@ db.once('open', function callback() {
 	console.log('Connection to DB established.');
 });
 
-var schemaService = require('./schema');
-var utilsService = require('./utils');
+var schema = require('../schema/schema');
+var utils = require('../utils/utils');
 
-var Ticket = schemaService.getTicket();
-var User = schemaService.getUser();
-var Log = schemaService.getLog();
-var Comment = schemaService.getComment();
+var Ticket = schema.getTicket();
+var User = schema.getUser();
+var Log = schema.getLog();
+var Comment = schema.getComment();
 
 /**
  * Users.
@@ -45,7 +45,7 @@ exports.getUser = function (username, res) {
 exports.createUser = function (user, res) {
 	var errorResponse = [];
 	var userData = {
-		key: utilsService.generateKey(),
+		key: utils.generateKey(),
 		email: user.email,
 		username: user.email.split('@')[0],
 		password: user.password,
@@ -101,7 +101,7 @@ exports.createUser = function (user, res) {
  */
 exports.createTicket = function (username, ticket, res) {
 	var ticketData = {
-		key: utilsService.generateKey(),
+		key: utils.generateKey(),
 		title: ticket.title,
 		status: 'created',
 		type: ticket.type,
@@ -243,7 +243,7 @@ exports.deleteTicket = function (key, username, res) {
  */
 exports.createComment = function (username, ticket, comment, res) {
 	var commentData = {
-		key: utilsService.generateKey(),
+		key: utils.generateKey(),
 		ticket: ticket,
 		content: comment.content,
 		author: comment.author,
@@ -384,7 +384,7 @@ exports.getAllLogs = function (res) {
 
 exports.createLog = function (username, log, res) {
 	var logData = {
-		key: utilsService.generateKey(),
+		key: utils.generateKey(),
 		action: log.action,
 		target: log.target,
 		targetType: log.targetType,
