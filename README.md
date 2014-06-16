@@ -13,7 +13,7 @@ Repository for the issue tracker application.
 
 ##### Server Side
 
-* Node.js v0.10.26
+* Node.js v0.10.28
   * Express
   	* Body-Parser
   	* Passport
@@ -31,8 +31,8 @@ Repository for the issue tracker application.
 * Angular.js 1.2.16
 * Bootstrap 3.1.1
 * Font Awesome 4.1.0
-* Ionicons 1.4.1
-* jQuery 2.1.0
+* Ionicons 1.5.0
+* jQuery 2.1.1
 * Highcharts.js 4.0.1
 
 #### Development Setup
