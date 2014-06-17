@@ -366,21 +366,21 @@ exports.getAllLogs = function (res) {
 		.exec(function (err, users) {
 			if (err) {
 				res.send(500, err);
+			} else {
+				var logs = [];
+
+				_.each(users, function (e, i, list) {
+					logs = _.union(logs, e.logs);
+				});
+
+				logs.sort(function (a, b) {
+					if (a.timestamp < b.timestamp) return 1;
+					if (b.timestamp < a.timestamp) return -1;
+					return 0;
+				});
+
+				res.json(logs);
 			}
-
-			var logs = [];
-
-			_.each(users, function (e, i, list) {
-				logs = _.union(logs, e.logs);
-			});
-
-			logs.sort(function (a, b) {
-				if (a.timestamp < b.timestamp) return 1;
-				if (b.timestamp < a.timestamp) return -1;
-				return 0;
-			});
-
-			res.json(logs);
 		});
 };
 

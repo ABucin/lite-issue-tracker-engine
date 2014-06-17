@@ -1,11 +1,14 @@
 app.service('TicketsService', ['$rootScope', 'ResourceService',
-
 	function ($rootScope, ResourceService) {
 
 		this.addTicket = function (username, ticket, tickets, createdTickets) {
 			var callback = function (data) {
 				tickets.push(data);
 				createdTickets.push(data);
+				$rootScope.$apply();
+				$rootScope.$broadcast('ticketCreated', {
+					ticket: data
+				});
 			};
 			ResourceService.postData('users/' + username + '/tickets', ticket, callback);
 		};
@@ -16,7 +19,9 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 					if (tickets[i].key == data.key) {
 						angular.copy(data, tickets[i]);
 						tickets[i].loggedTime += loggedWork;
-						$rootScope.$broadcast('ticketUpdated');
+						$rootScope.$broadcast('ticketUpdated', {
+							key: data.key
+						});
 						break;
 					}
 				}
@@ -87,6 +92,9 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 					if (tickets[i].key == key) {
 						deletedTicketStatus = tickets[i].status;
 						tickets.splice(i, 1);
+						$rootScope.$broadcast('ticketDeleted', {
+							key: key
+						});
 						break;
 					}
 				}

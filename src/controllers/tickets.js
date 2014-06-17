@@ -1,5 +1,5 @@
-app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService', 'CommentsService',
-function ($scope, $rootScope, $location, TicketsService, CommentsService) {
+app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService', 'CommentsService', 'LogsService',
+function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsService) {
 		$rootScope.auth = true;
 		$rootScope.canFilter = true;
 		$scope.isEditing = false;
@@ -64,6 +64,60 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService) {
 			$scope.comment.content = commentContent;
 		};
 
+		/**
+		 * Logs.
+		 */
+		$scope.logData = function (action, ticket) {
+			var mappedAction = "";
+
+			switch (action) {
+			case "update":
+				{
+					mappedAction = "pencil";
+					break;
+				}
+			case "create":
+				{
+					mappedAction = "plus";
+					break;
+				}
+			case "comment":
+				{
+					mappedAction = "comment";
+					break;
+				}
+			case "logTime":
+				{
+					mappedAction = "clock-o";
+					break;
+				}
+			case "delete":
+				{
+					mappedAction = "times";
+					break;
+				}
+			default:
+				{
+					mappedAction = "times";
+					break;
+				}
+			}
+
+			var log = {
+				action: mappedAction,
+				target: ticket.code,
+				targetType: ticket.type,
+				comment: $scope.comment.content,
+				amount: $scope.loggedWork.amount,
+				username: $rootScope.username
+			};
+
+			LogsService.logData($rootScope.username, log, $rootScope.dashboard.logEntries);
+		};
+
+		/*
+		 * Comments.
+		 */
 		$scope.editComment = function () {
 			CommentsService.editComment($rootScope.username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
 		}
@@ -72,6 +126,9 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService) {
 			CommentsService.fetchComments(commentKey, $scope.comments);
 		};
 
+		/**
+		 * Tickets.
+		 */
 		$scope.addTicket = function () {
 			TicketsService.addTicket($rootScope.username, $scope.ticket, $rootScope.tickets, $rootScope.createdTickets);
 		};

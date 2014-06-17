@@ -22,9 +22,37 @@ app.directive('ticket', function ($rootScope) {
 			});
 
 			// update the owner of the ticket (CSS-wise)
-			scope.$on('ticketUpdated', function (event) {
-				setOwnStatus();
-				scope.loggedWork.amount = 0.0;
+			scope.$on('ticketUpdated', function (event, args) {
+				if (args.key === scope.ticket.key) {
+					setOwnStatus();
+					if (scope.updatedTicket.loggedTime !== 0.0) {
+						scope.logData("logTime", scope.updatedTicket);
+					} else {
+						scope.logData("update", scope.updatedTicket);
+					}
+					scope.loggedWork.amount = 0.0;
+				}
+			});
+
+			// log the ticket deletion
+			scope.$on('ticketDeleted', function (event, args) {
+				if (args.key === scope.ticket.key) {
+					scope.logData("delete", scope.ticket);
+				}
+			});
+
+			// log the ticket creation
+			scope.$on('ticketCreated', function (event, args) {
+				if (args.ticket.key === scope.ticket.key) {
+					scope.logData("create", args.ticket);
+				}
+			});
+
+			// log the ticket comment adding
+			scope.$on('ticketCommentAdded', function (event, args) {
+				if (args.key === scope.ticket.key) {
+					scope.logData("comment", scope.ticket);
+				}
 			});
 
 			element.on('click', function (event) {

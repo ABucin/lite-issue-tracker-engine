@@ -58,13 +58,13 @@ exports.populateDb = function () {
 		logs: [{
 			key: utils.generateKey(),
 			action: "times",
-			target: "TA-2",
+			target: "2",
 			targetType: "task",
 			username: "psmith"
 }, {
 			key: utils.generateKey(),
 			action: "pencil",
-			target: "BG-3",
+			target: "3",
 			targetType: "bug",
 			username: "psmith"
 }],
@@ -88,7 +88,7 @@ exports.populateDb = function () {
 		logs: [{
 			key: utils.generateKey(),
 			action: "comment",
-			target: "TA-7",
+			target: "7",
 			targetType: "task",
 			comment: "I think this feature should be implemented in the next sprint.",
 			username: "abucin"
@@ -96,13 +96,13 @@ exports.populateDb = function () {
 			key: utils.generateKey(),
 			action: "clock-o",
 			amount: 5,
-			target: "BG-6",
+			target: "6",
 			targetType: "bug",
 			username: "abucin"
 		}, {
 			key: utils.generateKey(),
 			action: "comment",
-			target: "BG-5",
+			target: "5",
 			targetType: "bug",
 			comment: "Bug fixed in commit 3d6h4.",
 			username: "abucin"

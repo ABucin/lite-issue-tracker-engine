@@ -1,9 +1,9 @@
 app.service('LogsService', ['ResourceService',
 	function (ResourceService) {
 
-		this.logData = function (username, log, response) {
+		this.logData = function (username, log, logEntries) {
 			var callback = function (data) {
-				response = data;
+				logEntries.push(data);
 			};
 			ResourceService.postData('users/' + username + '/logs', log, callback);
 		};

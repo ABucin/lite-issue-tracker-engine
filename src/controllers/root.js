@@ -50,6 +50,10 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 
 		$rootScope.copiedEntity = {};
 
+		$rootScope.dashboard = {
+			logEntries: []
+		};
+
 		$rootScope.registrationData = {
 			email: null,
 			password: null,

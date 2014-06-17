@@ -1,5 +1,5 @@
-app.service('CommentsService', ['ResourceService',
-	function (ResourceService) {
+app.service('CommentsService', ['$rootScope', 'ResourceService',
+	function ($rootScope, ResourceService) {
 
 		this.deleteComment = function (username, commentKey, comments, comment) {
 			var callback = function (data) {
@@ -16,6 +16,9 @@ app.service('CommentsService', ['ResourceService',
 		this.addComment = function (username, ticketKey, comment, comments) {
 			var callback = function (data) {
 				comments.push(data);
+				$rootScope.$broadcast('ticketCommentAdded', {
+					key: data.ticket
+				});
 				comment.content = "";
 			};
 			ResourceService.postData('users/' + username + '/tickets/' + ticketKey + '/comments', comment, callback);

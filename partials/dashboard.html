@@ -56,7 +56,7 @@
 						<div class="log">
 							<i class="fa fa-fw fa-{{entry.action}}"></i>
 							<span class="log-user">{{entry.username}}</span>
-							<span class="log-target ticket-{{entry.targetType}}">{{entry.target}}</span>
+							<span class="log-target ticket-{{entry.targetType}}">TC-{{entry.target}}</span>
 							<span class="log-amount" ng-if="entry.amount">{{entry.amount}} hrs.</span>
 							<span class="log-comment" ng-if="entry.comment"><em>"{{entry.comment}}"</em></span>
 						</div>
