@@ -108,7 +108,8 @@ exports.createTicket = function (username, ticket, res) {
 		description: ticket.description,
 		loggedTime: ticket.loggedTime,
 		estimatedTime: ticket.estimatedTime,
-		owner: ticket.owner
+		owner: ticket.owner,
+		priority: ticket.priority
 	};
 
 	// save the ticket and check for errors
@@ -191,6 +192,7 @@ exports.updateTicket = function (key, username, ticket, res) {
 						}
 						el.description = ticket.description;
 						el.owner = ticket.owner;
+						el.priority = ticket.priority;
 
 						if (errorResponse.length) {
 							res.send(500, errorResponse);

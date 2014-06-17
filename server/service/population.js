@@ -20,29 +20,30 @@ exports.populateDb = function () {
 	var firstUserTickets = [];
 	var secondUserTickets = [];
 
-	var generateTicket = function (tickets, title, status, type, description, owner) {
+	var generateTicket = function (tickets, title, status, type, description, owner, priority) {
 		return tickets.push({
 			key: utils.generateKey(),
-			code: code++,
+			code: ++code,
 			title: title,
 			status: status,
 			type: type,
 			description: description,
-			owner: owner
+			owner: owner,
+			priority: priority
 		});
 	}
 
-	generateTicket(firstUserTickets, "Email Validation Not Working", "testing", "bug", "The email validation is broken for several users.", "psmith");
-	generateTicket(firstUserTickets, "Authentication Whitespace Handling", "created", "bug", "The authentication ignores whitespace.", "psmith");
-	generateTicket(firstUserTickets, "Registration Page Header Missing", "fixed", "bug", "The registration page does not contain any headers.", "psmith");
-	generateTicket(firstUserTickets, "Minor CSS Alignment Bug", "in_progress", "bug", "The logo is misaligned in IE6.", "abucin");
-	generateTicket(firstUserTickets, "Review Currency Conversion Code", "created", "task", "Create a secure mechanism for registering an account.", "abucin");
-	generateTicket(firstUserTickets, "Implement User Password Reset", "created", "task", "See title.", "psmith");
+	generateTicket(firstUserTickets, "Email Validation Not Working", "testing", "bug", "The email validation is broken for several users.", "psmith", "normal");
+	generateTicket(firstUserTickets, "Authentication Whitespace Handling", "created", "bug", "The authentication ignores whitespace.", "psmith", "minor");
+	generateTicket(firstUserTickets, "Registration Page Header Missing", "fixed", "bug", "The registration page does not contain any headers.", "psmith", "minor");
+	generateTicket(firstUserTickets, "Minor CSS Alignment Bug", "in_progress", "bug", "The logo is misaligned in IE6.", "abucin", "major");
+	generateTicket(firstUserTickets, "Review Currency Conversion Code", "created", "task", "Create a secure mechanism for registering an account.", "abucin", "major");
+	generateTicket(firstUserTickets, "Implement User Password Reset", "created", "task", "See title.", "psmith", "normal");
 
-	generateTicket(secondUserTickets, "Plan Review Meeting", "in_progress", "task", "This Thursday at 10:00.", "abucin");
-	generateTicket(secondUserTickets, "Add Colour Palette", "done", "task", "Create a colour palette for the website.", "psmith");
-	generateTicket(secondUserTickets, "Remove Redundant Tests", "in_progress", "task", "Remove tests that are not used.", "abucin");
-	generateTicket(secondUserTickets, "Fix CSS Button Padding", "in_progress", "bug", "The login button has extra padding.", "abucin");
+	generateTicket(secondUserTickets, "Plan Review Meeting", "in_progress", "task", "This Thursday at 10:00.", "abucin", "normal");
+	generateTicket(secondUserTickets, "Add Colour Palette", "done", "task", "Create a colour palette for the website.", "psmith", "major");
+	generateTicket(secondUserTickets, "Remove Redundant Tests", "in_progress", "task", "Remove tests that are not used.", "abucin", "minor");
+	generateTicket(secondUserTickets, "Fix CSS Button Padding", "in_progress", "bug", "The login button has extra padding.", "abucin", "minor");
 
 	var sampleTicketKey = utils.generateKey();
 

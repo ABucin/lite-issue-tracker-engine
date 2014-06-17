@@ -39,6 +39,10 @@ var TicketSchema = new Schema({
 	},
 	owner: {
 		type: String
+	},
+	priority: {
+		type: String,
+		default: "normal"
 	}
 });
 
