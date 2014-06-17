@@ -24,6 +24,7 @@ app.directive('ticket', function ($rootScope) {
 			// update the owner of the ticket (CSS-wise)
 			scope.$on('ticketUpdated', function (event) {
 				setOwnStatus();
+				scope.loggedWork.amount = 0.0;
 			});
 
 			element.on('click', function (event) {
