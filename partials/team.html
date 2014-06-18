@@ -5,36 +5,32 @@
 				<li class="header">
 					Members
 				</li>
-				<li class="toggleable active"><i class="chart-icon fa fa-fw fa-terminal"></i>abucin</li>
-				<li class="toggleable"><i class="chart-icon fa fa-fw fa-star"></i>athompson</li>
-				<li class="toggleable"><i class="chart-icon fa fa-fw fa-terminal"></i>mlawrence<i class="fa fa-fw fa-times"></i></li>
-				<li class="toggleable"><i class="chart-icon fa fa-fw fa-bug"></i>psmith</li>
-				<li class="toggleable text-center"><i class="chart-icon fa fa-fw fa-plus"></i></li>
+				<li class="toggleable" ng-repeat="user in users" ng-click="selectTeamMember(user)" ng-class="(user.username === username) ? 'active': ''"><i class="chart-icon fa fa-fw fa-{{getRoleIcon(user.projectRole)}}"></i>{{user.username}}</li>
+				<li class="toggleable text-center"><i class="chart-icon fa fa-fw fa-plus"></i>
+				</li>
 			</ul>
 		</div>
 		<div class="col-lg-10">
 			<p>
-				<img src="./img/{{username}}.jpg" class="img-responsive img-thumbnail" width="100" />
+				<img ng-if="selectedTeamMember.username.length" ng-src="./img/{{selectedTeamMember.username}}.jpg" class="img-responsive img-thumbnail" width="100" />
 				<br>
-				<strong>Role:</strong> Developer
-				<!--				{{user.role | capitalize}}-->
+				<strong>Role:</strong> {{selectedTeamMember.projectRole | capitalize}}
 				<br>
-				<strong>Expertise:</strong> Java, PHP, JavaScript, Web Design
+				<strong>Expertise:</strong> {{selectedTeamMember.expertise}}
 				<br>
-				<strong>Open Tickets:</strong> 4
+				<strong>Open Tickets:</strong> {{getOpenTickets()}}
 				<br>
-				<strong>Effort-Estimation Ratio:</strong> 1.12
+				<strong>Effort-Estimation Ratio:</strong> {{getEffortEstimationRatio()}}
 				<br>
 				<strong>Latest Tickets:</strong>
-				<div class="ticket ticket-{{ticket.type}} ticket-code" ng-repeat="ticket in tickets | filter: username | limitTo: 5">
+				<span class="ticket ticket-{{ticket.type}} ticket-code" ng-repeat="ticket in tickets | filter: selectedTeamMember.username | limitTo: 5">
 					TC-{{ticket.code}}
 					<span class="ticket-title">{{ticket.title}}</span>
-				</div>
-				<br>
+				</span>
 				<br>
 				<strong>Latest Comments:</strong>
 				<ul>
-					<li>"I think this feature should be implemented in the next sprint."
+					<li ng-repeat="comment in selectedTeamMember.comments | limitTo: 5">"{{comment.content}}" <strong>({{comment.timestamp | date:'yyyy-MM-dd HH:mm:ss'}})</strong>
 					</li>
 				</ul>
 			</p>

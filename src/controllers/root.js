@@ -54,6 +54,7 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 		$rootScope.errors = [];
 
 		$rootScope.copiedEntity = {};
+		$rootScope.currentUser = {};
 
 		$rootScope.dashboard = {
 			logEntries: []

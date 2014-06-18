@@ -18,6 +18,9 @@ app.service('UserService', ['$rootScope', 'ResourceService',
 
 				for (var i in data) {
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
+					if (data[i].username === $rootScope.username) {
+						angular.copy(data[i], $rootScope.currentUser);
+					}
 
 					var tickets = $rootScope.users[i].tickets;
 					var logs = $rootScope.users[i].logs;

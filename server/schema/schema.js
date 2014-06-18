@@ -129,9 +129,16 @@ var UserSchema = new Schema({
 		type: String,
 		required: true
 	},
+	projectRole: {
+		type: String,
+		required: true
+	},
 	project: {
 		type: String,
 		required: true
+	},
+	expertise: {
+		type: String
 	},
 	tickets: [TicketSchema],
 	logs: [LogSchema],

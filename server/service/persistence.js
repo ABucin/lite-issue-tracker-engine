@@ -80,6 +80,7 @@ exports.createUser = function (user, res) {
 			username: user.email.split('@')[0],
 			password: user.password,
 			role: 'user',
+			projectRole: 'developer',
 			project: 'issue-tracker',
 			tickets: [],
 			logs: []

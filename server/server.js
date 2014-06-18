@@ -5,7 +5,7 @@ var port = 3000;
 var router = express.Router();
 
 // Required files.
-var populationService = require('./service/population');
+var utils = require('./utils/population');
 var persistenceService = require('./service/persistence');
 var analyticsService = require('./service/analytics');
 var configurationService = require('./service/settings');
@@ -18,7 +18,7 @@ server.use(express.static(__dirname + "./../"));
 server.listen(port);
 
 // Add default data to database.
-populationService.populateDb();
+utils.populateDb();
 
 /**
  * Users.
