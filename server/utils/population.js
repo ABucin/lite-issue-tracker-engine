@@ -1,10 +1,13 @@
 var mongoose = require('mongoose'),
 	utils = require('./utils'),
-	schema = require('../schema/schema'),
-	Log = schema.getLog(),
-	Ticket = schema.getTicket(),
-	Comment = schema.getComment(),
-	User = schema.getUser();
+	commentSchema = require('../schema/comment'),
+	logSchema = require('../schema/log'),
+	ticketSchema = require('../schema/ticket'),
+	userSchema = require('../schema/user'),
+	Log = logSchema.getLog(),
+	Ticket = ticketSchema.getTicket(),
+	Comment = commentSchema.getComment(),
+	User = userSchema.getUser();
 
 exports.populateDb = function () {
 

@@ -24,6 +24,10 @@ table > tbody > tr > td[status] {min-height: 50px;}
 
 .comment-author {color: #21579D;}
 
+.list-unstyled .fa-check {color: #4C921C;}
+.list-unstyled .fa-times {color: #cb1f26;}
+.nav.ng-scope .fa-edit {color: #CB8E02;}
+
 /**
  * Ticket CSS.
  */

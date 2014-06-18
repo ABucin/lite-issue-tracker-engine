@@ -11,13 +11,15 @@ db.once('open', function callback() {
 	console.log('Connection to DB established.');
 });
 
-var schema = require('../schema/schema');
-var utils = require('../utils/utils');
-
-var Ticket = schema.getTicket();
-var User = schema.getUser();
-var Log = schema.getLog();
-var Comment = schema.getComment();
+var utils = require('../utils/utils'),
+	commentSchema = require('../schema/comment'),
+	logSchema = require('../schema/log'),
+	ticketSchema = require('../schema/ticket'),
+	userSchema = require('../schema/user'),
+	Log = logSchema.getLog(),
+	Ticket = ticketSchema.getTicket(),
+	Comment = commentSchema.getComment(),
+	User = userSchema.getUser();
 
 /**
  * Users.

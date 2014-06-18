@@ -175,7 +175,6 @@ exports.getChart = function (type, res) {
 				for (var i in users) {
 					for (var t in users[i].tickets) {
 						if (users[i].tickets[t].status !== "done") {
-							console.log(users[i].tickets[t]);
 							if (users[i].tickets[t].estimatedTime > maxEstimation) {
 								maxEstimation = users[i].tickets[t].estimatedTime;
 							}
