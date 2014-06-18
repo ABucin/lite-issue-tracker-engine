@@ -1,6 +1,6 @@
 app.controller('DashboardCtrl', ['$scope', '$rootScope', '$location', 'AnalyticsService', 'LogsService',
 function ($scope, $rootScope, $location, AnalyticsService, LogsService) {
-		$rootScope.canFilter = false;
+		$rootScope.hasDropdown = false;
 		$rootScope.auth = true;
 
 		AnalyticsService.fetchChartData('assignedTickets');

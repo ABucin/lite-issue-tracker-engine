@@ -36,8 +36,13 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 
 		$rootScope.auth = false;
 		$rootScope.canFilter = false;
-		$rootScope.isDeleting = false;
-		$rootScope.displayAll = true;
+		$rootScope.hasDropdown = false;
+		$rootScope.actions = {
+			isDeleting: false
+		};
+		$rootScope.filters = {
+			displayTickets: 'all'
+		};
 
 		$rootScope.tickets = [];
 		$rootScope.users = [];
@@ -59,6 +64,10 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 			password: null,
 			confirmedPassword: null
 		};
+
+		$scope.submenuTemplates = [{
+			url: 'partials/snippets/menu/submenu.html'
+		}];
 
 		$scope.templates = [{
 			url: 'partials/modals/register/register.html'

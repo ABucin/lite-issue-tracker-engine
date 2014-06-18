@@ -75,7 +75,7 @@ app.directive('ticket', function ($rootScope) {
 			});
 		},
 		replace: true,
-		template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>TC-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='isDeleting && ticket.owner === username'></i></span></div>"
+		template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>TC-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='actions.isDeleting && ticket.owner === username'></i></span></div>"
 	};
 });
 

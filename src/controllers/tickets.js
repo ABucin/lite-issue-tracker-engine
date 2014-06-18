@@ -1,6 +1,7 @@
 app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService', 'CommentsService', 'LogsService',
 function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsService) {
 		$rootScope.auth = true;
+		$rootScope.hasDropdown = true;
 		$rootScope.canFilter = true;
 		$scope.isEditing = false;
 
@@ -50,19 +51,22 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		$scope.templateEdit = $scope.templates[1];
 		$scope.templateDelete = $scope.templates[2];
 
-		$scope.addComment = function () {
-			CommentsService.addComment($rootScope.username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
-		}
-
-		$scope.deleteComment = function (commentKey) {
-			CommentsService.deleteComment($rootScope.username, commentKey, $scope.comments, $scope.comment);
-		}
-
 		$scope.markForEdit = function (commentKey, commentContent) {
 			$scope.status.isEditingComment = true;
 			$scope.editedCommentKey = commentKey;
 			$scope.comment.content = commentContent;
 		};
+
+		$scope.filterTicket = function (owner) {
+			if ($rootScope.filters.displayTickets === 'all') {
+				return true;
+			} else if ($rootScope.filters.displayTickets === 'mine') {
+				return (owner === $rootScope.username);
+			} else if ($rootScope.filters.displayTickets === 'unassigned') {
+				return (owner === undefined || !owner.length);
+			}
+			return false;
+		}
 
 		/**
 		 * Logs.
@@ -118,6 +122,14 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		/*
 		 * Comments.
 		 */
+		$scope.addComment = function () {
+			CommentsService.addComment($rootScope.username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
+		}
+
+		$scope.deleteComment = function (commentKey) {
+			CommentsService.deleteComment($rootScope.username, commentKey, $scope.comments, $scope.comment);
+		}
+
 		$scope.editComment = function () {
 			CommentsService.editComment($rootScope.username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
 		}

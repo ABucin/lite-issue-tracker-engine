@@ -2,7 +2,7 @@ app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location', 'Analytics
 
 function ($scope, $rootScope, $location, AnalyticsService) {
 		$rootScope.auth = true;
-		$rootScope.canFilter = false;
+		$rootScope.hasDropdown = false;
 
 		$scope.fetchChartData = function (type, elementId) {
 			AnalyticsService.fetchChartData(type, elementId);

@@ -48,7 +48,7 @@ div[ng-repeat*='doneTickets'] .ticket .ticket-title {text-decoration: line-throu
  */
 .log { border-radius: .3em; color: white; background-color: #3F424B; padding: 3px 0px 3px 6px; vertical-align: middle; margin: 3px 3px; align-items: center;}
 .log span:last-child { border-radius: 0 .3em .3em 0; }
-.log-user { background-color: #C3C2B8; color: black; padding: 3px 6px; margin: 0 0px 0 3px; }
+.log-user { background-color: #C3C2B8; color: black; padding: 3px 6px; margin: 0 0px 0 3px;}
 .log-target { color: white; padding: 3px 6px; margin-left: -3px; }
 .log-amount,
 .log-comment { margin-left: 6px; padding-right: 6px; }

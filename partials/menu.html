@@ -2,33 +2,7 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand">Issue Tracker v.1.0</a>
-			<ul class="nav navbar-nav text-center">
-				<li>
-					<a class="fa fa-bars" data-toggle="dropdown"></a>
-					<ul class="dropdown-menu dropdown-menu-left text-left" role="menu" aria-labelledby="ticketsMenu">
-						<li role="presentation" ng-show="canFilter">
-							<a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#ticket-creation-modal">{{createAction}}</a>
-						</li>
-						<li role="presentation" ng-show="canFilter">
-							<a role="menuitem" tabindex="-1" ng-click="isDeleting = true">{{deleteAction}}</a>
-						</li>
-						<li role="presentation" class="divider" ng-show="canFilter"></li>
-						<li role="presentation" class="dropdown-header" ng-show="canFilter">
-							Owner
-						</li>
-						<li role="presentation" ng-show="canFilter">
-							<a role="menuitem" tabindex="-1" ng-click="displayAll = true">All
-                                <i ng-show="displayAll" class="fa fa-check"></i>
-                            </a>
-						</li>
-						<li role="presentation" ng-show="canFilter">
-							<a role="menuitem" tabindex="-1" ng-click="displayAll = false">Mine
-                                <i ng-show="!displayAll" class="fa fa-check"></i>
-                            </a>
-						</li>
-					</ul>
-				</li>
-			</ul>
+			<span ng-include="submenuTemplates[0].url"></span>
 			<ul class="nav navbar-nav collapse navbar-collapse">
 				<li class='toggleable'>
 					<a ng-click="navigate('dashboard')">
