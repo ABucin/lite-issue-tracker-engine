@@ -20,7 +20,7 @@ exports.populateDb = function () {
 	var firstUserTickets = [];
 	var secondUserTickets = [];
 
-	var generateTicket = function (tickets, title, status, type, description, owner, priority) {
+	var generateTicket = function (tickets, title, status, type, description, owner, priority, estimatedTime, loggedTime) {
 		return tickets.push({
 			key: utils.generateKey(),
 			code: ++code,
@@ -29,21 +29,23 @@ exports.populateDb = function () {
 			type: type,
 			description: description,
 			owner: owner,
-			priority: priority
+			priority: priority,
+			estimatedTime: estimatedTime,
+			loggedTime: loggedTime
 		});
 	}
 
-	generateTicket(firstUserTickets, "Email Validation Not Working", "testing", "bug", "The email validation is broken for several users.", "psmith", "normal");
-	generateTicket(firstUserTickets, "Authentication Whitespace Handling", "created", "bug", "The authentication ignores whitespace.", "psmith", "minor");
-	generateTicket(firstUserTickets, "Registration Page Header Missing", "fixed", "bug", "The registration page does not contain any headers.", "psmith", "minor");
-	generateTicket(firstUserTickets, "Minor CSS Alignment Bug", "in_progress", "bug", "The logo is misaligned in IE6.", "abucin", "major");
-	generateTicket(firstUserTickets, "Review Currency Conversion Code", "created", "task", "Create a secure mechanism for registering an account.", "abucin", "major");
-	generateTicket(firstUserTickets, "Implement User Password Reset", "created", "task", "See title.", "psmith", "normal");
+	generateTicket(firstUserTickets, "Email Validation Not Working", "testing", "bug", "The email validation is broken for several users.", "psmith", "normal", 15, 20);
+	generateTicket(firstUserTickets, "Authentication Whitespace Handling", "created", "bug", "The authentication ignores whitespace.", "psmith", "minor", 5, 10);
+	generateTicket(firstUserTickets, "Registration Page Header Missing", "done", "bug", "The registration page does not contain any headers.", "psmith", "minor", 9, 18);
+	generateTicket(firstUserTickets, "Minor CSS Alignment Bug", "in_progress", "bug", "The logo is misaligned in IE6.", "abucin", "major", 25, 12);
+	generateTicket(firstUserTickets, "Review Currency Conversion Code", "created", "task", "Create a secure mechanism for registering an account.", "abucin", "major", 15, 30);
+	generateTicket(firstUserTickets, "Implement User Password Reset", "created", "task", "See title.", "psmith", "normal", 20, 10);
 
-	generateTicket(secondUserTickets, "Plan Review Meeting", "in_progress", "task", "This Thursday at 10:00.", "abucin", "normal");
-	generateTicket(secondUserTickets, "Add Colour Palette", "done", "task", "Create a colour palette for the website.", "psmith", "major");
-	generateTicket(secondUserTickets, "Remove Redundant Tests", "in_progress", "task", "Remove tests that are not used.", "abucin", "minor");
-	generateTicket(secondUserTickets, "Fix CSS Button Padding", "in_progress", "bug", "The login button has extra padding.", "abucin", "minor");
+	generateTicket(secondUserTickets, "Plan Review Meeting", "in_progress", "task", "This Thursday at 10:00.", "abucin", "normal", 10, 20);
+	generateTicket(secondUserTickets, "Add Colour Palette", "testing", "task", "Create a colour palette for the website.", "", "major", 12, 12);
+	generateTicket(secondUserTickets, "Remove Redundant Tests", "in_progress", "task", "Remove tests that are not used.", "abucin", "minor", 10, 5);
+	generateTicket(secondUserTickets, "Fix CSS Button Padding", "in_progress", "bug", "The login button has extra padding.", "abucin", "minor", 10, 20);
 
 	var sampleTicketKey = utils.generateKey();
 
@@ -63,6 +65,21 @@ exports.populateDb = function () {
 			username: "psmith"
 }, {
 			key: utils.generateKey(),
+			action: "clock-o",
+			amount: 2,
+			target: "3",
+			targetType: "bug",
+			username: "psmith",
+			timestamp: new Date().setTime(new Date() - (1000 * 60 * 60 * 24)) // yesterday
+		}, {
+			key: utils.generateKey(),
+			action: "clock-o",
+			amount: 6,
+			target: "2",
+			targetType: "task",
+			username: "psmith"
+		}, {
+			key: utils.generateKey(),
 			action: "pencil",
 			target: "3",
 			targetType: "bug",
@@ -72,9 +89,7 @@ exports.populateDb = function () {
 			key: utils.generateKey(),
 			content: "I think that the ticket should be marked as fixed.",
 			ticket: sampleTicketKey
-		}],
-		estimatedTime: 200,
-		loggedTime: 300
+		}]
 	});
 
 	var secondUser = new User({
@@ -96,8 +111,8 @@ exports.populateDb = function () {
 			key: utils.generateKey(),
 			action: "clock-o",
 			amount: 5,
-			target: "6",
-			targetType: "bug",
+			target: "9",
+			targetType: "task",
 			username: "abucin"
 		}, {
 			key: utils.generateKey(),
@@ -115,9 +130,7 @@ exports.populateDb = function () {
 			key: utils.generateKey(),
 			content: "That is correct. I will do it soon.",
 			ticket: sampleTicketKey
-		}],
-		estimatedTime: 200,
-		loggedTime: 200
+		}]
 	});
 
 	firstUser.save(function (err) {

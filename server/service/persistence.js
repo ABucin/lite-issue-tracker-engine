@@ -26,8 +26,15 @@ exports.getAllUsers = function (res) {
 	User.find(function (err, users) {
 		if (err) {
 			res.send(500, err);
+		} else {
+			res.json(users);
 		}
-		res.json(users);
+	});
+};
+
+exports.getAllUsersCallback = function (cb) {
+	User.find(function (err, users) {
+		cb(users);
 	});
 };
 
@@ -37,23 +44,14 @@ exports.getUser = function (username, res) {
 	}, function (err, user) {
 		if (err) {
 			res.send(500, err);
+		} else {
+			res.json([user]);
 		}
-		res.json([user]);
 	});
 };
 
 exports.createUser = function (user, res) {
 	var errorResponse = [];
-	var userData = {
-		key: utils.generateKey(),
-		email: user.email,
-		username: user.email.split('@')[0],
-		password: user.password,
-		role: 'user',
-		project: 'issue-tracker',
-		tickets: [],
-		logs: []
-	};
 
 	if (!user.password.length) {
 		errorResponse.push({
@@ -75,25 +73,35 @@ exports.createUser = function (user, res) {
 
 	if (errorResponse.length) {
 		res.send(500, errorResponse);
-	}
+	} else {
+		var userData = {
+			key: utils.generateKey(),
+			email: user.email,
+			username: user.email.split('@')[0],
+			password: user.password,
+			role: 'user',
+			project: 'issue-tracker',
+			tickets: [],
+			logs: []
+		};
+		var persistedUser = new User(userData);
 
-	var persistedUser = new User(userData);
-
-	persistedUser.save(function (err) {
-		if (err) {
-			var errorResponse = [];
-			_.each(err.errors, function (e, i, l) {
-				errorResponse.push({
-					message: e.message.split('Path ')[1]
+		persistedUser.save(function (err) {
+			if (err) {
+				var errorResponse = [];
+				_.each(err.errors, function (e, i, l) {
+					errorResponse.push({
+						message: e.message.split('Path ')[1]
+					});
 				});
-			});
-			res.send(500, errorResponse);
-		}
+				res.send(500, errorResponse);
+			}
 
-		res.json({
-			message: 'User created!'
+			res.json({
+				message: 'User created!'
+			});
 		});
-	});
+	}
 };
 
 /**
@@ -118,35 +126,34 @@ exports.createTicket = function (username, ticket, res) {
 	}, function (err, user) {
 		if (err) {
 			res.send(500, err);
-		}
-
-		User.find(function (err, users) {
-			if (err) {
-				res.send(500, err);
-			}
-
-			var tickets = [];
-
-			_.each(users, function (e, i, list) {
-				tickets = _.union(tickets, e.tickets);
-			});
-
-			var latestTicket = _.max(tickets, function (ticket) {
-				return ticket.code;
-			});
-
-			ticketData.code = latestTicket.code + 1;
-			user.tickets.push(new Ticket(ticketData));
-
-			user.save(function (err) {
+		} else {
+			User.find(function (err, users) {
 				if (err) {
 					res.send(500, err);
+				} else {
+					var tickets = [];
+
+					_.each(users, function (e, i, list) {
+						tickets = _.union(tickets, e.tickets);
+					});
+
+					var latestTicket = _.max(tickets, function (ticket) {
+						return ticket.code;
+					});
+
+					ticketData.code = latestTicket.code + 1;
+					user.tickets.push(new Ticket(ticketData));
+
+					user.save(function (err) {
+						if (err) {
+							res.send(500, err);
+						} else {
+							res.json(ticketData);
+						}
+					});
 				}
-
-				res.json(ticketData);
 			});
-		});
-
+		}
 	});
 };
 
@@ -156,8 +163,9 @@ exports.getTickets = function (username, res) {
 	}, function (err, user) {
 		if (err) {
 			res.send(500, err);
+		} else {
+			res.json([user.tickets]);
 		}
-		res.json([user.tickets]);
 	});
 };
 
@@ -168,45 +176,46 @@ exports.updateTicket = function (key, username, ticket, res) {
 			var errorResponse = [];
 			if (err) {
 				res.send(500, err);
-			}
+			} else {
+				_.each(users, function (user, i, list) {
+					_.each(user.tickets, function (el, ix, innerList) {
+						if (el.key == key) {
 
-			_.each(users, function (user, i, list) {
-				_.each(user.tickets, function (el, ix, innerList) {
-					if (el.key == key) {
+							if (ticket.title != null && ticket.title.length) {
+								el.title = ticket.title;
+							} else {
+								errorResponse.push({
+									message: 'Title must be provided.'
+								});
+							}
+							if (ticket.status != null) {
+								el.status = ticket.status;
+							}
+							if (ticket.loggedTime != null) {
+								el.loggedTime = ticket.loggedTime;
+							}
+							if (ticket.estimatedTime != null) {
+								el.estimatedTime = ticket.estimatedTime;
+							}
+							el.description = ticket.description;
+							el.owner = ticket.owner;
+							el.priority = ticket.priority;
 
-						if (ticket.title != null && ticket.title.length) {
-							el.title = ticket.title;
-						} else {
-							errorResponse.push({
-								message: 'Title must be provided.'
-							});
+							if (errorResponse.length) {
+								res.send(500, errorResponse);
+							} else {
+								user.save(function (err) {
+									if (err) {
+										res.send(500, err);
+									} else {
+										res.json(ticket);
+									}
+								});
+							}
 						}
-						if (ticket.status != null) {
-							el.status = ticket.status;
-						}
-						if (ticket.loggedTime != null) {
-							el.loggedTime = ticket.loggedTime;
-						}
-						if (ticket.estimatedTime != null) {
-							el.estimatedTime = ticket.estimatedTime;
-						}
-						el.description = ticket.description;
-						el.owner = ticket.owner;
-						el.priority = ticket.priority;
-
-						if (errorResponse.length) {
-							res.send(500, errorResponse);
-						} else {
-							user.save(function (err) {
-								if (err) {
-									res.send(500, err);
-								}
-								res.json(ticket);
-							});
-						}
-					}
+					});
 				});
-			});
+			}
 		}
 	);
 };
@@ -215,28 +224,29 @@ exports.deleteTicket = function (key, username, res) {
 	User.find().exec(function (err, users) {
 		if (err) {
 			res.send(500, err);
+		} else {
+			_.each(users, function (user, i, list) {
+				_.each(user.tickets, function (ticket, ix, innerList) {
+					if (ticket.key == key) {
+						user.tickets.splice(ix, 1);
+					}
+				});
+
+				_.each(user.comments, function (comment, ix, innerList) {
+					if (comment.ticket == key) {
+						user.comments.splice(ix, 1);
+					}
+				});
+
+				user.save(function (err) {
+					if (err) {
+						res.send(500, err);
+					} else {
+						res.json();
+					}
+				});
+			});
 		}
-
-		_.each(users, function (user, i, list) {
-			_.each(user.tickets, function (ticket, ix, innerList) {
-				if (ticket.key == key) {
-					user.tickets.splice(ix, 1);
-				}
-			});
-
-			_.each(user.comments, function (comment, ix, innerList) {
-				if (comment.ticket == key) {
-					user.comments.splice(ix, 1);
-				}
-			});
-
-			user.save(function (err) {
-				if (err) {
-					res.send(500, err);
-				}
-				res.json();
-			});
-		});
 	});
 };
 
@@ -258,16 +268,17 @@ exports.createComment = function (username, ticket, comment, res) {
 	}, function (err, user) {
 		if (err) {
 			res.send(500, err);
+		} else {
+			user.comments.push(new Comment(commentData));
+
+			user.save(function (err) {
+				if (err) {
+					res.send(500, err);
+				} else {
+					res.json(commentData);
+				}
+			});
 		}
-
-		user.comments.push(new Comment(commentData));
-
-		user.save(function (err) {
-			if (err) {
-				res.send(500, err);
-			}
-			res.json(commentData);
-		});
 	});
 };
 
@@ -277,20 +288,21 @@ exports.deleteComment = function (key, username, res) {
 	}, function (err, user) {
 		if (err) {
 			res.send(500, err);
+		} else {
+			_.each(user.comments, function (comment, ix, innerList) {
+				if (comment.key == key) {
+					user.comments.splice(ix, 1);
+				}
+			});
+
+			user.save(function (err) {
+				if (err) {
+					res.send(500, err);
+				} else {
+					res.json();
+				}
+			});
 		}
-
-		_.each(user.comments, function (comment, ix, innerList) {
-			if (comment.key == key) {
-				user.comments.splice(ix, 1);
-			}
-		});
-
-		user.save(function (err) {
-			if (err) {
-				res.send(500, err);
-			}
-			res.json();
-		});
 	});
 };
 
@@ -298,24 +310,25 @@ exports.getComments = function (key, res) {
 	User.find().exec(function (err, users) {
 		if (err) {
 			res.send(500, err);
-		}
-		var comments = [];
+		} else {
+			var comments = [];
 
-		_.each(users, function (user, i, list) {
-			_.each(user.comments, function (comment, ix, innerList) {
-				if (comment.ticket == key) {
-					var c = {
-						key: comment.key,
-						author: user.username,
-						ticket: comment.ticket,
-						timestamp: comment.timestamp,
-						content: comment.content
-					};
-					comments.push(c);
-				}
+			_.each(users, function (user, i, list) {
+				_.each(user.comments, function (comment, ix, innerList) {
+					if (comment.ticket == key) {
+						var c = {
+							key: comment.key,
+							author: user.username,
+							ticket: comment.ticket,
+							timestamp: comment.timestamp,
+							content: comment.content
+						};
+						comments.push(c);
+					}
+				});
 			});
-		});
-		res.json(comments);
+			res.json(comments);
+		}
 	});
 };
 
@@ -327,32 +340,32 @@ exports.updateComment = function (key, ticket, username, comment, res) {
 		var errorResponse = [];
 		if (err) {
 			res.send(500, err);
+		} else {
+			_.each(user.comments, function (c, i, list) {
+				if (c.key == key && c.ticket == ticket) {
+
+					if (comment.content != null && comment.content.length) {
+						c.content = comment.content;
+						c.isEdited = true;
+					} else {
+						errorResponse.push({
+							message: 'Content must be provided.'
+						});
+					}
+
+					if (errorResponse.length) {
+						res.send(500, errorResponse);
+					} else {
+						user.save(function (err) {
+							if (err) {
+								res.send(500, err);
+							}
+							res.json(c);
+						});
+					}
+				}
+			});
 		}
-
-		_.each(user.comments, function (c, i, list) {
-			if (c.key == key && c.ticket == ticket) {
-
-				if (comment.content != null && comment.content.length) {
-					c.content = comment.content;
-					c.isEdited = true;
-				} else {
-					errorResponse.push({
-						message: 'Content must be provided.'
-					});
-				}
-
-				if (errorResponse.length) {
-					res.send(500, errorResponse);
-				} else {
-					user.save(function (err) {
-						if (err) {
-							res.send(500, err);
-						}
-						res.json(c);
-					});
-				}
-			}
-		});
 	});
 };
 
@@ -402,15 +415,16 @@ exports.createLog = function (username, log, res) {
 	}, function (err, user) {
 		if (err) {
 			res.send(500, err);
+		} else {
+			user.logs.push(new Log(logData));
+
+			user.save(function (err) {
+				if (err) {
+					res.send(500, err);
+				} else {
+					res.json(logData);
+				}
+			});
 		}
-
-		user.logs.push(new Log(logData));
-
-		user.save(function (err) {
-			if (err) {
-				res.send(500, err);
-			}
-			res.json(logData);
-		});
 	});
 };

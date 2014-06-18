@@ -135,15 +135,7 @@ var UserSchema = new Schema({
 	},
 	tickets: [TicketSchema],
 	logs: [LogSchema],
-	comments: [CommentSchema],
-	estimatedTime: {
-		type: Number,
-		default: 0
-	},
-	loggedTime: {
-		type: Number,
-		default: 0
-	}
+	comments: [CommentSchema]
 });
 
 var Ticket = mongoose.model("Ticket", TicketSchema);
