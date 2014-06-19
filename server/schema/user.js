@@ -1,11 +1,13 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
-	commentSchema = require('../schema/comment'),
-	logSchema = require('../schema/log'),
-	ticketSchema = require('../schema/ticket'),
-	LogSchema = logSchema.getLogSchema(),
-	TicketSchema = ticketSchema.getTicketSchema(),
-	CommentSchema = commentSchema.getCommentSchema();
+	comment = require('../schema/comment'),
+	log = require('../schema/log'),
+	ticket = require('../schema/ticket'),
+	settings = require('../schema/settings'),
+	LogSchema = log.getLogSchema(),
+	TicketSchema = ticket.getTicketSchema(),
+	CommentSchema = comment.getCommentSchema(),
+	SettingsSchema = settings.getSettingsSchema();
 
 var UserSchema = new Schema({
 	key: {
@@ -44,7 +46,8 @@ var UserSchema = new Schema({
 	},
 	tickets: [TicketSchema],
 	logs: [LogSchema],
-	comments: [CommentSchema]
+	comments: [CommentSchema],
+	settings: [SettingsSchema]
 });
 
 var User = mongoose.model("User", UserSchema);

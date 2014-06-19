@@ -3,18 +3,25 @@ function ($scope, $rootScope, $location, ResourceService) {
 		$rootScope.auth = true;
 		$rootScope.hasDropdown = false;
 
-		$scope.settingsData = {};
 		$scope.settingsTemplate = {};
+
+		$scope.settings = {
+			displayUserActivity: false,
+			displayUserChart: false,
+			displayUserRole: false,
+			displayUserEmail: false
+		};
+
+		$scope.computeToggle = function (property) {
+			return (property === true) ? 'fa-check' : 'fa-times';
+		}
 
 		$scope.fetchSettingsData = function (type) {
 			$scope.settingsTemplate.url = 'partials/snippets/settings/' + type + '.html';
-			var params = {
-				type: type
-			};
 			var callback = function (data) {
-				$scope.settingsData = data;
+				$scope.settings = data[0];
 			};
-			ResourceService.getData('config', params, callback);
+			ResourceService.getData('users/' + $rootScope.username + '/settings', null, callback);
 		};
 
 }]);

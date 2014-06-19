@@ -4,16 +4,19 @@ var mongoose = require('mongoose'),
 	logSchema = require('../schema/log'),
 	ticketSchema = require('../schema/ticket'),
 	userSchema = require('../schema/user'),
+	settingsSchema = require('../schema/settings'),
 	Log = logSchema.getLog(),
 	Ticket = ticketSchema.getTicket(),
 	Comment = commentSchema.getComment(),
-	User = userSchema.getUser();
+	User = userSchema.getUser(),
+	Settings = settingsSchema.getSettings();
 
 exports.populateDb = function () {
 
 	/**
-	 * Flushes ticket collection and adds some default data.
+	 * Flushes all collections and adds some default data.
 	 */
+	Settings.collection.drop();
 	Log.collection.drop();
 	Ticket.collection.drop();
 	Comment.collection.drop();
@@ -62,6 +65,13 @@ exports.populateDb = function () {
 		project: "email-client",
 		expertise: "Selenium, jQuery, JavaScript",
 		tickets: firstUserTickets,
+		settings: [{
+			key: utils.generateKey(),
+			displayUserActivity: true,
+			displayUserChart: true,
+			displayUserEmail: true,
+			displayUserRole: true
+		}],
 		logs: [{
 			key: utils.generateKey(),
 			action: "times",
@@ -107,6 +117,13 @@ exports.populateDb = function () {
 		project: "email-client",
 		expertise: "Java, PHP, JavaScript, Web Design",
 		tickets: secondUserTickets,
+		settings: [{
+			key: utils.generateKey(),
+			displayUserActivity: true,
+			displayUserChart: true,
+			displayUserEmail: true,
+			displayUserRole: true
+		}],
 		logs: [{
 			key: utils.generateKey(),
 			action: "comment",

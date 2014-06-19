@@ -5,10 +5,9 @@ var port = 3000;
 var router = express.Router();
 
 // Required files.
-var utils = require('./utils/population');
-var persistenceService = require('./service/persistence');
-var analyticsService = require('./service/analytics');
-var configurationService = require('./service/settings');
+var utils = require('./utils/population'),
+	persistenceService = require('./service/persistence'),
+	analyticsService = require('./service/analytics');
 
 server.use(bodyParser());
 server.use('/itracker/api', router);
@@ -85,6 +84,7 @@ router.route('/logs')
 	.get(function (req, res) {
 		persistenceService.getAllLogs(res);
 	});
+
 router.route('/users/:uname/logs')
 	.post(function (req, res) {
 		persistenceService.createLog(req.params.uname, req.body, res);
@@ -101,9 +101,9 @@ router.route('/analytics?:type')
 /**
  * Settings.
  */
-router.route('/config?:type')
+router.route('/users/:uname/settings')
 	.get(function (req, res) {
-		configurationService.getConfig(req.query.type, res);
+		persistenceService.getSettings(req.params.uname, res);
 	});
 
 console.log('Server started. Listening on port ' + port + '...');

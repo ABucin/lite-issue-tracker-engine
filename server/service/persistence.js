@@ -16,10 +16,27 @@ var utils = require('../utils/utils'),
 	logSchema = require('../schema/log'),
 	ticketSchema = require('../schema/ticket'),
 	userSchema = require('../schema/user'),
+	settingsSchema = require('../schema/settings'),
 	Log = logSchema.getLog(),
 	Ticket = ticketSchema.getTicket(),
 	Comment = commentSchema.getComment(),
-	User = userSchema.getUser();
+	User = userSchema.getUser(),
+	Settings = settingsSchema.getSettings();
+
+/**
+ * Settings.
+ */
+exports.getSettings = function (username, res) {
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			res.json(user.settings);
+		}
+	});
+};
 
 /**
  * Users.
