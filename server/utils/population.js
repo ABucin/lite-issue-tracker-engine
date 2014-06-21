@@ -46,7 +46,7 @@ exports.populateDb = function () {
 		key: utils.generateKey(),
 		username: "abucin",
 		email: "abucin@gmail.com",
-		password: "abucin",
+//		password: "abucin",
 		salt: "124",
 		hash: "124",
 		role: "admin",
@@ -93,9 +93,10 @@ exports.populateDb = function () {
 			ticket: sampleTicketKey
 		}]
 	});
-	//	firstUser.setPassword("test", function(){
-	//		console.log("password set");
-	//	});
+
+		firstUser.setPassword("test", function(){
+			console.log("Password set.");
+		});
 
 	firstUser.save(function (err) {
 		if (err) return console.error(err); // we should handle this

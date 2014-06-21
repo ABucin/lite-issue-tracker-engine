@@ -42,6 +42,8 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			displayTickets: 'all'
 		};
 
+		$rootScope.submitted = false;
+
 		$rootScope.tickets = [];
 		$rootScope.users = [];
 		$rootScope.workloadData = [];
@@ -136,8 +138,12 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		/*
 		 * Logs in the current user.
 		 */
-		$scope.login = function () {
-			AuthenticationService.login($rootScope.loginData);
+		$scope.login = function (isValid) {
+			$scope.submitted = true;
+			if (isValid) {
+				AuthenticationService.login($rootScope.loginData);
+				$scope.submitted = false;
+			}
 		};
 
 		/*

@@ -6,20 +6,30 @@
 				Login
 			</div>
 			<div class="panel-body">
-				<form class="form-horizontal" role="form">
-					<div class="form-group">
+				<form class="form-horizontal" role="form" name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
+					<div class="form-group" ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine && submitted }">
 						<div class="col-md-12">
-							<input type="text" class="form-control" placeholder="Username" ng-model="loginData.username">
+							<input type="text" name="username" class="form-control" placeholder="Username" ng-model="loginData.username" ng-minlength="3" ng-maxlength="8" required>
+							<p ng-show="loginForm.username.$error.minlength && submitted"><i class="fa fa-warning"></i>Username must have at least 3 characters.</p>
+							<p ng-show="loginForm.username.$error.maxlength && submitted"><i class="fa fa-warning"></i>Username must have at most 8 characters.</p>
+
+						</div>
+					</div>
+					<div class="form-group" ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine && submitted }">
+						<div class="col-md-12">
+							<input type="password" name="password" class="form-control" placeholder="Password" ng-model="loginData.password" ng-minlength="3" ng-maxlength="8" required>
+							<p ng-show="loginForm.password.$error.minlength && submitted"><i class="fa fa-warning"></i>Password must have at least 3 characters.</p>
+							<p ng-show="loginForm.password.$error.maxlength && submitted"><i class="fa fa-warning"></i>Password must have at most 8 characters.</p>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-12">
-							<input type="password" class="form-control" placeholder="Password" ng-model="loginData.password">
+							<p ng-repeat="error in general.errors"><i class="fa fa-warning"></i>{{error.message}}</p>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-12">
-							<button class="btn btn-default form-control" ng-click="login()">
+							<button type="submit" class="btn btn-default form-control">
 								Sign in
 							</button>
 						</div>

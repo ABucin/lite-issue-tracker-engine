@@ -11,7 +11,13 @@ app.service('ResourceService', ['$rootScope', '$http',
 			}).success(function (data) {
 				callback(data);
 			}).error(function (data, status) {
-				$rootScope.general.errors = data;
+				if (status === 401) {
+					$rootScope.general.errors = [{
+						message: "Authentication failed. Invalid username or password."
+					}];
+				} else {
+					$rootScope.general.errors = data;
+				}
 			});
 		};
 
