@@ -217,8 +217,8 @@ exports.getChart = function (type, res) {
 						layout: 'vertical',
 						align: 'left',
 						verticalAlign: 'top',
-						x: 100,
-						y: 70,
+						x: 60,
+						y: 40,
 						floating: true,
 						backgroundColor: '#FFFFFF',
 						borderWidth: 1

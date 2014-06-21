@@ -1,8 +1,9 @@
-.body-menu-padding { margin-top: 45px; }
+/*.body-menu-padding { margin-top: 45px; }*/
 
-nav.navbar {border-color: #ddd; min-height: 40px;}
+.ng-scope .panel-dashboard {margin-right: 15px;}
+
+nav.navbar {border-color: #ddd; min-height: 40px; margin-bottom: 0;}
 nav.navbar > .container-fluid {background-color: #ededed;}
-nav.navbar .navbar-brand {padding: 10px; height: 40px; font-size: 97%;}
 nav.navbar li > a.fa-bars:hover,
 nav.navbar li.open > a.fa-bars:hover,
 nav.navbar li.open > a.fa-bars { background-color: #ccc; }

@@ -13,6 +13,8 @@ app.directive('toggleable', function ($rootScope) {
 
 			if (pageName === attribute.url) {
 				element.toggleClass('active', true);
+			} else {
+				element.toggleClass('active', false);
 			}
 
 			element.on('click', function (event) {
