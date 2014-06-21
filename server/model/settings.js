@@ -25,12 +25,6 @@ var SettingsSchema = new Schema({
 	}
 });
 
-var Settings = mongoose.model("Settings", SettingsSchema);
+module.exports.schema = SettingsSchema;
 
-exports.getSettings = function () {
-	return Settings;
-};
-
-exports.getSettingsSchema = function () {
-	return SettingsSchema;
-};
+module.exports = mongoose.model("Settings", SettingsSchema);

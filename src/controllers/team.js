@@ -1,6 +1,5 @@
 app.controller('TeamCtrl', ['$scope', '$rootScope', '$location',
 function ($scope, $rootScope, $location) {
-		$rootScope.auth = true;
 		$rootScope.hasDropdown = false;
 
 		$scope.selectedTeamMember = $rootScope.currentUser;

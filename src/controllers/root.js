@@ -1,4 +1,4 @@
-var app = angular.module('issueTracker', ['ngRoute']);
+var app = angular.module('issueTracker', ['ngCookies', 'ngRoute']);
 
 /**
  * Associates each route to a controller and a template.
@@ -29,12 +29,10 @@ function ($routeProvider) {
 		});
 }]);
 
-app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', 'ResourceService', 'UserService',
-function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
-		$rootScope.username = "abucin";
+app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', 'ResourceService', 'UserService', 'AuthenticationService',
+function ($scope, $rootScope, $location, $http, ResourceService, UserService, AuthenticationService) {
 		$rootScope.createAction = null;
 
-		$rootScope.auth = false;
 		$rootScope.canFilter = false;
 		$rootScope.hasDropdown = false;
 		$rootScope.actions = {
@@ -51,7 +49,6 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 		$rootScope.inProgressTickets = [];
 		$rootScope.testingTickets = [];
 		$rootScope.doneTickets = [];
-		$rootScope.errors = [];
 
 		$rootScope.copiedEntity = {};
 		$rootScope.currentUser = {};
@@ -60,10 +57,20 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 			logEntries: []
 		};
 
+		$rootScope.general = {
+			errors: []
+		};
+
 		$rootScope.registrationData = {
-			email: null,
+			//			email: null,
+			username: null,
 			password: null,
 			confirmedPassword: null
+		};
+
+		$rootScope.loginData = {
+			username: null,
+			password: null
 		};
 
 		$scope.submenuTemplates = [{
@@ -92,12 +99,12 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 			});
 		});
 
-		$scope.navigate = function (url) {
+		$rootScope.navigate = function (url) {
 			$location.path('/' + url);
 		};
 
 		$scope.register = function () {
-			UserService.register($rootScope.registrationData);
+			AuthenticationService.register($rootScope.registrationData);
 		};
 
 		$scope.fetchUserData = function () {
@@ -109,23 +116,35 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService) {
 		 * This depends on whether or not we are logged in to the dashboard.
 		 */
 		$scope.togglePadding = function () {
-			return ($rootScope.auth === true) ? "body-menu-padding" : "";
+			return ($rootScope.isAuthenticated() === true) ? "body-menu-padding" : "";
 		};
 
 		/*
 		 * Logs in the current user.
 		 */
 		$scope.login = function () {
-			$rootScope.auth = true;
-			$scope.navigate('dashboard');
+			AuthenticationService.login($rootScope.loginData);
 		};
 
 		/*
 		 * Logs out the current user.
 		 */
 		$scope.logout = function () {
-			$rootScope.auth = false;
-			$scope.navigate('login');
+			AuthenticationService.logout();
 		};
+
+		/**
+		 * Checks if the user is authenticated.
+		 */
+		$rootScope.isAuthenticated = function () {
+			return AuthenticationService.isAuthenticated();
+		};
+
+		/**
+		 * Retrieves the current authenticated user.
+		 */
+		$rootScope.getAuthenticatedUser = function () {
+			return AuthenticationService.getAuthenticatedUser();
+		}
 
 }]);

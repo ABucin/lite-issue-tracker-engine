@@ -1,2 +1,2 @@
 @echo off
-npm update & bower update
+npm update -g & npm update & bower cache clean & bower update

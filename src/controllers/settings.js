@@ -1,6 +1,5 @@
 app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', 'ResourceService',
 function ($scope, $rootScope, $location, ResourceService) {
-		$rootScope.auth = true;
 		$rootScope.hasDropdown = false;
 
 		$scope.settingsTemplate = {};
@@ -21,7 +20,7 @@ function ($scope, $rootScope, $location, ResourceService) {
 			var callback = function (data) {
 				$scope.settings = data[0];
 			};
-			ResourceService.getData('users/' + $rootScope.username + '/settings', null, callback);
+			ResourceService.getData('users/' + $rootScope.getAuthenticatedUser() + '/settings', null, callback);
 		};
 
 }]);

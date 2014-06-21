@@ -46,12 +46,6 @@ var TicketSchema = new Schema({
 	}
 });
 
-var Ticket = mongoose.model("Ticket", TicketSchema);
+module.exports.schema = TicketSchema;
 
-exports.getTicket = function () {
-	return Ticket;
-};
-
-exports.getTicketSchema = function () {
-	return TicketSchema;
-};
+module.exports = mongoose.model("Ticket", TicketSchema);

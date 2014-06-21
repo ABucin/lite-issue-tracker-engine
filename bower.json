@@ -1,21 +1,17 @@
 {
-  "name": "issue-tracker",
-  "version": "0.1.0",
-  "dependencies": {
-    "angular": "latest",
-    "angular-route": "latest",
-    "jquery": "latest"
-  },
-  "homepage": "https://github.com/ABucin/issue-tracker",
-  "authors": [
+	"name": "issue-tracker",
+	"version": "0.1.0",
+	"dependencies": {},
+	"homepage": "https://github.com/ABucin/issue-tracker",
+	"authors": [
     "Andrei Bucin <abucin@gmail.com>"
   ],
-  "description": "Application which allows project task management.",
-  "moduleType": [
+	"description": "Application which allows project task management.",
+	"moduleType": [
     "node"
   ],
-  "license": "MIT",
-  "ignore": [
+	"license": "MIT",
+	"ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
@@ -23,7 +19,11 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "ionicons": "latest"
-  }
+	"devDependencies": {
+		"ionicons": "latest",
+		"angular": "latest",
+		"angular-route": "latest",
+		"angular-cookies": "latest"
+		"jquery": "latest"
+	}
 }

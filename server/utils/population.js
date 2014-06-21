@@ -1,15 +1,10 @@
 var mongoose = require('mongoose'),
 	utils = require('./utils'),
-	commentSchema = require('../schema/comment'),
-	logSchema = require('../schema/log'),
-	ticketSchema = require('../schema/ticket'),
-	userSchema = require('../schema/user'),
-	settingsSchema = require('../schema/settings'),
-	Log = logSchema.getLog(),
-	Ticket = ticketSchema.getTicket(),
-	Comment = commentSchema.getComment(),
-	User = userSchema.getUser(),
-	Settings = settingsSchema.getSettings();
+	Comment = require('../model/comment'),
+	Log = require('../model/log'),
+	Ticket = require('../model/ticket'),
+	User = require('../model/user'),
+	Settings = require('../model/settings');
 
 exports.populateDb = function () {
 
@@ -59,7 +54,6 @@ exports.populateDb = function () {
 		key: utils.generateKey(),
 		username: "psmith",
 		email: "psmith@dummy.com",
-		password: "test",
 		role: "user",
 		projectRole: "tester",
 		project: "email-client",
@@ -106,12 +100,17 @@ exports.populateDb = function () {
 			ticket: sampleTicketKey
 		}]
 	});
+//	firstUser.setPassword("test", function(){
+//		console.log("password set");
+//	});
 
 	var secondUser = new User({
 		key: utils.generateKey(),
 		username: "abucin",
 		email: "abucin@gmail.com",
-		password: "test",
+		password: "abucin",
+		salt: "124",
+		hash: "124",
 		role: "admin",
 		projectRole: "developer",
 		project: "email-client",
@@ -156,6 +155,9 @@ exports.populateDb = function () {
 			ticket: sampleTicketKey
 		}]
 	});
+//	secondUser.setPassword("test", function(){
+//		console.log("password set");
+//	});
 
 	firstUser.save(function (err) {
 		if (err) return console.error(err); // we should handle this

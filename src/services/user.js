@@ -1,14 +1,5 @@
 app.service('UserService', ['$rootScope', 'ResourceService',
 	function ($rootScope, ResourceService) {
-		this.registerUser = function (data) {
-			var callback = function (data) {
-				$rootScope.errors = [];
-				$("#register-modal").modal('hide');
-				$('#register-success-modal').modal('show');
-			};
-
-			ResourceService.postData('users', data, callback);
-		};
 
 		this.fetchUserData = function () {
 			var callback = function (data) {
@@ -18,7 +9,7 @@ app.service('UserService', ['$rootScope', 'ResourceService',
 
 				for (var i in data) {
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
-					if (data[i].username === $rootScope.username) {
+					if (data[i].username === $rootScope.getAuthenticatedUser()) {
 						angular.copy(data[i], $rootScope.currentUser);
 					}
 

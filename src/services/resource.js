@@ -11,7 +11,7 @@ app.service('ResourceService', ['$rootScope', '$http',
 			}).success(function (data) {
 				callback(data);
 			}).error(function (data, status) {
-				$rootScope.errors = data;
+				$rootScope.general.errors = data;
 			});
 		};
 

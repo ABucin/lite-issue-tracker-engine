@@ -1,6 +1,5 @@
 app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService', 'CommentsService', 'LogsService',
 function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsService) {
-		$rootScope.auth = true;
 		$rootScope.hasDropdown = true;
 		$rootScope.canFilter = true;
 		$scope.isEditing = false;
@@ -28,12 +27,12 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			type: "",
 			estimatedTime: 0.0,
 			loggedTime: 0.0,
-			owner: $rootScope.username
+			owner: $rootScope.getAuthenticatedUser()
 		};
 
 		$scope.comment = {
 			key: "",
-			author: $rootScope.username,
+			author: $rootScope.getAuthenticatedUser(),
 			content: ""
 		};
 
@@ -61,7 +60,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			if ($rootScope.filters.displayTickets === 'all') {
 				return true;
 			} else if ($rootScope.filters.displayTickets === 'mine') {
-				return (owner === $rootScope.username);
+				return (owner === $rootScope.getAuthenticatedUser());
 			} else if ($rootScope.filters.displayTickets === 'unassigned') {
 				return (owner === undefined || !owner.length);
 			}
@@ -113,25 +112,25 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 				targetType: ticket.type,
 				comment: $scope.comment.content,
 				amount: $scope.loggedWork.amount,
-				username: $rootScope.username
+				username: $rootScope.getAuthenticatedUser()
 			};
 
-			LogsService.logData($rootScope.username, log, $rootScope.dashboard.logEntries);
+			LogsService.logData($rootScope.getAuthenticatedUser(), log, $rootScope.dashboard.logEntries);
 		};
 
 		/*
 		 * Comments.
 		 */
 		$scope.addComment = function () {
-			CommentsService.addComment($rootScope.username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
+			CommentsService.addComment($rootScope.getAuthenticatedUser(), $scope.updatedTicket.key, $scope.comment, $scope.comments);
 		}
 
 		$scope.deleteComment = function (commentKey) {
-			CommentsService.deleteComment($rootScope.username, commentKey, $scope.comments, $scope.comment);
+			CommentsService.deleteComment($rootScope.getAuthenticatedUser(), commentKey, $scope.comments, $scope.comment);
 		}
 
 		$scope.editComment = function () {
-			CommentsService.editComment($rootScope.username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
+			CommentsService.editComment($rootScope.getAuthenticatedUser(), $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
 		}
 
 		$scope.fetchComments = function (commentKey) {
@@ -142,14 +141,14 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		 * Tickets.
 		 */
 		$scope.addTicket = function () {
-			TicketsService.addTicket($rootScope.username, $scope.ticket, $rootScope.tickets, $rootScope.createdTickets);
+			TicketsService.addTicket($rootScope.getAuthenticatedUser(), $scope.ticket, $rootScope.tickets, $rootScope.createdTickets);
 		};
 
 		$scope.updateTicket = function () {
-			TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.username, $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
+			TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser(), $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
 		};
 
 		$scope.deleteTicket = function (key) {
-			TicketsService.deleteTicket(key, $rootScope.username, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTicket);
+			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser(), $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTicket);
 		};
 }]);

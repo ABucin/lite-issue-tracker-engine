@@ -12,16 +12,12 @@ db.once('open', function callback() {
 });
 
 var utils = require('../utils/utils'),
-	commentSchema = require('../schema/comment'),
-	logSchema = require('../schema/log'),
-	ticketSchema = require('../schema/ticket'),
-	userSchema = require('../schema/user'),
-	settingsSchema = require('../schema/settings'),
-	Log = logSchema.getLog(),
-	Ticket = ticketSchema.getTicket(),
-	Comment = commentSchema.getComment(),
-	User = userSchema.getUser(),
-	Settings = settingsSchema.getSettings();
+	passport = require('passport'),
+	Comment = require('../model/comment'),
+	Log = require('../model/log'),
+	Ticket = require('../model/ticket'),
+	User = require('../model/user'),
+	Settings = require('../model/settings');
 
 /**
  * Settings.
@@ -37,6 +33,27 @@ exports.getSettings = function (username, res) {
 		}
 	});
 };
+
+/**
+ * Authentication.
+ */
+exports.register = function (req, res) {
+	User.register(new User({
+		username: req.body.username
+	}), req.body.password, function (err, user) {
+		if (err) {
+			console.log("Registration error %s", err);
+			res.send(500, err);
+		} else {
+			passport.authenticate('local')(req, res, function () {
+				console.log("Registration successful. User %s authenticated.", req.body.username);
+				res.send(201, {
+					username: req.body.username
+				});
+			});
+		}
+	});
+}
 
 /**
  * Users.
@@ -67,61 +84,6 @@ exports.getUser = function (username, res) {
 			res.json([user]);
 		}
 	});
-};
-
-exports.createUser = function (user, res) {
-	var errorResponse = [];
-
-	if (!user.password.length) {
-		errorResponse.push({
-			message: 'Password must be provided.'
-		});
-	}
-
-	if (!user.email.length) {
-		errorResponse.push({
-			message: 'Email address must be provided.'
-		});
-	}
-
-	if (user.password !== user.repeatedPassword) {
-		errorResponse.push({
-			message: 'Passwords do not match.'
-		});
-	}
-
-	if (errorResponse.length) {
-		res.send(500, errorResponse);
-	} else {
-		var userData = {
-			key: utils.generateKey(),
-			email: user.email,
-			username: user.email.split('@')[0],
-			password: user.password,
-			role: 'user',
-			projectRole: 'developer',
-			project: 'issue-tracker',
-			tickets: [],
-			logs: []
-		};
-		var persistedUser = new User(userData);
-
-		persistedUser.save(function (err) {
-			if (err) {
-				var errorResponse = [];
-				_.each(err.errors, function (e, i, l) {
-					errorResponse.push({
-						message: e.message.split('Path ')[1]
-					});
-				});
-				res.send(500, errorResponse);
-			}
-
-			res.json({
-				message: 'User created!'
-			});
-		});
-	}
 };
 
 /**

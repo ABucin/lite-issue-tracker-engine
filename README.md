@@ -15,8 +15,10 @@ Repository for the issue tracker application.
 
 * Node.js v0.10.28
   * Express
-  	* Body-Parser
-  	* Passport
+  	* Passport (passport-local, passport-local-mongoose)
+	* Connect
+	* Cookie-Parser
+	* Express-Session
   * Bower
   * Grunt
   	* Uglify
@@ -29,6 +31,8 @@ Repository for the issue tracker application.
 ##### Client Side
 
 * Angular.js 1.2.16
+	* angular-route
+	* angular-cookies
 * Bootstrap 3.1.1
 * Font Awesome 4.1.0
 * Ionicons 1.5.0

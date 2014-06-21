@@ -11,7 +11,7 @@ app.directive('secured', function ($rootScope, $location) {
 	return {
 		restrict: 'A',
 		link: function (scope, element, attr) {
-			if ($rootScope.auth === false) {
+			if (!$rootScope.isAuthenticated()) {
 				$location.path('/login');
 			}
 		}

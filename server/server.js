@@ -1,23 +1,61 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var server = express();
-var port = 3000;
-var router = express.Router();
-
-// Required files.
-var utils = require('./utils/population'),
+var express = require('express'),
+	bodyParser = require('body-parser'),
+	cookieParser = require('cookie-parser'),
+	session = require('express-session'),
+	passport = require('passport'),
+	LocalStrategy = require('passport-local').Strategy,
+	server = express(),
+	port = 3000,
+	router = express.Router(),
+	// Required files.
+	utils = require('./utils/population'),
 	persistenceService = require('./service/persistence'),
-	analyticsService = require('./service/analytics');
+	analyticsService = require('./service/analytics'),
+	User = require('./model/user');
 
+server.use(cookieParser());
 server.use(bodyParser());
-server.use('/itracker/api', router);
 // Set the path to the index.html file.
 server.use(express.static(__dirname + "./../"));
+server.use(session({
+	secret: 'SECRET'
+}));
+server.use(passport.initialize());
+server.use(passport.session());
+server.use('/itracker/api', router);
 
 server.listen(port);
 
 // Add default data to database.
 utils.populateDb();
+
+console.log('Server started. Listening on port %s ...', port);
+
+/**
+ * Authentication.
+ */
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+router.route('/register')
+	.post(function (req, res) {
+		persistenceService.register(req, res);
+	});
+
+router.route('/login')
+	.post(passport.authenticate('local'), function (req, res) {
+		res.send(200);
+	});
+
+router.route('/logout')
+	.get(function (req, res) {
+		req.logout();
+		res.send(200);
+	});
 
 /**
  * Users.
@@ -25,9 +63,6 @@ utils.populateDb();
 router.route('/users')
 	.get(function (req, res) {
 		persistenceService.getAllUsers(res);
-	})
-	.post(function (req, res) {
-		persistenceService.createUser(req.body, res);
 	});
 
 router.route('/users/:uname')
@@ -105,5 +140,3 @@ router.route('/users/:uname/settings')
 	.get(function (req, res) {
 		persistenceService.getSettings(req.params.uname, res);
 	});
-
-console.log('Server started. Listening on port ' + port + '...');
