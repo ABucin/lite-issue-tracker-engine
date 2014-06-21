@@ -22,12 +22,14 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		};
 
 		$scope.ticket = {
-			title: "",
-			description: "",
-			type: "",
+			title: null,
+			description: null,
+			type: "task",
+			priority: "major",
 			estimatedTime: 0.0,
 			loggedTime: 0.0,
-			owner: $rootScope.getAuthenticatedUser()
+			owner: $rootScope.getAuthenticatedUser(),
+			user: $rootScope.getAuthenticatedUser()
 		};
 
 		$scope.comment = {

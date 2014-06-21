@@ -46,6 +46,8 @@ exports.populateDb = function () {
 //		key: utils.generateKey(),
 //		username: "abucin",
 //		email: "abucin@gmail.com",
+//		firstName: "Andrei",
+//		lastName: "Bucin",
 ////		password: "abucin",
 //		salt: "124",
 //		hash: "124",

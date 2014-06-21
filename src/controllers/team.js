@@ -1,12 +1,15 @@
-app.controller('TeamCtrl', ['$scope', '$rootScope', '$location',
-function ($scope, $rootScope, $location) {
+app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 'AuthenticationService',
+function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		$rootScope.hasDropdown = false;
 
-		$scope.selectedTeamMember = $rootScope.currentUser;
+		$scope.selectedTeamMember = {};
 
-		$scope.selectTeamMember = function (user) {
-			angular.copy(user, $scope.selectedTeamMember);
+		$scope.selectTeamMember = function (username) {
+			UserService.getUser(username, $scope.selectedTeamMember);
 		}
+
+		$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser());
+
 
 		$scope.getOpenTickets = function () {
 			var openTickets = 0;
@@ -23,9 +26,12 @@ function ($scope, $rootScope, $location) {
 			var totalEstimatedTime = 0.0;
 			for (var i in $rootScope.tickets) {
 				if ($rootScope.tickets[i].owner === $scope.selectedTeamMember.username) {
-					totalLoggedTime+=$rootScope.tickets[i].loggedTime;
-					totalEstimatedTime+=$rootScope.tickets[i].estimatedTime;
+					totalLoggedTime += $rootScope.tickets[i].loggedTime;
+					totalEstimatedTime += $rootScope.tickets[i].estimatedTime;
 				}
+			}
+			if (totalLoggedTime === totalEstimatedTime === 0.0 || totalEstimatedTime === 0.0) {
+				return 1;
 			}
 			return (totalLoggedTime / totalEstimatedTime).toFixed(2);
 		}

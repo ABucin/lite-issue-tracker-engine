@@ -39,7 +39,17 @@ exports.getSettings = function (username, res) {
  */
 exports.register = function (req, res) {
 	User.register(new User({
-		username: req.body.username
+		username: req.body.username,
+		email: req.body.email,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		settings: [{
+			key: utils.generateKey(),
+			displayUserActivity: true,
+			displayUserChart: true,
+			displayUserEmail: true,
+			displayUserRole: true
+	}]
 	}), req.body.password, function (err, user) {
 		if (err) {
 			console.log("Registration error %s", err);
@@ -47,8 +57,24 @@ exports.register = function (req, res) {
 		} else {
 			passport.authenticate('local')(req, res, function () {
 				console.log("Registration successful. User %s authenticated.", req.body.username);
-				res.send(201, {
-					username: req.body.username
+				User.findOne({
+					'username': req.body.username
+				}, function (err, user) {
+					if (err) {
+						res.send(500, err);
+					} else {
+						res.send(201, {
+							username: user.username,
+							email: user.email,
+							role: user.role,
+							projectRole: user.projectRole,
+							project: user.project,
+							expertise: user.expertise,
+							firstName: user.firstName,
+							lastName: user.lastName,
+							settings: user.settings
+						});
+					}
 				});
 			});
 		}
@@ -63,7 +89,15 @@ exports.login = function (username, res) {
 			res.send(500, err);
 		} else {
 			res.send(200, {
-				username: user.username
+				username: user.username,
+				email: user.email,
+				role: user.role,
+				projectRole: user.projectRole,
+				project: user.project,
+				expertise: user.expertise,
+				firstName: user.firstName,
+				lastName: user.lastName,
+				settings: user.settings
 			});
 		}
 	});

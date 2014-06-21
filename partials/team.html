@@ -5,7 +5,7 @@
 				<li class="header">
 					Members
 				</li>
-				<li class="toggleable" ng-repeat="user in users" ng-click="selectTeamMember(user)" ng-class="(user.username === username) ? 'active': ''"><i class="chart-icon fa fa-fw fa-{{getRoleIcon(user.projectRole)}}"></i>{{user.username}}</li>
+				<li class="toggleable" ng-repeat="user in users" ng-click="selectTeamMember(user.username)" ng-class="(user.username === username) ? 'active': ''"><i class="chart-icon fa fa-fw fa-{{getRoleIcon(user.projectRole)}}"></i>{{user.username}}</li>
 				<li class="toggleable text-center"><i class="chart-icon fa fa-fw fa-plus"></i>
 				</li>
 			</ul>
@@ -14,23 +14,31 @@
 			<p>
 				<img ng-if="selectedTeamMember.username.length" ng-src="./img/{{selectedTeamMember.username}}.jpg" class="img-responsive img-thumbnail" width="100" />
 				<br>
-				<strong>Role:</strong> {{selectedTeamMember.projectRole | capitalize}}
+				<strong>Username:</strong>  <span ng-bind="selectedTeamMember.username"></span>
 				<br>
-				<strong>Expertise:</strong> {{selectedTeamMember.expertise}}
+				<strong>First Name:</strong>  <span ng-bind="selectedTeamMember.firstName"></span>
 				<br>
-				<strong>Open Tickets:</strong> {{getOpenTickets()}}
+				<strong>Last Name:</strong>  <span ng-bind="selectedTeamMember.lastName"></span>
 				<br>
-				<strong>Effort-Estimation Ratio:</strong> {{getEffortEstimationRatio()}}
+				<strong>Email Address:</strong>  <span ng-bind="selectedTeamMember.email"></span>
+				<br>
+				<strong>Role:</strong>  <span ng-bind="selectedTeamMember.projectRole"></span>
+				<br>
+				<strong>Expertise:</strong>  <span ng-bind="selectedTeamMember.expertise"></span>
+				<br>
+				<strong>Open Tickets:</strong> <span ng-bind="getOpenTickets()"></span>
+				<br>
+				<strong>Effort-Estimation Ratio:</strong> <span ng-bind="getEffortEstimationRatio()"></span>
 				<br>
 				<strong>Latest Tickets:</strong>
 				<span class="ticket ticket-{{ticket.type}} ticket-code" ng-repeat="ticket in tickets | filter: selectedTeamMember.username | limitTo: 5">
 					TC-{{ticket.code}}
-					<span class="ticket-title">{{ticket.title}}</span>
+					<span class="ticket-title" ng-bind="ticket.title"></span>
 				</span>
 				<br>
 				<strong>Latest Comments:</strong>
-					<p ng-repeat="comment in selectedTeamMember.comments | limitTo: 5"><i class="fa fa-angle-double-right"></i>"{{comment.content}}" <strong>({{comment.timestamp | date:'yyyy-MM-dd HH:mm:ss'}})</strong>
-					</p>
+				<p ng-repeat="comment in selectedTeamMember.comments | limitTo: 5"><i class="fa fa-angle-double-right"></i>"{{comment.content}}" <strong>(<span ng-bind="comment.timestamp | date:'yyyy-MM-dd HH:mm:ss'"></span>)</strong>
+				</p>
 			</p>
 		</div>
 	</div>

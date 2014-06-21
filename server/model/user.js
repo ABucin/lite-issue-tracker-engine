@@ -16,8 +16,14 @@ var UserSchema = new Schema({
 	},
 	email: {
 		type: String,
-//		required: true,
+		required: true,
 		unique: true
+	},
+	firstName: {
+		type: String
+	},
+	lastName: {
+		type: String
 	},
 	username: {
 		type: String

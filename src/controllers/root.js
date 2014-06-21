@@ -64,7 +64,7 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		};
 
 		$rootScope.registrationData = {
-			//			email: null,
+			email: null,
 			username: null,
 			password: null,
 			confirmedPassword: null

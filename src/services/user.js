@@ -1,6 +1,14 @@
 app.service('UserService', ['$rootScope', 'ResourceService',
 	function ($rootScope, ResourceService) {
 
+		this.getUser = function (username, result) {
+			var callback = function (data) {
+				angular.copy(data[0], result);
+			};
+
+			ResourceService.getData('users/' + username, null, callback);
+		};
+
 		this.fetchUserData = function () {
 			var callback = function (data) {
 				$rootScope.users = data;
