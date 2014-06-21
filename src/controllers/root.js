@@ -108,7 +108,9 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService, Au
 		};
 
 		$scope.fetchUserData = function () {
-			UserService.fetchUserData();
+			if ($rootScope.isAuthenticated()) {
+				UserService.fetchUserData();
+			}
 		}
 
 		/**

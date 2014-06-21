@@ -48,7 +48,7 @@ router.route('/register')
 
 router.route('/login')
 	.post(passport.authenticate('local'), function (req, res) {
-		res.send(200);
+		persistenceService.login(req.body.username, res);
 	});
 
 router.route('/logout')

@@ -55,6 +55,20 @@ exports.register = function (req, res) {
 	});
 }
 
+exports.login = function (username, res) {
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			res.send(200, {
+				username: user.username
+			});
+		}
+	});
+};
+
 /**
  * Users.
  */

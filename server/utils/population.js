@@ -19,7 +19,6 @@ exports.populateDb = function () {
 
 	var code = 0;
 	var firstUserTickets = [];
-	var secondUserTickets = [];
 
 	var generateTicket = function (tickets, title, status, type, description, owner, priority, estimatedTime, loggedTime) {
 		return tickets.push({
@@ -36,75 +35,14 @@ exports.populateDb = function () {
 		});
 	}
 
-	generateTicket(firstUserTickets, "Email Validation Not Working", "testing", "bug", "The email validation is broken for several users.", "psmith", "normal", 15, 20);
-	generateTicket(firstUserTickets, "Authentication Whitespace Handling", "created", "bug", "The authentication ignores whitespace.", "psmith", "minor", 5, 10);
-	generateTicket(firstUserTickets, "Registration Page Header Missing", "done", "bug", "The registration page does not contain any headers.", "psmith", "minor", 9, 18);
-	generateTicket(firstUserTickets, "Minor CSS Alignment Bug", "in_progress", "bug", "The logo is misaligned in IE6.", "abucin", "major", 25, 12);
-	generateTicket(firstUserTickets, "Review Currency Conversion Code", "created", "task", "Create a secure mechanism for registering an account.", "abucin", "major", 15, 30);
-	generateTicket(firstUserTickets, "Implement User Password Reset", "created", "task", "See title.", "psmith", "normal", 20, 10);
-
-	generateTicket(secondUserTickets, "Plan Review Meeting", "in_progress", "task", "This Thursday at 10:00.", "abucin", "normal", 10, 20);
-	generateTicket(secondUserTickets, "Add Colour Palette", "testing", "task", "Create a colour palette for the website.", "", "major", 12, 12);
-	generateTicket(secondUserTickets, "Remove Redundant Tests", "in_progress", "task", "Remove tests that are not used.", "abucin", "minor", 10, 5);
-	generateTicket(secondUserTickets, "Fix CSS Button Padding", "in_progress", "bug", "The login button has extra padding.", "abucin", "minor", 10, 20);
+	generateTicket(firstUserTickets, "Plan Review Meeting", "in_progress", "task", "This Thursday at 10:00.", "abucin", "normal", 10, 20);
+	generateTicket(firstUserTickets, "Add Colour Palette", "testing", "task", "Create a colour palette for the website.", "", "major", 12, 12);
+	generateTicket(firstUserTickets, "Remove Redundant Tests", "in_progress", "task", "Remove tests that are not used.", "abucin", "minor", 10, 5);
+	generateTicket(firstUserTickets, "Fix CSS Button Padding", "in_progress", "bug", "The login button has extra padding.", "abucin", "minor", 10, 20);
 
 	var sampleTicketKey = utils.generateKey();
 
 	var firstUser = new User({
-		key: utils.generateKey(),
-		username: "psmith",
-		email: "psmith@dummy.com",
-		role: "user",
-		projectRole: "tester",
-		project: "email-client",
-		expertise: "Selenium, jQuery, JavaScript",
-		tickets: firstUserTickets,
-		settings: [{
-			key: utils.generateKey(),
-			displayUserActivity: true,
-			displayUserChart: true,
-			displayUserEmail: true,
-			displayUserRole: true
-		}],
-		logs: [{
-			key: utils.generateKey(),
-			action: "times",
-			target: "2",
-			targetType: "task",
-			username: "psmith"
-}, {
-			key: utils.generateKey(),
-			action: "clock-o",
-			amount: 2,
-			target: "3",
-			targetType: "bug",
-			username: "psmith",
-			timestamp: new Date().setTime(new Date() - (1000 * 60 * 60 * 24)) // yesterday
-		}, {
-			key: utils.generateKey(),
-			action: "clock-o",
-			amount: 6,
-			target: "2",
-			targetType: "task",
-			username: "psmith"
-		}, {
-			key: utils.generateKey(),
-			action: "pencil",
-			target: "3",
-			targetType: "bug",
-			username: "psmith"
-}],
-		comments: [{
-			key: utils.generateKey(),
-			content: "I think that the ticket should be marked as fixed.",
-			ticket: sampleTicketKey
-		}]
-	});
-//	firstUser.setPassword("test", function(){
-//		console.log("password set");
-//	});
-
-	var secondUser = new User({
 		key: utils.generateKey(),
 		username: "abucin",
 		email: "abucin@gmail.com",
@@ -115,7 +53,7 @@ exports.populateDb = function () {
 		projectRole: "developer",
 		project: "email-client",
 		expertise: "Java, PHP, JavaScript, Web Design",
-		tickets: secondUserTickets,
+		tickets: firstUserTickets,
 		settings: [{
 			key: utils.generateKey(),
 			displayUserActivity: true,
@@ -155,15 +93,11 @@ exports.populateDb = function () {
 			ticket: sampleTicketKey
 		}]
 	});
-//	secondUser.setPassword("test", function(){
-//		console.log("password set");
-//	});
+	//	firstUser.setPassword("test", function(){
+	//		console.log("password set");
+	//	});
 
 	firstUser.save(function (err) {
 		if (err) return console.error(err); // we should handle this
-
-		secondUser.save(function (err) {
-			if (err) return console.error(err); // we should handle this
-		});
 	});
 };
