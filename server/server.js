@@ -6,6 +6,7 @@ var express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	server = express(),
 	port = 3000,
+	ip = "0.0.0.0",
 	router = express.Router(),
 	// Required files.
 	utils = require('./utils/population'),
@@ -24,7 +25,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 server.use('/itracker/api', router);
 
-server.listen(port);
+server.listen(port, ip);
 
 // Add default data to database.
 utils.populateDb();
