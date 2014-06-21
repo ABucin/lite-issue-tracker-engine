@@ -1,19 +1,19 @@
 <h4>Avatar</h4>
 <div class="col-sm-12 form-group">
-	<img src="./img/{{username}}.jpg" class="img-responsive img-thumbnail" width="150" />
+	<img src="./img/{{getAuthenticatedUser().username}}.jpg" class="img-responsive img-thumbnail" width="150" />
 </div>
 <h4>Profile</h4>
 <ul class="nav">
 	<li>
-		<strong>First Name:</strong> {{settingsData.firstName}} <i class="fa fa-edit fa-fw"></i>
+		<strong>First Name:</strong> {{getAuthenticatedUser().firstName}} <i class="fa fa-edit fa-fw"></i>
 	</li>
 	<li>
-		<strong>Last Name:</strong> {{settingsData.lastName}} <i class="fa fa-edit fa-fw"></i>
+		<strong>Last Name:</strong> {{getAuthenticatedUser().lastName}} <i class="fa fa-edit fa-fw"></i>
 	</li>
 	<li>
-		<strong>Email Address:</strong> {{settingsData.email}} <i class="fa fa-edit fa-fw"></i>
+		<strong>Email Address:</strong> {{getAuthenticatedUser().email}} <i class="fa fa-edit fa-fw"></i>
 	</li>
 	<li>
-		<strong>Expertise:</strong> {{settingsData.expertise}} <i class="fa fa-edit fa-fw"></i>
+		<strong>Expertise:</strong> {{getAuthenticatedUser().expertise}} <i class="fa fa-edit fa-fw"></i>
 	</li>
 </ul>

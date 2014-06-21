@@ -5,7 +5,7 @@ app.directive('ticket', function ($rootScope) {
 			var setOwnStatus = function () {
 				if (scope.ticket.owner === undefined || !scope.ticket.owner.length) {
 					scope.ownStatus = "ticket-unassigned";
-				} else if (scope.ticket.owner !== $rootScope.getAuthenticatedUser()) {
+				} else if (scope.ticket.owner !== $rootScope.getAuthenticatedUser().username) {
 					scope.ownStatus = "ticket-not-owned";
 				} else {
 					scope.ownStatus = "";
@@ -67,7 +67,7 @@ app.directive('ticket', function ($rootScope) {
 
 			element[0].addEventListener('dragstart', function (e) {
 				// cannot drag and drop the tickets that are not assigned to current user
-				if (scope.ticket.owner !== $rootScope.getAuthenticatedUser()) {
+				if (scope.ticket.owner !== $rootScope.getAuthenticatedUser().username) {
 					e.preventDefault();
 				} else {
 					angular.copy(scope.ticket, $rootScope.copiedEntity);
@@ -75,7 +75,7 @@ app.directive('ticket', function ($rootScope) {
 			});
 		},
 		replace: true,
-		template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>TC-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='actions.isDeleting && ticket.owner === getAuthenticatedUser()'></i></span></div>"
+		template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>TC-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='actions.isDeleting && ticket.owner === getAuthenticatedUser().username'></i></span></div>"
 	};
 });
 

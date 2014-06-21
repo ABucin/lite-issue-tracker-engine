@@ -7,11 +7,11 @@
 				</li>
 				<li class="toggleable active" ng-click="fetchSettingsData('profile')"><i class="chart-icon fa fa-fw fa-user"></i>Profile</li>
 				<li class="toggleable" ng-click="fetchSettingsData('dashboard')"><i class="chart-icon fa fa-fw fa-th-large"></i>Dashboard</li>
-				<li class="header">
+				<li ng-show="getAuthenticatedUser().role === 'admin'" class="header">
 					Administration
 				</li>
-				<li class="toggleable" ng-click="fetchSettingsData('users')"><i class="chart-icon fa fa-fw fa-users"></i>Users</li>
-				<li class="toggleable" ng-click="fetchSettingsData('projects')"><i class="chart-icon fa fa-fw fa-bookmark"></i>Projects</li>
+				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-click="fetchSettingsData('users')"><i class="chart-icon fa fa-fw fa-users"></i>Users</li>
+				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-click="fetchSettingsData('projects')"><i class="chart-icon fa fa-fw fa-bookmark"></i>Projects</li>
 			</ul>
 		</div>
 		<div class="col-lg-10 col-md-4 col-sm-9 col-xs-7">

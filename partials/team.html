@@ -5,8 +5,8 @@
 				<li class="header">
 					Members
 				</li>
-				<li class="toggleable" ng-repeat="user in users" ng-click="selectTeamMember(user.username)" ng-class="(user.username === username) ? 'active': ''"><i class="chart-icon fa fa-fw fa-{{getRoleIcon(user.projectRole)}}"></i>{{user.username}}</li>
-				<li class="toggleable text-center"><i class="chart-icon fa fa-fw fa-plus"></i>
+				<li class="toggleable" ng-repeat="user in users" ng-click="selectTeamMember(user.username)" ng-class="(user.username === username) ? 'active': ''"><i class="chart-icon fa fa-fw fa-{{getRoleIcon(user.projectRole)}}"></i>{{user.username}} <i ng-show="getAuthenticatedUser().role === 'admin'" class="fa fa-times"></i></li>
+				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable text-center"><i class="chart-icon fa fa-fw fa-plus"></i>
 				</li>
 			</ul>
 		</div>

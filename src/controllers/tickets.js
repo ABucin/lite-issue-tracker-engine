@@ -28,13 +28,13 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			priority: "major",
 			estimatedTime: 0.0,
 			loggedTime: 0.0,
-			owner: $rootScope.getAuthenticatedUser(),
-			user: $rootScope.getAuthenticatedUser()
+			owner: $rootScope.getAuthenticatedUser().username,
+			user: $rootScope.getAuthenticatedUser().username
 		};
 
 		$scope.comment = {
 			key: "",
-			author: $rootScope.getAuthenticatedUser(),
+			author: $rootScope.getAuthenticatedUser().username,
 			content: ""
 		};
 
@@ -62,7 +62,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			if ($rootScope.filters.displayTickets === 'all') {
 				return true;
 			} else if ($rootScope.filters.displayTickets === 'mine') {
-				return (owner === $rootScope.getAuthenticatedUser());
+				return (owner === $rootScope.getAuthenticatedUser().username);
 			} else if ($rootScope.filters.displayTickets === 'unassigned') {
 				return (owner === undefined || !owner.length);
 			}
@@ -114,25 +114,25 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 				targetType: ticket.type,
 				comment: $scope.comment.content,
 				amount: $scope.loggedWork.amount,
-				username: $rootScope.getAuthenticatedUser()
+				username: $rootScope.getAuthenticatedUser().username
 			};
 
-			LogsService.logData($rootScope.getAuthenticatedUser(), log, $rootScope.dashboard.logEntries);
+			LogsService.logData($rootScope.getAuthenticatedUser().username, log, $rootScope.dashboard.logEntries);
 		};
 
 		/*
 		 * Comments.
 		 */
 		$scope.addComment = function () {
-			CommentsService.addComment($rootScope.getAuthenticatedUser(), $scope.updatedTicket.key, $scope.comment, $scope.comments);
+			CommentsService.addComment($rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
 		}
 
 		$scope.deleteComment = function (commentKey) {
-			CommentsService.deleteComment($rootScope.getAuthenticatedUser(), commentKey, $scope.comments, $scope.comment);
+			CommentsService.deleteComment($rootScope.getAuthenticatedUser().username, commentKey, $scope.comments, $scope.comment);
 		}
 
 		$scope.editComment = function () {
-			CommentsService.editComment($rootScope.getAuthenticatedUser(), $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
+			CommentsService.editComment($rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
 		}
 
 		$scope.fetchComments = function (commentKey) {
@@ -143,14 +143,14 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		 * Tickets.
 		 */
 		$scope.addTicket = function () {
-			TicketsService.addTicket($rootScope.getAuthenticatedUser(), $scope.ticket, $rootScope.tickets, $rootScope.createdTickets);
+			TicketsService.addTicket($rootScope.getAuthenticatedUser().username, $scope.ticket, $rootScope.tickets, $rootScope.createdTickets);
 		};
 
 		$scope.updateTicket = function () {
-			TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser(), $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
+			TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
 		};
 
 		$scope.deleteTicket = function (key) {
-			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser(), $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTicket);
+			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser().username, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTicket);
 		};
 }]);

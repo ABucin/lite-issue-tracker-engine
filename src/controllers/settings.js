@@ -20,7 +20,7 @@ function ($scope, $rootScope, $location, ResourceService) {
 			var callback = function (data) {
 				$scope.settings = data[0];
 			};
-			ResourceService.getData('users/' + $rootScope.getAuthenticatedUser() + '/settings', null, callback);
+			ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().username + '/settings', null, callback);
 		};
 
 }]);

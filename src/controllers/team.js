@@ -8,7 +8,7 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 			UserService.getUser(username, $scope.selectedTeamMember);
 		}
 
-		$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser());
+		$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser().username);
 
 
 		$scope.getOpenTickets = function () {

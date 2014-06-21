@@ -7,7 +7,7 @@ app.service('AuthenticationService', ['ResourceService', '$rootScope', '$cookieS
 		};
 
 		this.getAuthenticatedUser = function () {
-			return $cookieStore.get('user').username;
+			return ($cookieStore.get('user') !== undefined) ? $cookieStore.get('user') : {};
 		}
 
 		this.login = function (data) {
