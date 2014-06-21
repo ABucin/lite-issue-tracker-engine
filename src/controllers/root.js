@@ -29,8 +29,8 @@ function ($routeProvider) {
 		});
 }]);
 
-app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', 'ResourceService', 'UserService', 'AuthenticationService',
-function ($scope, $rootScope, $location, $http, ResourceService, UserService, AuthenticationService) {
+app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', '$cookieStore', 'ResourceService', 'UserService', 'AuthenticationService',
+function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, UserService, AuthenticationService) {
 		$rootScope.createAction = null;
 
 		$rootScope.canFilter = false;
@@ -101,7 +101,19 @@ function ($scope, $rootScope, $location, $http, ResourceService, UserService, Au
 
 		$rootScope.navigate = function (url) {
 			$location.path('/' + url);
+			$cookieStore.put('page', {
+				name: url
+			});
 		};
+
+		$rootScope.getPageName = function () {
+			var page = $cookieStore.get('page');
+			if (page !== undefined && page.name !== undefined) {
+				return page.name;
+			}
+
+			return "dashboard";
+		}
 
 		$scope.register = function () {
 			AuthenticationService.register($rootScope.registrationData);

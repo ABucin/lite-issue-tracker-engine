@@ -4,23 +4,23 @@
 			<a class="navbar-brand">Issue Tracker v.1.0</a>
 			<span ng-include="submenuTemplates[0].url"></span>
 			<ul class="nav navbar-nav collapse navbar-collapse">
-				<li class='toggleable'>
+				<li class='toggleable' url='dashboard'>
 					<a ng-click="navigate('dashboard')">
 						<i class="fa fa-home"></i>Dashboard</a>
 				</li>
-				<li class='toggleable'>
+				<li class='toggleable' url='tickets'>
 					<a ng-click="navigate('tickets')">
 						<i class="fa fa-ticket"></i>Tickets</a>
 				</li>
-				<li class='toggleable'>
+				<li class='toggleable' url='analytics'>
 					<a ng-click="navigate('analytics')">
 						<i class="fa fa-bar-chart-o"></i>Analytics</a>
 				</li>
-				<li class='toggleable'>
+				<li class='toggleable' url='team'>
 					<a ng-click="navigate('team')">
 						<i class="fa fa-users"></i>Team</a>
 				</li>
-				<li class='toggleable'>
+				<li class='toggleable' url='settings'>
 					<a ng-click="navigate('settings')">
 						<i class="fa fa-cog"></i>Settings</a>
 				</li>
