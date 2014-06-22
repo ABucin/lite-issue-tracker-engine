@@ -29,8 +29,8 @@ function ($routeProvider) {
 		});
 }]);
 
-app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', '$cookieStore', 'ResourceService', 'UserService', 'AuthenticationService',
-function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, UserService, AuthenticationService) {
+app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', '$cookieStore', 'ResourceService', 'UserService', 'AuthenticationService', 'SettingsService',
+function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, UserService, AuthenticationService, SettingsService) {
 		$rootScope.createAction = null;
 
 		$rootScope.canFilter = false;
@@ -88,8 +88,7 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		$scope.templateRegisterSuccess = $scope.templates[1];
 
 		angular.element(document).ready(function () {
-			// disable when user auth in place
-			$scope.fetchUserData();
+			$scope.loadData();
 
 			// set Highcharts config options
 			Highcharts.setOptions({
@@ -121,10 +120,17 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			AuthenticationService.register($rootScope.registrationData);
 		};
 
-		$scope.fetchUserData = function () {
+		$scope.loadData = function () {
 			if ($rootScope.isAuthenticated()) {
+				// disable when user auth in place
 				UserService.fetchUserData();
+				// caches the settings for the current user
+				SettingsService.loadSettings();
 			}
+		}
+
+		$rootScope.getSettings = function () {
+			return SettingsService.getSettings();
 		}
 
 		/**

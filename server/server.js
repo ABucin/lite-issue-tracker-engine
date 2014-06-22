@@ -145,3 +145,8 @@ router.route('/users/:uname/settings')
 	.get(function (req, res) {
 		persistenceService.getSettings(req.params.uname, res);
 	});
+
+router.route('/users/:uname/settings/:key')
+	.put(function (req, res) {
+		persistenceService.updateSettings(req.params.uname, req.params.key, req.body, res);
+	});

@@ -6,4 +6,12 @@ function ($scope, $rootScope, $location, AnalyticsService, LogsService) {
 
 		LogsService.fetchLogData($rootScope.dashboard.logEntries);
 
+		$scope.computeDashboardPanelWidth = function (condition) {
+			var width = 6;
+			if (!condition) {
+				width = 12;
+			}
+			return "col-lg-" + width + " col-md-" + width + " col-sm-" + width + " col-xs-" + width;
+		};
+
 }]);

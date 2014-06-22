@@ -1,6 +1,6 @@
 <div class="panel panel-dashboard">
 	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		<div ng-if="getSettings().displayUserChart" ng-class="computeDashboardPanelWidth(getSettings().displayUserActivity)">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Workload
@@ -10,12 +10,11 @@
 				</div>
 				<div class="panel-body panel-body-dashboard collapse in" id="panel-workload">
 					<div id="chart">
-
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 dashboard-panel-right">
+		<div ng-if="getSettings().displayUserActivity" class="dashboard-panel-right" ng-class="computeDashboardPanelWidth(getSettings().displayUserChart)">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Recent Tasks

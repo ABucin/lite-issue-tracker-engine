@@ -26,6 +26,7 @@ app.service('AuthenticationService', ['ResourceService', '$rootScope', '$cookieS
 			var callback = function (data) {
 				$cookieStore.remove('user');
 				$cookieStore.remove('page');
+				$cookieStore.remove('settings');
 				$rootScope.navigate('login');
 			};
 

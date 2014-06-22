@@ -34,6 +34,33 @@ exports.getSettings = function (username, res) {
 	});
 };
 
+exports.updateSettings = function (username, key, settings, res) {
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			_.each(user.settings, function (s, i, list) {
+				if (s.key == key) {
+					s.displayUserActivity = settings.displayUserActivity;
+					s.displayUserChart = settings.displayUserChart;
+					s.displayUserEmail = settings.displayUserEmail;
+					s.displayUserRole = settings.displayUserRole;
+				}
+			});
+
+			user.save(function (err) {
+				if (err) {
+					res.send(500, err);
+				} else {
+					res.json(settings);
+				}
+			});
+		}
+	});
+};
+
 /**
  * Authentication.
  */
