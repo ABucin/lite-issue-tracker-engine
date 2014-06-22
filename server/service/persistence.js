@@ -134,6 +134,18 @@ exports.getUser = function (username, res) {
 	});
 };
 
+exports.getUsersWithProject = function (project, res) {
+	User.find({
+		project: project
+	}, function (err, users) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			res.json(users);
+		}
+	});
+};
+
 /**
  * Tickets.
  */

@@ -9,6 +9,19 @@ app.service('UserService', ['$rootScope', 'ResourceService',
 			ResourceService.getData('users/' + username, null, callback);
 		};
 
+		this.getUnassignedUsers = function (result) {
+			var callback = function (data) {
+				for(var i in data){
+					result.push(data[i]);
+				}
+//				angular.copy(data, result);
+			};
+
+			ResourceService.getData('users', {
+				project: "unassigned"
+			}, callback);
+		}
+
 		this.fetchUserData = function () {
 			var callback = function (data) {
 				$rootScope.users = data;

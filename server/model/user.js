@@ -51,8 +51,7 @@ var UserSchema = new Schema({
 	},
 	project: {
 		type: String,
-		required: true,
-		default: "issue-tracker"
+		default: "unassigned"
 	},
 	expertise: {
 		type: String

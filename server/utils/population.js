@@ -52,7 +52,7 @@ exports.populateDb = function () {
 		hash: null,
 		role: "admin",
 		projectRole: "developer",
-		project: "email-client",
+		project: "issue-tracker",
 		expertise: "Java, PHP, JavaScript, Web Design",
 		tickets: userTickets,
 		settings: [{

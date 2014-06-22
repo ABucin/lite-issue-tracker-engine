@@ -10,6 +10,18 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 
 		$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser().username);
 
+		$scope.modalTemplates = [{
+			url: 'partials/modals/team/user_assign.html'
+			}];
+
+		$scope.templateUserAssignModal = $scope.modalTemplates[0];
+
+		$scope.unassignedUser = {};
+		$scope.unassignedUsers = [];
+
+		$scope.getUnassignedUsers = function() {
+			UserService.getUnassignedUsers($scope.unassignedUsers);
+		}
 
 		$scope.getOpenTickets = function () {
 			var openTickets = 0;

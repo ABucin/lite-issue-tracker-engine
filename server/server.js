@@ -61,9 +61,13 @@ router.route('/logout')
 /**
  * Users.
  */
-router.route('/users')
+router.route('/users?:project')
 	.get(function (req, res) {
-		persistenceService.getAllUsers(res);
+		if (req.query.project === undefined) {
+			persistenceService.getAllUsers(res);
+		} else {
+			persistenceService.getUsersWithProject(req.query.project, res);
+		}
 	});
 
 router.route('/users/:uname')
