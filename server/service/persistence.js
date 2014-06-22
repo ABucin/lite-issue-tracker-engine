@@ -61,6 +61,27 @@ exports.updateSettings = function (username, key, settings, res) {
 	});
 };
 
+exports.updateAllSettings = function (username, settings, res) {
+	User.find(function (err, users) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			_.each(users, function (user, i, list) {
+				user.settings[0].displayUserEmail = settings.displayUserEmail;
+				user.settings[0].displayUserRole = settings.displayUserRole;
+
+				user.save(function (err) {
+					if (err) {
+						res.send(500, err);
+					} else {
+						res.json(settings);
+					}
+				});
+			});
+		}
+	});
+};
+
 /**
  * Authentication.
  */

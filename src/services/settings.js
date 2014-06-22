@@ -27,4 +27,19 @@ app.service('SettingsService', ['$rootScope', '$cookieStore', 'ResourceService',
 				ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().username + '/settings', null, callback);
 			}
 		};
+
+		this.setGlobalSettings = function (property, value) {
+			var callback = function (data) {
+				$cookieStore.remove('settings');
+				$cookieStore.put('settings', data);
+			};
+
+			if ($cookieStore.get('settings') !== undefined) {
+				var payload = $cookieStore.get('settings');
+				payload[property] = value;
+				ResourceService.putData('users/' + $rootScope.getAuthenticatedUser().username + '/settings', payload, callback);
+			} else {
+				ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().username + '/settings', null, callback);
+			}
+		};
 }]);

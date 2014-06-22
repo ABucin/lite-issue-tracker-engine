@@ -16,8 +16,12 @@ function ($scope, $rootScope, $location, SettingsService) {
 			SettingsService.loadSettings();
 		};
 
-		$scope.setSettings = function(property, value) {
+		$scope.setSettings = function (property, value) {
 			SettingsService.setSettings(property, value);
+		};
+
+		$scope.setGlobalSettings = function (property, value) {
+			SettingsService.setGlobalSettings(property, value);
 		};
 
 }]);

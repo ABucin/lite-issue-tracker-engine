@@ -144,6 +144,9 @@ router.route('/analytics?:type')
 router.route('/users/:uname/settings')
 	.get(function (req, res) {
 		persistenceService.getSettings(req.params.uname, res);
+	})
+	.put(function (req, res) {
+		persistenceService.updateAllSettings(req.params.uname, req.body, res);
 	});
 
 router.route('/users/:uname/settings/:key')
