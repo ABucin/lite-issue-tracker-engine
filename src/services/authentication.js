@@ -14,8 +14,8 @@ app.service('AuthenticationService', ['ResourceService', '$rootScope', '$cookieS
 			var callback = function (data) {
 				if (!$rootScope.general.errors.length) {
 					$rootScope.general.errors = [];
-					$rootScope.navigate('dashboard');
 					$cookieStore.put('user', data);
+					$rootScope.navigate('dashboard');
 				}
 			};
 

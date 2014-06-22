@@ -42,6 +42,8 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			displayTickets: 'all'
 		};
 
+		$rootScope.project = "issue-tracker";
+
 		$rootScope.submitted = false;
 
 		$rootScope.tickets = [];

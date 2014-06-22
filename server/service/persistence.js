@@ -194,6 +194,26 @@ exports.getUsersWithProject = function (project, res) {
 	});
 };
 
+exports.updateUser = function (username, data, res) {
+	User.findOne({
+		'username': username
+	}, function (err, user) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			user.project = data.project;
+
+			user.save(function (err) {
+				if (err) {
+					res.send(500, err);
+				} else {
+					res.json(user);
+				}
+			});
+		}
+	});
+};
+
 /**
  * Tickets.
  */

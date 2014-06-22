@@ -19,8 +19,22 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		$scope.unassignedUser = {};
 		$scope.unassignedUsers = [];
 
-		$scope.getUnassignedUsers = function() {
+		$scope.getUnassignedUsers = function () {
 			UserService.getUnassignedUsers($scope.unassignedUsers);
+		}
+
+		$scope.setProject = function (username) {
+			UserService.updateUser(username, {
+				project: $rootScope.project
+			}, $rootScope.users);
+		}
+
+		$scope.unsetProject = function (username, event) {
+			event.preventDefault();
+			event.stopPropagation();
+			UserService.updateUser(username, {
+				project: "unassigned"
+			}, $rootScope.users);
 		}
 
 		$scope.getOpenTickets = function () {

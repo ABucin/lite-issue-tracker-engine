@@ -1,17 +1,17 @@
 <div class="panel panel-team">
 	<div class="row">
-		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-4 secondary-menu">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 secondary-menu">
 			<ul class="nav">
 				<li class="header">
 					Members
 				</li>
-				<li class="toggleable" ng-repeat="user in users" ng-click="selectTeamMember(user.username)" ng-class="(user.username === username) ? 'active': ''"><i class="chart-icon fa fa-fw fa-{{getRoleIcon(user.projectRole)}}"></i>{{user.username}} <i ng-show="getAuthenticatedUser().role === 'admin'" class="fa fa-times"></i>
+				<li class="toggleable" ng-repeat="user in users | filter: project" ng-click="selectTeamMember(user.username)" ng-class="(user.username === username) ? 'active': ''"><i class="chart-icon fa fa-fw fa-{{getRoleIcon(user.projectRole)}}"></i>{{user.username}} <i ng-show="getAuthenticatedUser().role === 'admin' && getAuthenticatedUser().username !== user.username" class="fa fa-times" ng-click="unsetProject(user.username, $event)"></i>
 				</li>
 				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable text-center" ng-click="getUnassignedUsers()" data-toggle="modal" data-target="#user-assignment-modal"><i class="chart-icon fa fa-fw fa-plus"></i>
 				</li>
 			</ul>
 		</div>
-		<div class="col-lg-10 col-md-4 col-sm-9 col-xs-8">
+		<div class="col-lg-10 col-md-4 col-sm-9 col-xs-7">
 			<p>
 				<img ng-if="selectedTeamMember.username.length" ng-src="./img/{{selectedTeamMember.username}}.jpg" class="img-responsive img-thumbnail" width="100" />
 				<br>

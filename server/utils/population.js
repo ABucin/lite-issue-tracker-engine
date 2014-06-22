@@ -95,9 +95,41 @@ exports.populateDb = function () {
 		}]
 	});
 
+	var user2 = new User({
+		key: utils.generateKey(),
+		username: "test",
+		email: "test@gmail.com",
+		firstName: "test",
+		lastName: "test",
+		salt: null,
+		hash: null,
+		role: "user",
+		projectRole: "developer",
+		project: "unassigned",
+		expertise: "Java, PHP, JavaScript, Web Design",
+		tickets: [],
+		settings: [{
+			key: utils.generateKey(),
+			displayUserActivity: true,
+			displayUserChart: true,
+			displayUserEmail: true,
+			displayUserRole: true
+		}],
+		logs: [],
+		comments: []
+	});
+
 	user.setPassword("abucin", function () {
 		user.save(function (err) {
-			if (err) return console.error(err); // we should handle this
+			if (err) {
+				return console.error(err); // we should handle this
+			} else {
+				user2.save(function (err) {
+					if (err) {
+						return console.error(err); // we should handle this
+					}
+				});
+			}
 		});
 	});
 

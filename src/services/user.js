@@ -9,12 +9,26 @@ app.service('UserService', ['$rootScope', 'ResourceService',
 			ResourceService.getData('users/' + username, null, callback);
 		};
 
+		this.updateUser = function (username, user, users) {
+			var self = this;
+			var callback = function (data) {
+//				for (var i in users) {
+//					if (users[i].username === username) {
+//						//angular.copy(data, users[i]);
+//						users.push(data);
+//					}
+//				}
+				self.fetchUserData();
+			};
+
+			ResourceService.putData('users/' + username, user, callback);
+		};
+
 		this.getUnassignedUsers = function (result) {
 			var callback = function (data) {
-				for(var i in data){
+				for (var i in data) {
 					result.push(data[i]);
 				}
-//				angular.copy(data, result);
 			};
 
 			ResourceService.getData('users', {

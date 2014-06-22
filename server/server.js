@@ -73,6 +73,9 @@ router.route('/users?:project')
 router.route('/users/:uname')
 	.get(function (req, res) {
 		persistenceService.getUser(req.params.uname, res);
+	})
+	.put(function (req, res) {
+		persistenceService.updateUser(req.params.uname, req.body, res);
 	});
 
 /**
