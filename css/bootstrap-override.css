@@ -29,6 +29,8 @@ nav.navbar li ul.dropdown-menu {font-size: 90%;}
 .panel > .panel-heading {background-color: #ededed;}
 .panel.panel-dashboard .ticket {margin:3px;}
 
+.panel.panel-settings ul.list-unstyled li:hover {cursor: pointer;}
+
 .sidebar button[data-target*='-modal'] {margin: 5px 0;}
 
 .list-group-item { padding: 5px 10px; }
