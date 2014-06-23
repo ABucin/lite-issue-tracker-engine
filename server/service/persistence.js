@@ -201,7 +201,21 @@ exports.updateUser = function (username, data, res) {
 		if (err) {
 			res.send(500, err);
 		} else {
-			user.project = data.project;
+			if (data.project !== undefined) {
+				user.project = data.project;
+			}
+			if (data.firstName !== undefined) {
+				user.firstName = data.firstName;
+			}
+			if (data.lastName !== undefined) {
+				user.lastName = data.lastName;
+			}
+			if (data.email !== undefined) {
+				user.email = data.email;
+			}
+			if (data.expertise !== undefined) {
+				user.expertise = data.expertise;
+			}
 
 			user.save(function (err) {
 				if (err) {

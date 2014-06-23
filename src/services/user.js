@@ -1,5 +1,5 @@
-app.service('UserService', ['$rootScope', 'ResourceService',
-	function ($rootScope, ResourceService) {
+app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
+	function ($rootScope, $cookieStore, ResourceService) {
 
 		this.getUser = function (username, result) {
 			var callback = function (data) {
@@ -9,19 +9,19 @@ app.service('UserService', ['$rootScope', 'ResourceService',
 			ResourceService.getData('users/' + username, null, callback);
 		};
 
-		this.updateUser = function (username, user, users) {
+		this.updateUser = function (username, userData, users) {
 			var self = this;
 			var callback = function (data) {
-//				for (var i in users) {
-//					if (users[i].username === username) {
-//						//angular.copy(data, users[i]);
-//						users.push(data);
-//					}
-//				}
+				//				for (var i in users) {
+				//					if (users[i].username === username) {
+				//						//angular.copy(data, users[i]);
+				//						users.push(data);
+				//					}
+				//				}
 				self.fetchUserData();
 			};
 
-			ResourceService.putData('users/' + username, user, callback);
+			ResourceService.putData('users/' + username, userData, callback);
 		};
 
 		this.getUnassignedUsers = function (result) {
@@ -46,6 +46,8 @@ app.service('UserService', ['$rootScope', 'ResourceService',
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
 					if (data[i].username === $rootScope.getAuthenticatedUser().username) {
 						angular.copy(data[i], $rootScope.currentUser);
+						//						$cookieStore.remove('user');
+						//						$cookieStore.put('user', $rootScope.currentUser);
 					}
 
 					var tickets = $rootScope.users[i].tickets;

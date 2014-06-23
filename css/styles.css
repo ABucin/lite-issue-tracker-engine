@@ -10,6 +10,9 @@ table > tbody > tr > td[status] {min-height: 50px;}
 .dashboard-panel-right {padding-left: 0; padding-right: 0;}
 .dashboard-panel-right .panel {margin-bottom: 15px;}
 
+.panel-settings .fa:hover {cursor: pointer;}
+.panel-settings input[type="text"] {border: 0; background-color: #e0e0e0;}
+
 /**
  * Chart Secondary Menu CSS
  */

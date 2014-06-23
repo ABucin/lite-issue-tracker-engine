@@ -53,7 +53,7 @@ exports.populateDb = function () {
 		role: "admin",
 		projectRole: "developer",
 		project: "issue-tracker",
-		expertise: "Java, PHP, JavaScript, Web Design",
+		expertise: "Java, PHP, JavaScript, Web Design.",
 		tickets: userTickets,
 		settings: [{
 			key: utils.generateKey(),
