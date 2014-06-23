@@ -68,21 +68,24 @@ exports.populateDb = function () {
 			target: "7",
 			targetType: "task",
 			comment: "I think this feature should be implemented in the next sprint.",
-			username: "abucin"
+			username: "abucin",
+			timestamp: new Date()
 		}, {
 			key: utils.generateKey(),
 			action: "clock-o",
 			amount: 5,
 			target: "9",
 			targetType: "task",
-			username: "abucin"
+			username: "abucin",
+			timestamp: new Date()
 		}, {
 			key: utils.generateKey(),
 			action: "comment",
 			target: "5",
 			targetType: "bug",
 			comment: "Bug fixed in commit 3d6h4.",
-			username: "abucin"
+			username: "abucin",
+			timestamp: new Date()
 		}],
 		comments: [{
 			key: utils.generateKey(),
@@ -124,11 +127,11 @@ exports.populateDb = function () {
 			if (err) {
 				return console.error(err); // we should handle this
 			} else {
-				user2.save(function (err) {
-					if (err) {
-						return console.error(err); // we should handle this
-					}
-				});
+//				user2.save(function (err) {
+//					if (err) {
+//						return console.error(err); // we should handle this
+//					}
+//				});
 			}
 		});
 	});

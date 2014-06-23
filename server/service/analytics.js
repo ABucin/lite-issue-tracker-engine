@@ -19,7 +19,7 @@ exports.getChart = function (type, res) {
 					for (var l in users[i].logs) {
 						var tstamp = users[i].logs[l].timestamp;
 						if (tstamp !== undefined && utils.getWeekNumber(currentDate) === utils.getWeekNumber(tstamp)) {
-							logged[tstamp.getDay() - 1] += users[i].logs[l].amount;
+							logged[tstamp.getDay()] += users[i].logs[l].amount;
 						}
 					}
 
@@ -40,7 +40,7 @@ exports.getChart = function (type, res) {
 						}
 					},
 					xAxis: {
-						categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+						categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 						tickmarkPlacement: "on"
 					},
 					yAxis: {
