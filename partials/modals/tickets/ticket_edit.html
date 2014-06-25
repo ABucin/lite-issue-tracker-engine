@@ -72,6 +72,19 @@
 							</div>
 						</div>
 					</div>
+					<div class="form-group">
+						<div class="col-lg-5" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
+							<div class="input-group">
+								<span class="input-group-addon">Status</span>
+								<select class="form-control" ng-model="updatedTicket.status">
+									<option>created</option>
+									<option value="in_progress">in progress</option>
+									<option>testing</option>
+									<option>done</option>
+								</select>
+							</div>
+						</div>
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer modal-comments">

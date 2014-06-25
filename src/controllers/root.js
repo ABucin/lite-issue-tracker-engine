@@ -1,4 +1,4 @@
-var app = angular.module('issueTracker', ['ngCookies', 'ngRoute']);
+var app = angular.module('issueTracker', ['ngCookies', 'ngRoute', 'ngTouch']);
 
 /**
  * Associates each route to a controller and a template.
