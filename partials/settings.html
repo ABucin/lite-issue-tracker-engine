@@ -1,17 +1,17 @@
-<div class="panel panel-settings" ng-init="fetchSettingsData('profile')">
+<div class="panel panel-settings" ng-init="fetchSettingsData(getSubPageName())">
 	<div class="row">
 		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 secondary-menu">
 			<ul class="nav">
 				<li class="header">
 					Application
 				</li>
-				<li class="toggleable active" ng-click="fetchSettingsData('profile')"><i class="chart-icon fa fa-fw fa-user"></i>Profile</li>
-				<li class="toggleable" ng-click="fetchSettingsData('dashboard')"><i class="chart-icon fa fa-fw fa-th-large"></i>Dashboard</li>
+				<li class="toggleable active" ng-class="toggleActive('profile')" ng-click="fetchSettingsData('profile')"><i class="chart-icon fa fa-fw fa-user"></i>Profile</li>
+				<li class="toggleable" ng-class="toggleActive('dashboard')" ng-click="fetchSettingsData('dashboard')"><i class="chart-icon fa fa-fw fa-th-large"></i>Dashboard</li>
 				<li ng-show="getAuthenticatedUser().role === 'admin'" class="header">
 					Administration
 				</li>
-				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-click="fetchSettingsData('users')"><i class="chart-icon fa fa-fw fa-users"></i>Users</li>
-				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-click="fetchSettingsData('projects')"><i class="chart-icon fa fa-fw fa-bookmark"></i>Projects</li>
+				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-class="toggleActive('users')" ng-click="fetchSettingsData('users')"><i class="chart-icon fa fa-fw fa-users"></i>Users</li>
+				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-class="toggleActive('projects')" ng-click="fetchSettingsData('projects')"><i class="chart-icon fa fa-fw fa-bookmark"></i>Projects</li>
 			</ul>
 		</div>
 		<div class="col-lg-10 col-md-4 col-sm-9 col-xs-7">

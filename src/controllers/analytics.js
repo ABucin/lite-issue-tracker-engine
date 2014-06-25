@@ -4,7 +4,7 @@ function ($scope, $rootScope, $location, $cookieStore, AnalyticsService) {
 		$rootScope.hasDropdown = false;
 
 		$scope.putSubPageName = function (name) {
-			$cookieStore.put('subpage', {
+			$cookieStore.put('analytics-subpage', {
 				name: name
 			});
 		}
@@ -15,7 +15,7 @@ function ($scope, $rootScope, $location, $cookieStore, AnalyticsService) {
 		};
 
 		$scope.getSubPageName = function () {
-			var subpage = $cookieStore.get('subpage');
+			var subpage = $cookieStore.get('analytics-subpage');
 			if (subpage !== undefined && subpage.name !== undefined) {
 				return subpage.name;
 			}

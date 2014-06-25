@@ -23,6 +23,7 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 		};
 
 		$scope.fetchSettingsData = function (type) {
+			$scope.putSubPageName(type);
 			$scope.settingsTemplate.url = 'partials/snippets/settings/' + type + '.html';
 		};
 
@@ -50,5 +51,24 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 
 			UserService.updateUser($rootScope.getAuthenticatedUser().username, $scope.editedUser);
 		};
+
+	$scope.putSubPageName = function (name) {
+			$cookieStore.put('settings-subpage', {
+				name: name
+			});
+		}
+
+		$scope.getSubPageName = function () {
+			var subpage = $cookieStore.get('settings-subpage');
+			if (subpage !== undefined && subpage.name !== undefined) {
+				return subpage.name;
+			}
+
+			return "profile";
+		}
+
+		$scope.toggleActive = function (page) {
+			return ($scope.getSubPageName() === page) ? 'active' : '';
+		}
 
 }]);
