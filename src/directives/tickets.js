@@ -31,6 +31,7 @@ app.directive('ticket', function ($rootScope) {
 						scope.logData("update", scope.updatedTicket);
 					}
 					scope.loggedWork.amount = 0.0;
+					scope.updatedTicket.loggedTime = 0.0;
 				}
 			});
 
@@ -86,6 +87,7 @@ app.directive('ticketContainer', function ($rootScope) {
 			element[0].addEventListener('drop', function (e) {
 				$rootScope.copiedEntity.status = element.attr("status");
 				angular.copy($rootScope.copiedEntity, scope.updatedTicket);
+				scope.updatedTicket.loggedTime = 0.0;
 				scope.$apply();
 				scope.updateTicket();
 			});
