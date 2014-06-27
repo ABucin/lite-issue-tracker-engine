@@ -123,16 +123,24 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		/*
 		 * Comments.
 		 */
-		$scope.addComment = function () {
-			CommentsService.addComment($rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
+		$scope.addComment = function (isValid) {
+			if (isValid) {
+				CommentsService.addComment($rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
+			}
 		}
 
 		$scope.deleteComment = function (commentKey) {
 			CommentsService.deleteComment($rootScope.getAuthenticatedUser().username, commentKey, $scope.comments, $scope.comment);
 		}
 
-		$scope.editComment = function () {
-			CommentsService.editComment($rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
+		$scope.editComment = function (isValid) {
+			$rootScope.submitted = true;
+			$rootScope.general.errors = [];
+			if (isValid) {
+				$rootScope.submitted = false;
+				$rootScope.general.errors = [];
+				CommentsService.editComment($rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
+			}
 		}
 
 		$scope.fetchComments = function (commentKey) {
@@ -158,8 +166,19 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			$('#ticket-creation-modal').modal('hide');
 		};
 
-		$scope.updateTicket = function () {
-			TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
+		$scope.hideTicketPreviewModal = function () {
+			$rootScope.general.errors = [];
+			$('#ticket-preview-modal').modal('hide');
+		};
+
+		$scope.updateTicket = function (isValid) {
+			$rootScope.submitted = true;
+			$rootScope.general.errors = [];
+			if (isValid) {
+				$rootScope.general.errors = [];
+				$('#ticket-preview-modal').modal('hide');
+				TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
+			}
 		};
 
 		$scope.deleteTicket = function (key) {
