@@ -23,10 +23,21 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 			UserService.getUnassignedUsers($scope.unassignedUsers);
 		}
 
-		$scope.setProject = function (username) {
-			UserService.updateUser(username, {
-				project: $rootScope.project
-			}, $rootScope.users);
+		$scope.dismissUserAssignmentModal = function () {
+			$rootScope.submitted = false;
+			$rootScope.general.errors = [];
+			$('#user-assignment-modal').modal('hide');
+		}
+
+		$scope.setProject = function (username, isValid) {
+			$rootScope.submitted = true;
+			$rootScope.general.errors = [];
+			if (isValid) {
+				$('#user-assignment-modal').modal('hide');
+				UserService.updateUser(username, {
+					project: $rootScope.project
+				}, $rootScope.users);
+			}
 		}
 
 		$scope.unsetProject = function (username, event) {

@@ -140,6 +140,7 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 					}];
 			}
 			if (isValid) {
+				$('#register-modal').modal('hide');
 				AuthenticationService.register($rootScope.registrationData);
 				$rootScope.submitted = false;
 			}
