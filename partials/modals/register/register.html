@@ -3,68 +3,92 @@
 <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title">Register Account</h4>
-			</div>
-			<div class="modal-body">
-				<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" name="registerForm" ng-submit="register(registerForm.$valid)" novalidate>
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="hideRegistrationModal()" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title">Register Account</h4>
+				</div>
+				<div class="modal-body">
 					<p>
 						All the fields are mandatory.
 					</p>
-					<div class="form-group">
+					<div class="form-group" ng-class="{ 'has-error' : registerForm.username.$invalid && !registerForm.username.$pristine && submitted }">
 						<div class="col-md-12">
 							<label for="registerUsername">Username</label>
-							<input id="registerUsername" type="text" class="form-control" placeholder="Username" ng-model="registrationData.username">
+							<input id="registerUsername" type="text" name="username" class="form-control" placeholder="Username" ng-model="registrationData.username" ng-minlength="3" ng-maxlength="8" ng-required="true">
+							<p ng-show="registerForm.username.$error.minlength && submitted"><i class="fa fa-warning"></i>Username must have at least 3 characters.</p>
+							<p ng-show="registerForm.username.$error.maxlength && submitted"><i class="fa fa-warning"></i>Username must have at most 8 characters.</p>
+							<p ng-show="registerForm.username.$error.required && submitted"><i class="fa fa-warning"></i>Username must be provided.</p>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" ng-class="{ 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine && submitted }">
 						<div class="col-md-12">
 							<label for="registerPassword">Password</label>
-							<input id="registerPassword" type="password" class="form-control" placeholder="Password" ng-model="registrationData.password">
+							<input id="registerPassword" type="password" name="password" class="form-control" placeholder="Password" ng-model="registrationData.password" ng-minlength="3" ng-maxlength="8" ng-required="true">
+							<p ng-show="registerForm.password.$error.minlength && submitted"><i class="fa fa-warning"></i>Password must have at least 3 characters.</p>
+							<p ng-show="registerForm.password.$error.maxlength && submitted"><i class="fa fa-warning"></i>Password must have at most 8 characters.</p>
+							<p ng-show="registerForm.password.$error.required && submitted"><i class="fa fa-warning"></i>Password must be provided.</p>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" ng-class="{ 'has-error' : registerForm.confirmedPassword.$invalid && !registerForm.confirmedPassword.$pristine && submitted }">
 						<div class="col-md-12">
 							<label for="registerConfirmedPassword">Confirmed Password</label>
-							<input id="registerConfirmedPassword" type="password" class="form-control" placeholder="Confirmed Password" ng-model="registrationData.confirmedPassword">
+							<input id="registerConfirmedPassword" type="password" name="passwordConfirmed" class="form-control" placeholder="Confirmed Password" ng-model="registrationData.confirmedPassword" ng-minlength="3" ng-maxlength="8" ng-required="true">
+							<p ng-show="registerForm.passwordConfirmed.$error.minlength && submitted"><i class="fa fa-warning"></i>Confirmed password must have at least 3 characters.</p>
+							<p ng-show="registerForm.passwordConfirmed.$error.maxlength && submitted"><i class="fa fa-warning"></i>Confirmed password must have at most 8 characters.</p>
+							<p ng-show="registerForm.passwordConfirmed.$error.required && submitted"><i class="fa fa-warning"></i>Confirmed password must be provided.</p>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" ng-class="{ 'has-error' : registerForm.email.$invalid && !registerForm.email.$pristine && submitted }">
 						<div class="col-md-12">
 							<label for="registerEmailAddress">Email Address</label>
-							<input id="registerEmailAddress" type="email" class="form-control" placeholder="Email Address" ng-model="registrationData.email">
+							<input id="registerEmailAddress" type="email" name="email" class="form-control" placeholder="Email Address" ng-model="registrationData.email" ng-minlength="10" ng-maxlength="20" ng-required="true">
+							<p ng-show="registerForm.email.$error.minlength && submitted"><i class="fa fa-warning"></i>Email address must have at least 10 characters.</p>
+							<p ng-show="registerForm.email.$error.maxlength && submitted"><i class="fa fa-warning"></i>Email address must have at most 20 characters.</p>
+							<p ng-show="registerForm.email.$error.required && submitted"><i class="fa fa-warning"></i>Email address must be provided.</p>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" ng-class="{ 'has-error' : registerForm.firstName.$invalid && !registerForm.firstName.$pristine && submitted }">
 						<div class="col-md-12">
 							<label for="registerFirstName">First Name</label>
-							<input id="registerFirstName" type="text" class="form-control" placeholder="First Name" ng-model="registrationData.firstName">
+							<input id="registerFirstName" type="text" name="firstName" class="form-control" placeholder="First Name" ng-model="registrationData.firstName" ng-minlength="2" ng-maxlength="10" ng-required="true">
+							<p ng-show="registerForm.firstName.$error.minlength && submitted"><i class="fa fa-warning"></i>First name must have at least 2 characters.</p>
+							<p ng-show="registerForm.firstName.$error.maxlength && submitted"><i class="fa fa-warning"></i>First name must have at most 10 characters.</p>
+							<p ng-show="registerForm.firstName.$error.required && submitted"><i class="fa fa-warning"></i>First name must be provided.</p>
+						</div>
+					</div>
+					<div class="form-group" ng-class="{ 'has-error' : registerForm.lastName.$invalid && !registerForm.lastName.$pristine && submitted }">
+						<div class="col-md-12">
+							<label for="registerEmailAddress">Last Name</label>
+							<input id="registerEmailAddress" type="text" name="lastName" class="form-control" placeholder="Last Name" ng-model="registrationData.lastName" ng-minlength="2" ng-maxlength="10" ng-required="true">
+							<p ng-show="registerForm.lastName.$error.minlength && submitted"><i class="fa fa-warning"></i>Last name must have at least 2 characters.</p>
+							<p ng-show="registerForm.lastName.$error.maxlength && submitted"><i class="fa fa-warning"></i>Last name must have at most 10 characters.</p>
+							<p ng-show="registerForm.lastName.$error.required && submitted"><i class="fa fa-warning"></i>Last name must be provided.</p>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-12">
-							<label for="registerEmailAddress">Last Name</label>
-							<input id="registerEmailAddress" type="text" class="form-control" placeholder="Last Name" ng-model="registrationData.lastName">
+							<p ng-repeat="error in general.errors"><i class="fa fa-warning"></i>{{error.message}}</p>
 						</div>
 					</div>
-				</form>
-				<div class="alert alert-danger" ng-show="general.errors.length">
-					<ul>
-						<li ng-repeat="error in general.errors">{{error.message}}</li>
-					</ul>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">
-					Close
-				</button>
-				<button type="button" class="btn btn-primary" ng-click="register()">
-					Submit
-				</button>
-			</div>
+				<div class="modal-footer">
+					<div class="form-group">
+						<div class="col-md-6">
+							<button type="button" class="btn btn-default form-control" ng-click="hideRegistrationModal()">
+								Close
+							</button>
+						</div>
+						<div class="col-md-6">
+							<button type="submit" class="btn btn-primary form-control">
+								Submit
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 		<!-- /.modal-content -->
 	</div>

@@ -31,9 +31,10 @@ table > tbody > tr > td[status] {min-height: 50px;}
 .list-unstyled .fa-times {color: #cb1f26;}
 .nav.ng-scope .fa-edit {color: #CB8E02;}
 
-.login-form .fa-warning, p[ng-repeat*='comment'] i.fa {margin-right: 7px;}
-p[ng-show*='loginForm'], p[ng-repeat*='error'] {color: #cb1f26;}
+form[name*='registerForm'] .fa-warning, .login-form .fa-warning, p[ng-repeat*='comment'] i.fa {margin-right: 7px;}
+form[name*='registerForm'] p[ng-show*='registerForm'], p[ng-show*='loginForm'], p[ng-repeat*='error'] {color: #cb1f26;}
 p[ng-show*='error'] {margin:10px;}
+p[ng-show*='loginForm.password'] {margin:0px;}
 
 /**
  * Ticket CSS.

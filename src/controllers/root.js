@@ -118,8 +118,31 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			return "dashboard";
 		}
 
-		$scope.register = function () {
-			AuthenticationService.register($rootScope.registrationData);
+		$scope.showRegistrationModal = function () {
+			$rootScope.submitted = false;
+			$rootScope.general.errors = [];
+			$('#register-modal').modal('show');
+		};
+
+		$scope.hideRegistrationModal = function () {
+			$rootScope.submitted = false;
+			$rootScope.general.errors = [];
+			$('#register-modal').modal('hide');
+		};
+
+		$scope.register = function (isValid) {
+			$rootScope.submitted = true;
+			$rootScope.general.errors = [];
+			if ($rootScope.registrationData.password !== $rootScope.registrationData.confirmedPassword) {
+				isValid = false;
+				$rootScope.general.errors = [{
+					message: "Password does not match confirmed Password."
+					}];
+			}
+			if (isValid) {
+				AuthenticationService.register($rootScope.registrationData);
+				$rootScope.submitted = false;
+			}
 		};
 
 		$scope.loadData = function () {
@@ -147,10 +170,11 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		 * Logs in the current user.
 		 */
 		$scope.login = function (isValid) {
-			$scope.submitted = true;
+			$rootScope.submitted = true;
+			$rootScope.general.errors = [];
 			if (isValid) {
 				AuthenticationService.login($rootScope.loginData);
-				$scope.submitted = false;
+				$rootScope.submitted = false;
 			}
 		};
 
