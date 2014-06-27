@@ -1,14 +1,14 @@
 app.service('TicketsService', ['$rootScope', 'ResourceService',
 	function ($rootScope, ResourceService) {
 
-		this.addTicket = function (username, ticket, tickets, createdTickets) {
+		this.addTicket = function (username, ticket, tickets, createdTickets, logger) {
 			var callback = function (data) {
 				tickets.push(data);
 				createdTickets.push(data);
-				$rootScope.$apply();
-				$rootScope.$broadcast('ticketCreated', {
-					ticket: data
-				});
+//				$rootScope.$broadcast('ticketCreated', {
+//					ticket: data
+//				});
+				logger("create", data);
 			};
 			ResourceService.postData('users/' + username + '/tickets', ticket, callback);
 		};

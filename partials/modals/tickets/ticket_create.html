@@ -3,20 +3,21 @@
 <div class="modal fade" id="ticket-creation-modal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title">Create Ticket</h4>
-			</div>
-			<div class="modal-body">
-				<form class="form-horizontal" role="form">
-					<div class="form-group">
+			<form class="form-horizontal" role="form" name="ticketCreateForm" ng-submit="addTicket(ticketCreateForm.$valid)" novalidate>
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="hideTicketCreationModal()" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title">Create Ticket</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group" ng-class="{ 'has-error' : ticketCreateForm.title.$invalid && !ticketCreateForm.title.$pristine && submitted }">
 						<div class="col-md-12">
 							<div class="input-group">
 								<span class="input-group-addon">Title</span>
-								<input type="text" class="form-control" placeholder="Title" ng-model="ticket.title">
+								<input type="text" class="form-control" name="title" placeholder="Title" ng-model="ticket.title" ng-required="true">
 							</div>
+							<p ng-show="ticketCreateForm.title.$error.required && submitted"><i class="fa fa-warning"></i>Title is required.</p>
 						</div>
 					</div>
 					<div class="form-group">
@@ -65,16 +66,24 @@
 							</div>
 						</div>
 					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">
-					Cancel
-				</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addTicket()">
-					Create
-				</button>
-			</div>
+				</div>
+				<div class="modal-footer">
+					<div class="form-group">
+						<div class="col-md-4">
+						</div>
+						<div class="col-md-4">
+							<button type="button" class="btn btn-default form-control" ng-click="hideTicketCreationModal()">
+								Cancel
+							</button>
+						</div>
+						<div class="col-md-4">
+							<button type="submit" class="btn btn-primary form-control">
+								Create
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 		<!-- /.modal-content -->
 	</div>

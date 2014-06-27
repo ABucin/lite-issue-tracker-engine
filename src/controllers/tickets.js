@@ -142,8 +142,20 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		/**
 		 * Tickets.
 		 */
-		$scope.addTicket = function () {
-			TicketsService.addTicket($rootScope.getAuthenticatedUser().username, $scope.ticket, $rootScope.tickets, $rootScope.createdTickets);
+		$scope.addTicket = function (isValid) {
+			$rootScope.submitted = true;
+			$rootScope.general.errors = [];
+			if (isValid) {
+				$rootScope.general.errors = [];
+				$('#ticket-creation-modal').modal('hide');
+				$rootScope.submitted = false;
+				TicketsService.addTicket($rootScope.getAuthenticatedUser().username, $scope.ticket, $rootScope.tickets, $rootScope.createdTickets, $scope.logData);
+			}
+		};
+
+		$scope.hideTicketCreationModal = function () {
+			$rootScope.general.errors = [];
+			$('#ticket-creation-modal').modal('hide');
 		};
 
 		$scope.updateTicket = function () {
