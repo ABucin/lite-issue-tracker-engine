@@ -1,28 +1,39 @@
 app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'AnalyticsService',
 
 function ($scope, $rootScope, $location, $cookieStore, AnalyticsService) {
-		$scope.putSubPageName = function (name) {
-			$cookieStore.put('analytics-subpage', {
-				name: name
-			});
-		}
 
+		/**
+		 * Caches name of current subpage.
+		 */
+		$scope.subPageName = {
+			put: function (name) {
+				$cookieStore.put('analytics-subpage', {
+					name: name
+				});
+			},
+			get: function () {
+				var subpage = $cookieStore.get('analytics-subpage');
+				if (subpage !== undefined && subpage.name !== undefined) {
+					return subpage.name;
+				}
+
+				return "loggedHours";
+			}
+		};
+
+		/**
+		 * Retrieves the data for the provided chart type.
+		 */
 		$scope.fetchChartData = function (type) {
-			$scope.putSubPageName(type);
+			$scope.subPageName.put(type);
 			AnalyticsService.fetchChartData(type);
 		};
 
-		$scope.getSubPageName = function () {
-			var subpage = $cookieStore.get('analytics-subpage');
-			if (subpage !== undefined && subpage.name !== undefined) {
-				return subpage.name;
-			}
-
-			return "loggedHours";
-		}
-
+		/**
+		 * Toggles the submenu for each subpage.
+		 */
 		$scope.toggleActive = function (page) {
-			return ($scope.getSubPageName() === page) ? 'active' : '';
-		}
+			return ($scope.subPageName.get() === page) ? 'active' : '';
+		};
 
 }]);
