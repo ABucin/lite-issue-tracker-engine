@@ -32,18 +32,39 @@ function ($routeProvider) {
 app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', '$cookieStore', 'ResourceService', 'UserService', 'AuthenticationService', 'SettingsService',
 function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, UserService, AuthenticationService, SettingsService) {
 
+		// CONFIGURATION
+
+		/**
+		 * Document loading configuration.
+		 */
+		angular.element(document).ready(function () {
+			if ($rootScope.isAuthenticated()) {
+				// disable when user auth in place
+				UserService.fetchUserData();
+				// caches the settings for the current user
+				SettingsService.loadSettings();
+			}
+		});
+
+		/**
+		 * Highcharts config options.
+		 */
+		Highcharts.setOptions({
+			chart: {
+				style: {
+					fontFamily: "Roboto"
+				}
+			}
+		});
+
 		/**
 		 * Menu properties.
 		 */
 		$rootScope.menu = {
-			hasDropdown: false
-		};
-
-		/**
-		 * Menu filters.
-		 */
-		$rootScope.filters = {
-			displayTickets: 'all'
+			hasDropdown: false,
+			filters: {
+				displayTickets: 'all'
+			}
 		};
 
 		/**
@@ -74,9 +95,11 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		/*
 		 * Login variables.
 		 */
-		$rootScope.login = {
-			username: null,
-			password: null
+		$rootScope.form = {
+			login: {
+				username: null,
+				password: null
+			}
 		};
 
 		/**
@@ -92,37 +115,33 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 
 		$rootScope.userTickets = [];
 		$rootScope.users = [];
-		$rootScope.workloadData = [];
 		$rootScope.createdTickets = [];
 		$rootScope.inProgressTickets = [];
 		$rootScope.testingTickets = [];
 		$rootScope.doneTickets = [];
 
-		$scope.submenuTemplates = [{
-			url: 'partials/snippets/menu/submenu.html'
-		}];
-
-		$scope.templates = [{
-			url: 'partials/modals/register/register.html'
+		/**
+		 * Login and registration page templates.
+		 */
+		$scope.templates = {
+			modals: [{
+				url: 'partials/modals/register/register.html'
 			}, {
-			url: 'partials/modals/register/register-success.html'
-			}];
-		$scope.templateRegister = $scope.templates[0];
-		$scope.templateRegisterSuccess = $scope.templates[1];
+				url: 'partials/modals/register/register-success.html'
+			}],
+			submenu: [{
+				url: 'partials/snippets/menu/submenu.html'
+		}]
+		};
 
-		angular.element(document).ready(function () {
-			$scope.loadData();
+		$scope.templateRegister = $scope.templates.modals[0];
+		$scope.templateRegisterSuccess = $scope.templates.modals[1];
 
-			// set Highcharts config options
-			Highcharts.setOptions({
-				chart: {
-					style: {
-						fontFamily: "Roboto"
-					}
-				}
-			});
-		});
+		// FUNCTIONS
 
+		/**
+		 * Navigates to the specified page of the application.
+		 */
 		$rootScope.navigate = function (url) {
 			$location.path('/' + url);
 			$rootScope.menu.hasDropdown = false;
@@ -132,6 +151,9 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			});
 		};
 
+		/**
+		 * Returns the name of the current page. Defaults to dashboard.
+		 */
 		$rootScope.getPageName = function () {
 			var page = $cookieStore.get('page');
 			if (page !== undefined && page.name !== undefined) {
@@ -141,45 +163,22 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			return "dashboard";
 		}
 
-		$scope.showRegistrationModal = function () {
-			$rootScope.submitted = false;
-			$rootScope.general.errors = [];
-			$('#register-modal').modal('show');
-		};
-
-		$scope.hideRegistrationModal = function () {
-			$rootScope.submitted = false;
-			$rootScope.general.errors = [];
-			$('#register-modal').modal('hide');
-		};
-
-		$scope.register = function (isValid) {
-			$rootScope.submitted = true;
-			$rootScope.general.errors = [];
-			if ($rootScope.registration.password !== $rootScope.registration.confirmedPassword) {
-				isValid = false;
-				$rootScope.general.errors = [{
-					message: "Password does not match confirmed Password."
-					}];
-			}
-			if (isValid) {
-				$('#register-modal').modal('hide');
-				AuthenticationService.register($rootScope.registration);
-				$rootScope.submitted = false;
-			}
-		};
-
-		$scope.loadData = function () {
-			if ($rootScope.isAuthenticated()) {
-				// disable when user auth in place
-				UserService.fetchUserData();
-				// caches the settings for the current user
-				SettingsService.loadSettings();
-			}
-		}
-
+		/**
+		 * Retrieves the settings for the current user.
+		 */
 		$rootScope.getSettings = function () {
 			return SettingsService.getSettings();
+		}
+
+		/**
+		 * Contains modal-related functions.
+		 */
+		$scope.modal = {
+			registration: function (toggle) {
+				$rootScope.submitted = false;
+				$rootScope.general.errors = [];
+				$('#register-modal').modal(toggle);
+			}
 		}
 
 		/**
@@ -190,6 +189,24 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			return ($rootScope.isAuthenticated() === true) ? "body-menu-padding" : "";
 		};
 
+		/**
+		 * Creates a new user account.
+		 */
+		$scope.register = function (isValid) {
+			$rootScope.submitted = true;
+			$rootScope.general.errors = [];
+			if ($rootScope.registration.password !== $rootScope.registration.confirmedPassword) {
+				isValid = false;
+				$rootScope.general.errors = [{
+					message: "Password does not match confirmed password."
+					}];
+			}
+			if (isValid) {
+				$scope.modal.registration('hide');
+				AuthenticationService.register($rootScope.registration);
+			}
+		};
+
 		/*
 		 * Logs in the current user.
 		 */
@@ -197,8 +214,8 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			$rootScope.submitted = true;
 			$rootScope.general.errors = [];
 			if (isValid) {
-				AuthenticationService.login($rootScope.login);
 				$rootScope.submitted = false;
+				AuthenticationService.login($rootScope.form.login);
 			}
 		};
 
@@ -211,13 +228,14 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 
 		/**
 		 * Checks if the user is authenticated.
+		 * Returns true if user is logged in. False, otherwise.
 		 */
 		$rootScope.isAuthenticated = function () {
 			return AuthenticationService.isAuthenticated();
 		};
 
 		/**
-		 * Retrieves the current authenticated user.
+		 * Retrieves the currently authenticated user from the cache.
 		 */
 		$rootScope.getAuthenticatedUser = function () {
 			return AuthenticationService.getAuthenticatedUser();

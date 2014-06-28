@@ -39,12 +39,9 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 		this.fetchUserData = function () {
 			var callback = function (data) {
 				$rootScope.users = data;
-				$rootScope.workloadData = [];
 				$rootScope.userTickets = [];
 
 				for (var i in data) {
-					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
-
 					var tickets = $rootScope.users[i].tickets;
 					var logs = $rootScope.users[i].logs;
 

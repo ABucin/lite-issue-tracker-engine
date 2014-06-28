@@ -5,7 +5,7 @@
 				<li><a><strong>{{getAuthenticatedUser().username | uppercase}}</strong></a>
 				</li>
 			</ul>
-			<span ng-include="submenuTemplates[0].url"></span>
+			<span ng-include="templates.submenu[0].url"></span>
 			<ul class="nav navbar-nav navbar-left">
 				<li class='toggleable' url='dashboard'>
 					<a ng-click="navigate('dashboard')">

@@ -56,11 +56,11 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		};
 
 		$scope.filterTicket = function (owner) {
-			if ($rootScope.filters.displayTickets === 'all') {
+			if ($rootScope.menu.filters.displayTickets === 'all') {
 				return true;
-			} else if ($rootScope.filters.displayTickets === 'mine') {
+			} else if ($rootScope.menu.filters.displayTickets === 'mine') {
 				return (owner === $rootScope.getAuthenticatedUser().username);
-			} else if ($rootScope.filters.displayTickets === 'unassigned') {
+			} else if ($rootScope.menu.filters.displayTickets === 'unassigned') {
 				return (owner === undefined || !owner.length);
 			}
 			return false;
