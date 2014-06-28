@@ -1,15 +1,25 @@
 app.controller('DashboardCtrl', ['$scope', '$rootScope', '$location', 'AnalyticsService', 'LogsService',
 function ($scope, $rootScope, $location, AnalyticsService, LogsService) {
-		AnalyticsService.fetchChartData('assignedTickets');
 
-		LogsService.fetchLogData($rootScope.dashboard.logEntries);
+		/**
+		 * Document loading configuration.
+		 */
+		angular.element(document).ready(function () {
+			AnalyticsService.fetchChartData('assignedTickets');
+			LogsService.fetchLogData($rootScope.dashboard.logEntries);
+		});
 
-		$scope.computeDashboardPanelWidth = function (condition) {
-			var width = 6;
-			if (!condition) {
-				width = 12;
+		/**
+		 * General dashboard configuration.
+		 */
+		$scope.general = {
+			computeWidth: function (condition) {
+				var width = 6;
+				if (!condition) {
+					width = 12;
+				}
+				return "col-lg-" + width + " col-md-" + width + " col-sm-" + width + " col-xs-" + width;
 			}
-			return "col-lg-" + width + " col-md-" + width + " col-sm-" + width + " col-xs-" + width;
 		};
 
 }]);
