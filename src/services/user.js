@@ -40,22 +40,17 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 			var callback = function (data) {
 				$rootScope.users = data;
 				$rootScope.workloadData = [];
-				$rootScope.tickets = [];
+				$rootScope.userTickets = [];
 
 				for (var i in data) {
 					$rootScope.workloadData.push([data[i].username, data[i].tickets.length]);
-					if (data[i].username === $rootScope.getAuthenticatedUser().username) {
-						angular.copy(data[i], $rootScope.currentUser);
-						//						$cookieStore.remove('user');
-						//						$cookieStore.put('user', $rootScope.currentUser);
-					}
 
 					var tickets = $rootScope.users[i].tickets;
 					var logs = $rootScope.users[i].logs;
 
 					for (var j in tickets) {
 						tickets[j].creator = $rootScope.users[i].username;
-						$rootScope.tickets.push(tickets[j]);
+						$rootScope.userTickets.push(tickets[j]);
 						switch (tickets[j].status) {
 						case "created":
 							{

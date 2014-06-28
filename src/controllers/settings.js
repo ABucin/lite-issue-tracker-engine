@@ -1,7 +1,5 @@
 app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'SettingsService', 'UserService', 'ProjectsService',
 function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserService, ProjectsService) {
-		$rootScope.hasDropdown = false;
-
 		$scope.settingsTemplate = {};
 
 		$scope.edit = {

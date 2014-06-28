@@ -71,12 +71,12 @@ app.directive('ticket', function ($rootScope) {
 				if (scope.ticket.owner !== $rootScope.getAuthenticatedUser().username) {
 					e.preventDefault();
 				} else {
-					angular.copy(scope.ticket, $rootScope.copiedEntity);
+					angular.copy(scope.ticket, $rootScope.tickets.copied);
 				}
 			});
 		},
 		replace: true,
-		template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>TC-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='actions.isDeleting && ticket.owner === getAuthenticatedUser().username'></i></span></div>"
+		template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>TC-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='tickets.isDeleting && ticket.owner === getAuthenticatedUser().username'></i></span></div>"
 	};
 });
 
@@ -85,8 +85,8 @@ app.directive('ticketContainer', function ($rootScope) {
 		restrict: 'A',
 		link: function (scope, element, attr) {
 			element[0].addEventListener('drop', function (e) {
-				$rootScope.copiedEntity.status = element.attr("status");
-				angular.copy($rootScope.copiedEntity, scope.updatedTicket);
+				$rootScope.tickets.copied.status = element.attr("status");
+				angular.copy($rootScope.tickets.copied, scope.updatedTicket);
 				scope.updatedTicket.loggedTime = 0.0;
 				scope.$apply();
 				scope.updateTicket(true);

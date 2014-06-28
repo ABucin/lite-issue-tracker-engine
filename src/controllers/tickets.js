@@ -1,11 +1,8 @@
 app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService', 'CommentsService', 'LogsService',
 function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsService) {
-		$rootScope.hasDropdown = true;
-		$rootScope.canFilter = true;
+		$rootScope.menu.hasDropdown = true;
 		$scope.isEditing = false;
 
-		$rootScope.createAction = "Create Ticket";
-		$rootScope.deleteAction = "Delete Ticket";
 		$scope.status = {
 			isEditingComment: false
 		};
@@ -157,7 +154,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 				$rootScope.general.errors = [];
 				$('#ticket-creation-modal').modal('hide');
 				$rootScope.submitted = false;
-				TicketsService.addTicket($rootScope.getAuthenticatedUser().username, $scope.ticket, $rootScope.tickets, $rootScope.createdTickets, $scope.logData);
+				TicketsService.addTicket($rootScope.getAuthenticatedUser().username, $scope.ticket, $rootScope.userTickets, $rootScope.createdTickets, $scope.logData);
 			}
 		};
 
@@ -177,11 +174,11 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			if (isValid) {
 				$rootScope.general.errors = [];
 				$('#ticket-preview-modal').modal('hide');
-				TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
+				TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket, $rootScope.userTickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
 			}
 		};
 
 		$scope.deleteTicket = function (key) {
-			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser().username, $rootScope.tickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTicket);
+			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser().username, $rootScope.userTickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTicket);
 		};
 }]);

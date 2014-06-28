@@ -1,7 +1,5 @@
 app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 'AuthenticationService',
 function ($scope, $rootScope, $location, UserService, AuthenticationService) {
-		$rootScope.hasDropdown = false;
-
 		$scope.selectedTeamMember = {};
 
 		$scope.selectTeamMember = function (username) {
@@ -50,8 +48,8 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 
 		$scope.getOpenTickets = function () {
 			var openTickets = 0;
-			for (var i in $rootScope.tickets) {
-				if ($rootScope.tickets[i].owner === $scope.selectedTeamMember.username && $rootScope.tickets[i].status !== 'done') {
+			for (var i in $rootScope.userTickets) {
+				if ($rootScope.userTickets[i].owner === $scope.selectedTeamMember.username && $rootScope.userTickets[i].status !== 'done') {
 					openTickets++;
 				}
 			}
@@ -61,10 +59,10 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		$scope.getEffortEstimationRatio = function () {
 			var totalLoggedTime = 0.0;
 			var totalEstimatedTime = 0.0;
-			for (var i in $rootScope.tickets) {
-				if ($rootScope.tickets[i].owner === $scope.selectedTeamMember.username) {
-					totalLoggedTime += $rootScope.tickets[i].loggedTime;
-					totalEstimatedTime += $rootScope.tickets[i].estimatedTime;
+			for (var i in $rootScope.userTickets) {
+				if ($rootScope.userTickets[i].owner === $scope.selectedTeamMember.username) {
+					totalLoggedTime += $rootScope.userTickets[i].loggedTime;
+					totalEstimatedTime += $rootScope.userTickets[i].estimatedTime;
 				}
 			}
 			if (totalLoggedTime === totalEstimatedTime === 0.0 || totalEstimatedTime === 0.0) {

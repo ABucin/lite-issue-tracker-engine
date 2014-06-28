@@ -1,17 +1,15 @@
 app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'AnalyticsService',
 
 function ($scope, $rootScope, $location, $cookieStore, AnalyticsService) {
-		$rootScope.hasDropdown = false;
-
 		$scope.putSubPageName = function (name) {
 			$cookieStore.put('analytics-subpage', {
 				name: name
 			});
 		}
 
-		$scope.fetchChartData = function (type, elementId) {
+		$scope.fetchChartData = function (type) {
 			$scope.putSubPageName(type);
-			AnalyticsService.fetchChartData(type, elementId);
+			AnalyticsService.fetchChartData(type);
 		};
 
 		$scope.getSubPageName = function () {

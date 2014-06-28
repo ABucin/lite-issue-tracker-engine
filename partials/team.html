@@ -46,7 +46,7 @@
 			</h4>
 			<div class="team-details">
 				<strong>Latest Tickets:</strong>
-				<span class="ticket ticket-{{ticket.type}} ticket-code" ng-repeat="ticket in tickets | filter: selectedTeamMember.username | limitTo: 5">
+				<span class="ticket ticket-{{ticket.type}} ticket-code" ng-repeat="ticket in userTickets | filter: selectedTeamMember.username | limitTo: 5">
 					TC-{{ticket.code}}
 					<span class="ticket-title" ng-bind="ticket.title"></span>
 				</span>

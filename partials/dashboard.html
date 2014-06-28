@@ -23,7 +23,7 @@
 					</span>
 				</div>
 				<div id="panel-tasks" class="panel-body panel-body-dashboard collapse in">
-					<div class="ticket ticket-task ticket-code" ng-repeat="ticket in tickets | filter:'task' | filter: username | limitTo: 5">
+					<div class="ticket ticket-task ticket-code" ng-repeat="ticket in userTickets | filter:'task' | filter: username | limitTo: 5">
 						TC-{{ticket.code}}
 						<span class="ticket-title">{{ticket.title}}</span>
 					</div>
@@ -37,7 +37,7 @@
 					</span>
 				</div>
 				<div id="panel-bugs" class="panel-body panel-body-dashboard collapse in">
-					<div class="ticket ticket-bug ticket-code" ng-repeat="ticket in tickets | filter:'bug' | filter: username | limitTo: 5">
+					<div class="ticket ticket-bug ticket-code" ng-repeat="ticket in userTickets | filter:'bug' | filter: username | limitTo: 5">
 						TC-{{ticket.code}}
 						<span class="ticket-title">{{ticket.title}}</span>
 					</div>
