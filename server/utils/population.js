@@ -35,10 +35,10 @@ exports.populateDb = function () {
 		});
 	}
 
-	generateTicket(userTickets, "Plan Review Meeting", "in_progress", "task", "This Thursday at 10:00.", "abucin", "normal", 10, 20);
+	generateTicket(userTickets, "Plan Review Meeting", "inProgress", "task", "This Thursday at 10:00.", "abucin", "normal", 10, 20);
 	generateTicket(userTickets, "Add Colour Palette", "testing", "task", "Create a colour palette for the website.", "", "major", 12, 12);
-	generateTicket(userTickets, "Remove Redundant Tests", "in_progress", "task", "Remove tests that are not used.", "abucin", "minor", 10, 5);
-	generateTicket(userTickets, "Fix CSS Button Padding", "in_progress", "bug", "The login button has extra padding.", "abucin", "minor", 10, 20);
+	generateTicket(userTickets, "Remove Redundant Tests", "inProgress", "task", "Remove tests that are not used.", "abucin", "minor", 10, 5);
+	generateTicket(userTickets, "Fix CSS Button Padding", "inProgress", "bug", "The login button has extra padding.", "abucin", "minor", 10, 20);
 
 	var sampleTicketKey = utils.generateKey();
 

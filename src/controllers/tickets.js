@@ -148,13 +148,14 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		 * Tickets.
 		 */
 		$scope.addTicket = function (isValid) {
+			$rootScope.tickets.isDeleting = false;
 			$rootScope.submitted = true;
 			$rootScope.general.errors = [];
 			if (isValid) {
 				$rootScope.general.errors = [];
 				$('#ticket-creation-modal').modal('hide');
 				$rootScope.submitted = false;
-				TicketsService.addTicket($rootScope.getAuthenticatedUser().username, $scope.ticket, $rootScope.userTickets, $rootScope.createdTickets, $scope.logData);
+				TicketsService.addTicket($rootScope.getAuthenticatedUser().username, $scope.ticket, $rootScope.userTickets, $rootScope.tickets.created, $scope.logData);
 			}
 		};
 
@@ -169,16 +170,17 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		};
 
 		$scope.updateTicket = function (isValid) {
+			$rootScope.tickets.isDeleting = false;
 			$rootScope.submitted = true;
 			$rootScope.general.errors = [];
 			if (isValid) {
 				$rootScope.general.errors = [];
 				$('#ticket-preview-modal').modal('hide');
-				TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket, $rootScope.userTickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTickets, $scope.loggedWork.amount);
+				TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket, $rootScope.userTickets, $rootScope.tickets.created, $rootScope.tickets.inProgress, $rootScope.tickets.testing, $rootScope.tickets.done, $scope.loggedWork.amount);
 			}
 		};
 
 		$scope.deleteTicket = function (key) {
-			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser().username, $rootScope.userTickets, $rootScope.createdTickets, $rootScope.inProgressTickets, $rootScope.testingTickets, $rootScope.doneTicket);
+			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser().username, $rootScope.userTickets, $rootScope.tickets.created, $rootScope.tickets.inProgress, $rootScope.tickets.testing, $rootScope.tickets.done);
 		};
 }]);

@@ -58,7 +58,7 @@ p[ng-show*='loginForm.password'] {margin:0px;}
 .ticket-code { color: white; border-radius: .3em; padding: 0px 0 0px 6px; display: inline-flex; align-items: center; }
 .ticket-title {position: relative; left: 1px; background-color: #C3C2B8 ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
 td > .ng-scope:last-child > .ticket {margin-bottom: 6px;}
-div[ng-repeat*='doneTickets'] .ticket .ticket-title {text-decoration: line-through; color: black;}
+div[ng-repeat*='tickets.done'] .ticket .ticket-title {text-decoration: line-through; color: black;}
 
 /**
  * Log entry CSS.

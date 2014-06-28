@@ -46,34 +46,10 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 					var logs = $rootScope.users[i].logs;
 
 					for (var j in tickets) {
+						var status = tickets[j].status;
 						tickets[j].creator = $rootScope.users[i].username;
 						$rootScope.userTickets.push(tickets[j]);
-						switch (tickets[j].status) {
-						case "created":
-							{
-								$rootScope.createdTickets.push(tickets[j]);
-								break;
-							}
-						case "in_progress":
-							{
-								$rootScope.inProgressTickets.push(tickets[j]);
-								break;
-							}
-						case "testing":
-							{
-								$rootScope.testingTickets.push(tickets[j]);
-								break;
-							}
-						case "done":
-							{
-								$rootScope.doneTickets.push(tickets[j]);
-								break;
-							}
-						default:
-							{
-								$rootScope.doneTickets.push(tickets[j]);
-							}
-						}
+						$rootScope.tickets[status].push(tickets[j]);
 					}
 				}
 			}

@@ -37,7 +37,7 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 						}
 						break;
 					}
-				case "in_progress":
+				case "inProgress":
 					{
 						for (var i in inProgressTickets) {
 							if (inProgressTickets[i].key == data.key) {
@@ -110,7 +110,7 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 						}
 						break;
 					}
-				case "in_progress":
+				case "inProgress":
 					{
 						for (var i in inProgressTickets) {
 							if (inProgressTickets[i].key == key) {
@@ -132,9 +132,9 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 					}
 				case "done":
 					{
-						for (var i in doneTickets) {
-							if (doneTickets[i].key == key) {
-								doneTickets.splice(i, 1);
+						for (var i in $rootScope.tickets.done) {
+							if ($rootScope.tickets.done[i].key == key) {
+								$rootScope.tickets.done.splice(i, 1);
 								break;
 							}
 						}
@@ -142,9 +142,9 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 					}
 				default:
 					{
-						for (var i in doneTickets) {
-							if (doneTickets[i].key == key) {
-								doneTickets.splice(i, 1);;
+						for (var i in $rootScope.tickets.done) {
+							if ($rootScope.tickets.done[i].key == key) {
+								$rootScope.tickets.done.splice(i, 1);;
 								break;
 							}
 						}

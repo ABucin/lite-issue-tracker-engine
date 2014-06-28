@@ -71,6 +71,10 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		 * Ticket properties.
 		 */
 		$rootScope.tickets = {
+			created: [],
+			inProgress: [],
+			testing: [],
+			done: [],
 			isDeleting: false,
 			copied: {}
 		};
@@ -115,10 +119,6 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 
 		$rootScope.userTickets = [];
 		$rootScope.users = [];
-		$rootScope.createdTickets = [];
-		$rootScope.inProgressTickets = [];
-		$rootScope.testingTickets = [];
-		$rootScope.doneTickets = [];
 
 		/**
 		 * Login and registration page templates.
