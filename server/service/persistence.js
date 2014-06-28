@@ -20,6 +20,29 @@ var utils = require('../utils/utils'),
 	Settings = require('../model/settings');
 
 /**
+ * Projects.
+ */
+exports.updateProject = function (oldProject, body, res) {
+	User.find({
+		project: oldProject
+	}, function (err, users) {
+		if (err) {
+			res.send(500, err);
+		} else {
+			_.each(users, function (user, i, list) {
+				user.project = body.project;
+				user.save(function (err) {
+					if (err) {
+						res.send(500, err);
+					}
+				});
+			});
+			res.json(body);
+		}
+	});
+};
+
+/**
  * Settings.
  */
 exports.getSettings = function (username, res) {

@@ -156,3 +156,11 @@ router.route('/users/:uname/settings/:key')
 	.put(function (req, res) {
 		persistenceService.updateSettings(req.params.uname, req.params.key, req.body, res);
 	});
+
+/**
+ * Projects.
+ */
+router.route('/projects/:pname')
+	.put(function (req, res) {
+		persistenceService.updateProject(req.params.pname, req.body, res);
+	});

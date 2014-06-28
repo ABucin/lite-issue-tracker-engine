@@ -30,6 +30,8 @@
 					Project
 			</h4>
 			<div class="team-details">
+				<strong>Name:</strong>  <span ng-bind="selectedTeamMember.project | capitalize"></span>
+				<br>
 				<span ng-if="getSettings().displayUserRole"><strong>Role:</strong>  <span ng-bind="selectedTeamMember.projectRole | capitalize"></span>
 				<br>
 				</span>

@@ -1,5 +1,5 @@
-app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'SettingsService', 'UserService',
-function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserService) {
+app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'SettingsService', 'UserService', 'ProjectsService',
+function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserService, ProjectsService) {
 		$rootScope.hasDropdown = false;
 
 		$scope.settingsTemplate = {};
@@ -8,7 +8,13 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 			firstName: false,
 			lastName: false,
 			email: false,
-			expertise: false
+			expertise: false,
+			project: false
+		};
+
+		$scope.general = {
+			project: ($rootScope.getAuthenticatedUser().role == "admin") ? $rootScope.getAuthenticatedUser().project : null,
+			oldProject: ($rootScope.getAuthenticatedUser().role == "admin") ? $rootScope.getAuthenticatedUser().project : null
 		};
 
 		$scope.editedUser = {
@@ -51,6 +57,10 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 
 			UserService.updateUser($rootScope.getAuthenticatedUser().username, $scope.editedUser);
 		};
+
+		$scope.updateProject = function() {
+			ProjectsService.updateProject($scope.general.oldProject, $scope.general);
+		}
 
 	$scope.putSubPageName = function (name) {
 			$cookieStore.put('settings-subpage', {
