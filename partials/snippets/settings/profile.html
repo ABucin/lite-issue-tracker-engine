@@ -33,7 +33,7 @@
 		<span ng-show="!edit.expertise"> {{editedUser.expertise}} </span>
 		<span ng-show="edit.expertise"><input type="text" ng-model="editedUser.expertise" /></span>
 		<i ng-show="!edit.expertise" class="fa fa-edit fa-fw" ng-click="edit.expertise = true"></i>
-		<i ng-show="edit.expertise" class="fa fa-check fa-fw" ng-click="edit.expertise; updateUser()"></i>
+		<i ng-show="edit.expertise" class="fa fa-check fa-fw" ng-click="edit.expertise = false; updateUser()"></i>
 		<i ng-show="edit.expertise" class="fa fa-times fa-fw" ng-click="edit.expertise = false"></i>
 	</li>
 </ul>

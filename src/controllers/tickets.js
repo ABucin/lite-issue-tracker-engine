@@ -66,47 +66,22 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			return false;
 		}
 
+		$scope.general = {
+			log: {
+				update: "pencil",
+				create: "plus",
+				comment: "comment",
+				logTime: "clock-o",
+				delete: "times"
+			}
+		};
+
 		/**
 		 * Logs.
 		 */
 		$scope.logData = function (action, ticket) {
-			var mappedAction = "";
-
-			switch (action) {
-			case "update":
-				{
-					mappedAction = "pencil";
-					break;
-				}
-			case "create":
-				{
-					mappedAction = "plus";
-					break;
-				}
-			case "comment":
-				{
-					mappedAction = "comment";
-					break;
-				}
-			case "logTime":
-				{
-					mappedAction = "clock-o";
-					break;
-				}
-			case "delete":
-				{
-					mappedAction = "times";
-					break;
-				}
-			default:
-				{
-					mappedAction = "times";
-					break;
-				}
-			}
-
 			var log = {
-				action: mappedAction,
+				action: $scope.general.log[action],
 				target: ticket.code,
 				targetType: ticket.type,
 				comment: $scope.comment.content,

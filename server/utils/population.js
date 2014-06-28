@@ -65,7 +65,7 @@ exports.populateDb = function () {
 		logs: [{
 			key: utils.generateKey(),
 			action: "comment",
-			target: "7",
+			target: "1",
 			targetType: "task",
 			comment: "I think this feature should be implemented in the next sprint.",
 			username: "abucin",
@@ -74,14 +74,14 @@ exports.populateDb = function () {
 			key: utils.generateKey(),
 			action: "clock-o",
 			amount: 5,
-			target: "9",
+			target: "2",
 			targetType: "task",
 			username: "abucin",
 			timestamp: new Date()
 		}, {
 			key: utils.generateKey(),
 			action: "comment",
-			target: "5",
+			target: "3",
 			targetType: "bug",
 			comment: "Bug fixed in commit 3d6h4.",
 			username: "abucin",

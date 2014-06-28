@@ -1,12 +1,8 @@
 app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 'AuthenticationService',
 function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		$scope.selectedTeamMember = {};
-
-		$scope.selectTeamMember = function (username) {
-			UserService.getUser(username, $scope.selectedTeamMember);
-		}
-
-		$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser().username);
+		$scope.unassignedUser = {};
+		$scope.unassignedUsers = [];
 
 		$scope.modalTemplates = [{
 			url: 'partials/modals/team/user_assign.html'
@@ -14,38 +10,63 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 
 		$scope.templateUserAssignModal = $scope.modalTemplates[0];
 
-		$scope.unassignedUser = {};
-		$scope.unassignedUsers = [];
+		/**
+		 * Document loading configuration.
+		 */
+		angular.element(document).ready(function () {
+			$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser().username);
+		});
 
+		/**
+		 * Selects a team member.
+		 */
+		$scope.selectTeamMember = function (username) {
+			UserService.getUser(username, $scope.selectedTeamMember);
+		}
+
+		/**
+		 * Retrieves the users that are unassigned to any project.
+		 */
 		$scope.getUnassignedUsers = function () {
+			$scope.unassignedUsers = [];
 			UserService.getUnassignedUsers($scope.unassignedUsers);
 		}
 
+		/**
+		 * Dismissses the modal responsible for user assignment to projects.
+		 */
 		$scope.dismissUserAssignmentModal = function () {
 			$rootScope.submitted = false;
 			$rootScope.general.errors = [];
 			$('#user-assignment-modal').modal('hide');
 		}
 
-		$scope.setProject = function (username, isValid) {
-			$rootScope.submitted = true;
-			$rootScope.general.errors = [];
-			if (isValid) {
-				$('#user-assignment-modal').modal('hide');
+		/**
+		 * Various project functions.
+		 */
+		$scope.project = {
+			set: function (username, isValid) {
+				$rootScope.submitted = true;
+				$rootScope.general.errors = [];
+				if (isValid) {
+					$('#user-assignment-modal').modal('hide');
+					UserService.updateUser(username, {
+						project: $rootScope.project
+					}, $rootScope.users);
+				}
+			},
+			unset: function (username, event) {
+				event.preventDefault();
+				event.stopPropagation();
 				UserService.updateUser(username, {
-					project: $rootScope.project
+					project: "unassigned"
 				}, $rootScope.users);
 			}
-		}
+		};
 
-		$scope.unsetProject = function (username, event) {
-			event.preventDefault();
-			event.stopPropagation();
-			UserService.updateUser(username, {
-				project: "unassigned"
-			}, $rootScope.users);
-		}
-
+		/**
+		 * Computes number of open tickets for selected user.
+		 */
 		$scope.getOpenTickets = function () {
 			var openTickets = 0;
 			for (var i in $rootScope.userTickets) {
@@ -56,41 +77,32 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 			return openTickets;
 		}
 
+		/**
+		 * Computes effort-estimation ratio for selected user.
+		 */
 		$scope.getEffortEstimationRatio = function () {
-			var totalLoggedTime = 0.0;
-			var totalEstimatedTime = 0.0;
+			var totalLoggedTime = 0.0,
+				totalEstimatedTime = 0.0;
 			for (var i in $rootScope.userTickets) {
 				if ($rootScope.userTickets[i].owner === $scope.selectedTeamMember.username) {
 					totalLoggedTime += $rootScope.userTickets[i].loggedTime;
 					totalEstimatedTime += $rootScope.userTickets[i].estimatedTime;
 				}
 			}
-			if (totalLoggedTime === totalEstimatedTime === 0.0 || totalEstimatedTime === 0.0) {
+			if (totalLoggedTime === totalEstimatedTime || totalEstimatedTime === 0.0) {
 				return 1;
 			}
 			return (totalLoggedTime / totalEstimatedTime).toFixed(2);
 		}
 
-		$scope.getRoleIcon = function (role) {
-			var res = "";
-			switch (role) {
-			case "developer":
-				{
-					res = "terminal";
-					break;
-				}
-			case "tester":
-				{
-					res = "bug";
-					break;
-				}
-			default:
-				{
-					res = "bug";
-					break;
-				}
+		/**
+		 * General page configuration.
+		 */
+		$scope.general = {
+			roleIcon: {
+				developer: "terminal",
+				tester: "bug"
 			}
+		};
 
-			return res;
-		}
 }]);

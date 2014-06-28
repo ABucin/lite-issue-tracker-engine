@@ -1,6 +1,6 @@
-app.service('AuthenticationService', ['ResourceService', '$rootScope', '$cookieStore', '$cookies',
+app.service('AuthenticationService', ['ResourceService', 'UserService', 'SettingsService', '$rootScope', '$cookieStore', '$cookies',
 
-	function (ResourceService, $rootScope, $cookieStore, $cookies) {
+	function (ResourceService, UserService, SettingsService, $rootScope, $cookieStore, $cookies) {
 
 		this.isAuthenticated = function () {
 			return $cookieStore.get('user') !== undefined && $cookieStore.get('user').username !== undefined;
@@ -13,8 +13,11 @@ app.service('AuthenticationService', ['ResourceService', '$rootScope', '$cookieS
 		this.login = function (data) {
 			var callback = function (data) {
 				if (!$rootScope.general.errors.length) {
-					$rootScope.general.errors = [];
 					$cookieStore.put('user', data);
+					// disable when user auth in place
+					UserService.fetchUserData();
+					// caches the settings for the current user
+					SettingsService.loadSettings();
 					$rootScope.navigate('dashboard');
 				}
 			};
@@ -42,6 +45,10 @@ app.service('AuthenticationService', ['ResourceService', '$rootScope', '$cookieS
 					$rootScope.general.errors = [];
 					$("#register-modal").modal('hide');
 					$('#register-success-modal').modal('show');
+					// disable when user auth in place
+					UserService.fetchUserData();
+					// caches the settings for the current user
+					SettingsService.loadSettings();
 				}
 			};
 
