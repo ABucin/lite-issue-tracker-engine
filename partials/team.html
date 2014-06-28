@@ -12,9 +12,11 @@
 			</ul>
 		</div>
 		<div class="col-lg-10 col-md-4 col-sm-9 col-xs-7">
-			<p>
-				<img ng-if="selectedTeamMember.username.length" ng-src="./img/{{selectedTeamMember.username}}.jpg" class="img-responsive img-thumbnail" width="100" />
-				<br>
+			<img ng-if="selectedTeamMember.username.length" ng-src="./img/{{selectedTeamMember.username}}.jpg" class="img-responsive img-thumbnail" width="100" />
+			<h4>
+					Contact
+			</h4>
+			<div class="team-details">
 				<strong>Username:</strong>  <span ng-bind="selectedTeamMember.username"></span>
 				<br>
 				<strong>First Name:</strong>  <span ng-bind="selectedTeamMember.firstName"></span>
@@ -22,9 +24,13 @@
 				<strong>Last Name:</strong>  <span ng-bind="selectedTeamMember.lastName"></span>
 				<br>
 				<span ng-if="getSettings().displayUserEmail"><strong>Email Address:</strong>  <span ng-bind="selectedTeamMember.email"></span>
-				<br>
 				</span>
-				<span ng-if="getSettings().displayUserRole"><strong>Role:</strong>  <span ng-bind="selectedTeamMember.projectRole"></span>
+			</div>
+			<h4>
+					Project
+			</h4>
+			<div class="team-details">
+				<span ng-if="getSettings().displayUserRole"><strong>Role:</strong>  <span ng-bind="selectedTeamMember.projectRole | capitalize"></span>
 				<br>
 				</span>
 				<strong>Expertise:</strong>  <span ng-bind="selectedTeamMember.expertise"></span>
@@ -32,7 +38,11 @@
 				<strong>Open Tickets:</strong>  <span ng-bind="getOpenTickets()"></span>
 				<br>
 				<strong>Effort-Estimation Ratio:</strong>  <span ng-bind="getEffortEstimationRatio()"></span>
-				<br>
+			</div>
+			<h4>
+					Activity
+			</h4>
+			<div class="team-details">
 				<strong>Latest Tickets:</strong>
 				<span class="ticket ticket-{{ticket.type}} ticket-code" ng-repeat="ticket in tickets | filter: selectedTeamMember.username | limitTo: 5">
 					TC-{{ticket.code}}
@@ -42,7 +52,7 @@
 				<strong>Latest Comments:</strong>
 				<p ng-repeat="comment in selectedTeamMember.comments | limitTo: 5"><i class="fa fa-angle-double-right"></i>"{{comment.content}}" <strong>(<span ng-bind="comment.timestamp | date:'yyyy-MM-dd HH:mm:ss'"></span>)</strong>
 				</p>
-			</p>
+			</div>
 		</div>
 	</div>
 </div>

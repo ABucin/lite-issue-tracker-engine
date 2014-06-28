@@ -12,6 +12,10 @@ table > tbody > tr > td[status] {min-height: 50px;}
 
 .panel-settings .fa:hover {cursor: pointer;}
 .panel-settings input[type="text"] {border: 0; background-color: #e0e0e0;}
+.panel-settings ul.nav.ng-scope {padding-left: 15px;}
+
+.panel-team p[ng-repeat*="comment"] {padding-left: 25px;}
+.panel-team .team-details {padding-left: 15px;}
 
 /**
  * Chart Secondary Menu CSS
