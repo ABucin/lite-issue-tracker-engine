@@ -89,7 +89,7 @@ app.directive('ticketContainer', function ($rootScope) {
 				angular.copy($rootScope.copiedEntity, scope.updatedTicket);
 				scope.updatedTicket.loggedTime = 0.0;
 				scope.$apply();
-				scope.updateTicket();
+				scope.updateTicket(true);
 			});
 		}
 	};
