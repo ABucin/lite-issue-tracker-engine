@@ -3,20 +3,7 @@ body { -webkit-font-smoothing: antialiased; background-image: url('../img/bg.png
 body a{cursor: pointer;}
 body a:hover {text-decoration: none;}
 
-table > tbody > tr > td[status] {min-height: 50px;}
-
 .login-form {padding-top: 10%;}
-
-.dashboard-panel-right {padding-left: 0; padding-right: 0;}
-.dashboard-panel-right .panel {margin-bottom: 15px;}
-
-.panel-settings .fa:hover {cursor: pointer;}
-.panel-settings input[type="text"] {border: 0; background-color: #e0e0e0;}
-.panel-settings ul.nav.ng-scope, .panel-settings .list-projects {padding-left: 15px;}
-.panel-settings .list-projects .fa-edit {color: #cb8e02;}
-
-.panel-team p[ng-repeat*="comment"] {padding-left: 25px;}
-.panel-team .team-details {padding-left: 15px;}
 
 /**
  * Chart Secondary Menu CSS
@@ -70,9 +57,3 @@ div[ng-repeat*='tickets.done'] .ticket .ticket-title {text-decoration: line-thro
 .log-amount,
 .log-comment { margin-left: 6px; padding-right: 6px; }
 .log-timestamp { display: inline; }
-
-/**
- * Utils.
- */
-.center-y {vertical-align: middle;}
-.center-x {text-align: center;}
