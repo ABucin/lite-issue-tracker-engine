@@ -143,12 +143,12 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		 * Navigates to the specified page of the application.
 		 */
 		$rootScope.navigate = function (url) {
-			$location.path('/' + url);
-			$rootScope.menu.hasDropdown = false;
-			$rootScope.tickets.isDeleting = false;
 			$cookieStore.put('page', {
 				name: url
 			});
+			$location.path('/' + url);
+			$rootScope.menu.hasDropdown = false;
+			$rootScope.tickets.isDeleting = false;
 		};
 
 		/**

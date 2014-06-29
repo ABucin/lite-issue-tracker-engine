@@ -143,7 +143,11 @@ exports.populateDb = function () {
 			username: "psmith",
 			timestamp: yesterday
 		}],
-		comments: []
+		comments: [{
+			key: utils.generateKey(),
+			content: "Also, please update the title to something more accurate.",
+			ticket: sampleTicketKey
+		}]
 	});
 
 	user.setPassword("abucin", function () {
@@ -151,14 +155,14 @@ exports.populateDb = function () {
 			if (err) {
 				return console.error(err); // we should handle this
 			} else {
-				user2.save(function (err) {
-					if (err) {
-						return console.error(err); // we should handle this
-					}
+				user2.setPassword("psmith", function () {
+					user2.save(function (err) {
+						if (err) {
+							return console.error(err); // we should handle this
+						}
+					});
 				});
 			}
 		});
 	});
-
-
 };
