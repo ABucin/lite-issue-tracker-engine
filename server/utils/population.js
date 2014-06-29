@@ -19,6 +19,7 @@ exports.populateDb = function () {
 
 	var code = 0;
 	var userTickets = [];
+	var user2Tickets = [];
 
 	var generateTicket = function (tickets, title, status, type, description, owner, priority, estimatedTime, loggedTime) {
 		return tickets.push({
@@ -37,10 +38,17 @@ exports.populateDb = function () {
 
 	generateTicket(userTickets, "Plan Review Meeting", "inProgress", "task", "This Thursday at 10:00.", "abucin", "normal", 10, 20);
 	generateTicket(userTickets, "Add Colour Palette", "testing", "task", "Create a colour palette for the website.", "", "major", 12, 12);
-	generateTicket(userTickets, "Remove Redundant Tests", "inProgress", "task", "Remove tests that are not used.", "abucin", "minor", 10, 5);
-	generateTicket(userTickets, "Fix CSS Button Padding", "inProgress", "bug", "The login button has extra padding.", "abucin", "minor", 10, 20);
+	generateTicket(userTickets, "Remove Redundant Tests", "done", "task", "Remove tests that are not used.", "abucin", "minor", 10, 5);
+	generateTicket(userTickets, "Fix CSS Button Padding", "done", "bug", "The login button has extra padding.", "abucin", "minor", 10, 20);
+	generateTicket(userTickets, "Fix Responsive Menu", "inProgress", "bug", "The menu needs to be made responsive.", "abucin", "minor", 15, 10);
+
+	generateTicket(user2Tickets, "Test Batch Script", "testing", "task", "The deployment script should be tested.", "psmith", "normal", 25, 13);
+	generateTicket(user2Tickets, "Fix Missing Authentication Header.", "inProgress", "bug", "Add the missing header.", "psmith", "major", 5, 26);
+	generateTicket(user2Tickets, "Fix Login Page CSS", "done", "bug", "Fix Login Page CSS.", "psmith", "major", 15, 23);
 
 	var sampleTicketKey = utils.generateKey();
+	var yesterday = new Date();
+	yesterday.setDate(yesterday.getDate() - 1);
 
 	var user = new User({
 		key: utils.generateKey(),
@@ -73,11 +81,11 @@ exports.populateDb = function () {
 		}, {
 			key: utils.generateKey(),
 			action: "clock-o",
-			amount: 5,
+			amount: 3,
 			target: "2",
 			targetType: "task",
 			username: "abucin",
-			timestamp: new Date()
+			timestamp: yesterday
 		}, {
 			key: utils.generateKey(),
 			action: "comment",
@@ -100,17 +108,17 @@ exports.populateDb = function () {
 
 	var user2 = new User({
 		key: utils.generateKey(),
-		username: "test",
-		email: "test@gmail.com",
-		firstName: "test",
-		lastName: "test",
+		username: "psmith",
+		email: "psmith@gmail.com",
+		firstName: "Peter",
+		lastName: "Smith",
 		salt: null,
 		hash: null,
 		role: "user",
 		projectRole: "developer",
 		project: "unassigned",
-		expertise: "Java, PHP, JavaScript, Web Design",
-		tickets: [],
+		expertise: "JavaScript, HTML5, CSS3.",
+		tickets: user2Tickets,
 		settings: [{
 			key: utils.generateKey(),
 			displayUserActivity: true,
@@ -118,7 +126,23 @@ exports.populateDb = function () {
 			displayUserEmail: true,
 			displayUserRole: true
 		}],
-		logs: [],
+		logs: [{
+			key: utils.generateKey(),
+			action: "clock-o",
+			amount: 4,
+			target: "6",
+			targetType: "task",
+			username: "psmith",
+			timestamp: new Date()
+		}, {
+			key: utils.generateKey(),
+			action: "clock-o",
+			amount: 6,
+			target: "6",
+			targetType: "task",
+			username: "psmith",
+			timestamp: yesterday
+		}],
 		comments: []
 	});
 
@@ -127,11 +151,11 @@ exports.populateDb = function () {
 			if (err) {
 				return console.error(err); // we should handle this
 			} else {
-//				user2.save(function (err) {
-//					if (err) {
-//						return console.error(err); // we should handle this
-//					}
-//				});
+				user2.save(function (err) {
+					if (err) {
+						return console.error(err); // we should handle this
+					}
+				});
 			}
 		});
 	});
