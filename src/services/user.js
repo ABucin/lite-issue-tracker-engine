@@ -40,6 +40,12 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 			var callback = function (data) {
 				$rootScope.users = data;
 				$rootScope.userTickets = [];
+				$rootScope.tickets = {
+					created: [],
+					inProgress: [],
+					testing: [],
+					done: []
+				};
 
 				for (var i in data) {
 					var tickets = $rootScope.users[i].tickets;

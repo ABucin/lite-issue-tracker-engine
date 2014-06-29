@@ -11,6 +11,16 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		$scope.templateUserAssignModal = $scope.modalTemplates[0];
 
 		/**
+		 * General page configuration.
+		 */
+		$scope.general = {
+			roleIcon: {
+				developer: "terminal",
+				tester: "bug"
+			}
+		};
+
+		/**
 		 * Document loading configuration.
 		 */
 		angular.element(document).ready(function () {
@@ -94,15 +104,5 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 			}
 			return (totalLoggedTime / totalEstimatedTime).toFixed(2);
 		}
-
-		/**
-		 * General page configuration.
-		 */
-		$scope.general = {
-			roleIcon: {
-				developer: "terminal",
-				tester: "bug"
-			}
-		};
 
 }]);
