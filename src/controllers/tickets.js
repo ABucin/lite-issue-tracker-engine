@@ -1,5 +1,5 @@
-app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService', 'CommentsService', 'LogsService',
-function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsService) {
+app.controller('TicketsCtrl', ['$scope', '$rootScope', '$location', 'TicketsService', 'CommentsService', 'LogsService', 'UserService',
+function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsService, UserService) {
 		$rootScope.menu.hasDropdown = true;
 		$scope.isEditing = false;
 
@@ -13,10 +13,15 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 
 		$scope.updatedTicket = {};
 		$scope.deletedTicket = {};
+		$scope.copiedTicket = {};
 
 		$scope.loggedWork = {
 			amount: 0.0
 		};
+
+		angular.element(document).ready(function () {
+			UserService.fetchUserData();
+		});
 
 		$scope.ticket = {
 			title: null,
@@ -137,6 +142,21 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		$scope.hideTicketCreationModal = function () {
 			$rootScope.general.errors = [];
 			$('#ticket-creation-modal').modal('hide');
+		};
+
+		$rootScope.showTicketCreationModal = function () {
+			$rootScope.general.errors = [];
+			$scope.ticket = {
+				title: null,
+				description: null,
+				type: "task",
+				priority: "major",
+				estimatedTime: 0.0,
+				loggedTime: 0.0,
+				owner: $rootScope.getAuthenticatedUser().username,
+				user: $rootScope.getAuthenticatedUser().username
+			};
+			$('#ticket-creation-modal').modal('show');
 		};
 
 		$scope.hideTicketPreviewModal = function () {

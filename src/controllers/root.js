@@ -75,8 +75,7 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			inProgress: [],
 			testing: [],
 			done: [],
-			isDeleting: false,
-			copied: {}
+			isDeleting: false
 		};
 
 		/**

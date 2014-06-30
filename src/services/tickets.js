@@ -18,7 +18,7 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 				for (var i in tickets) {
 					if (tickets[i].key == data.key) {
 						angular.copy(data, tickets[i]);
-						tickets[i].loggedTime += loggedWork;
+//						tickets[i].loggedTime += loggedWork;
 						$rootScope.$broadcast('ticketUpdated', {
 							key: data.key
 						});
@@ -79,7 +79,7 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 				}
 			}
 
-			updatedTicket.loggedTime += loggedWork;
+			updatedTicket.loggedTime = loggedWork;
 
 			ResourceService.putData('users/' + username + '/tickets/' + key, updatedTicket, callback);
 		};

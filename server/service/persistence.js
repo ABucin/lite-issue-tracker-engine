@@ -51,7 +51,7 @@ exports.getSettings = function (username, res) {
 	}, function (err, user) {
 		if (err) {
 			res.send(500, err);
-		} else {
+		} else if (user != null) {
 			res.json(user.settings);
 		}
 	});
@@ -96,11 +96,11 @@ exports.updateAllSettings = function (username, settings, res) {
 				user.save(function (err) {
 					if (err) {
 						res.send(500, err);
-					} else {
-						res.json(settings);
 					}
 				});
 			});
+
+			res.json(settings);
 		}
 	});
 };

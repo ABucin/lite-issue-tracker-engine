@@ -60,9 +60,7 @@ app.directive('ticket', function ($rootScope) {
 				scope.isEditing = true;
 				scope.fetchComments(scope.ticket.key);
 				// display the clicked ticket data in the modal
-				if (scope.updatedTicket.code === null || scope.ticket.key !== scope.updatedTicket.key) {
-					angular.copy(scope.ticket, scope.updatedTicket);
-				}
+				angular.copy(scope.ticket, scope.updatedTicket);
 				scope.$apply();
 			});
 
@@ -71,7 +69,7 @@ app.directive('ticket', function ($rootScope) {
 				if (scope.ticket.owner !== $rootScope.getAuthenticatedUser().username) {
 					e.preventDefault();
 				} else {
-					angular.copy(scope.ticket, $rootScope.tickets.copied);
+					angular.copy(scope.ticket, scope.copiedTicket);
 				}
 			});
 		},
@@ -85,9 +83,9 @@ app.directive('ticketContainer', function ($rootScope) {
 		restrict: 'A',
 		link: function (scope, element, attr) {
 			element[0].addEventListener('drop', function (e) {
-				$rootScope.tickets.copied.status = element.attr("status");
-				angular.copy($rootScope.tickets.copied, scope.updatedTicket);
-				scope.updatedTicket.loggedTime = 0.0;
+				scope.copiedTicket.status = element.attr("status");
+				angular.copy(scope.copiedTicket, scope.updatedTicket);
+				//				scope.updatedTicket.loggedTime = 0.0;
 				scope.$apply();
 				scope.updateTicket(true);
 			});
