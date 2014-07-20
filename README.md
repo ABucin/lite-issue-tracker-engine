@@ -24,6 +24,8 @@ Repository for the issue tracker application.
   	* Uglify
 	* Concat
 	* Watch
+	* Copy
+	* Less
   * Mongoose
   * Underscore
 * MongoDB 2.6 Standard

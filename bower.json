@@ -24,6 +24,7 @@
     "angular-route": "latest",
     "angular-cookies": "latest",
     "jquery": "latest",
-    "angular-touch": "~1.2.18"
+    "angular-touch": "~1.2.18",
+    "components-font-awesome": "~4.1.0"
   }
 }
