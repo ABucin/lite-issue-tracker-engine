@@ -2,6 +2,9 @@
 /**
  * Color constants.
  */
+/**
+ * Main body.
+ */
 body {
   -webkit-font-smoothing: antialiased;
   background-image: url('../img/bg.png');
@@ -46,7 +49,7 @@ body a:hover {
 }
 .secondary-menu > ul > li i.chart-icon > ul > li.active,
 .secondary-menu > ul > li.toggleable:hover {
-  background-color: #ccc;
+  background-color: #cccccc;
   border-radius: .2em;
   cursor: pointer;
 }
@@ -99,7 +102,7 @@ p[ng-show*='loginForm.password'] {
 .ticket .fa-times {
   color: #cb1f26;
 }
-.ticket-bug {
+.ticket .ticket-bug {
   background-color: #cb1f26;
 }
 .ticket-task {
@@ -108,16 +111,16 @@ p[ng-show*='loginForm.password'] {
 .ticket-not-owned {
   background-color: #3f424b;
 }
-.ticket-code.ticket-unassigned {
-  background-color: #e0e0e0;
-  color: #3f424b;
-}
 .ticket-code {
   color: white;
   border-radius: .3em;
   padding: 0px 0 0px 6px;
   display: inline-flex;
   align-items: center;
+}
+.ticket-code.ticket-unassigned {
+  background-color: #e0e0e0;
+  color: #3f424b;
 }
 .ticket-title {
   position: relative;
@@ -170,7 +173,7 @@ div[ng-repeat*='tickets.done'] .ticket .ticket-title {
   display: inline;
 }
 nav.navbar {
-  border-color: #ddd;
+  border-color: #dddddd;
   min-height: 40px;
   margin-bottom: 0;
 }
@@ -180,13 +183,13 @@ nav.navbar .container-fluid {
 nav.navbar li > a.fa-bars:hover,
 nav.navbar li.open > a.fa-bars:hover,
 nav.navbar li.open > a.fa-bars {
-  background-color: #ccc;
+  background-color: #cccccc;
 }
 nav.navbar li ul.dropdown-menu {
   font-size: 90%;
 }
 nav.navbar a.fa-bars {
-  background-color: #ccc;
+  background-color: #cccccc;
   margin: 0 3px;
 }
 nav.navbar ul.nav > li {
@@ -204,27 +207,25 @@ nav.navbar ul.nav > li > a i.fa {
 nav.navbar ul.navbar-nav > li.toggleable:hover,
 nav.navbar .navbar-nav > li.toggleable.active > a,
 nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
-  background-color: #ccc;
+  background-color: #cccccc;
 }
-.panel.ng-scope {
+.panel .ng-scope {
   background-color: transparent;
 }
 .panel.panel-dashboard,
 .panel.panel-analytics,
-.panel.panel-team,
-.panel-body-dashboard {
+.panel.panel-team {
   padding: 5px;
 }
-.panel-bugs > .row > div,
-.panel-tickets > .row > div {
-  padding-right: 0;
+.panel.panel-dashboard p[ng-repeat*="comment"],
+.panel.panel-analytics p[ng-repeat*="comment"],
+.panel.panel-team p[ng-repeat*="comment"] {
+  padding-left: 25px;
 }
-.panel > .panel-heading {
-  background-color: #ededed;
-}
-.panel > .panel-heading > span > i[data-toggle*="collapse"] {
-  cursor: pointer;
-  line-height: 1.5;
+.panel.panel-dashboard .team-details,
+.panel.panel-analytics .team-details,
+.panel.panel-team .team-details {
+  padding-left: 15px;
 }
 .panel.panel-dashboard {
   margin-right: 15px;
@@ -254,17 +255,25 @@ nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
   cursor: pointer;
 }
 .panel.panel-settings ul.nav.ng-scope,
-.panel-settings .list-projects {
+.panel.panel-settings ul .panel-settings .list-projects {
   padding-left: 15px;
 }
 .panel.panel-settings .list-projects .fa-edit {
   color: #cb8e02;
 }
-.panel.panel-team p[ng-repeat*="comment"] {
-  padding-left: 25px;
+.panel > .panel-heading {
+  background-color: #ededed;
 }
-.panel.panel-team .team-details {
-  padding-left: 15px;
+.panel > .panel-heading > span > i[data-toggle*="collapse"] {
+  cursor: pointer;
+  line-height: 1.5;
+}
+.panel-body-dashboard {
+  padding: 5px;
+}
+.panel-bugs > .row > div,
+.panel-tickets > .row > div {
+  padding-right: 0;
 }
 .modal-dialog {
   font-weight: normal;
@@ -282,7 +291,7 @@ nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
   margin-top: 0;
 }
 .modal-comments {
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5e5e5;
 }
 .modal-comments i.fa {
   cursor: pointer;
@@ -296,34 +305,35 @@ nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
 .table {
   background-color: transparent;
 }
+.table > thead > i {
+  padding-left: 5px;
+}
 .table > thead > tr > th {
   margin-bottom: 10px;
   font-weight: 300;
   text-align: center;
   min-width: 20%;
-  border-bottom: 1px solid #DDDDDD;
-}
-.table > tbody > tr > td:last-child,
-.table > thead > tr > th:last-child {
-  border-right: 1px dashed #DDDDDD;
-}
-.table > tbody > tr > td,
-.table > thead > tr > th {
-  border-left: 1px dashed #DDDDDD;
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px dashed #dddddd;
   vertical-align: top;
+}
+.table > thead > tr > th:last-child {
+  border-right: 1px dashed #dddddd;
 }
 .table > tbody > tr > td {
   border-top: none;
   padding: 0;
+  border-left: 1px dashed #dddddd;
+  vertical-align: top;
+}
+.table > tbody > tr > td:last-child {
+  border-right: 1px dashed #dddddd;
 }
 .table > tbody > tr > td i {
   padding-left: 5px;
 }
 .table > tbody > tr > td > div.progress {
   margin-bottom: 0;
-}
-.table > thead > i {
-  padding-left: 5px;
 }
 table > tbody > tr > td[status] {
   min-height: 50px;

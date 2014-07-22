@@ -9,7 +9,13 @@
 @light-grey: #C3C2B8;
 @ticket-unassigned: #E0E0E0;
 @secondary-menu: #DDDDDD;
+@container-background: #EDEDED;
+@nav-hover: #CCCCCC;
+@comments-border: #E5E5E5;
 
+/**
+ * Main body.
+ */
 body {
 	-webkit-font-smoothing: antialiased;
 	background-image: url('../img/bg.png');
@@ -50,7 +56,7 @@ body {
 		}
 		i.chart-icon > ul > li.active,
 		&.toggleable:hover {
-			background-color: #ccc;
+			background-color: @nav-hover;
 			border-radius: .2em;
 			cursor: pointer;
 		}
@@ -65,9 +71,9 @@ body {
 
 .fa-times {
 			color: @red;
-
 		}
 	}
+
 
 .nav.ng-scope .fa-edit {color: @orange;}
 
@@ -84,13 +90,12 @@ p[ng-show*='loginForm.password'] {margin:0px;}
 .log-timestamp { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500; }
 .ticket:hover,
 .log:hover { cursor: pointer; }
-.ticket {margin: 6px 6px 0 6px;}
-.ticket .fa-times {color: @red;}
+.ticket {margin: 6px 6px 0 6px; .fa-times {color: @red;}}
+.ticket
 .ticket-bug { background-color: @red; }
 .ticket-task { background-color: @blue; }
 .ticket-not-owned {background-color: @dark-grey;}
-.ticket-code.ticket-unassigned { background-color: @ticket-unassigned; color: @dark-grey;}
-.ticket-code { color: white; border-radius: .3em; padding: 0px 0 0px 6px; display: inline-flex; align-items: center; }
+.ticket-code { color: white; border-radius: .3em; padding: 0px 0 0px 6px; display: inline-flex; align-items: center; &.ticket-unassigned { background-color: @ticket-unassigned; color: @dark-grey;} }
 .ticket-title {position: relative; left: 1px; background-color: @light-grey ; color: black; padding: 3px 6px; border-radius: 0 .3em .3em 0; margin-left: 6px;}
 td > .ng-scope:last-child > .ticket {margin-bottom: 6px;}
 div[ng-repeat*='tickets.done'] .ticket .ticket-title {text-decoration: line-through; color: black;}
@@ -107,22 +112,22 @@ div[ng-repeat*='tickets.done'] .ticket .ticket-title {text-decoration: line-thro
 .log-timestamp { display: inline; }
 
 nav.navbar {
-	border-color: #ddd;
+	border-color: @secondary-menu;
 	min-height: 40px;
 	margin-bottom: 0;
 	.container-fluid {
-		background-color: #ededed;
+		background-color: @container-background;
 	}
 	li {
 		> a.fa-bars:hover, &.open > a.fa-bars:hover, &.open > a.fa-bars {
-			background-color: #ccc;
+			background-color: @nav-hover;
 		}
 		ul.dropdown-menu {
 			font-size: 90%;
 		}
 	}
 	a.fa-bars {
-		background-color: #ccc;
+		background-color: @nav-hover;
 		margin: 0 3px;
 	}
 	ul.nav > li {
@@ -140,53 +145,142 @@ nav.navbar {
 	ul.navbar-nav > li.toggleable:hover,
 	.navbar-nav > li.toggleable.active > a,
 	.navbar-nav > nav.navbar li.toggleable.active > a:hover {
-		background-color: #ccc;
+		background-color: @nav-hover;
 	}
 }
 
-.panel.ng-scope {background-color: transparent;}
-.panel.panel-dashboard,
-.panel.panel-analytics,
-.panel.panel-team,
+.panel {
+	.ng-scope {
+		background-color: transparent;
+	}
+	&.panel-dashboard,
+	&.panel-analytics,
+	&.panel-team {
+		padding: 5px;
+		p[ng-repeat*="comment"] {
+			padding-left: 25px;
+		}
+		.team-details {
+			padding-left: 15px;
+		}
+	}
+	&.panel-dashboard {
+		margin-right: 15px;
+		margin-top: 5px;
+		.ticket {
+			margin: 3px;
+		}
+		.dashboard-panel-right {
+			padding-left: 0;
+			padding-right: 0;
+			.panel {
+				margin-bottom: 15px;
+			}
+		}
+	}
+	&.panel-settings {
+		margin-top: 10px;
+		.fa:hover {
+			cursor: pointer;
+		}
+		input[type="text"] {
+			border: 0;
+			background-color: @ticket-unassigned;
+		}
+		ul {
+			&.list-unstyled li:hover {
+				cursor: pointer;
+			}
+			&.nav.ng-scope,
+			.panel-settings .list-projects {
+				padding-left: 15px;
+			}
+		}
+		.list-projects .fa-edit {
+			color: @orange;
+		}
+	}
+	> .panel-heading {
+		background-color: @container-background;
+		> span > i[data-toggle*="collapse"] {
+			cursor: pointer;
+			line-height: 1.5;
+		}
+	}
+}
+
 .panel-body-dashboard { padding: 5px; }
 .panel-bugs > .row > div,
 .panel-tickets > .row > div {padding-right: 0;}
 
-.panel > .panel-heading {background-color: #ededed;}
-.panel > .panel-heading > span > i[data-toggle*="collapse"] {cursor: pointer; line-height: 1.5;}
+.modal-dialog {
+	font-weight: normal;
+	form {
+		margin-bottom: 0;
+	}
+}
 
-.panel.panel-dashboard {margin-right: 15px; margin-top: 5px;}
-.panel.panel-dashboard .ticket {margin:3px;}
-.panel.panel-dashboard .dashboard-panel-right {padding-left: 0; padding-right: 0;}
-.panel.panel-dashboard .dashboard-panel-right .panel {margin-bottom: 15px;}
+.modal-header {
+	padding: 10px 15px;
+}
 
-.panel.panel-settings {margin-top: 10px;}
-.panel.panel-settings .fa:hover {cursor: pointer;}
-.panel.panel-settings input[type="text"] {border: 0; background-color: #e0e0e0;}
-.panel.panel-settings ul.list-unstyled li:hover {cursor: pointer;}
-.panel.panel-settings ul.nav.ng-scope, .panel-settings .list-projects {padding-left: 15px;}
-.panel.panel-settings .list-projects .fa-edit {color: #cb8e02;}
+.modal-body .form-group:last-child {
+	margin-bottom: 0;
+}
 
-.panel.panel-team p[ng-repeat*="comment"] {padding-left: 25px;}
-.panel.panel-team .team-details {padding-left: 15px;}
+.modal-footer {
+	margin-top: 0;
+}
 
-.modal-dialog {font-weight: normal;}
-.modal-dialog form {margin-bottom: 0;}
-.modal-header { padding: 10px 15px; }
-.modal-body .form-group:last-child {margin-bottom: 0;}
-.modal-footer { margin-top: 0; }
-.modal-comments { border-bottom: 1px solid #E5E5E5; }
-.modal-comments i.fa {cursor: pointer;}
-.modal-comments i.fa-edit {margin-right: 5px;}
-.modal-comments em {padding: 0 5px;}
+.modal-comments {
+	border-bottom: 1px solid @comments-border;
+	i {
+		&.fa {
+			cursor: pointer;
+		}
+		&.fa-edit {
+			margin-right: 5px;
+		}
+	}
+	em {
+		padding: 0 5px;
+	}
+}
 
-.table {background-color: transparent;}
-.table > thead > tr > th {margin-bottom: 10px; font-weight: 300; text-align: center; min-width: 20%; border-bottom: 1px solid #DDDDDD;}
-.table > tbody > tr > td:last-child, .table > thead > tr > th:last-child {border-right: 1px dashed #DDDDDD;}
-.table > tbody > tr > td, .table > thead > tr > th {border-left: 1px dashed #DDDDDD; vertical-align: top;}
-.table > tbody > tr > td {border-top: none; padding: 0;}
-.table > tbody > tr > td i {padding-left: 5px;}
-.table > tbody > tr > td > div.progress { margin-bottom: 0; }
-.table > thead > i {padding-left: 5px;}
+.table {
+	background-color: transparent;
+	> thead {
+		> i {
+			padding-left: 5px;
+		}
+		> tr > th {
+			margin-bottom: 10px;
+			font-weight: 300;
+			text-align: center;
+			min-width: 20%;
+			border-bottom: 1px solid @secondary-menu;
+			border-left: 1px dashed @secondary-menu;
+			vertical-align: top;
+			&:last-child {
+				border-right: 1px dashed @secondary-menu;
+			}
+		}
+	}
+	> tbody > tr > td {
+		border-top: none;
+		padding: 0;
+		border-left: 1px dashed @secondary-menu;
+		vertical-align: top;
+		&:last-child {
+			border-right: 1px dashed @secondary-menu;
+		}
+		i {
+			padding-left: 5px;
+		}
+		> div.progress {
+			margin-bottom: 0;
+		}
+	}
+}
 
 table > tbody > tr > td[status] {min-height: 50px;}
