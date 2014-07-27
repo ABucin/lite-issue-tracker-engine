@@ -34,11 +34,11 @@ Repository for the issue tracker application.
 	* angular-route
 	* angular-cookies
 	* angular-touch
-* Bootstrap 3.1.1
+* Bootstrap 3.2.0
 * Font Awesome 4.1.0
-* Ionicons 1.5.0
+* Ionicons 1.5.2
 * jQuery 2.1.1
-* Highcharts.js 4.0.1
+* Highcharts.js 4.0.3
 
 #### Development Setup
 

@@ -102,7 +102,7 @@ p[ng-show*='loginForm.password'] {
 .ticket .fa-times {
   color: #cb1f26;
 }
-.ticket .ticket-bug {
+.ticket-bug {
   background-color: #cb1f26;
 }
 .ticket-task {
