@@ -3,8 +3,6 @@ issue-tracker
 
 Repository for the issue tracker application.
 
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-
 #### Versioning
 
 `<major>.<minor>.<patch>`
@@ -20,7 +18,7 @@ Repository for the issue tracker application.
 	* Cookie-Parser
 	* Express-Session
   * Bower
-  * Grunt
+  * [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
   	* Uglify
 	* Concat
 	* Watch
@@ -32,9 +30,10 @@ Repository for the issue tracker application.
 
 ##### Client Side
 
-* Angular.js 1.2.16
+* [![Built with Angular](https://angularjs.org/img/AngularJS-small.png)](https://angularjs.org/)
 	* angular-route
 	* angular-cookies
+	* angular-touch
 * Bootstrap 3.1.1
 * Font Awesome 4.1.0
 * Ionicons 1.5.0
