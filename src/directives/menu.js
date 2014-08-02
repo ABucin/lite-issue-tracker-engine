@@ -5,7 +5,7 @@ app.directive('trackerMenu', function () {
 	};
 });
 
-app.directive('toggleable', function ($rootScope) {
+app.directive('toggleable', ['$rootScope', function ($rootScope) {
 	return {
 		restrict: 'C',
 		link: function (scope, element, attribute) {
@@ -23,4 +23,4 @@ app.directive('toggleable', function ($rootScope) {
 			});
 		}
 	};
-});
+}]);

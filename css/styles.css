@@ -3,13 +3,34 @@
  * Color constants.
  */
 /**
+ * Layout contsants.
+ */
+* {
+  margin: 0;
+  padding: 0;
+}
+/**
+ * FontAwesome overrides.
+ */
+.fa {
+  cursor: pointer;
+}
+.fa-times {
+  color: #cb1f26;
+}
+.fa-edit {
+  color: #cb8e02;
+}
+.fa-check {
+  color: #4c921c;
+}
+/**
  * Main body.
  */
 body {
   -webkit-font-smoothing: antialiased;
   background-image: url('../img/bg.png');
   font-family: "Roboto", "Helvetica", "Verdana", sans-serif;
-  margin-right: 0px;
 }
 body a {
   cursor: pointer;
@@ -17,8 +38,15 @@ body a {
 body a:hover {
   text-decoration: none;
 }
-.login-form {
+body div[ng-repeat*='tickets.done'] .ticket .ticket-title {
+  text-decoration: line-through;
+  color: black;
+}
+body .login-form {
   padding-top: 10%;
+}
+body .comment-author {
+  color: #21579d;
 }
 /**
  * Chart Secondary Menu CSS
@@ -47,23 +75,11 @@ body a:hover {
 .secondary-menu > ul > li > i.chart-icon.fa {
   font-size: 14px;
 }
-.secondary-menu > ul > li i.chart-icon > ul > li.active,
+.secondary-menu > ul > li > i.chart-icon > ul > li.active,
 .secondary-menu > ul > li.toggleable:hover {
   background-color: #cccccc;
   border-radius: .2em;
   cursor: pointer;
-}
-.comment-author {
-  color: #21579d;
-}
-.list-unstyled .fa-check {
-  color: #4c921c;
-}
-.list-unstyled .fa-times {
-  color: #cb1f26;
-}
-.nav.ng-scope .fa-edit {
-  color: #cb8e02;
 }
 form[name*='Form'] .fa-warning,
 .login-form .fa-warning,
@@ -83,24 +99,26 @@ p[ng-show*='loginForm.password'] {
 /**
  * Ticket CSS.
  */
-.ticket,
-.log,
-.log-timestamp {
+.ticket-display {
   display: inline-block;
   margin: 3px;
   line-height: normal;
   font-size: 80%;
   font-weight: 500;
 }
-.ticket:hover,
-.log:hover {
+.ticket-display:hover {
   cursor: pointer;
 }
 .ticket {
+  display: inline-block;
+  margin: 3px;
+  line-height: normal;
+  font-size: 80%;
+  font-weight: 500;
   margin: 6px 6px 0 6px;
 }
-.ticket .fa-times {
-  color: #cb1f26;
+.ticket:hover {
+  cursor: pointer;
 }
 .ticket-bug {
   background-color: #cb1f26;
@@ -113,7 +131,7 @@ p[ng-show*='loginForm.password'] {
 }
 .ticket-code {
   color: white;
-  border-radius: .3em;
+  border-radius: 0.3em;
   padding: 0px 0 0px 6px;
   display: inline-flex;
   align-items: center;
@@ -128,21 +146,19 @@ p[ng-show*='loginForm.password'] {
   background-color: #c3c2b8;
   color: black;
   padding: 3px 6px;
-  border-radius: 0 .3em .3em 0;
+  border-radius: 0 0.3em 0.3em 0;
   margin-left: 6px;
-}
-td > .ng-scope:last-child > .ticket {
-  margin-bottom: 6px;
-}
-div[ng-repeat*='tickets.done'] .ticket .ticket-title {
-  text-decoration: line-through;
-  color: black;
 }
 /**
  * Log entry CSS.
  */
 .log {
-  border-radius: .3em;
+  display: inline-block;
+  margin: 3px;
+  line-height: normal;
+  font-size: 80%;
+  font-weight: 500;
+  border-radius: 0.3em;
   color: white;
   background-color: #3f424b;
   padding: 3px 0px 3px 6px;
@@ -150,8 +166,11 @@ div[ng-repeat*='tickets.done'] .ticket .ticket-title {
   margin: 3px 3px;
   align-items: center;
 }
+.log:hover {
+  cursor: pointer;
+}
 .log span:last-child {
-  border-radius: 0 .3em .3em 0;
+  border-radius: 0 0.3em 0.3em 0;
 }
 .log-user {
   background-color: #c3c2b8;
@@ -170,7 +189,15 @@ div[ng-repeat*='tickets.done'] .ticket .ticket-title {
   padding-right: 6px;
 }
 .log-timestamp {
+  display: inline-block;
+  margin: 3px;
+  line-height: normal;
+  font-size: 80%;
+  font-weight: 500;
   display: inline;
+}
+.log-timestamp:hover {
+  cursor: pointer;
 }
 nav.navbar {
   border-color: #dddddd;
@@ -205,12 +232,13 @@ nav.navbar ul.nav > li > a i.fa {
   margin-right: 5px;
 }
 nav.navbar ul.navbar-nav > li.toggleable:hover,
-nav.navbar .navbar-nav > li.toggleable.active > a,
-nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
+nav.navbar ul.navbar-nav > li.toggleable.active > a,
+nav.navbar ul.navbar-nav > nav.navbar li.toggleable.active > a:hover {
   background-color: #cccccc;
 }
-.panel .ng-scope {
+.panel.ng-scope {
   background-color: transparent;
+  box-shadow: none;
 }
 .panel.panel-dashboard,
 .panel.panel-analytics,
@@ -230,6 +258,12 @@ nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
 .panel.panel-dashboard {
   margin-right: 15px;
   margin-top: 5px;
+}
+.panel.panel-dashboard > div.ng-scope:first-child {
+  padding-left: 10px;
+}
+.panel.panel-dashboard > div.ng-scope:last-child {
+  padding-right: 10px;
 }
 .panel.panel-dashboard .ticket {
   margin: 3px;
@@ -281,22 +315,19 @@ nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
 .modal-dialog form {
   margin-bottom: 0;
 }
-.modal-header {
+.modal-dialog .modal-header {
   padding: 10px 15px;
 }
-.modal-body .form-group:last-child {
+.modal-dialog .modal-body .form-group:last-child {
   margin-bottom: 0;
 }
-.modal-footer {
+.modal-dialog .modal-footer {
   margin-top: 0;
 }
 .modal-comments {
   border-bottom: 1px solid #e5e5e5;
 }
-.modal-comments i.fa {
-  cursor: pointer;
-}
-.modal-comments i.fa-edit {
+.modal-comments .fa-edit {
   margin-right: 5px;
 }
 .modal-comments em {
@@ -304,9 +335,6 @@ nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
 }
 .table {
   background-color: transparent;
-}
-.table > thead > i {
-  padding-left: 5px;
 }
 .table > thead > tr > th {
   margin-bottom: 10px;
@@ -326,15 +354,15 @@ nav.navbar .navbar-nav > nav.navbar li.toggleable.active > a:hover {
   border-left: 1px dashed #dddddd;
   vertical-align: top;
 }
+.table > tbody > tr > td[status] {
+  min-height: 50px;
+}
 .table > tbody > tr > td:last-child {
   border-right: 1px dashed #dddddd;
-}
-.table > tbody > tr > td i {
-  padding-left: 5px;
 }
 .table > tbody > tr > td > div.progress {
   margin-bottom: 0;
 }
-table > tbody > tr > td[status] {
-  min-height: 50px;
+.table > tbody > tr > td > .ng-scope:last-child > .ticket {
+  margin-bottom: 6px;
 }

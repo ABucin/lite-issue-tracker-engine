@@ -1,4 +1,4 @@
-app.directive('ticket', function ($rootScope) {
+app.directive('ticket', ['$rootScope', function ($rootScope) {
 	return {
 		restrict: 'E',
 		link: function (scope, element, attr) {
@@ -76,9 +76,9 @@ app.directive('ticket', function ($rootScope) {
 		replace: true,
 		template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>TC-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i class='fa fa-times' ng-show='tickets.isDeleting && ticket.owner === getAuthenticatedUser().username'></i></span></div>"
 	};
-});
+}]);
 
-app.directive('ticketContainer', function ($rootScope) {
+app.directive('ticketContainer', ['$rootScope', function ($rootScope) {
 	return {
 		restrict: 'A',
 		link: function (scope, element, attr) {
@@ -91,4 +91,4 @@ app.directive('ticketContainer', function ($rootScope) {
 			});
 		}
 	};
-});
+}]);

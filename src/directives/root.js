@@ -1,13 +1,13 @@
-app.directive('resource', function ($rootScope) {
+app.directive('resource', ['$rootScope', function ($rootScope) {
 	return {
 		restrict: 'E',
 		link: function (scope, element, attr) {
 			$scope.path = attr.path;
 		}
 	};
-});
+}]);
 
-app.directive('secured', function ($rootScope, $location) {
+app.directive('secured', ['$rootScope', '$location', function ($rootScope, $location) {
 	return {
 		restrict: 'A',
 		link: function (scope, element, attr) {
@@ -16,7 +16,7 @@ app.directive('secured', function ($rootScope, $location) {
 			}
 		}
 	};
-});
+}]);
 
 app.directive('highlightable', function () {
 	return {

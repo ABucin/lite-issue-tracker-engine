@@ -25,7 +25,7 @@
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-less": "^0.11.3",
     "grunt-contrib-uglify": "*",
-    "grunt-contrib-watch": "*",
+    "grunt-contrib-watch": "^0.6.1",
     "less": "^1.7.3",
     "mongoose": "3.8.11",
     "passport": "*",
