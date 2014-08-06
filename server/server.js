@@ -15,7 +15,10 @@ var express = require('express'),
 	User = require('./model/user');
 
 server.use(cookieParser());
-server.use(bodyParser());
+server.use(bodyParser.urlencoded({
+	extended: true
+}));
+server.use(bodyParser.json());
 // Set the path to the index.html file.
 server.use(express.static(__dirname + "./../"));
 server.use(session({

@@ -9,16 +9,18 @@ Repository for the issue tracker application.
 
 #### Technology Stack
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 ##### Server Side
 
-* Node.js v0.10.28
+* Node.js v0.10.30
   * Express
   	* Passport (passport-local, passport-local-mongoose)
 	* Connect
 	* Cookie-Parser
 	* Express-Session
   * Bower
-  * [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+  * Grunt
   	* Uglify
 	* Concat
 	* Watch
@@ -30,7 +32,7 @@ Repository for the issue tracker application.
 
 ##### Client Side
 
-* [![Built with Angular](https://angularjs.org/img/AngularJS-small.png)](https://angularjs.org/)
+* Angular.js 1.2.21
 	* angular-route
 	* angular-cookies
 	* angular-touch
