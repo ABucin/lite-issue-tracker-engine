@@ -1,19 +1,29 @@
+/**
+ * Required Express modules.
+ */
 var express = require('express'),
 	bodyParser = require('body-parser'),
 	cookieParser = require('cookie-parser'),
 	session = require('express-session'),
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
+	/**
+	 * Server config.
+	 */
 	server = express(),
 	port = 3000,
 	ip = "0.0.0.0",
 	router = express.Router(),
-	// Required files.
+	/**
+	 * Required JS files.
+	 */
 	utils = require('./utils/population'),
 	persistenceService = require('./service/persistence'),
 	analyticsService = require('./service/analytics'),
 	User = require('./model/user');
-
+/**
+ * Load Express modules.
+ */
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({
 	extended: true
@@ -36,15 +46,17 @@ utils.populateDb();
 console.log('Server started. Listening on port %s ...', port);
 
 /**
- * Authentication.
+ * Authentication config.
  */
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));
-
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+/**
+ * Authentication.
+ */
 router.route('/register')
 	.post(function (req, res) {
 		persistenceService.register(req, res);
@@ -58,7 +70,7 @@ router.route('/login')
 router.route('/logout')
 	.get(function (req, res) {
 		req.logout();
-		res.send(200);
+		res.status(200).send();
 	});
 
 /**

@@ -27,13 +27,13 @@ exports.updateProject = function (oldProject, body, res) {
 		project: oldProject
 	}, function (err, users) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			_.each(users, function (user, i, list) {
 				user.project = body.project;
 				user.save(function (err) {
 					if (err) {
-						res.send(500, err);
+						res.status(500).send(err);
 					}
 				});
 			});
@@ -50,7 +50,7 @@ exports.getSettings = function (username, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else if (user != null) {
 			res.json(user.settings);
 		}
@@ -62,7 +62,7 @@ exports.updateSettings = function (username, key, settings, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			_.each(user.settings, function (s, i, list) {
 				if (s.key == key) {
@@ -75,7 +75,7 @@ exports.updateSettings = function (username, key, settings, res) {
 
 			user.save(function (err) {
 				if (err) {
-					res.send(500, err);
+					res.status(500).send(err);
 				} else {
 					res.json(settings);
 				}
@@ -87,7 +87,7 @@ exports.updateSettings = function (username, key, settings, res) {
 exports.updateAllSettings = function (username, settings, res) {
 	User.find(function (err, users) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			_.each(users, function (user, i, list) {
 				user.settings[0].displayUserEmail = settings.displayUserEmail;
@@ -95,7 +95,7 @@ exports.updateAllSettings = function (username, settings, res) {
 
 				user.save(function (err) {
 					if (err) {
-						res.send(500, err);
+						res.status(500).send(err);
 					}
 				});
 			});
@@ -124,7 +124,7 @@ exports.register = function (req, res) {
 	}), req.body.password, function (err, user) {
 		if (err) {
 			console.log("Registration error %s", err);
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			passport.authenticate('local')(req, res, function () {
 				console.log("Registration successful. User %s authenticated.", req.body.username);
@@ -132,9 +132,9 @@ exports.register = function (req, res) {
 					'username': req.body.username
 				}, function (err, user) {
 					if (err) {
-						res.send(500, err);
+						res.status(500).send(err);
 					} else {
-						res.send(201, {
+						res.status(201).send({
 							username: user.username,
 							email: user.email,
 							role: user.role,
@@ -157,9 +157,9 @@ exports.login = function (username, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
-			res.send(200, {
+			res.status(200).send({
 				username: user.username,
 				email: user.email,
 				role: user.role,
@@ -180,7 +180,7 @@ exports.login = function (username, res) {
 exports.getAllUsers = function (res) {
 	User.find(function (err, users) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			res.json(users);
 		}
@@ -198,7 +198,7 @@ exports.getUser = function (username, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			res.json([user]);
 		}
@@ -210,7 +210,7 @@ exports.getUsersWithProject = function (project, res) {
 		project: project
 	}, function (err, users) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			res.json(users);
 		}
@@ -222,7 +222,7 @@ exports.updateUser = function (username, data, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			if (data.project !== undefined) {
 				user.project = data.project;
@@ -242,7 +242,7 @@ exports.updateUser = function (username, data, res) {
 
 			user.save(function (err) {
 				if (err) {
-					res.send(500, err);
+					res.status(500).send(err);
 				} else {
 					res.json(user);
 				}
@@ -272,11 +272,11 @@ exports.createTicket = function (username, ticket, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			User.find(function (err, users) {
 				if (err) {
-					res.send(500, err);
+					res.status(500).send(err);
 				} else {
 					var tickets = [];
 
@@ -293,7 +293,7 @@ exports.createTicket = function (username, ticket, res) {
 
 					user.save(function (err) {
 						if (err) {
-							res.send(500, err);
+							res.status(500).send(err);
 						} else {
 							res.json(ticketData);
 						}
@@ -309,7 +309,7 @@ exports.getTickets = function (username, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			res.json([user.tickets]);
 		}
@@ -322,7 +322,7 @@ exports.updateTicket = function (key, username, ticket, res) {
 		function (err, users) {
 			var errorResponse = [];
 			if (err) {
-				res.send(500, err);
+				res.status(500).send(err);
 			} else {
 				_.each(users, function (user, i, list) {
 					_.each(user.tickets, function (el, ix, innerList) {
@@ -349,11 +349,11 @@ exports.updateTicket = function (key, username, ticket, res) {
 							el.priority = ticket.priority;
 
 							if (errorResponse.length) {
-								res.send(500, errorResponse);
+								res.status(500).send(errorResponse);
 							} else {
 								user.save(function (err) {
 									if (err) {
-										res.send(500, err);
+										res.status(500).send(err);
 									} else {
 										res.json(ticket);
 									}
@@ -370,7 +370,7 @@ exports.updateTicket = function (key, username, ticket, res) {
 exports.deleteTicket = function (key, username, res) {
 	User.find().exec(function (err, users) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			_.each(users, function (user, i, list) {
 				_.each(user.tickets, function (ticket, ix, innerList) {
@@ -387,7 +387,7 @@ exports.deleteTicket = function (key, username, res) {
 
 				user.save(function (err) {
 					if (err) {
-						res.send(500, err);
+						res.status(500).send(err);
 					} else {
 						res.json();
 					}
@@ -414,13 +414,13 @@ exports.createComment = function (username, ticket, comment, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			user.comments.push(new Comment(commentData));
 
 			user.save(function (err) {
 				if (err) {
-					res.send(500, err);
+					res.status(500).send(err);
 				} else {
 					res.json(commentData);
 				}
@@ -434,7 +434,7 @@ exports.deleteComment = function (key, username, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			_.each(user.comments, function (comment, ix, innerList) {
 				if (comment.key == key) {
@@ -444,7 +444,7 @@ exports.deleteComment = function (key, username, res) {
 
 			user.save(function (err) {
 				if (err) {
-					res.send(500, err);
+					res.status(500).send(err);
 				} else {
 					res.json();
 				}
@@ -456,7 +456,7 @@ exports.deleteComment = function (key, username, res) {
 exports.getComments = function (key, res) {
 	User.find().exec(function (err, users) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			var comments = [];
 
@@ -486,7 +486,7 @@ exports.updateComment = function (key, ticket, username, comment, res) {
 	}, function (err, user) {
 		var errorResponse = [];
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			_.each(user.comments, function (c, i, list) {
 				if (c.key == key && c.ticket == ticket) {
@@ -501,11 +501,11 @@ exports.updateComment = function (key, ticket, username, comment, res) {
 					}
 
 					if (errorResponse.length) {
-						res.send(500, errorResponse);
+						res.status(500).send(errorResponse);
 					} else {
 						user.save(function (err) {
 							if (err) {
-								res.send(500, err);
+								res.status(500).send(err);
 							}
 							res.json(c);
 						});
@@ -525,7 +525,7 @@ exports.getAllLogs = function (res) {
 		.limit(10)
 		.exec(function (err, users) {
 			if (err) {
-				res.send(500, err);
+				res.status(500).send(err);
 			} else {
 				var logs = [];
 
@@ -561,13 +561,13 @@ exports.createLog = function (username, log, res) {
 		'username': username
 	}, function (err, user) {
 		if (err) {
-			res.send(500, err);
+			res.status(500).send(err);
 		} else {
 			user.logs.push(new Log(logData));
 
 			user.save(function (err) {
 				if (err) {
-					res.send(500, err);
+					res.status(500).send(err);
 				} else {
 					res.json(logData);
 				}
