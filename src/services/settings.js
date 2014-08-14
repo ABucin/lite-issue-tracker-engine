@@ -6,7 +6,7 @@ app.service('SettingsService', ['$rootScope', '$cookieStore', 'ResourceService',
 				$cookieStore.put('settings', data[0]);
 			};
 
-			ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().username + '/settings', null, callback);
+			ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().key + '/settings', null, callback);
 		};
 
 		this.getSettings = function () {
@@ -22,9 +22,9 @@ app.service('SettingsService', ['$rootScope', '$cookieStore', 'ResourceService',
 			if ($cookieStore.get('settings') !== undefined) {
 				var payload = $cookieStore.get('settings');
 				payload[property] = value;
-				ResourceService.putData('users/' + $rootScope.getAuthenticatedUser().username + '/settings/' + payload.key, payload, callback);
+				ResourceService.putData('users/' + $rootScope.getAuthenticatedUser().key + '/settings/' + payload.key, payload, callback);
 			} else {
-				ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().username + '/settings', null, callback);
+				ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().key + '/settings', null, callback);
 			}
 		};
 
@@ -37,9 +37,9 @@ app.service('SettingsService', ['$rootScope', '$cookieStore', 'ResourceService',
 			if ($cookieStore.get('settings') !== undefined) {
 				var payload = $cookieStore.get('settings');
 				payload[property] = value;
-				ResourceService.putData('users/' + $rootScope.getAuthenticatedUser().username + '/settings', payload, callback);
+				ResourceService.putData('settings', payload, callback);
 			} else {
-				ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().username + '/settings', null, callback);
+				ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().key + '/settings', null, callback);
 			}
 		};
 }]);

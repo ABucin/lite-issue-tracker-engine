@@ -24,14 +24,14 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		 * Document loading configuration.
 		 */
 		angular.element(document).ready(function () {
-			$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser().username);
+			$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser().key);
 		});
 
 		/**
 		 * Selects a team member.
 		 */
-		$scope.selectTeamMember = function (username) {
-			UserService.getUser(username, $scope.selectedTeamMember);
+		$scope.selectTeamMember = function (userId) {
+			UserService.getUser(userId, $scope.selectedTeamMember);
 		}
 
 		/**

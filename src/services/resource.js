@@ -1,6 +1,6 @@
 app.service('ResourceService', ['$rootScope', '$http',
 	function ($rootScope, $http) {
-		var pathRoot = '/itracker/api/';
+		var pathRoot = '/itr/api/';
 
 		var resource = function (method, path, params, data, callback) {
 			$http({

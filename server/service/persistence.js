@@ -45,9 +45,9 @@ exports.updateProject = function (oldProject, body, res) {
 /**
  * Settings.
  */
-exports.getSettings = function (username, res) {
+exports.getSettings = function (userId, res) {
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
@@ -57,15 +57,15 @@ exports.getSettings = function (username, res) {
 	});
 };
 
-exports.updateSettings = function (username, key, settings, res) {
+exports.updateSettings = function (userId, settingId, settings, res) {
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
 		} else {
 			_.each(user.settings, function (s, i, list) {
-				if (s.key == key) {
+				if (s.key == settingId) {
 					s.displayUserActivity = settings.displayUserActivity;
 					s.displayUserChart = settings.displayUserChart;
 					s.displayUserEmail = settings.displayUserEmail;
@@ -84,7 +84,7 @@ exports.updateSettings = function (username, key, settings, res) {
 	});
 };
 
-exports.updateAllSettings = function (username, settings, res) {
+exports.updateAllSettings = function (settings, res) {
 	User.find(function (err, users) {
 		if (err) {
 			res.status(500).send(err);
@@ -110,6 +110,7 @@ exports.updateAllSettings = function (username, settings, res) {
  */
 exports.register = function (req, res) {
 	User.register(new User({
+		key: utils.generateKey(),
 		username: req.body.username,
 		email: req.body.email,
 		firstName: req.body.firstName,
@@ -135,6 +136,7 @@ exports.register = function (req, res) {
 						res.status(500).send(err);
 					} else {
 						res.status(201).send({
+							key: user.key,
 							username: user.username,
 							email: user.email,
 							role: user.role,
@@ -160,6 +162,7 @@ exports.login = function (username, res) {
 			res.status(500).send(err);
 		} else {
 			res.status(200).send({
+				key: user.key,
 				username: user.username,
 				email: user.email,
 				role: user.role,
@@ -193,9 +196,9 @@ exports.getAllUsersCallback = function (cb) {
 	});
 };
 
-exports.getUser = function (username, res) {
+exports.getUser = function (userId, res) {
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
@@ -217,9 +220,9 @@ exports.getUsersWithProject = function (project, res) {
 	});
 };
 
-exports.updateUser = function (username, data, res) {
+exports.updateUser = function (userId, data, res) {
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
@@ -254,7 +257,7 @@ exports.updateUser = function (username, data, res) {
 /**
  * Tickets.
  */
-exports.createTicket = function (username, ticket, res) {
+exports.createTicket = function (userId, ticket, res) {
 	var ticketData = {
 		key: utils.generateKey(),
 		title: ticket.title,
@@ -269,7 +272,7 @@ exports.createTicket = function (username, ticket, res) {
 
 	// save the ticket and check for errors
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
@@ -304,9 +307,9 @@ exports.createTicket = function (username, ticket, res) {
 	});
 };
 
-exports.getTickets = function (username, res) {
+exports.getTickets = function (userId, res) {
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
@@ -316,7 +319,7 @@ exports.getTickets = function (username, res) {
 	});
 };
 
-exports.updateTicket = function (key, username, ticket, res) {
+exports.updateTicket = function (ticketId, ticket, res) {
 	// save the ticket and check for errors
 	User.find().exec(
 		function (err, users) {
@@ -326,7 +329,7 @@ exports.updateTicket = function (key, username, ticket, res) {
 			} else {
 				_.each(users, function (user, i, list) {
 					_.each(user.tickets, function (el, ix, innerList) {
-						if (el.key == key) {
+						if (el.key == ticketId) {
 
 							if (ticket.title != null && ticket.title.length) {
 								el.title = ticket.title;
@@ -367,7 +370,7 @@ exports.updateTicket = function (key, username, ticket, res) {
 	);
 };
 
-exports.deleteTicket = function (key, username, res) {
+exports.deleteTicket = function (key, res) {
 	User.find().exec(function (err, users) {
 		if (err) {
 			res.status(500).send(err);
@@ -400,7 +403,7 @@ exports.deleteTicket = function (key, username, res) {
 /**
  * Comments.
  */
-exports.createComment = function (username, ticket, comment, res) {
+exports.createComment = function (userId, ticket, comment, res) {
 	var commentData = {
 		key: utils.generateKey(),
 		ticket: ticket,
@@ -411,7 +414,7 @@ exports.createComment = function (username, ticket, comment, res) {
 
 	// save the comment and check for errors
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
@@ -429,15 +432,15 @@ exports.createComment = function (username, ticket, comment, res) {
 	});
 };
 
-exports.deleteComment = function (key, username, res) {
+exports.deleteComment = function (commentId, userId, res) {
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
 		} else {
 			_.each(user.comments, function (comment, ix, innerList) {
-				if (comment.key == key) {
+				if (comment.key == userId) {
 					user.comments.splice(ix, 1);
 				}
 			});
@@ -453,7 +456,7 @@ exports.deleteComment = function (key, username, res) {
 	});
 };
 
-exports.getComments = function (key, res) {
+exports.getComments = function (ticketId, res) {
 	User.find().exec(function (err, users) {
 		if (err) {
 			res.status(500).send(err);
@@ -462,7 +465,7 @@ exports.getComments = function (key, res) {
 
 			_.each(users, function (user, i, list) {
 				_.each(user.comments, function (comment, ix, innerList) {
-					if (comment.ticket == key) {
+					if (comment.ticket == ticketId) {
 						var c = {
 							key: comment.key,
 							author: user.username,
@@ -479,17 +482,17 @@ exports.getComments = function (key, res) {
 	});
 };
 
-exports.updateComment = function (key, ticket, username, comment, res) {
+exports.updateComment = function (ticketId, ticket, userId, comment, res) {
 	// save the comment and check for errors
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		var errorResponse = [];
 		if (err) {
 			res.status(500).send(err);
 		} else {
 			_.each(user.comments, function (c, i, list) {
-				if (c.key == key && c.ticket == ticket) {
+				if (c.key == ticketId && c.ticket == ticket) {
 
 					if (comment.content != null && comment.content.length) {
 						c.content = comment.content;
@@ -544,7 +547,7 @@ exports.getAllLogs = function (res) {
 		});
 };
 
-exports.createLog = function (username, log, res) {
+exports.createLog = function (userId, log, res) {
 	var logData = {
 		key: utils.generateKey(),
 		action: log.action,
@@ -558,7 +561,7 @@ exports.createLog = function (username, log, res) {
 
 	// save the log and check for errors
 	User.findOne({
-		'username': username
+		'key': userId
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);

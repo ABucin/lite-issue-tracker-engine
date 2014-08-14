@@ -94,7 +94,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 				username: $rootScope.getAuthenticatedUser().username
 			};
 
-			LogsService.logData($rootScope.getAuthenticatedUser().username, log, $rootScope.dashboard.logEntries);
+			LogsService.logData($rootScope.getAuthenticatedUser().key, log, $rootScope.dashboard.logEntries);
 		};
 
 		/*
@@ -102,12 +102,12 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		 */
 		$scope.addComment = function (isValid) {
 			if (isValid) {
-				CommentsService.addComment($rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.comment, $scope.comments);
+				CommentsService.addComment($rootScope.getAuthenticatedUser().key, $scope.updatedTicket.key, $scope.comment, $scope.comments);
 			}
 		}
 
 		$scope.deleteComment = function (commentKey) {
-			CommentsService.deleteComment($rootScope.getAuthenticatedUser().username, commentKey, $scope.comments, $scope.comment);
+			CommentsService.deleteComment($rootScope.getAuthenticatedUser().key, commentKey, $scope.comments, $scope.comment);
 		}
 
 		$scope.editComment = function (isValid) {
@@ -116,7 +116,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			if (isValid) {
 				$rootScope.submitted = false;
 				$rootScope.general.errors = [];
-				CommentsService.editComment($rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
+				CommentsService.editComment($rootScope.getAuthenticatedUser().key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
 			}
 		}
 
@@ -135,7 +135,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 				$rootScope.general.errors = [];
 				$('#ticket-creation-modal').modal('hide');
 				$rootScope.submitted = false;
-				TicketsService.addTicket($rootScope.getAuthenticatedUser().username, $scope.ticket, $rootScope.userTickets, $rootScope.tickets.created, $scope.logData);
+				TicketsService.addTicket($rootScope.getAuthenticatedUser().key, $scope.ticket, $rootScope.userTickets, $rootScope.tickets.created, $scope.logData);
 			}
 		};
 
@@ -171,11 +171,11 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			if (isValid) {
 				$rootScope.general.errors = [];
 				$('#ticket-preview-modal').modal('hide');
-				TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket, $rootScope.userTickets, $rootScope.tickets.created, $rootScope.tickets.inProgress, $rootScope.tickets.testing, $rootScope.tickets.done, $scope.loggedWork.amount);
+				TicketsService.updateTicket($scope.updatedTicket.key, $rootScope.getAuthenticatedUser().key, $scope.updatedTicket, $rootScope.userTickets, $rootScope.tickets.created, $rootScope.tickets.inProgress, $rootScope.tickets.testing, $rootScope.tickets.done, $scope.loggedWork.amount);
 			}
 		};
 
 		$scope.deleteTicket = function (key) {
-			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser().username, $rootScope.userTickets, $rootScope.tickets.created, $rootScope.tickets.inProgress, $rootScope.tickets.testing, $rootScope.tickets.done);
+			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser().key, $rootScope.userTickets, $rootScope.tickets.created, $rootScope.tickets.inProgress, $rootScope.tickets.testing, $rootScope.tickets.done);
 		};
 }]);

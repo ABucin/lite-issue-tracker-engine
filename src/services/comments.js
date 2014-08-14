@@ -1,7 +1,7 @@
 app.service('CommentsService', ['$rootScope', 'ResourceService',
 	function ($rootScope, ResourceService) {
 
-		this.deleteComment = function (username, commentKey, comments, comment) {
+		this.deleteComment = function (userId, commentKey, comments, comment) {
 			var callback = function (data) {
 				for (var i in comments) {
 					if (comments[i].key == commentKey) {
@@ -10,10 +10,10 @@ app.service('CommentsService', ['$rootScope', 'ResourceService',
 					}
 				}
 			};
-			ResourceService.deleteData('users/' + username + '/comments/' + commentKey, callback);
+			ResourceService.deleteData('users/' + userId + '/comments/' + commentKey, callback);
 		};
 
-		this.addComment = function (username, ticketKey, comment, comments) {
+		this.addComment = function (userId, ticketKey, comment, comments) {
 			var callback = function (data) {
 				comments.push(data);
 				$rootScope.$broadcast('ticketCommentAdded', {
@@ -21,10 +21,10 @@ app.service('CommentsService', ['$rootScope', 'ResourceService',
 				});
 				comment.content = "";
 			};
-			ResourceService.postData('users/' + username + '/tickets/' + ticketKey + '/comments', comment, callback);
+			ResourceService.postData('users/' + userId + '/tickets/' + ticketKey + '/comments', comment, callback);
 		};
 
-		this.editComment = function (username, ticketKey, commentKey, comments, comment, statusObj) {
+		this.editComment = function (userId, username, ticketKey, commentKey, comments, comment, statusObj) {
 			var callback = function (data) {
 				for (var i in comments) {
 					if (comments[i].key == commentKey) {
@@ -35,7 +35,7 @@ app.service('CommentsService', ['$rootScope', 'ResourceService',
 					}
 				}
 			};
-			ResourceService.putData('users/' + username + '/tickets/' + ticketKey + '/comments/' + commentKey, comment, callback);
+			ResourceService.putData('users/' + userId + '/tickets/' + ticketKey + '/comments/' + commentKey, comment, callback);
 		}
 
 		this.fetchComments = function (ticketKey, comments) {

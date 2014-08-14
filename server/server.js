@@ -36,8 +36,8 @@ server.use(session({
 }));
 server.use(passport.initialize());
 server.use(passport.session());
-server.use('/itracker/api', router);
-
+server.use('/itr/api', router);
+// Specify port and ip address of server
 server.listen(port, ip);
 
 // Add default data to database.
@@ -55,27 +55,24 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 /**
- * Authentication.
+ * User routes.
  */
-router.route('/register')
+router.route('/users/register')
 	.post(function (req, res) {
 		persistenceService.register(req, res);
 	});
 
-router.route('/login')
+router.route('/users/login')
 	.post(passport.authenticate('local'), function (req, res) {
 		persistenceService.login(req.body.username, res);
 	});
 
-router.route('/logout')
-	.get(function (req, res) {
+router.route('/users/logout')
+	.post(function (req, res) {
 		req.logout();
 		res.status(200).send();
 	});
 
-/**
- * Users.
- */
 router.route('/users?:project')
 	.get(function (req, res) {
 		if (req.query.project === undefined) {
@@ -85,71 +82,71 @@ router.route('/users?:project')
 		}
 	});
 
-router.route('/users/:uname')
+router.route('/users/:userId')
 	.get(function (req, res) {
-		persistenceService.getUser(req.params.uname, res);
+		persistenceService.getUser(req.params.userId, res);
 	})
 	.put(function (req, res) {
-		persistenceService.updateUser(req.params.uname, req.body, res);
+		persistenceService.updateUser(req.params.userId, req.body, res);
 	});
 
 /**
- * Comments.
+ * Comment routes.
  */
-router.route('/tickets/:key/comments')
+router.route('/tickets/:ticketId/comments')
 	.get(function (req, res) {
-		persistenceService.getComments(req.params.key, res);
+		persistenceService.getComments(req.params.ticketId, res);
 	});
 
-router.route('/users/:uname/tickets/:key/comments')
+router.route('/users/:userId/tickets/:ticketId/comments')
 	.post(function (req, res) {
-		persistenceService.createComment(req.params.uname, req.params.key, req.body, res);
+		persistenceService.createComment(req.params.userId, req.params.ticketId, req.body, res);
 	});
 
-router.route('/users/:uname/tickets/:ticketKey/comments/:key')
+router.route('/users/:userId/tickets/:ticketKey/comments/:commentId')
 	.put(function (req, res) {
-		persistenceService.updateComment(req.params.key, req.params.ticketKey, req.params.uname, req.body, res);
+		persistenceService.updateComment(req.params.commentId, req.params.ticketKey, req.params.userId, req.body, res);
 	});
 
-router.route('/users/:uname/comments/:key')
+router.route('/users/:userId/comments/:commentId')
 	.delete(function (req, res) {
-		persistenceService.deleteComment(req.params.key, req.params.uname, res);
+		persistenceService.deleteComment(req.params.commentId, req.params.userId, res);
 	});
 
 /**
- * Tickets.
+ * Ticket routes.
  */
-router.route('/users/:uname/tickets')
+router.route('/users/:userId/tickets')
 	.post(function (req, res) {
-		persistenceService.createTicket(req.params.uname, req.body, res);
+		persistenceService.createTicket(req.params.userId, req.body, res);
 	})
 	.get(function (req, res) {
-		persistenceService.getTickets(req.params.uname, res);
+		persistenceService.getTickets(req.params.userId, res);
 	});
 
-router.route('/users/:uname/tickets/:key')
+router.route('/tickets/:ticketId')
 	.put(function (req, res) {
-		persistenceService.updateTicket(req.params.key, req.params.uname, req.body, res);
+		persistenceService.updateTicket(req.params.ticketId, req.body, res);
 	})
 	.delete(function (req, res) {
-		persistenceService.deleteTicket(req.params.key, req.params.uname, res);
+		persistenceService.deleteTicket(req.params.ticketId, res);
 	});
 
 /**
- * Logs.
+ * Log routes.
  */
 router.route('/logs')
 	.get(function (req, res) {
 		persistenceService.getAllLogs(res);
 	});
 
-router.route('/users/:uname/logs')
+router.route('/users/:userId/logs')
 	.post(function (req, res) {
-		persistenceService.createLog(req.params.uname, req.body, res);
+		persistenceService.createLog(req.params.userId, req.body, res);
 	});
 
 /**
- * Analytics.
+ * Analytics routes.
  */
 router.route('/analytics?:type')
 	.get(function (req, res) {
@@ -157,25 +154,27 @@ router.route('/analytics?:type')
 	});
 
 /**
- * Settings.
+ * Settings routes.
  */
-router.route('/users/:uname/settings')
+router.route('/users/:userId/settings')
 	.get(function (req, res) {
-		persistenceService.getSettings(req.params.uname, res);
-	})
-	.put(function (req, res) {
-		persistenceService.updateAllSettings(req.params.uname, req.body, res);
+		persistenceService.getSettings(req.params.userId, res);
 	});
 
-router.route('/users/:uname/settings/:key')
+router.route('/settings')
 	.put(function (req, res) {
-		persistenceService.updateSettings(req.params.uname, req.params.key, req.body, res);
+		persistenceService.updateAllSettings(req.body, res);
+	});
+
+router.route('/users/:userId/settings/:settingId')
+	.put(function (req, res) {
+		persistenceService.updateSettings(req.params.userId, req.params.settingId, req.body, res);
 	});
 
 /**
- * Projects.
+ * Project routes.
  */
-router.route('/projects/:pname')
+router.route('/projects/:projectId')
 	.put(function (req, res) {
-		persistenceService.updateProject(req.params.pname, req.body, res);
+		persistenceService.updateProject(req.params.projectId, req.body, res);
 	});

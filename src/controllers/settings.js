@@ -80,7 +80,7 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 				$cookieStore.put('user', temp);
 			}
 
-			UserService.updateUser($rootScope.getAuthenticatedUser().username, $scope.editedUser);
+			UserService.updateUser($rootScope.getAuthenticatedUser().key, $scope.editedUser);
 		};
 
 		/**

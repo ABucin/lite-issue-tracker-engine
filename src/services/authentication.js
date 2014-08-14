@@ -22,7 +22,7 @@ app.service('AuthenticationService', ['ResourceService', 'UserService', 'Setting
 				}
 			};
 
-			ResourceService.postData('login', data, callback);
+			ResourceService.postData('users/login', data, callback);
 		};
 
 		this.logout = function () {
@@ -35,7 +35,7 @@ app.service('AuthenticationService', ['ResourceService', 'UserService', 'Setting
 				$rootScope.navigate('login');
 			};
 
-			ResourceService.getData('logout', null, callback);
+			ResourceService.getData('users/logout', null, callback);
 		};
 
 		this.register = function (data) {
@@ -52,6 +52,6 @@ app.service('AuthenticationService', ['ResourceService', 'UserService', 'Setting
 				}
 			};
 
-			ResourceService.postData('register', data, callback);
+			ResourceService.postData('users/register', data, callback);
 		};
 }]);

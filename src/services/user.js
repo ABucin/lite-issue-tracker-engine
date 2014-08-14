@@ -1,15 +1,15 @@
 app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 	function ($rootScope, $cookieStore, ResourceService) {
 
-		this.getUser = function (username, result) {
+		this.getUser = function (userId, result) {
 			var callback = function (data) {
 				angular.copy(data[0], result);
 			};
 
-			ResourceService.getData('users/' + username, null, callback);
+			ResourceService.getData('users/' + userId, null, callback);
 		};
 
-		this.updateUser = function (username, userData, users) {
+		this.updateUser = function (userId, userData, users) {
 			var self = this;
 			var callback = function (data) {
 				//				for (var i in users) {
@@ -21,7 +21,7 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 				self.fetchUserData();
 			};
 
-			ResourceService.putData('users/' + username, userData, callback);
+			ResourceService.putData('users/' + userId, userData, callback);
 		};
 
 		this.getUnassignedUsers = function (result) {
