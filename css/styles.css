@@ -236,6 +236,9 @@ nav.navbar ul.navbar-nav > li.toggleable.active > a,
 nav.navbar ul.navbar-nav > nav.navbar li.toggleable.active > a:hover {
   background-color: #cccccc;
 }
+nav.navbar ul.dropdown-menu .fa-check {
+  color: #3f424b;
+}
 .panel.ng-scope {
   background-color: transparent;
   box-shadow: none;

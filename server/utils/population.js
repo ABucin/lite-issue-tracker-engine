@@ -51,7 +51,7 @@ exports.populateDb = function () {
 	yesterday.setDate(yesterday.getDate() - 1);
 
 	var user = new User({
-		key: utils.generateKey(),
+		key: 123,
 		username: "abucin",
 		email: "abucin@gmail.com",
 		firstName: "Andrei",
@@ -107,7 +107,7 @@ exports.populateDb = function () {
 	});
 
 	var user2 = new User({
-		key: utils.generateKey(),
+		key: 124,
 		username: "psmith",
 		email: "psmith@gmail.com",
 		firstName: "Peter",

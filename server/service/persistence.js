@@ -276,6 +276,8 @@ exports.createTicket = function (userId, ticket, res) {
 	}, function (err, user) {
 		if (err) {
 			res.status(500).send(err);
+		} else if (user === null) {
+			res.status(404).send();
 		} else {
 			User.find(function (err, users) {
 				if (err) {
