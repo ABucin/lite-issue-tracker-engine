@@ -1,4 +1,4 @@
-issue-tracker
+issue-tracker v.1.0
 =============
 
 Repository for the issue tracker application.
@@ -7,7 +7,7 @@ Repository for the issue tracker application.
 
 `<major>.<minor>.<patch>`
 
-#### Technology Stack
+### Technology Stack
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
@@ -42,7 +42,7 @@ Repository for the issue tracker application.
 * jQuery 2.1.1
 * Highcharts.js 4.0.3
 
-#### Development Setup
+### Development Setup
 
 1. Run `git clone https://github.com/ABucin/issue-tracker.git` to get the files.
 2. Install Node.js from `http://nodejs.org/` .
