@@ -1,4 +1,4 @@
-issue-tracker v.1.0
+issue-tracker v.1.0.0
 =============
 
 Repository for the issue tracker application.
