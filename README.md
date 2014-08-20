@@ -13,12 +13,12 @@ The wiki can be found [here](https://github.com/ABucin/issue-tracker/wiki).
 
 ### Installation
 
-Pre-requisites:
+#### Pre-requisites:
 
 1. Install Node.js from `http://nodejs.org/` .
 2. Install MongoDB from `http://www.mongodb.org/downloads` .
 
-Steps:
+#### Steps:
 
 1. Run `git clone https://github.com/ABucin/issue-tracker.git` to get the files.
 2. **Windows:** open a console using `Shift + right-click on project folder > Open command window here` .
