@@ -7,9 +7,13 @@ Repository for the issue tracker application.
 
 `<major>.<minor>.<patch>`
 
+### Wiki
+
+The wiki can be found [here](https://github.com/ABucin/issue-tracker/wiki).
+
 ### Installation
 
-For application setup, please consult the [wiki](https://github.com/ABucin/issue-tracker/wiki).
+For application setup, please consult the [wiki](https://github.com/ABucin/issue-tracker/wiki/Setup).
 
 ### Licensing
 
