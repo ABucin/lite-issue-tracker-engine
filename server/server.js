@@ -11,11 +11,11 @@ var express = require('express'),
 	 * Server config.
 	 */
 	server = express(),
-	config = require('./config.json'),
 	router = express.Router(),
 	/**
 	 * Required JS files.
 	 */
+	config = require('./config.json'),
 	utils = require('./utils/population'),
 	persistenceService = require('./service/persistence'),
 	analyticsService = require('./service/analytics'),

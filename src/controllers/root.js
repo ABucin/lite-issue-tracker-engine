@@ -33,6 +33,9 @@ app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', '$cook
 function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, UserService, AuthenticationService, SettingsService) {
 
 		// CONFIGURATION
+		$rootScope.project = {
+			version: "1.0.1"
+		}
 
 		/**
 		 * Document loading configuration.
