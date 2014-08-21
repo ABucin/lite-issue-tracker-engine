@@ -11,8 +11,7 @@ var express = require('express'),
 	 * Server config.
 	 */
 	server = express(),
-	port = 3000,
-	ip = "0.0.0.0",
+	config = require('./config.json'),
 	router = express.Router(),
 	/**
 	 * Required JS files.
@@ -32,18 +31,18 @@ server.use(bodyParser.json());
 // Set the path to the index.html file.
 server.use(express.static(__dirname + "./../"));
 server.use(session({
-	secret: 'SECRET'
+	secret: config.secret
 }));
 server.use(passport.initialize());
 server.use(passport.session());
-server.use('/itr/api', router);
+server.use(config.root, router);
 // Specify port and ip address of server
-server.listen(port, ip);
+server.listen(config.port, config.ip);
 
 // Add default data to database.
 utils.populateDb();
 
-console.log('Server started. Listening on port %s ...', port);
+console.log('Server started. Listening on port %s ...', config.port);
 
 /**
  * Authentication config.
