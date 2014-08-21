@@ -30,7 +30,3 @@ The wiki can be found [here](https://github.com/ABucin/issue-tracker/wiki).
   1. **Windows:** start the database server by using `start_db_server.bat` . 
   2. **Linux:** start the database server by using the `mongo` command.
 8. To access the application, go to `http://localhost:3000/index.html` using your favourite browser.
-
-### Licensing
-
-This issue tracker is licensed under the [MIT license](http://opensource.org/licenses/MIT).
