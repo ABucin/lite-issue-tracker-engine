@@ -39,13 +39,6 @@ exports.populateDb = function () {
 		user2Comments = [],
 		usernames = ["abucin", "psmith"],
 		priorities = ["minor", "normal", "major"],
-		globalSettings = [{
-			key: utils.generateKey(),
-			displayUserActivity: true,
-			displayUserChart: true,
-			displayUserEmail: true,
-			displayUserRole: true
-		}],
 		sampleTicketKey = utils.generateKey(),
 		yesterday = new Date();
 
@@ -67,6 +60,19 @@ exports.populateDb = function () {
 			estimatedTime: estimatedTime,
 			loggedTime: loggedTime
 		});
+	}
+
+	/**
+	 * Generates a settings object for a user.
+	 */
+	var generateSettings = function () {
+		return [{
+			key: utils.generateKey(),
+			displayUserActivity: true,
+			displayUserChart: true,
+			displayUserEmail: true,
+			displayUserRole: true
+		}];
 	}
 
 	/**
@@ -96,7 +102,7 @@ exports.populateDb = function () {
 		});
 	}
 
-	var generateUser = function (key, username, email, firstName, lastName, role, projectRole, project, expertise, tickets, logs, comments) {
+	var generateUser = function (key, username, email, firstName, lastName, role, projectRole, project, expertise, tickets, logs, comments, settings) {
 		return new User({
 			key: key,
 			username: username,
@@ -110,7 +116,7 @@ exports.populateDb = function () {
 			project: project,
 			expertise: expertise,
 			tickets: tickets,
-			settings: globalSettings,
+			settings: settings,
 			logs: logs,
 			comments: comments
 		});
@@ -119,9 +125,6 @@ exports.populateDb = function () {
 	/**
 	 * Dummy-data generation.
 	 */
-	var user = generateUser(123, usernames[0], "abucin@gmail.com", "Andrei", "Bucin", "admin", "tester", "issue-tracker", "Java, PHP, JavaScript, Web Design.", userTickets, userLogs, userComments),
-		user2 = generateUser(124, usernames[1], "psmith@gmail.com", "Peter", "Smith", "user", "developer", "unassigned", "JavaScript, HTML5, CSS3.", user2Tickets, user2Logs, user2Comments);
-
 	generateTicket(userTickets, "Plan Review Meeting", "inProgress", "task", "This Thursday at 10:00.", usernames[0], priorities[1], 10, 20);
 	generateTicket(userTickets, "Add Colour Palette", "testing", "task", "Create a colour palette for the website.", "", priorities[2], 12, 12);
 	generateTicket(userTickets, "Remove Redundant Tests", "done", "task", "Remove tests that are not used.", usernames[0], priorities[0], 10, 5);
@@ -143,6 +146,9 @@ exports.populateDb = function () {
 	generateComment(userComments, "That is correct. I will do it soon.");
 
 	generateComment(user2Comments, "Also, please update the title to something more accurate.");
+
+	var user = generateUser(123, usernames[0], "abucin@gmail.com", "Andrei", "Bucin", "admin", "tester", "issue-tracker", "Java, PHP, JavaScript, Web Design.", userTickets, userLogs, userComments, generateSettings()),
+		user2 = generateUser(124, usernames[1], "psmith@gmail.com", "Peter", "Smith", "user", "developer", "unassigned", "JavaScript, HTML5, CSS3.", user2Tickets, user2Logs, user2Comments, generateSettings());
 
 	/**
 	 * Password generation.

@@ -33,9 +33,10 @@ app.controller('RootCtrl', ['$scope', '$rootScope', '$location', '$http', '$cook
 function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, UserService, AuthenticationService, SettingsService) {
 
 		// CONFIGURATION
-		$rootScope.project = {
-			version: "1.0.1"
-		}
+		$rootScope.footer = {
+			version: "1.0.1",
+			year: "2014" + (new Date().getFullYear() !== 2014 ? "-" + new Date().getFullYear() : "")
+		};
 
 		/**
 		 * Document loading configuration.

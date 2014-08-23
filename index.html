@@ -17,12 +17,12 @@
 		<ng-view secured></ng-view>
 	</div>
 
-</body>
-<footer>
 	<div class="row">
-		<small class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">Issue Tracker v{{project.version}}. Copyright &copy; 2014 Andrei Bucin, All rights reserved.</small>
+		<small class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">Issue Tracker v{{footer.version}}. Copyright &copy; {{footer.year}} Andrei Bucin, All rights reserved.</small>
 	</div>
 
+</body>
+<footer>
 	<script src="dist/js/issue-tracker-libs.min.js"></script>
 	<script src="dist/js/issue-tracker.min.js"></script>
 </footer>

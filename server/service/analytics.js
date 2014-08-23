@@ -1,9 +1,9 @@
-var bugColor = "#CB1F26";
-var taskColor = "#21579D";
-var chartFontWeight = "300";
+var bugColor = "#CB1F26",
+	taskColor = "#21579D",
+	chartFontWeight = "300";
 
-var persistenceService = require('./persistence');
-var utils = require('../utils/utils');
+var persistenceService = require('./persistence'),
+	utils = require('../utils/utils');
 
 exports.getChart = function (type, res) {
 	var result = {};
