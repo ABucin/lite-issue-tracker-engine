@@ -96,9 +96,32 @@ exports.populateDb = function () {
 		});
 	}
 
+	var generateUser = function (key, username, email, firstName, lastName, role, projectRole, project, expertise, tickets, logs, comments) {
+		return new User({
+			key: key,
+			username: username,
+			email: email,
+			firstName: firstName,
+			lastName: lastName,
+			salt: null,
+			hash: null,
+			role: role,
+			projectRole: projectRole,
+			project: project,
+			expertise: expertise,
+			tickets: tickets,
+			settings: globalSettings,
+			logs: logs,
+			comments: comments
+		});
+	}
+
 	/**
 	 * Dummy-data generation.
 	 */
+	var user = generateUser(123, usernames[0], "abucin@gmail.com", "Andrei", "Bucin", "admin", "tester", "issue-tracker", "Java, PHP, JavaScript, Web Design.", userTickets, userLogs, userComments),
+		user2 = generateUser(124, usernames[1], "psmith@gmail.com", "Peter", "Smith", "user", "developer", "unassigned", "JavaScript, HTML5, CSS3.", user2Tickets, user2Logs, user2Comments);
+
 	generateTicket(userTickets, "Plan Review Meeting", "inProgress", "task", "This Thursday at 10:00.", usernames[0], priorities[1], 10, 20);
 	generateTicket(userTickets, "Add Colour Palette", "testing", "task", "Create a colour palette for the website.", "", priorities[2], 12, 12);
 	generateTicket(userTickets, "Remove Redundant Tests", "done", "task", "Remove tests that are not used.", usernames[0], priorities[0], 10, 5);
@@ -122,45 +145,6 @@ exports.populateDb = function () {
 	generateComment(user2Comments, "Also, please update the title to something more accurate.");
 
 	/**
-	 * User generation.
-	 */
-	var user = new User({
-		key: 123,
-		username: usernames[0],
-		email: "abucin@gmail.com",
-		firstName: "Andrei",
-		lastName: "Bucin",
-		salt: null,
-		hash: null,
-		role: "admin",
-		projectRole: "tester",
-		project: "issue-tracker",
-		expertise: "Java, PHP, JavaScript, Web Design.",
-		tickets: userTickets,
-		settings: globalSettings,
-		logs: userLogs,
-		comments: userComments
-	});
-
-	var user2 = new User({
-		key: 124,
-		username: usernames[1],
-		email: "psmith@gmail.com",
-		firstName: "Peter",
-		lastName: "Smith",
-		salt: null,
-		hash: null,
-		role: "user",
-		projectRole: "developer",
-		project: "unassigned",
-		expertise: "JavaScript, HTML5, CSS3.",
-		tickets: user2Tickets,
-		settings: globalSettings,
-		logs: user2Logs,
-		comments: user2Comments
-	});
-
-	/**
 	 * Password generation.
 	 */
 	user.setPassword(usernames[0], function () {
@@ -178,4 +162,6 @@ exports.populateDb = function () {
 			}
 		});
 	});
+
+	console.log('Data population complete...');
 };

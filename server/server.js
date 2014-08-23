@@ -39,10 +39,10 @@ server.use(config.root, router);
 // Specify port and ip address of server
 server.listen(config.port, config.ip);
 
+console.log('Server started. Listening on port %s ...', config.port);
+
 // Add default data to database.
 utils.populateDb();
-
-console.log('Server started. Listening on port %s ...', config.port);
 
 /**
  * Authentication config.
