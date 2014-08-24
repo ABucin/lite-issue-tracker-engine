@@ -3,9 +3,24 @@ issue-tracker
 
 Repository for the issue tracker application.
 
-### Versioning
+### Release notes
 
-Current version: v1.0.1.
+#### 1.1.0
+
+##### Features
+
+* Added sorting by ticket priority.
+* Added ticket priority icons.
+
+##### Bugfixes
+
+* Fixed submenu not being highlighted when selecting a subpage.
+
+##### Extras
+
+* Optimized server population script.
+
+### Versioning
 
 Version template: `<major>.<minor>.<patch>`
 
