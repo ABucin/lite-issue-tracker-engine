@@ -1,11 +1,13 @@
 issue-tracker
 =============
 
-Repository for the issue tracker application. Current version: v1.0.0
+Repository for the issue tracker application.
 
 ### Versioning
 
-`<major>.<minor>.<patch>`
+Current version: v1.0.1.
+
+Version template: `<major>.<minor>.<patch>`
 
 ### Wiki
 
