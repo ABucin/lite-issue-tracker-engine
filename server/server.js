@@ -7,9 +7,6 @@ var express = require('express'),
 	session = require('express-session'),
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
-	/**
-	 * Server config.
-	 */
 	server = express(),
 	router = express.Router(),
 	/**

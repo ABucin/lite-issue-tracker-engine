@@ -1,7 +1,7 @@
 var dbURI = 'mongodb://localhost/issuetracker';
 
-var mongoose = require('mongoose');
-var _ = require('underscore')._;
+var mongoose = require('mongoose'),
+	_ = require('underscore')._;
 
 mongoose.connect(dbURI);
 

@@ -51,6 +51,11 @@ body .comment-author {
 /**
  * Chart Secondary Menu CSS
  */
+.menu-hover {
+  background-color: #cccccc;
+  border-radius: .2em;
+  cursor: pointer;
+}
 .secondary-menu {
   border-right: 1px solid #dddddd;
   margin-bottom: 10px;
@@ -75,7 +80,7 @@ body .comment-author {
 .secondary-menu > ul > li > i.chart-icon.fa {
   font-size: 14px;
 }
-.secondary-menu > ul > li > i.chart-icon > ul > li.active,
+.secondary-menu > ul > li.active,
 .secondary-menu > ul > li.toggleable:hover {
   background-color: #cccccc;
   border-radius: .2em;

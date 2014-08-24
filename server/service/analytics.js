@@ -3,7 +3,8 @@ var bugColor = "#CB1F26",
 	chartFontWeight = "300";
 
 var persistenceService = require('./persistence'),
-	utils = require('../utils/utils');
+	utils = require('../utils/utils'),
+	_ = require('underscore')._;
 
 exports.getChart = function (type, res) {
 	var result = {};
@@ -14,20 +15,20 @@ exports.getChart = function (type, res) {
 				var series = [];
 				var currentDate = new Date();
 
-				for (var i in users) {
+				_.each(users, function (user, i, list) {
 					var logged = [0, 0, 0, 0, 0, 0, 0];
-					for (var l in users[i].logs) {
-						var tstamp = users[i].logs[l].timestamp;
+					_.each(user.logs, function (log, j, list2) {
+						var tstamp = log.timestamp;
 						if (tstamp !== undefined && utils.getWeekNumber(currentDate) === utils.getWeekNumber(tstamp)) {
-							logged[tstamp.getDay()] += users[i].logs[l].amount;
+							logged[tstamp.getDay()] += log.amount;
 						}
-					}
+					});
 
 					series.push({
-						name: users[i].username,
+						name: user.username,
 						data: logged
 					});
-				}
+				});
 
 				var loggedHours = {
 					chart: {
@@ -87,24 +88,24 @@ exports.getChart = function (type, res) {
 					data: []
 	}];
 
-				for (var i in users) {
-					usernames.push(users[i].username);
-					var bt = 0;
-					var tt = 0;
+				_.each(users, function (user, i, list) {
+					usernames.push(user.username);
+					var bt = 0,
+						tt = 0;
 
-					for (var t in users[i].tickets) {
-						if (users[i].tickets[t].status === "done" && users[i].tickets[t].owner === users[i].username) {
-							if (users[i].tickets[t].type === "bug") {
+					_.each(user.tickets, function (ticket, j, list2) {
+						if (ticket.status === "done" && ticket.owner === user.username) {
+							if (ticket.type === "bug") {
 								bt++;
-							} else if (users[i].tickets[t].type === "task") {
+							} else if (ticket.type === "task") {
 								tt++;
 							}
 						}
-					}
+					});
 
 					series[0].data.push(bt);
 					series[1].data.push(tt);
-				}
+				});
 
 				var ticketCompletion = {
 					chart: {
@@ -168,24 +169,25 @@ exports.getChart = function (type, res) {
 		{
 			var callback = function (users) {
 
-				var bugEffortEstimation = [];
-				var taskEffortEstimation = [];
-				var maxEstimation = 0;
+				var bugEffortEstimation = [],
+					taskEffortEstimation = [],
+					maxEstimation = 0;
 
-				for (var i in users) {
-					for (var t in users[i].tickets) {
-						if (users[i].tickets[t].status !== "done") {
-							if (users[i].tickets[t].estimatedTime > maxEstimation) {
-								maxEstimation = users[i].tickets[t].estimatedTime;
+				_.each(users, function (user, i, list) {
+					_.each(user.tickets, function (ticket, j, list2) {
+						if (ticket.status !== "done") {
+							if (ticket.estimatedTime > maxEstimation) {
+								maxEstimation = ticket.estimatedTime;
 							}
-							if (users[i].tickets[t].type === "bug") {
-								bugEffortEstimation.push([users[i].tickets[t].estimatedTime, users[i].tickets[t].loggedTime]);
-							} else if (users[i].tickets[t].type === "task") {
-								taskEffortEstimation.push([users[i].tickets[t].estimatedTime, users[i].tickets[t].loggedTime]);
+							if (ticket.type === "bug") {
+								bugEffortEstimation.push([ticket.estimatedTime, ticket.loggedTime]);
+							} else if (ticket.type === "task") {
+								taskEffortEstimation.push([ticket.estimatedTime, ticket.loggedTime]);
 							}
 						}
-					}
-				}
+					});
+				});
+
 				var effortEstimation = {
 					chart: {
 						type: 'scatter'
@@ -287,21 +289,23 @@ exports.getChart = function (type, res) {
 	case "assignedTickets":
 		{
 			var callback = function (users) {
-				var data = [];
-				var ut = 0;
-				for (var i in users) {
+				var data = [],
+					ut = 0;
+
+				_.each(users, function (user, i, list) {
 					var ct = 0;
-					for (var t in users[i].tickets) {
-						if (users[i].tickets[t].status !== "done") {
-							if (users[i].tickets[t].owner === users[i].username) {
+					_.each(user.tickets, function (ticket, j, list2) {
+						if (ticket.status !== "done") {
+							if (ticket.owner === user.username) {
 								ct++;
-							} else if (users[i].tickets[t].owner !== undefined && !users[i].tickets[t].owner.length) {
+							} else if (ticket.owner !== undefined && !ticket.owner.length) {
 								ut++;
 							}
 						}
-					}
-					data.push([users[i].username, ct]);
-				}
+					});
+					data.push([user.username, ct]);
+				});
+
 				data.push(["unassigned", ut]);
 
 				var assignedTickets = {

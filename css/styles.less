@@ -66,6 +66,11 @@ body {
 /**
  * Chart Secondary Menu CSS
  */
+.menu-hover {
+	background-color: @nav-hover;
+			border-radius: .2em;
+			cursor: pointer;
+}
 .secondary-menu {
 	border-right: 1px solid @secondary-menu; margin-bottom: 10px;
 	> ul > li {
@@ -87,11 +92,9 @@ body {
 				font-size: 14px;
 			}
 		}
-		> i.chart-icon > ul > li.active,
+		&.active,
 		&.toggleable:hover {
-			background-color: @nav-hover;
-			border-radius: .2em;
-			cursor: pointer;
+			.menu-hover;
 		}
 	}
 }
