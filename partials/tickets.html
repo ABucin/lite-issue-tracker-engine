@@ -14,22 +14,22 @@
 					<tr>
 						<td highlightable status="created" droppable ticket-container>
 							<div ng-repeat="ticket in tickets.created">
-								<ticket ng-if="filterTicket(ticket.owner)"></ticket>
+								<ticket ng-if="filterByOwner(ticket.owner) && filterByPriority(ticket.priority)"></ticket>
 							</div>
 						</td>
 						<td highlightable status="inProgress" droppable ticket-container>
 							<div ng-repeat="ticket in tickets.inProgress">
-								<ticket ng-if="filterTicket(ticket.owner)"></ticket>
+								<ticket ng-if="filterByOwner(ticket.owner) && filterByPriority(ticket.priority)"></ticket>
 							</div>
 						</td>
 						<td highlightable status="testing" droppable ticket-container>
 							<div ng-repeat="ticket in tickets.testing">
-								<ticket ng-if="filterTicket(ticket.owner)"></ticket>
+								<ticket ng-if="filterByOwner(ticket.owner) && filterByPriority(ticket.priority)"></ticket>
 							</div>
 						</td>
 						<td highlightable status="done" droppable ticket-container>
 							<div ng-repeat="ticket in tickets.done">
-								<ticket ng-if="filterTicket(ticket.owner)"></ticket>
+								<ticket ng-if="filterByOwner(ticket.owner) && filterByPriority(ticket.priority)"></ticket>
 							</div>
 						</td>
 					</tr>

@@ -8,6 +8,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		};
 		$scope.ownComment = "";
 		$scope.editedCommentKey = "";
+		$scope.priorityIconClass = "";
 
 		$scope.comments = [];
 
@@ -60,14 +61,36 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			$scope.comment.content = commentContent;
 		};
 
-		$scope.filterTicket = function (owner) {
-			if ($rootScope.menu.filters.displayTickets === 'all') {
-				return true;
-			} else if ($rootScope.menu.filters.displayTickets === 'mine') {
-				return (owner === $rootScope.getAuthenticatedUser().username);
-			} else if ($rootScope.menu.filters.displayTickets === 'unassigned') {
-				return (owner === undefined || !owner.length);
+		$scope.filterByOwner = function (owner) {
+			switch ($rootScope.menu.filters.byTicketOwner) {
+			case 'all':
+				{
+					return true;
+				}
+			case 'mine':
+				{
+					return (owner === $rootScope.getAuthenticatedUser().username);
+				}
+			case 'unassigned':
+				{
+					return (owner === undefined || !owner.length);
+				}
+			default:
+				{
+					return false;
+				}
 			}
+		}
+
+		$scope.filterByPriority = function (priority) {
+			var filter = $rootScope.menu.filters.byTicketPriority;
+
+			if (filter === 'all') {
+				return true;
+			} else if (filter === 'minor' || filter === 'normal' || filter === 'major') {
+				return (priority === filter);
+			}
+
 			return false;
 		}
 

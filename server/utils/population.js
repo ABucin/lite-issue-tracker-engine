@@ -132,7 +132,7 @@ exports.populateDb = function () {
 	generateTicket(userTickets, "Fix Responsive Menu", "inProgress", "bug", "The menu needs to be made responsive.", usernames[0], priorities[0], 15, 10);
 
 	generateTicket(user2Tickets, "Test Batch Script", "testing", "task", "The deployment script should be tested.", usernames[1], priorities[1], 25, 13);
-	generateTicket(user2Tickets, "Fix Missing Authentication Header.", "inProgress", "bug", "Add the missing header.", usernames[1], priorities[2], 5, 26);
+	generateTicket(user2Tickets, "Fix Missing Authentication Header", "inProgress", "bug", "Add the missing header.", usernames[1], priorities[2], 5, 26);
 	generateTicket(user2Tickets, "Fix Login Page CSS", "done", "bug", "Fix Login Page CSS.", usernames[1], priorities[2], 15, 23);
 
 	generateLog(userLogs, "comment", null, "1", "task", "I think this feature should be implemented in the next sprint.", usernames[0], null);

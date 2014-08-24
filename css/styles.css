@@ -125,6 +125,15 @@ p[ng-show*='loginForm.password'] {
 .ticket:hover {
   cursor: pointer;
 }
+.ticket i {
+  padding-left: 5px;
+}
+.ticket i.ion-arrow-up-c {
+  color: #cb1f26;
+}
+.ticket i.ion-arrow-down-c {
+  color: #4c921c;
+}
 .ticket-bug {
   background-color: #cb1f26;
 }

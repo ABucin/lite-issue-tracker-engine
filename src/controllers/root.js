@@ -67,7 +67,8 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		$rootScope.menu = {
 			hasDropdown: false,
 			filters: {
-				displayTickets: 'all'
+				byTicketOwner: 'all',
+				byTicketPriority: 'all'
 			}
 		};
 

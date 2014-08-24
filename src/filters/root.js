@@ -10,6 +10,9 @@ app.filter('capitalize', function () {
 	};
 });
 
+/**
+ * Returns a moment in time as text.
+ */
 app.filter('momentInTime', function () {
 	return function (date) {
 		var now = Date.now();
