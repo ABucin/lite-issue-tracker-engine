@@ -3,10 +3,6 @@ issue-tracker
 
 Repository for the issue tracker application. You can check the latest release notes [here.] (https://github.com/ABucin/issue-tracker/releases)
 
-##### Extras
-
-* Optimized server population script.
-
 ### Versioning
 
 Version template: `<major>.<minor>.<patch>`
