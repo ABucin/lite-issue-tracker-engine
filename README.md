@@ -3,18 +3,7 @@ issue-tracker
 
 Repository for the issue tracker application.
 
-### Release notes
-
-#### 1.1.0
-
-##### Features
-
-* Added sorting by ticket priority.
-* Added ticket priority icons.
-
-##### Bugfixes
-
-* Fixed submenu not being highlighted when selecting a subpage.
+Latest [release notes.] (https://github.com/ABucin/issue-tracker/releases)
 
 ##### Extras
 
