@@ -17,6 +17,7 @@
  * Layout contsants.
  */
 @ticket-border-radius: .3em;
+@modal-md-max-width: 450px;
 
 * {
 	margin: 0;
@@ -280,14 +281,14 @@ nav.navbar {
 
 .modal-dialog {
 	font-weight: normal;
-	form {
+	form, .modal-body .form-group:last-child {
 		margin-bottom: 0;
+	}
+	&.modal-md {
+		max-width: @modal-md-max-width;
 	}
 	.modal-header {
 		padding: 10px 15px;
-	}
-	.modal-body .form-group:last-child {
-		margin-bottom: 0;
 	}
 	.modal-footer {
 		margin-top: 0;
@@ -301,6 +302,7 @@ nav.navbar {
 	}
 	em {
 		padding: 0 5px;
+		font-size: 10px;
 	}
 }
 

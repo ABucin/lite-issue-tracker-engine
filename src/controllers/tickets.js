@@ -16,6 +16,11 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		$scope.deletedTicket = {};
 		$scope.copiedTicket = {};
 
+		$scope.ticketTabs = {
+			info: true,
+			comments: false
+		};
+
 		$scope.loggedWork = {
 			amount: 0.0
 		};
@@ -200,5 +205,15 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 
 		$scope.deleteTicket = function (key) {
 			TicketsService.deleteTicket(key, $rootScope.getAuthenticatedUser().key, $rootScope.userTickets, $rootScope.tickets.created, $rootScope.tickets.inProgress, $rootScope.tickets.testing, $rootScope.tickets.done);
+		};
+
+		$scope.showTicketTab = function (tab) {
+			for (var k in $scope.ticketTabs) {
+				if (k === tab) {
+					$scope.ticketTabs[k] = true;
+				} else {
+					$scope.ticketTabs[k] = false;
+				}
+			}
 		};
 }]);

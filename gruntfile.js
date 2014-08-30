@@ -49,7 +49,7 @@ module.exports = function (grunt) {
 					compress: true
 				},
 				files: {
-					"dist/css/<%= pkg.name %>.min.css": "css/*.less"
+					"dist/css/<%= pkg.name %>.min.css": "less/*.less"
 				}
 			}
 		},

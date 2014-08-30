@@ -329,14 +329,15 @@ nav.navbar ul.dropdown-menu .fa-check {
 .modal-dialog {
   font-weight: normal;
 }
-.modal-dialog form {
+.modal-dialog form,
+.modal-dialog .modal-body .form-group:last-child {
   margin-bottom: 0;
+}
+.modal-dialog.modal-md {
+  max-width: 450px;
 }
 .modal-dialog .modal-header {
   padding: 10px 15px;
-}
-.modal-dialog .modal-body .form-group:last-child {
-  margin-bottom: 0;
 }
 .modal-dialog .modal-footer {
   margin-top: 0;
@@ -349,6 +350,7 @@ nav.navbar ul.dropdown-menu .fa-check {
 }
 .modal-comments em {
   padding: 0 5px;
+  font-size: 10px;
 }
 .table {
   background-color: transparent;

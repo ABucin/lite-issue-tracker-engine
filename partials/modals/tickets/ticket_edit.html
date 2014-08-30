@@ -1,136 +1,144 @@
 <!-- Ticket edit (preview) modal -->
 
 <div class="modal fade" id="ticket-preview-modal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-md">
 		<div class="modal-content">
-			<form class="form-horizontal" role="form" name="ticketEditForm" ng-submit="updateTicket(ticketEditForm.$valid)" novalidate>
-				<div class="modal-header">
-					<button type="button" class="close" ng-click="hideTicketPreviewModal()" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title">{{updatedTicket.username === getAuthenticatedUser().username ? 'Edit Ticket' : 'Preview Ticket'}}</h4>
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="hideTicketPreviewModal()" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">{{updatedTicket.username === getAuthenticatedUser().username ? 'Edit Ticket' : 'Preview Ticket'}}</h4>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active"><a role="tab" data-toggle="tab" ng-click="showTicketTab('info')">Info</a>
+					</li>
+					<li><a role="tab" data-toggle="tab" ng-click="showTicketTab('comments')">Comments</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane" ng-class="ticketTabs['info'] ? 'active' : ''">
+						<form class="form-horizontal" role="form" name="ticketEditForm" ng-submit="updateTicket(ticketEditForm.$valid)" novalidate>
+							<div class="form-group">
+								<div class="col-lg-12">
+									<div class="input-group">
+										<span class="input-group-addon">Title</span>
+										<input type="text" class="form-control" placeholder="Title" name="title" ng-model="updatedTicket.title" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username" ng-class="{ 'has-error' : ticketEditForm.title.$invalid && !ticketEditForm.title.$pristine && submitted }" ng-required="true">
+										<span class="input-group-addon">{{updatedTicket.loggedTime}} h</span>
+									</div>
+									<p ng-show="ticketEditForm.title.$error.required && submitted"><i class="fa fa-warning"></i>Title is required.</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-12">
+									<label for="ticketDescription">Description</label>
+									<textarea id="ticketDescription" class="form-control" ng-model="updatedTicket.description" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username"></textarea>
+								</div>
+							</div>
+							<div class="form-group" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
+								<div class="col-lg-6" ng-hide="updatedTicket.status === 'done'">
+									<div class="input-group">
+										<span class="input-group-addon">Log</span>
+										<input type="number" class="form-control" min="0" step="0.5" ng-model="loggedWork.amount" />
+										<span class="input-group-addon">h</span>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="input-group">
+										<span class="input-group-addon">Initial</span>
+										<input type="number" class="form-control" min="0" step="0.5" ng-disabled="updatedTicket.status !== 'created'" ng-model="updatedTicket.estimatedTime" />
+										<span class="input-group-addon">h</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-6">
+									<div class="input-group">
+										<span class="input-group-addon">Assignee</span>
+										<input type="text" class="form-control" ng-model="updatedTicket.owner" />
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="input-group">
+										<span class="input-group-addon">Creator</span>
+										<input type="text" class="form-control" ng-model="updatedTicket.creator" disabled="true" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-6" ng-hide="updatedTicket.status === 'done' || updatedTicket.owner !== getAuthenticatedUser().username">
+									<div class="input-group">
+										<span class="input-group-addon">Priority</span>
+										<select class="form-control" ng-model="updatedTicket.priority">
+											<option>major</option>
+											<option>standard</option>
+											<option>minor</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-6" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
+									<div class="input-group">
+										<span class="input-group-addon">Status</span>
+										<select class="form-control" ng-model="updatedTicket.status">
+											<option>created</option>
+											<option value="inProgress">in progress</option>
+											<option>testing</option>
+											<option>done</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+									<button type="button" class="btn btn-default form-control" ng-click="hideTicketPreviewModal()">
+										Cancel
+									</button>
+								</div>
+								<div class="col-md-4">
+									<button type="submit" class="btn btn-primary form-control">
+										Save
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="tab-pane" ng-class="ticketTabs['comments'] ? 'active' : ''">
+						<form class="form-horizontal" role="form" ng-submit="status.isEditingComment ? editComment(true) : addComment(true)" name="commentForm" novalidate>
+							<div class="modal-body modal-comments" ng-show="comments.length">
+								<div ng-repeat="c in comments" class="row">
+									<div class="col-lg-5" ng-class="(c.author == getAuthenticatedUser().username) ? 'comment-author' : ''">
+										<strong>{{c.author}}<span ng-show="c.isEdited">*</span></strong><em>{{c.timestamp | momentInTime}}</em><i class="fa fa-times" ng-click="deleteComment(c.key)" ng-show="c.author == getAuthenticatedUser().username"></i>
+									</div>
+									<div class="col-lg-7" ng-class="(c.author == getAuthenticatedUser().username)?'comment-author': ''">
+										<p><i class="fa fa-edit" ng-click="markForEdit(c.key, c.content)" ng-show="c.author == getAuthenticatedUser().username"></i>{{c.content}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<div class="col-lg-12">
+										<p>Posting as: <strong>{{comment.author}}</strong>
+										</p>
+										<textarea id="commentContent" class="form-control" name="comment" ng-model="comment.content"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-4"></div>
+									<div class="col-lg-4"></div>
+									<div class="col-lg-4">
+										<button type="submit" class="btn btn-primary">
+											{{(status.isEditingComment) ? 'Edit' : 'Add'}} Comment
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<div class="col-lg-12">
-							<div class="input-group">
-								<span class="input-group-addon">Title</span>
-								<input type="text" class="form-control" placeholder="Title" name="title" ng-model="updatedTicket.title" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username" ng-class="{ 'has-error' : ticketEditForm.title.$invalid && !ticketEditForm.title.$pristine && submitted }" ng-required="true">
-								<span class="input-group-addon">{{updatedTicket.loggedTime}} h</span>
-							</div>
-							<p ng-show="ticketEditForm.title.$error.required && submitted"><i class="fa fa-warning"></i>Title is required.</p>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-lg-12">
-							<label for="ticketDescription">Description</label>
-							<textarea id="ticketDescription" class="form-control" ng-model="updatedTicket.description" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-lg-4" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
-							<div class="input-group">
-								<span class="input-group-addon">Initial</span>
-								<input type="number" class="form-control" min="0" step="0.5" ng-disabled="updatedTicket.status !== 'created'" ng-model="updatedTicket.estimatedTime" />
-								<span class="input-group-addon">h</span>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-lg-6">
-							<div class="input-group">
-								<span class="input-group-addon">Creator</span>
-								<input type="text" class="form-control" ng-model="updatedTicket.creator" disabled="true" />
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-lg-4" ng-hide="updatedTicket.status === 'done' || updatedTicket.owner !== getAuthenticatedUser().username">
-							<div class="input-group">
-								<span class="input-group-addon">Log</span>
-								<input type="number" class="form-control" min="0" step="0.5" ng-model="loggedWork.amount" />
-								<span class="input-group-addon">h</span>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-lg-6">
-							<div class="input-group">
-								<span class="input-group-addon">Assignee</span>
-								<input type="text" class="form-control" ng-model="updatedTicket.owner" />
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-lg-5" ng-hide="updatedTicket.status === 'done' || updatedTicket.owner !== getAuthenticatedUser().username">
-							<div class="input-group">
-								<span class="input-group-addon">Priority</span>
-								<select class="form-control" ng-model="updatedTicket.priority">
-									<option>major</option>
-									<option>standard</option>
-									<option>minor</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-lg-5" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
-							<div class="input-group">
-								<span class="input-group-addon">Status</span>
-								<select class="form-control" ng-model="updatedTicket.status">
-									<option>created</option>
-									<option value="inProgress">in progress</option>
-									<option>testing</option>
-									<option>done</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer modal-comments">
-					<div class="form-group">
-						<div class="col-md-3">
-						</div><div class="col-md-3">
-						</div>
-						<div class="col-md-3">
-							<button type="button" class="btn btn-default form-control" ng-click="hideTicketPreviewModal()">
-								Cancel
-							</button>
-						</div>
-						<div class="col-md-3">
-							<button type="submit" class="btn btn-primary form-control">
-								Save
-							</button>
-						</div>
-					</div>
-				</div>
-			</form>
-			<form class="form-horizontal" role="form" ng-submit="status.isEditingComment ? editComment(true) : addComment(true)" name="commentForm" novalidate>
-				<div class="modal-body modal-comments" ng-show="comments.length">
-					<div ng-repeat="c in comments" class="row">
-						<div class="col-lg-5" ng-class="(c.author == getAuthenticatedUser().username) ? 'comment-author' : ''">
-							<strong>{{c.author}}<span ng-show="c.isEdited">*</span></strong><em>({{c.timestamp | date:'yyyy-MM-dd HH:mm:ss'}})</em><i class="fa fa-times" ng-click="deleteComment(c.key)" ng-show="c.author == getAuthenticatedUser().username"></i>
-						</div>
-						<div class="col-lg-7" ng-class="(c.author == getAuthenticatedUser().username)?'comment-author': ''">
-							<p><i class="fa fa-edit" ng-click="markForEdit(c.key, c.content)" ng-show="c.author == getAuthenticatedUser().username"></i>{{c.content}}</p>
-						</div>
-					</div>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<div class="col-lg-12">
-							<p>Posting as: <strong>{{comment.author}}</strong>
-							</p>
-							<textarea id="commentContent" class="form-control" name="comment" ng-model="comment.content"></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">
-						{{(status.isEditingComment) ? 'Edit' : 'Add'}} Comment
-					</button>
-				</div>
-			</form>
+			</div>
+			<div class="modal-footer modal-comments">
+			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>

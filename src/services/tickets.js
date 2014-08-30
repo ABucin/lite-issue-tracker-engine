@@ -5,9 +5,6 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 			var callback = function (data) {
 				tickets.push(data);
 				createdTickets.push(data);
-//				$rootScope.$broadcast('ticketCreated', {
-//					ticket: data
-//				});
 				logger("create", data);
 			};
 			ResourceService.postData('users/' + userId + '/tickets', ticket, callback);
@@ -18,7 +15,6 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 				for (var i in tickets) {
 					if (tickets[i].key == data.key) {
 						angular.copy(data, tickets[i]);
-//						tickets[i].loggedTime += loggedWork;
 						$rootScope.$broadcast('ticketUpdated', {
 							key: data.key
 						});

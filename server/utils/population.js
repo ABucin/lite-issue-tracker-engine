@@ -38,7 +38,7 @@ exports.populateDb = function () {
 		userComments = [],
 		user2Comments = [],
 		usernames = ["abucin", "psmith"],
-		priorities = ["minor", "normal", "major"],
+		priorities = ["minor", "standard", "major"],
 		sampleTicketKey = utils.generateKey(),
 		yesterday = new Date();
 
