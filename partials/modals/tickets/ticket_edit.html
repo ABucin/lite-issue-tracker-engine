@@ -13,7 +13,7 @@
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active"><a role="tab" data-toggle="tab" ng-click="showTicketTab('info')">Info</a>
 					</li>
-					<li><a role="tab" data-toggle="tab" ng-click="showTicketTab('comments')">Comments</a>
+					<li><a role="tab" data-toggle="tab" ng-click="showTicketTab('comments')">Comments <span ng-if="comments.length">({{comments.length}})</span></a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -65,8 +65,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="col-lg-6" ng-hide="updatedTicket.status === 'done' || updatedTicket.owner !== getAuthenticatedUser().username">
+							<div class="form-group" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
+								<div class="col-lg-6" ng-hide="updatedTicket.status === 'done'">
 									<div class="input-group">
 										<span class="input-group-addon">Priority</span>
 										<select class="form-control" ng-model="updatedTicket.priority">
@@ -76,7 +76,7 @@
 										</select>
 									</div>
 								</div>
-								<div class="col-lg-6" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
+								<div class="col-lg-6">
 									<div class="input-group">
 										<span class="input-group-addon">Status</span>
 										<select class="form-control" ng-model="updatedTicket.status">
@@ -88,7 +88,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="form-group modal-footer">
 								<div class="col-md-4"></div>
 								<div class="col-md-4">
 									<button type="button" class="btn btn-default form-control" ng-click="hideTicketPreviewModal()">
@@ -105,17 +105,20 @@
 					</div>
 					<div class="tab-pane" ng-class="ticketTabs['comments'] ? 'active' : ''">
 						<form class="form-horizontal" role="form" ng-submit="status.isEditingComment ? editComment(true) : addComment(true)" name="commentForm" novalidate>
-							<div class="modal-body modal-comments" ng-show="comments.length">
+							<div class="modal-body modal-comments">
+								<div ng-show="!comments.length">
+									There seems to be nothing here.
+								</div>
 								<div ng-repeat="c in comments" class="row">
-									<div class="col-lg-5" ng-class="(c.author == getAuthenticatedUser().username) ? 'comment-author' : ''">
+									<div class="col-lg-4" ng-class="(c.author == getAuthenticatedUser().username) ? 'comment-author' : ''">
 										<strong>{{c.author}}<span ng-show="c.isEdited">*</span></strong><em>{{c.timestamp | momentInTime}}</em><i class="fa fa-times" ng-click="deleteComment(c.key)" ng-show="c.author == getAuthenticatedUser().username"></i>
 									</div>
-									<div class="col-lg-7" ng-class="(c.author == getAuthenticatedUser().username)?'comment-author': ''">
-										<p><i class="fa fa-edit" ng-click="markForEdit(c.key, c.content)" ng-show="c.author == getAuthenticatedUser().username"></i>{{c.content}}</p>
+									<div class="col-lg-8" ng-class="(c.author == getAuthenticatedUser().username)?'comment-author': ''">
+										<p>{{c.content}}<i class="fa fa-edit" ng-click="markForEdit(c.key, c.content)" ng-show="c.author == getAuthenticatedUser().username"></i></p>
 									</div>
 								</div>
 							</div>
-							<div class="modal-body">
+							<div class="modal-body modal-comments-post">
 								<div class="form-group">
 									<div class="col-lg-12">
 										<p>Posting as: <strong>{{comment.author}}</strong>
@@ -136,8 +139,6 @@
 						</form>
 					</div>
 				</div>
-			</div>
-			<div class="modal-footer modal-comments">
 			</div>
 		</div>
 		<!-- /.modal-content -->

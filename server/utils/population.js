@@ -78,11 +78,11 @@ exports.populateDb = function () {
 	/**
 	 * Generates a ticket comment.
 	 */
-	var generateComment = function (comments, content) {
+	var generateComment = function (comments, content, ticketKey) {
 		return comments.push({
 			key: utils.generateKey(),
 			content: content,
-			ticket: sampleTicketKey
+			ticket: ticketKey
 		});
 	}
 
@@ -135,17 +135,18 @@ exports.populateDb = function () {
 	generateTicket(user2Tickets, "Fix Missing Authentication Header", "inProgress", "bug", "Add the missing header.", usernames[1], priorities[2], 5, 26);
 	generateTicket(user2Tickets, "Fix Login Page CSS", "done", "bug", "Fix Login Page CSS.", usernames[1], priorities[2], 15, 23);
 
-	generateLog(userLogs, "comment", null, "1", "task", "I think this feature should be implemented in the next sprint.", usernames[0], null);
-	generateLog(userLogs, "clock-o", 3, "2", "task", null, usernames[0], yesterday);
-	generateLog(userLogs, "comment", null, "3", "bug", "Bug fixed in commit 3d6h4.", usernames[0], null);
+	generateComment(userComments, "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.", userTickets[0].key);
+	generateComment(userComments, "That is correct. I will do it soon.", userTickets[0].key);
 
+	generateComment(user2Comments, "Also, please update the title to something more accurate.", user2Tickets[0].key);
+
+	generateLog(userLogs, "comment", null, "1", "task", userComments[0].content, usernames[0], null);
+	generateLog(userLogs, "clock-o", 3, "2", "task", null, usernames[0], yesterday);
+	generateLog(userLogs, "comment", null, "3", "bug", userComments[1].content, usernames[0], null);
+
+	generateLog(user2Logs, "comment", null, "3", "bug", user2Comments[0].content, usernames[1], null);
 	generateLog(user2Logs, "clock-o", 4, "6", "task", null, usernames[1], null);
 	generateLog(user2Logs, "clock-o", 6, "6", "task", null, usernames[1], yesterday);
-
-	generateComment(userComments, "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.");
-	generateComment(userComments, "That is correct. I will do it soon.");
-
-	generateComment(user2Comments, "Also, please update the title to something more accurate.");
 
 	var user = generateUser(123, usernames[0], "abucin@gmail.com", "Andrei", "Bucin", "admin", "tester", "issue-tracker", "Java, PHP, JavaScript, Web Design.", userTickets, userLogs, userComments, generateSettings()),
 		user2 = generateUser(124, usernames[1], "psmith@gmail.com", "Peter", "Smith", "user", "developer", "unassigned", "JavaScript, HTML5, CSS3.", user2Tickets, user2Logs, user2Comments, generateSettings());

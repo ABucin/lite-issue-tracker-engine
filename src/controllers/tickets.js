@@ -148,8 +148,8 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			}
 		}
 
-		$scope.fetchComments = function (commentKey) {
-			CommentsService.fetchComments(commentKey, $scope.comments);
+		$scope.fetchComments = function (ticketKey) {
+			CommentsService.fetchComments(ticketKey, $scope.comments);
 		};
 
 		/**
