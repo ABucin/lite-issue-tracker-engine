@@ -45,9 +45,6 @@ body div[ng-repeat*='tickets.done'] .ticket .ticket-title {
 body .login-form {
   padding-top: 10%;
 }
-body .comment-author {
-  color: #21579d;
-}
 /**
  * Chart Secondary Menu CSS
  */
