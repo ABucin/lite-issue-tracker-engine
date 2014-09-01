@@ -122,7 +122,7 @@
 								</div>
 								<div ng-repeat="c in comments" class="row">
 									<div class="col-lg-4" ng-class="(c.author == getAuthenticatedUser().username) ? 'comment-author' : ''">
-										<strong>{{c.author}}<span ng-show="c.isEdited">*</span></strong><em>{{c.timestamp | momentInTime}}</em><i class="fa fa-times" ng-click="deleteComment(c.key)" ng-show="c.author == getAuthenticatedUser().username"></i>
+										<strong>{{c.author}}</strong><em>{{c.timestamp | momentInTime}}<span ng-show="c.isEdited">*</span></em><i class="fa fa-times" ng-click="deleteComment(c.key)" ng-show="c.author == getAuthenticatedUser().username"></i>
 									</div>
 									<div class="col-lg-8" ng-class="(c.author == getAuthenticatedUser().username)?'comment-author': ''">
 										<p>{{c.content}}<i class="fa fa-edit" ng-click="markForEdit(c.key, c.content)" ng-show="c.author == getAuthenticatedUser().username"></i>

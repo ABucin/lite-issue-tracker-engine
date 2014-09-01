@@ -362,13 +362,13 @@ nav.navbar ul.dropdown-menu .fa-check {
   padding: 0 5px;
   font-size: 12px;
 }
+.modal-comments em span[ng-show*="isEdited"] {
+  font-size: 10px;
+}
 .modal-comments p,
 .modal-comments strong,
 .modal-comments i.fa {
   font-size: 12px;
-}
-.modal-comments textarea {
-  min-height: 200px;
 }
 .modal-comments-post {
   padding: 15px 0 0 0;
@@ -376,6 +376,9 @@ nav.navbar ul.dropdown-menu .fa-check {
 }
 .modal-comments-post .form-group:first-child div {
   padding: 0 15px 0 0;
+}
+.modal-comments-post textarea.form-control.ng-pristine.ng-valid {
+  min-height: 150px;
 }
 form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
   margin-left: 0;
