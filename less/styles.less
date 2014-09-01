@@ -151,20 +151,22 @@ p[ng-show*='loginForm.password'] {margin:0px;}
  */
 .log {
 	.ticket-display;
-	border-radius: @ticket-border-radius; color: white;
-	background-color: @tracker-grey-dark; padding: 3px 0px 3px 6px;
+	border-radius: @ticket-border-radius;
+	color: @tracker-grey-dark;
+	padding: 3px 0px 3px 6px;
 	vertical-align: middle;
 	margin: 3px 3px;
 	align-items: center;
+	display: inline-flex;
 	span:last-child {
 		border-radius: 0 @ticket-border-radius @ticket-border-radius 0;
 	}
+	padding-right: 6px;
+	.log-user { background-color: @tracker-grey-light; color: black; padding: 3px 6px; margin: 0 0px 0 5px; }
+	.log-target { color: white; padding: 3px 6px; margin: 0 5px 0 0px;}
+	.log-comment { margin-left: 6px; padding-right: 6px; }
+	.log-amount, .log-timestamp {font-size: 100%; margin-left: 5px;}
 }
-.log-user { background-color: @tracker-grey-light; color: black; padding: 3px 6px; margin: 0 0px 0 3px;}
-.log-target { color: white; padding: 3px 6px; margin-left: -3px; }
-.log-amount,
-.log-comment { margin-left: 6px; padding-right: 6px; }
-.log-timestamp { .ticket-display; display: inline; }
 
 nav.navbar {
 	border-color: @secondary-menu;
@@ -314,8 +316,12 @@ nav.navbar {
 .modal-comments {
 	border-bottom: 1px solid @comments-border;
 	padding-top: 0;
+	padding-bottom: 10px;
 	div {
 		padding: 0;
+		&.comments-empty {
+			padding-bottom: 5px;
+		}
 	}
 	.fa-edit {
 		margin-left: 5px;

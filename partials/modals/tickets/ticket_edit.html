@@ -106,7 +106,7 @@
 					<div class="tab-pane" ng-class="ticketTabs['comments'] ? 'active' : ''">
 						<form class="form-horizontal" role="form" ng-submit="status.isEditingComment ? editComment(true) : addComment(true)" name="commentForm" novalidate>
 							<div class="modal-body modal-comments">
-								<div ng-show="!comments.length">
+								<div class='comments-empty' ng-show="!comments.length">
 									There seems to be nothing here.
 								</div>
 								<div ng-repeat="c in comments" class="row">

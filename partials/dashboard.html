@@ -57,9 +57,9 @@
 							<span class="log-user">{{entry.username}}</span>
 							<span class="log-target ticket-{{entry.targetType}}">TC-{{entry.target}}</span>
 							<span class="log-amount" ng-if="entry.amount">{{entry.amount}} hrs.</span>
-							<span class="log-comment" ng-if="entry.comment"><em>"{{entry.comment}}"</em></span>
+							<span class="log-comment" ng-if="entry.comment"><em>"{{entry.comment | abbreviate}}"</em></span>
+							<span class="log-timestamp">{{entry.timestamp | momentInTime}}</span>
 						</div>
-						<span class="log-timestamp">{{entry.timestamp | momentInTime}}</span>
 					</div>
 				</div>
 			</div>

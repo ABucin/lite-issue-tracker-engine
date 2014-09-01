@@ -173,12 +173,13 @@ p[ng-show*='loginForm.password'] {
   font-size: 80%;
   font-weight: 500;
   border-radius: 0.3em;
-  color: white;
-  background-color: #3f424b;
+  color: #3f424b;
   padding: 3px 0px 3px 6px;
   vertical-align: middle;
   margin: 3px 3px;
   align-items: center;
+  display: inline-flex;
+  padding-right: 6px;
 }
 .log:hover {
   cursor: pointer;
@@ -186,32 +187,25 @@ p[ng-show*='loginForm.password'] {
 .log span:last-child {
   border-radius: 0 0.3em 0.3em 0;
 }
-.log-user {
+.log .log-user {
   background-color: #c3c2b8;
   color: black;
   padding: 3px 6px;
-  margin: 0 0px 0 3px;
+  margin: 0 0px 0 5px;
 }
-.log-target {
+.log .log-target {
   color: white;
   padding: 3px 6px;
-  margin-left: -3px;
+  margin: 0 5px 0 0px;
 }
-.log-amount,
-.log-comment {
+.log .log-comment {
   margin-left: 6px;
   padding-right: 6px;
 }
-.log-timestamp {
-  display: inline-block;
-  margin: 3px;
-  line-height: normal;
-  font-size: 80%;
-  font-weight: 500;
-  display: inline;
-}
-.log-timestamp:hover {
-  cursor: pointer;
+.log .log-amount,
+.log .log-timestamp {
+  font-size: 100%;
+  margin-left: 5px;
 }
 nav.navbar {
   border-color: #dddddd;
@@ -356,9 +350,13 @@ nav.navbar ul.dropdown-menu .fa-check {
 .modal-comments {
   border-bottom: 1px solid #e5e5e5;
   padding-top: 0;
+  padding-bottom: 10px;
 }
 .modal-comments div {
   padding: 0;
+}
+.modal-comments div.comments-empty {
+  padding-bottom: 5px;
 }
 .modal-comments .fa-edit {
   margin-left: 5px;

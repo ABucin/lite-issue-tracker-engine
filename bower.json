@@ -25,7 +25,7 @@
     "angular-cookies": "~1.2.21",
     "jquery": "~2.1.1",
     "angular-touch": "~1.2.18",
-    "components-font-awesome": "~4.2.0",
+    "components-font-awesome": "~4.1.0",
     "bootstrap": "~3.2.0",
     "highcharts": "~4.0.3"
   }
