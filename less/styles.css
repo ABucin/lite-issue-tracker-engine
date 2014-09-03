@@ -45,6 +45,12 @@ body div[ng-repeat*='tickets.done'] .ticket .ticket-title {
 body .login-form {
   padding-top: 10%;
 }
+body .bug-invert {
+  color: #cb1f26;
+}
+body .task-invert {
+  color: #21579d;
+}
 /**
  * Chart Secondary Menu CSS
  */
@@ -377,8 +383,8 @@ nav.navbar ul.dropdown-menu .fa-check {
 .modal-comments-post .form-group:first-child div {
   padding: 0 15px 0 0;
 }
-.modal-comments-post textarea.form-control.ng-pristine.ng-valid {
-  min-height: 150px;
+form .form-group textarea.form-control.ng-pristine.ng-valid {
+  min-height: 200px;
 }
 form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
   margin-left: 0;
@@ -420,7 +426,7 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
   color: #3f424b;
 }
 .nav.nav-tabs > li > a {
-  color: #777777;
+  color: #333333;
   padding: 5px 10px;
 }
 .nav.nav-tabs > li > a:hover {

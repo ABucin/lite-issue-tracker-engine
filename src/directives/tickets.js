@@ -24,7 +24,9 @@ app.directive('ticket', ['$rootScope',
 							break;
 						}
 					default:
-						scope.priorityIconClass = "";
+						{
+							scope.priorityIconClass = "";
+						}
 					}
 				}
 

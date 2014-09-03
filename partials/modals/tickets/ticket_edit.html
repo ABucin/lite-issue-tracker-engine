@@ -7,7 +7,7 @@
 				<button type="button" class="close" ng-click="hideTicketPreviewModal()" aria-hidden="true">
 					&times;
 				</button>
-				<h4 class="modal-title">{{updatedTicket.username === getAuthenticatedUser().username ? 'Edit Ticket' : 'Preview Ticket'}}</h4>
+				<h4 class="modal-title"><span class="{{updatedTicket.type}}-invert">TC-{{updatedTicket.code}}</span> {{updatedTicket.title}}</h4>
 			</div>
 			<div class="modal-body">
 				<ul class="nav nav-tabs" role="tablist">
@@ -45,7 +45,7 @@
 								</div>
 								<div class="col-lg-6">
 									<div class="input-group">
-										<span class="input-group-addon">Initial</span>
+										<span class="input-group-addon">Initial Est.</span>
 										<input type="number" class="form-control" min="0" step="0.5" ng-disabled="updatedTicket.status !== 'created'" ng-model="updatedTicket.estimatedTime" />
 										<span class="input-group-addon">h</span>
 									</div>
@@ -65,36 +65,36 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
-								<div class="col-lg-6" ng-hide="updatedTicket.status === 'done'">
+							<div class="form-group">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">Type</span>
+										<select class="form-control" ng-model="updatedTicket.type" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username">
+											<option>task</option>
+											<option>bug</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-6">
 									<div class="input-group">
 										<span class="input-group-addon">Priority</span>
-										<select class="form-control" ng-model="updatedTicket.priority">
+										<select class="form-control" ng-model="updatedTicket.priority" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username">
 											<option>major</option>
 											<option>standard</option>
 											<option>minor</option>
 										</select>
 									</div>
 								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-lg-6">
 									<div class="input-group">
 										<span class="input-group-addon">Status</span>
-										<select class="form-control" ng-model="updatedTicket.status">
+										<select class="form-control" ng-model="updatedTicket.status" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username">
 											<option>created</option>
 											<option value="inProgress">in progress</option>
 											<option>testing</option>
 											<option>done</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="form-group" ng-hide="updatedTicket.owner !== getAuthenticatedUser().username">
-								<div class="col-md-6">
-									<div class="input-group">
-										<span class="input-group-addon">Type</span>
-										<select class="form-control" ng-model="updatedTicket.type">
-											<option>task</option>
-											<option>bug</option>
 										</select>
 									</div>
 								</div>

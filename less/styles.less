@@ -65,6 +65,8 @@ body {
 	.comment-author {
 //		color: @tracker-grey-dark;
 	}
+	.bug-invert { color: @tracker-red; }
+	.task-invert { color: @tracker-blue; }
 }
 
 /**
@@ -344,9 +346,10 @@ nav.navbar {
 	.form-group:first-child div {
 		padding: 0 15px 0 0;
 	}
-	textarea.form-control.ng-pristine.ng-valid {
-		min-height: 150px;
-	}
+}
+
+form .form-group textarea.form-control.ng-pristine.ng-valid {
+		min-height: 200px;
 }
 
 form[name*='commentForm'].form-horizontal .modal-comments-post .form-group{
@@ -388,7 +391,7 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group{
 		color: @tracker-grey-dark;
 	}
 	> a {
-		color: @bootstrap-default;
+		color: @bootstrap-default-dark;
 		padding: 5px 10px;
 	}
 	> a:hover {
