@@ -352,6 +352,7 @@ exports.updateTicket = function (ticketId, ticket, res) {
 							el.description = ticket.description;
 							el.owner = ticket.owner;
 							el.priority = ticket.priority;
+							el.type = ticket.type;
 
 							if (errorResponse.length) {
 								res.status(500).send(errorResponse);

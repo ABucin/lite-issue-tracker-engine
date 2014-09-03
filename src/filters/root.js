@@ -11,6 +11,19 @@ app.filter('capitalize', function () {
 });
 
 /**
+ * Abbreviates a paragraph.
+ */
+app.filter('abbreviate', function () {
+	return function (input) {
+		var maxInputLength = 75;
+		if (input !== undefined && input.length > maxInputLength) {
+			return input.substring(0, maxInputLength) + " [...]";
+		}
+		return input;
+	};
+});
+
+/**
  * Returns a moment in time as text.
  */
 app.filter('momentInTime', function () {

@@ -1,22 +1,28 @@
 /**
  * Color constants.
  */
-@tracker-red: #CB1F26;
-@tracker-blue: #21579D;
-@tracker-green: #4C921C;
-@tracker-orange: #CB8E02;
-@tracker-dark-grey: #3F424B;
-@tracker-light-grey: #C3C2B8;
-@ticket-unassigned: #E0E0E0;
-@secondary-menu: #DDDDDD;
+@bootstrap-default: #777777;
+@bootstrap-default-dark: #333333;
+@bootstrap-default-hover: #555555;
+@comments-border: #E5E5E5;
 @container-background: #EDEDED;
 @nav-hover: #CCCCCC;
-@comments-border: #E5E5E5;
+@secondary-menu: #DDDDDD;
+@tracker-black: #000000;
+@tracker-blue: #21579D;
+@tracker-grey-dark: #3F424B;
+@tracker-grey-light: #C3C2B8;
+@tracker-green: #4C921C;
+@tracker-orange: #CB8E02;
+@tracker-red: #CB1F26;
+@tracker-white: #FFFFFF;
+@ticket-unassigned: #E0E0E0;
 
 /**
- * Layout contsants.
+ * Layout constants.
  */
 @ticket-border-radius: .3em;
+@modal-md-max-width: 450px;
 
 * {
 	margin: 0;
@@ -39,8 +45,6 @@
 	}
 }
 
-//div[class*='col'] {padding-left: 10px; padding-right: 10px;}
-
 /**
  * Main body.
  */
@@ -59,8 +63,10 @@ body {
 		padding-top: 10%;
 	}
 	.comment-author {
-		color: @tracker-blue;
+//		color: @tracker-grey-dark;
 	}
+	.bug-invert { color: @tracker-red; }
+	.task-invert { color: @tracker-blue; }
 }
 
 /**
@@ -128,7 +134,7 @@ p[ng-show*='loginForm.password'] {margin:0px;}
 }
 .ticket-task { background-color: @tracker-blue; }
 
-.ticket-not-owned {background-color: @tracker-dark-grey;}
+.ticket-not-owned {background-color: @tracker-grey-dark;}
 
 .ticket-code {
 	color: white;
@@ -137,30 +143,32 @@ p[ng-show*='loginForm.password'] {margin:0px;}
 	display: inline-flex;
 	align-items: center;
 	&.ticket-unassigned {
-		background-color: @ticket-unassigned; color: @tracker-dark-grey;}
+		background-color: @ticket-unassigned; color: @tracker-grey-dark;}
 	}
 
-.ticket-title {position: relative; left: 1px; background-color: @tracker-light-grey ; color: black; padding: 3px 6px; border-radius: 0 @ticket-border-radius @ticket-border-radius 0; margin-left: 6px;}
+.ticket-title {position: relative; left: 1px; background-color: @tracker-grey-light ; color: black; padding: 3px 6px; border-radius: 0 @ticket-border-radius @ticket-border-radius 0; margin-left: 6px;}
 
 /**
  * Log entry CSS.
  */
 .log {
 	.ticket-display;
-	border-radius: @ticket-border-radius; color: white;
-	background-color: @tracker-dark-grey; padding: 3px 0px 3px 6px;
+	border-radius: @ticket-border-radius;
+	color: @tracker-grey-dark;
+	padding: 3px 0px 3px 6px;
 	vertical-align: middle;
 	margin: 3px 3px;
 	align-items: center;
+	display: inline-flex;
 	span:last-child {
 		border-radius: 0 @ticket-border-radius @ticket-border-radius 0;
 	}
+	padding-right: 6px;
+	.log-user { background-color: @tracker-grey-light; color: black; padding: 3px 6px; margin: 0 0px 0 5px; }
+	.log-target { color: white; padding: 3px 6px; margin: 0 5px 0 0px;}
+	.log-comment { margin-left: 6px; padding-right: 6px; }
+	.log-amount, .log-timestamp {font-size: 100%; margin-left: 5px;}
 }
-.log-user { background-color: @tracker-light-grey; color: black; padding: 3px 6px; margin: 0 0px 0 3px;}
-.log-target { color: white; padding: 3px 6px; margin-left: -3px; }
-.log-amount,
-.log-comment { margin-left: 6px; padding-right: 6px; }
-.log-timestamp { .ticket-display; display: inline; }
 
 nav.navbar {
 	border-color: @secondary-menu;
@@ -201,7 +209,7 @@ nav.navbar {
 		}
 	}
 	ul.dropdown-menu .fa-check {
-		color: @tracker-dark-grey;
+		color: @tracker-grey-dark;
 	}
 }
 
@@ -280,14 +288,27 @@ nav.navbar {
 
 .modal-dialog {
 	font-weight: normal;
-	form {
+	form, .modal-body .form-group:last-child {
 		margin-bottom: 0;
+	}
+	&.modal-md {
+		max-width: @modal-md-max-width;
+		.form-group.modal-footer {
+			padding-bottom: 0;
+			padding-right: 0;
+		}
+		.modal-footer .form-group {
+			padding-right: 0;
+			margin-bottom: 0;
+		}
 	}
 	.modal-header {
 		padding: 10px 15px;
 	}
-	.modal-body .form-group:last-child {
-		margin-bottom: 0;
+	.modal-body {
+		.tab-content {
+			margin-top: 15px;
+		}
 	}
 	.modal-footer {
 		margin-top: 0;
@@ -296,12 +317,43 @@ nav.navbar {
 
 .modal-comments {
 	border-bottom: 1px solid @comments-border;
+	padding-top: 0;
+	padding-bottom: 10px;
+	div {
+		padding: 0;
+		&.comments-empty {
+			padding-bottom: 5px;
+		}
+	}
 	.fa-edit {
-		margin-right: 5px;
+		margin-left: 5px;
 	}
 	em {
 		padding: 0 5px;
+		font-size: 12px;
+		span[ng-show*="isEdited"] {
+			font-size: 10px;
+		}
 	}
+	p, strong, i.fa {
+		font-size: 12px;
+	}
+}
+
+.modal-comments-post {
+	padding: 15px 0 0 0;
+	margin: 0;
+	.form-group:first-child div {
+		padding: 0 15px 0 0;
+	}
+}
+
+form .form-group textarea.form-control.ng-pristine.ng-valid {
+		min-height: 200px;
+}
+
+form[name*='commentForm'].form-horizontal .modal-comments-post .form-group{
+	margin-left: 0;
 }
 
 .table {
@@ -331,5 +383,18 @@ nav.navbar {
 			margin-bottom: 0;
 		}
 		> .ng-scope:last-child > .ticket {margin-bottom: 6px;}
+	}
+}
+
+.nav.nav-tabs > li {
+	&.active {
+		color: @tracker-grey-dark;
+	}
+	> a {
+		color: @bootstrap-default-dark;
+		padding: 5px 10px;
+	}
+	> a:hover {
+		background-color: @container-background;
 	}
 }

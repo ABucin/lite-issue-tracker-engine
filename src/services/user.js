@@ -12,12 +12,6 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 		this.updateUser = function (userId, userData, users) {
 			var self = this;
 			var callback = function (data) {
-				//				for (var i in users) {
-				//					if (users[i].username === username) {
-				//						//angular.copy(data, users[i]);
-				//						users.push(data);
-				//					}
-				//				}
 				self.fetchUserData();
 			};
 
