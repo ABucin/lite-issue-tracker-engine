@@ -1,6 +1,7 @@
 var bugColor = "#CB1F26",
 	taskColor = "#21579D",
-	chartFontWeight = "300";
+	chartFontWeight = "300",
+	chartFontSize = "16px";
 
 var persistenceService = require('./persistence'),
 	utils = require('../utils/utils'),
@@ -37,7 +38,8 @@ exports.getChart = function (type, res) {
 					title: {
 						text: 'Logged Hours',
 						style: {
-							fontWeight: chartFontWeight
+							fontWeight: chartFontWeight,
+							fontSize: chartFontSize
 						}
 					},
 					xAxis: {
@@ -115,7 +117,8 @@ exports.getChart = function (type, res) {
 					title: {
 						text: 'Ticket Completion by User',
 						style: {
-							fontWeight: chartFontWeight
+							fontWeight: chartFontWeight,
+							fontSize: chartFontSize
 						}
 					},
 					xAxis: {
@@ -195,7 +198,8 @@ exports.getChart = function (type, res) {
 					title: {
 						text: 'Effort vs. Estimation of Open Tickets by Type',
 						style: {
-							fontWeight: chartFontWeight
+							fontWeight: chartFontWeight,
+							fontSize: chartFontSize
 						}
 					},
 					xAxis: {
@@ -256,7 +260,7 @@ exports.getChart = function (type, res) {
 					series: [
 						{
 							type: 'line',
-							name: 'Regression Line',
+							name: 'Regression',
 							data: [[0, 0], [maxEstimation + 10, maxEstimation + 10]],
 							color: '#555',
 							marker: {
@@ -317,7 +321,8 @@ exports.getChart = function (type, res) {
 					title: {
 						text: 'Assigned Tickets',
 						style: {
-							fontWeight: chartFontWeight
+							fontWeight: chartFontWeight,
+							fontSize: chartFontSize
 						}
 					},
 					tooltip: {
