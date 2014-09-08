@@ -58,7 +58,8 @@ exports.populateDb = function () {
 			owner: owner,
 			priority: priority,
 			estimatedTime: estimatedTime,
-			loggedTime: loggedTime
+			loggedTime: loggedTime,
+			remainingTime: estimatedTime - loggedTime
 		});
 	}
 

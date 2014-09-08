@@ -25,6 +25,8 @@ exports.getChart = function (type, res) {
 						}
 					});
 
+					logged.push(logged.shift());
+
 					series.push({
 						name: user.username,
 						data: logged
@@ -43,7 +45,7 @@ exports.getChart = function (type, res) {
 						}
 					},
 					xAxis: {
-						categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+						categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
 						tickmarkPlacement: "on"
 					},
 					yAxis: {
@@ -249,7 +251,7 @@ exports.getChart = function (type, res) {
 								}
 							},
 							tooltip: {
-								headerFormat: '<strong>{series.name}</strong><br>',
+								headerFormat: '',
 								pointFormat: '<strong>Est.:</strong> {point.x} hrs.<br><strong>Log.:</strong> {point.y} hrs.'
 							}
 						}

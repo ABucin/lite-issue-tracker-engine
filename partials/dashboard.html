@@ -18,6 +18,18 @@
 			<div class="panel panel-default">
 				<div class="panel-body panel-body-dashboard">
 					<h1>
+						Open Tickets
+					</h1>
+					<div class="dashboard-ticket" ng-repeat="entry in tickets.inProgress | filter: {owner: getAuthenticatedUser().username}">
+						<span class="ticket-{{entry.type}}-inverted">TC-{{entry.code}}</span>
+						<span>{{entry.title}}</span>
+						<span><strong ng-class="entry.remainingTime < 0 ? 'tracker-red' : ''">{{entry.remainingTime}} hrs.</strong></span>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body panel-body-dashboard">
+					<h1>
 						Recent Activity
 					</h1>
 					<div ng-repeat="entry in dashboard.logEntries | limitTo: 5">
