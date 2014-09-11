@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/ABucin/issue-tracker",
   "devDependencies": {
-    "body-parser": "^1.6.5",
-    "express": "^4.8.5",
+    "body-parser": "^1.8.1",
+    "express": "^4.9.0",
     "express-json": "^1.0.0",
     "grunt": "*",
     "grunt-contrib-concat": "*",
@@ -26,11 +26,11 @@
     "grunt-contrib-less": "^0.11.3",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "^0.6.1",
-    "less": "^1.7.3",
-    "mongoose": "^3.9.1",
-    "passport": "*",
+    "less": "^1.7.5",
+    "mongoose": "^3.9.2",
+    "passport": "^0.2.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^0.3.0",
-    "underscore": "*"
+    "underscore": "^1.7.0"
   }
 }

@@ -131,6 +131,7 @@ exports.populateDb = function () {
 	generateTicket(userTickets, "Remove Redundant Tests", "done", "task", "Remove tests that are not used.", usernames[0], priorities[0], 10, 5);
 	generateTicket(userTickets, "Fix CSS Button Padding", "done", "bug", "The login button has extra padding.", usernames[0], priorities[0], 10, 20);
 	generateTicket(userTickets, "Fix Responsive Menu", "inProgress", "bug", "The menu needs to be made responsive.", usernames[0], priorities[0], 15, 10);
+	generateTicket(userTickets, "Remove menu padding", "testing", "bug", "The main menu has some extra padding that interferes with the responsiveness of the page.", usernames[0], priorities[0], 5, 8);
 
 	generateTicket(user2Tickets, "Test Batch Script", "testing", "task", "The deployment script should be tested.", usernames[1], priorities[1], 25, 13);
 	generateTicket(user2Tickets, "Fix Missing Authentication Header", "inProgress", "bug", "Add the missing header.", usernames[1], priorities[2], 5, 26);
