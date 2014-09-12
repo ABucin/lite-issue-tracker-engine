@@ -1,16 +1,16 @@
 <html ng-app="issueTracker">
 
 <head>
+	<!--	Link to imported stylesheets	-->
 	<link rel="stylesheet" href="dist/css/issue-tracker-libs.min.css" />
+	<!--	Link to application stylesheets	-->
 	<link rel="stylesheet" href="dist/css/issue-tracker.min.css" />
-	<!--	Link to Google Web Fonts-->
+	<!--	Link to Google Web Fonts	-->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
-
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 
 <body ng-controller="RootCtrl">
-
 	<tracker-menu></tracker-menu>
 
 	<div class="container-fluid" ng-class="togglePadding()">
@@ -19,13 +19,17 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<small class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">Lite Issue Tracker Engine v{{footer.version}}. Copyright &copy; {{footer.year}} Andrei Bucin, All rights reserved.</small>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+				<small>Lite Issue Tracker Engine v{{footer.version}}. Copyright &copy; {{footer.year}} Andrei Bucin, All rights reserved.</small>
+			</div>
 		</div>
 	</div>
-
 </body>
+
 <footer>
+	<!--	Link to imported JS libraries	-->
 	<script src="dist/js/issue-tracker-libs.min.js"></script>
+	<!--	Link to application JS libraries	-->
 	<script src="dist/js/issue-tracker.min.js"></script>
 </footer>
 
