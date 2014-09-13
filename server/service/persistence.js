@@ -266,6 +266,7 @@ exports.createTicket = function (userId, ticket, res) {
 		description: ticket.description,
 		loggedTime: ticket.loggedTime,
 		estimatedTime: ticket.estimatedTime,
+		remainingTime: ticket.estimatedTime,
 		owner: ticket.owner,
 		priority: ticket.priority
 	};
@@ -348,6 +349,9 @@ exports.updateTicket = function (ticketId, ticket, res) {
 							}
 							if (ticket.estimatedTime != null) {
 								el.estimatedTime = ticket.estimatedTime;
+							}
+							if(ticket.loggedTime != null && ticket.estimatedTime != null) {
+								el.remainingTime = ticket.estimatedTime - ticket.loggedTime;
 							}
 							el.description = ticket.description;
 							el.owner = ticket.owner;

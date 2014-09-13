@@ -29,13 +29,17 @@
 	padding: 0;
 }
 
+.tracker-red {
+	color: @tracker-red;
+}
+
 /**
  * FontAwesome overrides.
  */
 .fa {
 	cursor: pointer;
 	&-times {
-		color: @tracker-red;
+		.tracker-red;
 	}
 	&-edit {
 		color: @tracker-orange;
@@ -67,6 +71,7 @@ body {
 	}
 	.bug-invert { color: @tracker-red; }
 	.task-invert { color: @tracker-blue; }
+	.toggleable { font-weight: 300; }
 }
 
 /**
@@ -113,7 +118,6 @@ p[ng-show*='loginForm.password'] {margin:0px;}
 /**
  * Ticket CSS.
  */
-
 .ticket-display { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500; &:hover{cursor: pointer;}}
 
 .ticket {
@@ -129,11 +133,10 @@ p[ng-show*='loginForm.password'] {margin:0px;}
 		}
 	}
 }
-.ticket-bug {
-	background-color: @tracker-red;
-}
+.ticket-bug { background-color: @tracker-red; }
+.ticket-bug-inverted { color: @tracker-red; }
 .ticket-task { background-color: @tracker-blue; }
-
+.ticket-task-inverted { color: @tracker-blue; }
 .ticket-not-owned {background-color: @tracker-grey-dark;}
 
 .ticket-code {
@@ -152,22 +155,25 @@ p[ng-show*='loginForm.password'] {margin:0px;}
  * Log entry CSS.
  */
 .log {
-	.ticket-display;
-	border-radius: @ticket-border-radius;
 	color: @tracker-grey-dark;
-	padding: 3px 0px 3px 6px;
 	vertical-align: middle;
-	margin: 3px 3px;
 	align-items: center;
 	display: inline-flex;
-	span:last-child {
-		border-radius: 0 @ticket-border-radius @ticket-border-radius 0;
-	}
 	padding-right: 6px;
-	.log-user { background-color: @tracker-grey-light; color: black; padding: 3px 6px; margin: 0 0px 0 5px; }
-	.log-target { color: white; padding: 3px 6px; margin: 0 5px 0 0px;}
+	line-height: normal;
+	font-size: 12px;
+	font-weight: 400;
+	i.fa {
+		margin-left: 5px;
+		&:hover {
+			cursor: default;
+		}
+	}
+	.log-user { padding: 3px 6px; margin: 0 0px 0 5px; font-weight: 500; }
+	.log-target { padding: 3px 6px; margin: 0 5px 0 0px;}
 	.log-comment { margin-left: 6px; padding-right: 6px; }
-	.log-amount, .log-timestamp {font-size: 100%; margin-left: 5px;}
+	.log-amount {font-size: 100%; margin-left: 5px;}
+	.log-timestamp {.log-amount; font-weight: bold;}
 }
 
 nav.navbar {
@@ -275,6 +281,7 @@ nav.navbar {
 	}
 	> .panel-heading {
 		background-color: @container-background;
+		padding: 5px 10px;
 		> span > i[data-toggle*="collapse"] {
 			cursor: pointer;
 			line-height: 1.5;
@@ -282,12 +289,30 @@ nav.navbar {
 	}
 }
 
-.panel-body-dashboard { padding: 5px; }
+.panel-body-dashboard {
+	padding: 5px;
+	> div[data-highcharts-chart] {
+		height: 200px;
+	}
+	h1 {
+		font-weight: 300;
+		font-size:16px;
+		text-align: center;
+		margin: 10px 0 10px 0;
+	}
+	.dashboard-ticket {
+		font-size:12px;
+		margin: 0 5px;
+		span {
+			margin-right: 10px;
+		}
+	}
+}
 .panel-bugs > .row > div,
 .panel-tickets > .row > div {padding-right: 0;}
 
 .modal-dialog {
-	font-weight: normal;
+	font-weight: 300;
 	form, .modal-body .form-group:last-child {
 		margin-bottom: 0;
 	}
@@ -321,6 +346,7 @@ nav.navbar {
 	padding-bottom: 10px;
 	div {
 		padding: 0;
+		font-weight: normal;
 		&.comments-empty {
 			padding-bottom: 5px;
 		}
@@ -348,8 +374,8 @@ nav.navbar {
 	}
 }
 
-form .form-group textarea.form-control.ng-pristine.ng-valid {
-		min-height: 200px;
+form .form-group textarea.form-control {
+	min-height: 200px;
 }
 
 form[name*='commentForm'].form-horizontal .modal-comments-post .form-group{

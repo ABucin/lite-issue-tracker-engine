@@ -5,7 +5,8 @@ function ($scope, $rootScope, $location, AnalyticsService, LogsService) {
 		 * Document loading configuration.
 		 */
 		angular.element(document).ready(function () {
-			AnalyticsService.fetchChartData('assignedTickets');
+			AnalyticsService.fetchChartData('loggedHours', '#chartLoggedHours');
+			AnalyticsService.fetchChartData('effortEstimation', '#chartEffortEstimation');
 			LogsService.fetchLogData($rootScope.dashboard.logEntries);
 		});
 

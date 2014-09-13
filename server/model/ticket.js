@@ -37,6 +37,10 @@ var TicketSchema = new Schema({
 		type: Number,
 		default: 0
 	},
+	remainingTime: {
+		type: Number,
+		default: 0
+	},
 	owner: {
 		type: String
 	},

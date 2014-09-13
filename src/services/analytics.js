@@ -1,9 +1,10 @@
 app.service('AnalyticsService', ['ResourceService',
 	function (ResourceService) {
 
-		this.fetchChartData = function (type) {
+		this.fetchChartData = function (type, divId) {
+			var id = (divId === undefined) ? "#chart" : divId;
 			var callback = function (data) {
-				$("#chart").highcharts(data);
+				$(id).highcharts(data);
 			};
 			var params = {
 				type: type

@@ -11,11 +11,11 @@ app.filter('capitalize', function () {
 });
 
 /**
- * Abbreviates a paragraph.
+ * Introduces a text ellipsis after a set number of characters.
  */
 app.filter('abbreviate', function () {
 	return function (input) {
-		var maxInputLength = 75;
+		var maxInputLength = 80;
 		if (input !== undefined && input.length > maxInputLength) {
 			return input.substring(0, maxInputLength) + " [...]";
 		}
