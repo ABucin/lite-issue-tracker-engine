@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 					'dist/js/<%= pkg.name %>.min.js': ['src/**/root.js', 'src/**/*.js', '!src/vendor/**/*.js'],
 					'dist/js/<%= pkg.name %>-libs.min.js': ['src/vendor/angular/angular.min.js', 'src/vendor/angular-*/angular-*.min.js', 'src/vendor/jquery/dist/jquery.min.js', 'src/vendor/bootstrap/dist/js/bootstrap.min.js', 'src/vendor/highcharts/highcharts.js'],
 					'dist/css/<%= pkg.name %>-libs.min.css': ['css/*.min.css', 'src/vendor/ionicons/css/ionicons.min.css', 'src/vendor/components-font-awesome/css/font-awesome.min.css', 'src/vendor/bootstrap/dist/css/bootstrap.min.css']
-				},
+				}
 			}
 		},
 		uglify: {

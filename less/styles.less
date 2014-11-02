@@ -1,426 +1,499 @@
-/**
- * Color constants.
- */
-@bootstrap-default: #777777;
-@bootstrap-default-dark: #333333;
-@bootstrap-default-hover: #555555;
-@comments-border: #E5E5E5;
-@container-background: #EDEDED;
-@nav-hover: #CCCCCC;
-@secondary-menu: #DDDDDD;
-@tracker-black: #000000;
-@tracker-blue: #21579D;
-@tracker-grey-dark: #3F424B;
-@tracker-grey-light: #C3C2B8;
-@tracker-green: #4C921C;
-@tracker-orange: #CB8E02;
-@tracker-red: #CB1F26;
-@tracker-white: #FFFFFF;
-@ticket-unassigned: #E0E0E0;
-
-/**
- * Layout constants.
- */
-@ticket-border-radius: .3em;
-@modal-md-max-width: 450px;
+@import "constants";
 
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .tracker-red {
-	color: @tracker-red;
+  color: @tracker-red;
 }
 
 /**
  * FontAwesome overrides.
  */
 .fa {
-	cursor: pointer;
-	&-times {
-		.tracker-red;
-	}
-	&-edit {
-		color: @tracker-orange;
-	}
-	&-check {
-		color: @tracker-green;
-	}
+  cursor: pointer;
+  &-times {
+    .tracker-red;
+  }
+  &-edit {
+    color: @tracker-orange;
+  }
+  &-check {
+    color: @tracker-green;
+  }
 }
 
 /**
  * Main body.
  */
 body {
-	-webkit-font-smoothing: antialiased;
-	background-image: url('../img/bg.png');
-	font-family: "Roboto", "Helvetica", "Verdana", sans-serif;
-	a {
-		cursor: pointer;
-		&:hover {
-			text-decoration: none;
-		}
-	}
-	div[ng-repeat*='tickets.done'] .ticket .ticket-title {text-decoration: line-through; color: black;}
-	.login-form {
-		padding-top: 10%;
-	}
-	.comment-author {
-//		color: @tracker-grey-dark;
-	}
-	.bug-invert { color: @tracker-red; }
-	.task-invert { color: @tracker-blue; }
-	.toggleable { font-weight: 300; }
+  -webkit-font-smoothing: antialiased;
+  background-image: url('../img/bg.png');
+  font-family: "Roboto", "Helvetica", "Verdana", sans-serif;
+  a {
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  div[ng-repeat*='tickets.done'] .ticket .ticket-title {
+    text-decoration: line-through;
+    color: black;
+  }
+  .login-form {
+    padding-top: 10%;
+  }
+  .comment-author {
+    //		color: @tracker-grey-dark;
+  }
+  .bug-invert {
+    color: @tracker-red;
+  }
+  .task-invert {
+    color: @tracker-blue;
+  }
+  .toggleable {
+    font-weight: 300;
+  }
 }
 
 /**
  * Chart Secondary Menu CSS
  */
 .menu-hover {
-	background-color: @nav-hover;
-			border-radius: .2em;
-			cursor: pointer;
-}
-.secondary-menu {
-	border-right: 1px solid @secondary-menu; margin-bottom: 10px;
-	> ul > li {
-		vertical-align: middle;
-		margin: 4px 0 4px 3px;
-		padding: 2px;
-		&.header {
-			font-size: 18px;
-			font-weight: 500;
-			margin-top: 0;
-		}
-		&:first-child {
-			margin-top: 0;
-		}
-		> i.chart-icon {
-			margin: 0 5px;
-			font-size: 18px;
-			&.fa {
-				font-size: 14px;
-			}
-		}
-		&.active,
-		&.toggleable:hover {
-			.menu-hover;
-		}
-	}
+  background-color: @nav-hover;
+  border-radius: .2em;
+  cursor: pointer;
 }
 
-form[name*='Form'] .fa-warning, .login-form .fa-warning, p[ng-repeat*='comment'] i.fa {margin-right: 7px;}
-form[name*='Form'] p[ng-show*='$error'], p[ng-repeat*='error'] {color: @tracker-red;}
-p[ng-show*='error'] {margin:10px;}
-p[ng-show*='loginForm.password'] {margin:0px;}
+.secondary-menu {
+  border-right: 1px solid @secondary-menu;
+  margin-bottom: 10px;
+  > ul > li {
+    vertical-align: middle;
+    margin: 4px 0 4px 3px;
+    padding: 2px;
+    &.header {
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 0;
+    }
+    &:first-child {
+      margin-top: 0;
+    }
+    > i.chart-icon {
+      margin: 0 5px;
+      font-size: 18px;
+      &.fa {
+        font-size: 14px;
+      }
+    }
+    &.active,
+    &.toggleable:hover {
+      .menu-hover;
+    }
+  }
+}
+
+form[name*='Form'] .fa-warning, .login-form .fa-warning, p[ng-repeat*='comment'] i.fa {
+  margin-right: 7px;
+}
+
+form[name*='Form'] p[ng-show*='$error'], p[ng-repeat*='error'] {
+  color: @tracker-red;
+}
+
+p[ng-show*='error'] {
+  margin: 10px;
+}
+
+p[ng-show*='loginForm.password'] {
+  margin: 0px;
+}
 
 /**
  * Ticket CSS.
  */
-.ticket-display { display: inline-block; margin: 3px; line-height: normal; font-size: 80%; font-weight: 500; &:hover{cursor: pointer;}}
+.ticket-display {
+  display: inline-block;
+  margin: 3px;
+  line-height: normal;
+  font-size: 80%;
+  font-weight: 500;
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 .ticket {
-	.ticket-display;
-	margin: 6px 6px 0 6px;
-	i {
-		padding-left: 5px;
-		&.ion-arrow-up-c {
-			color: @tracker-red;
-		}
-		&.ion-arrow-down-c {
-			color: @tracker-green;
-		}
-	}
+  .ticket-display;
+  margin: 6px 6px 0 6px;
+  i {
+    padding-left: 5px;
+    &.ion-arrow-up-c {
+      color: @tracker-red;
+    }
+    &.ion-arrow-down-c {
+      color: @tracker-green;
+    }
+  }
 }
-.ticket-bug { background-color: @tracker-red; }
-.ticket-bug-inverted { color: @tracker-red; }
-.ticket-task { background-color: @tracker-blue; }
-.ticket-task-inverted { color: @tracker-blue; }
-.ticket-not-owned {background-color: @tracker-grey-dark;}
+
+.ticket-bug {
+  background-color: @tracker-red;
+}
+
+.ticket-bug-inverted {
+  color: @tracker-red;
+}
+
+.ticket-task {
+  background-color: @tracker-blue;
+}
+
+.ticket-task-inverted {
+  color: @tracker-blue;
+}
+
+.ticket-not-owned {
+  background-color: @tracker-grey-dark;
+}
 
 .ticket-code {
-	color: white;
-	border-radius: @ticket-border-radius;
-	padding: 0px 0 0px 6px;
-	display: inline-flex;
-	align-items: center;
-	&.ticket-unassigned {
-		background-color: @ticket-unassigned; color: @tracker-grey-dark;}
-	}
+  color: white;
+  border-radius: @ticket-border-radius;
+  padding: 0px 0 0px 6px;
+  display: inline-flex;
+  align-items: center;
+  &.ticket-unassigned {
+    background-color: @ticket-unassigned;
+    color: @tracker-grey-dark;
+  }
+}
 
-.ticket-title {position: relative; left: 1px; background-color: @tracker-grey-light ; color: black; padding: 3px 6px; border-radius: 0 @ticket-border-radius @ticket-border-radius 0; margin-left: 6px;}
+.ticket-title {
+  position: relative;
+  left: 1px;
+  background-color: @tracker-grey-light;
+  color: black;
+  padding: 3px 6px;
+  border-radius: 0 @ticket-border-radius @ticket-border-radius 0;
+  margin-left: 6px;
+}
 
 /**
  * Log entry CSS.
  */
 .log {
-	color: @tracker-grey-dark;
-	vertical-align: middle;
-	align-items: center;
-	display: inline-flex;
-	padding-right: 6px;
-	line-height: normal;
-	font-size: 12px;
-	font-weight: 400;
-	i.fa {
-		margin-left: 5px;
-		&:hover {
-			cursor: default;
-		}
-	}
-	.log-user { padding: 3px 6px; margin: 0 0px 0 5px; font-weight: 500; }
-	.log-target { padding: 3px 6px; margin: 0 5px 0 0px;}
-	.log-comment { margin-left: 6px; padding-right: 6px; }
-	.log-amount {font-size: 100%; margin-left: 5px;}
-	.log-timestamp {.log-amount; font-weight: bold;}
+  color: @tracker-grey-dark;
+  vertical-align: middle;
+  align-items: center;
+  display: inline-flex;
+  padding-right: 6px;
+  line-height: normal;
+  font-size: 12px;
+  font-weight: 400;
+  i.fa {
+    margin-left: 5px;
+    &:hover {
+      cursor: default;
+    }
+  }
+  .log-user {
+    padding: 3px 6px;
+    margin: 0 0px 0 5px;
+    font-weight: 500;
+  }
+  .log-target {
+    padding: 3px 6px;
+    margin: 0 5px 0 0px;
+  }
+  .log-comment {
+    margin-left: 6px;
+    padding-right: 6px;
+  }
+  .log-amount {
+    font-size: 100%;
+    margin-left: 5px;
+  }
+  .log-timestamp {
+    .log-amount;
+    font-weight: bold;
+  }
 }
 
 nav.navbar {
-	border-color: @secondary-menu;
-	min-height: 40px;
-	margin-bottom: 0;
-	.container-fluid {
-		background-color: @container-background;
-	}
-	li {
-		> a.fa-bars:hover, &.open > a.fa-bars:hover, &.open > a.fa-bars {
-			background-color: @nav-hover;
-		}
-		ul.dropdown-menu {
-			font-size: 90%;
-		}
-	}
-	a.fa-bars {
-		background-color: @nav-hover;
-		margin: 0 3px;
-	}
-	ul.nav > li {
-		margin: 0 3px;
-		.icon {
-			padding-right: 5px;
-		}
-		> a {
-			padding: 10px;
-			i.fa {
-				margin-right: 5px;
-			}
-		}
-	}
-	ul.navbar-nav {
-		> li.toggleable:hover,
-		> li.toggleable.active > a,
-		> nav.navbar li.toggleable.active > a:hover {
-			background-color: @nav-hover;
-		}
-	}
-	ul.dropdown-menu .fa-check {
-		color: @tracker-grey-dark;
-	}
+  border-color: @secondary-menu;
+  min-height: 40px;
+  margin-bottom: 0;
+  .container-fluid {
+    background-color: @container-background;
+  }
+  li {
+    > a.fa-bars:hover, &.open > a.fa-bars:hover, &.open > a.fa-bars {
+      background-color: @nav-hover;
+    }
+    ul.dropdown-menu {
+      font-size: 90%;
+    }
+  }
+  a.fa-bars {
+    background-color: @nav-hover;
+    margin: 0 3px;
+  }
+  ul.nav > li {
+    margin: 0 3px;
+    .icon {
+      padding-right: 5px;
+    }
+    > a {
+      padding: 10px;
+      i.fa {
+        margin-right: 5px;
+      }
+    }
+  }
+  ul.navbar-nav {
+    > li.toggleable:hover,
+    > li.toggleable.active > a,
+    > nav.navbar li.toggleable.active > a:hover {
+      background-color: @nav-hover;
+    }
+  }
+  ul.dropdown-menu .fa-check {
+    color: @tracker-grey-dark;
+  }
 }
 
 .panel {
-	&.ng-scope {
-		background-color: transparent;
-		box-shadow: none;
-	}
-	&.panel-dashboard,
-	&.panel-analytics,
-	&.panel-team {
-		padding: 5px;
-		p[ng-repeat*="comment"] {
-			padding-left: 25px;
-		}
-		.team-details {
-			padding-left: 15px;
-		}
-	}
-	&.panel-dashboard {
-		margin-right: 15px;
-		margin-top: 5px;
-		> div.ng-scope {
-			&:first-child {
-				padding-left: 10px;
-			}
-			&:last-child {
-				padding-right: 10px;
-			}
-		}
-		.ticket {
-			margin: 3px;
-		}
-		.dashboard-panel-right {
-			padding-left: 0;
-			padding-right: 0;
-			.panel {
-				margin-bottom: 15px;
-			}
-		}
-	}
-	&.panel-settings {
-		margin-top: 10px;
-		.fa:hover {
-			cursor: pointer;
-		}
-		input[type="text"] {
-			border: 0;
-			background-color: @ticket-unassigned;
-		}
-		ul {
-			&.list-unstyled li:hover {
-				cursor: pointer;
-			}
-			&.nav.ng-scope,
-			.panel-settings .list-projects {
-				padding-left: 15px;
-			}
-		}
-		.list-projects .fa-edit {
-			color: @tracker-orange;
-		}
-	}
-	> .panel-heading {
-		background-color: @container-background;
-		padding: 5px 10px;
-		> span > i[data-toggle*="collapse"] {
-			cursor: pointer;
-			line-height: 1.5;
-		}
-	}
+  &.ng-scope {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  &.panel-dashboard,
+  &.panel-analytics,
+  &.panel-team {
+    padding: 5px;
+    p[ng-repeat*="comment"] {
+      padding-left: 25px;
+    }
+    .team-details {
+      padding-left: 15px;
+    }
+  }
+  &.panel-dashboard {
+    margin-right: 15px;
+    margin-top: 5px;
+    > div.ng-scope {
+      &:first-child {
+        padding-left: 10px;
+      }
+      &:last-child {
+        padding-right: 10px;
+      }
+    }
+    .ticket {
+      margin: 3px;
+    }
+    .dashboard-panel-right {
+      padding-left: 0;
+      padding-right: 0;
+      .panel {
+        margin-bottom: 15px;
+      }
+    }
+  }
+  &.panel-settings {
+    margin-top: 10px;
+    .fa:hover {
+      cursor: pointer;
+    }
+    input[type="text"] {
+      border: 0;
+      background-color: @ticket-unassigned;
+    }
+    ul {
+      &.list-unstyled li:hover {
+        cursor: pointer;
+      }
+      &.nav.ng-scope,
+      .panel-settings .list-projects {
+        padding-left: 15px;
+      }
+    }
+    .list-projects .fa-edit {
+      color: @tracker-orange;
+    }
+  }
+  > .panel-heading {
+    background-color: @container-background;
+    padding: 5px 10px;
+    > span > i[data-toggle*="collapse"] {
+      cursor: pointer;
+      line-height: 1.5;
+    }
+  }
 }
 
 .panel-body-dashboard {
-	padding: 5px;
-	> div[data-highcharts-chart] {
-		height: 200px;
-	}
-	h1 {
-		font-weight: 300;
-		font-size:16px;
-		text-align: center;
-		margin: 10px 0 10px 0;
-	}
-	.dashboard-ticket {
-		font-size:12px;
-		margin: 0 5px;
-		span {
-			margin-right: 10px;
-		}
-	}
+  padding: 5px;
+  > div[data-highcharts-chart] {
+    height: 200px;
+  }
+  h1 {
+    font-weight: 300;
+    font-size: 16px;
+    text-align: center;
+    margin: 10px 0 10px 0;
+  }
+  .dashboard-ticket {
+    font-size: 12px;
+    margin: 0 5px;
+    span {
+      margin-right: 10px;
+    }
+  }
 }
+
 .panel-bugs > .row > div,
-.panel-tickets > .row > div {padding-right: 0;}
+.panel-tickets > .row > div {
+  padding-right: 0;
+}
 
 .modal-dialog {
-	font-weight: 300;
-	form, .modal-body .form-group:last-child {
-		margin-bottom: 0;
-	}
-	&.modal-md {
-		max-width: @modal-md-max-width;
-		.form-group.modal-footer {
-			padding-bottom: 0;
-			padding-right: 0;
-		}
-		.modal-footer .form-group {
-			padding-right: 0;
-			margin-bottom: 0;
-		}
-	}
-	.modal-header {
-		padding: 10px 15px;
-	}
-	.modal-body {
-		.tab-content {
-			margin-top: 15px;
-		}
-	}
-	.modal-footer {
-		margin-top: 0;
-	}
+  font-weight: 300;
+  form, .modal-body .form-group:last-child {
+    margin-bottom: 0;
+  }
+  &.modal-md {
+    max-width: @modal-md-max-width;
+    .form-group.modal-footer {
+      padding-bottom: 0;
+      padding-right: 0;
+    }
+    .modal-footer .form-group {
+      padding-right: 0;
+      margin-bottom: 0;
+    }
+  }
+  .modal-header {
+    padding: 10px 15px;
+  }
+  .modal-body {
+    .tab-content {
+      margin-top: 15px;
+    }
+  }
+  .modal-footer {
+    margin-top: 0;
+  }
 }
 
 .modal-comments {
-	border-bottom: 1px solid @comments-border;
-	padding-top: 0;
-	padding-bottom: 10px;
-	div {
-		padding: 0;
-		font-weight: normal;
-		&.comments-empty {
-			padding-bottom: 5px;
-		}
-	}
-	.fa-edit {
-		margin-left: 5px;
-	}
-	em {
-		padding: 0 5px;
-		font-size: 12px;
-		span[ng-show*="isEdited"] {
-			font-size: 10px;
-		}
-	}
-	p, strong, i.fa {
-		font-size: 12px;
-	}
+  border-bottom: 1px solid @comments-border;
+  padding-top: 0;
+  padding-bottom: 10px;
+  div {
+    padding: 0;
+    font-weight: normal;
+    &.comments-empty {
+      padding-bottom: 5px;
+    }
+  }
+  .fa-edit {
+    margin-left: 5px;
+  }
+  em {
+    padding: 0 5px;
+    font-size: 12px;
+    span[ng-show*="isEdited"] {
+      font-size: 10px;
+    }
+  }
+  p, strong, i.fa {
+    font-size: 12px;
+  }
 }
 
 .modal-comments-post {
-	padding: 15px 0 0 0;
-	margin: 0;
-	.form-group:first-child div {
-		padding: 0 15px 0 0;
-	}
+  padding: 15px 0 0 0;
+  margin: 0;
+  .form-group:first-child div {
+    padding: 0 15px 0 0;
+  }
 }
 
 form .form-group textarea.form-control {
-	min-height: 200px;
+  min-height: 200px;
 }
 
-form[name*='commentForm'].form-horizontal .modal-comments-post .form-group{
-	margin-left: 0;
+form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
+  margin-left: 0;
 }
 
 .table {
-	background-color: transparent;
-	> thead > tr > th {
-			margin-bottom: 10px;
-			font-weight: 300;
-			text-align: center;
-			min-width: 20%;
-			border-bottom: 1px solid @secondary-menu;
-			border-left: 1px dashed @secondary-menu;
-			vertical-align: top;
-			&:last-child {
-				border-right: 1px dashed @secondary-menu;
-		}
-	}
-	> tbody > tr > td {
-		border-top: none;
-		padding: 0;
-		border-left: 1px dashed @secondary-menu;
-		vertical-align: top;
-		&[status] {min-height: 50px;}
-		&:last-child {
-			border-right: 1px dashed @secondary-menu;
-		}
-		> div.progress {
-			margin-bottom: 0;
-		}
-		> .ng-scope:last-child > .ticket {margin-bottom: 6px;}
-	}
+  background-color: transparent;
+  > thead > tr > th {
+    margin-bottom: 10px;
+    font-weight: 300;
+    text-align: center;
+    border-bottom: 1px solid @secondary-menu;
+    border-left: 1px dashed @secondary-menu;
+    vertical-align: top;
+    &:last-child {
+      border-right: 1px dashed @secondary-menu;
+    }
+  }
+  &.table-tickets > thead > tr > th {
+    min-width: 20%;
+  }
+  > tbody > tr {
+    > td {
+      border-top: none;
+      padding: 0;
+      border-left: 1px dashed @secondary-menu;
+      vertical-align: top;
+      &[status] {
+        min-height: 50px;
+      }
+      &:last-child {
+        border-right: 1px dashed @secondary-menu;
+      }
+      > div.progress {
+        margin-bottom: 0;
+      }
+      > .ng-scope:last-child > .ticket {
+        margin-bottom: 6px;
+      }
+  }
+    &.log {
+      display: table-row;
+      text-align: center;
+      div {
+        margin: @spacing-small-x;
+        padding: 0;
+      }
+      i.fa {
+        margin-left: 0;
+      }
+      &:hover {
+        background-color: @ticket-unassigned;
+      }
+    }
+  }
 }
 
 .nav.nav-tabs > li {
-	&.active {
-		color: @tracker-grey-dark;
-	}
-	> a {
-		color: @bootstrap-default-dark;
-		padding: 5px 10px;
-	}
-	> a:hover {
-		background-color: @container-background;
-	}
+  &.active {
+    color: @tracker-grey-dark;
+  }
+  > a {
+    color: @bootstrap-default-dark;
+    padding: 5px 10px;
+  }
+  > a:hover {
+    background-color: @container-background;
+  }
 }

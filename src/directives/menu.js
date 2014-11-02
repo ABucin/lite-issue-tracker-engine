@@ -17,7 +17,7 @@ app.directive('toggleable', ['$rootScope', function ($rootScope) {
 				element.toggleClass('active', false);
 			}
 
-			element.on('click', function (event) {
+			element.on('click', function () {
 				element.parent().children().toggleClass('active', false);
 				element.toggleClass('active', true);
 			});

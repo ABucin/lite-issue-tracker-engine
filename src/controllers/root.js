@@ -100,7 +100,7 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			confirmedPassword: null
 		};
 
-		/*
+		/**
 		 * Login variables.
 		 */
 		$rootScope.form = {

@@ -12,6 +12,7 @@
 				</li>
 				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-class="toggleActive('users')" ng-click="fetchSettingsData('users')"><i class="chart-icon fa fa-fw fa-users"></i>Users</li>
 				<li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-class="toggleActive('projects')" ng-click="fetchSettingsData('projects')"><i class="chart-icon fa fa-fw fa-bookmark"></i>Projects</li>
+                <li ng-show="getAuthenticatedUser().role === 'admin'" class="toggleable" ng-class="toggleActive('logs')" ng-click="fetchSettingsData('logs')"><i class="chart-icon fa fa-fw fa-file-text"></i>Logs</li>
 			</ul>
 		</div>
 		<div class="col-lg-10 col-md-4 col-sm-9 col-xs-7">

@@ -2,7 +2,7 @@ app.directive('ticket', ['$rootScope',
 	function ($rootScope) {
 		return {
 			restrict: 'E',
-			link: function (scope, element, attr) {
+			link: function (scope, element) {
 				var setMetadata = function () {
 					if (scope.ticket.owner === undefined || !scope.ticket.owner.length) {
 						scope.ownStatus = "ticket-unassigned";
@@ -74,7 +74,7 @@ app.directive('ticket', ['$rootScope',
 					}
 				});
 
-				element.on('click', function (event) {
+				element.on('click', function () {
 					scope.isEditing = true;
 					scope.fetchComments(scope.ticket.key);
 					// display the clicked ticket data in the modal
@@ -92,15 +92,15 @@ app.directive('ticket', ['$rootScope',
 				});
 			},
 			replace: true,
-			template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>TC-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i ng-if='priorityIconClass' class='ion-arrow-{{priorityIconClass}}-c'></i><i class='fa fa-times' ng-show='tickets.isDeleting && ticket.owner === getAuthenticatedUser().username'></i></span></div>"
+			template: "<div id='{{ticket.key}}' draggable class='ticket ticket-code ticket-{{ticket.type}} {{ownStatus}}'>ITR-{{ticket.code}}<span class='ticket-title' data-toggle='modal' data-target='#ticket-preview-modal'>{{ticket.title}}<i ng-if='priorityIconClass' class='ion-arrow-{{priorityIconClass}}-c'></i><i class='fa fa-times' ng-show='tickets.isDeleting && ticket.owner === getAuthenticatedUser().username'></i></span></div>"
 		};
 }]);
 
 app.directive('ticketContainer', ['$rootScope',
-	function ($rootScope) {
+	function () {
 		return {
 			restrict: 'A',
-			link: function (scope, element, attr) {
+			link: function (scope, element) {
 				element[0].addEventListener('drop', function (e) {
 					scope.copiedTicket.status = element.attr("status");
 					angular.copy(scope.copiedTicket, scope.updatedTicket);

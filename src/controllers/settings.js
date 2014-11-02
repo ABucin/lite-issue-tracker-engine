@@ -1,5 +1,5 @@
-app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'SettingsService', 'UserService', 'ProjectsService',
-function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserService, ProjectsService) {
+app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'SettingsService', 'UserService', 'ProjectsService', 'LogsService',
+function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserService, ProjectsService, LogsService) {
 
 		/**
 		 * General page configuration.
@@ -52,6 +52,12 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 		$scope.loadSettings = function () {
 			SettingsService.loadSettings();
 		};
+
+        $scope.loadLogData = function() {
+            LogsService.fetchLogData($rootScope.dashboard.logEntries);
+        };
+
+        $scope.loadLogData();
 
 		/**
 		 * Sets the given property with the given value for the current user.
