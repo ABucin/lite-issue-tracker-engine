@@ -70,7 +70,7 @@ body {
 
 .secondary-menu {
   border-right: 1px solid @secondary-menu;
-  margin-bottom: 10px;
+  margin-bottom: @spacing-medium;
   > ul > li {
     vertical-align: middle;
     margin: 4px 0 4px 3px;
@@ -84,7 +84,7 @@ body {
       margin-top: 0;
     }
     > i.chart-icon {
-      margin: 0 5px;
+      margin: 0 @spacing-small;
       font-size: 18px;
       &.fa {
         font-size: 14px;
@@ -106,7 +106,7 @@ form[name*='Form'] p[ng-show*='$error'], p[ng-repeat*='error'] {
 }
 
 p[ng-show*='error'] {
-  margin: 10px;
+  margin: @spacing-medium;
 }
 
 p[ng-show*='loginForm.password'] {
@@ -131,7 +131,7 @@ p[ng-show*='loginForm.password'] {
   .ticket-display;
   margin: 6px 6px 0 6px;
   i {
-    padding-left: 5px;
+    padding-left: @spacing-small;
     &.ion-arrow-up-c {
       color: @tracker-red;
     }
@@ -193,22 +193,22 @@ p[ng-show*='loginForm.password'] {
   display: inline-flex;
   padding-right: 6px;
   line-height: normal;
-  font-size: 12px;
+  font-size: @font-size-small;
   font-weight: 400;
   i.fa {
-    margin-left: 5px;
+    margin-left: @spacing-small;
     &:hover {
       cursor: default;
     }
   }
   .log-user {
     padding: 3px 6px;
-    margin: 0 0px 0 5px;
+    margin: 0 0px 0 @spacing-small;
     font-weight: 500;
   }
   .log-target {
     padding: 3px 6px;
-    margin: 0 5px 0 0px;
+    margin: 0 @spacing-small 0 0px;
   }
   .log-comment {
     margin-left: 6px;
@@ -216,7 +216,7 @@ p[ng-show*='loginForm.password'] {
   }
   .log-amount {
     font-size: 100%;
-    margin-left: 5px;
+    margin-left: @spacing-small;
   }
   .log-timestamp {
     .log-amount;
@@ -246,12 +246,12 @@ nav.navbar {
   ul.nav > li {
     margin: 0 3px;
     .icon {
-      padding-right: 5px;
+      padding-right: @spacing-small;
     }
     > a {
-      padding: 10px;
+      padding: @spacing-medium;
       i.fa {
-        margin-right: 5px;
+        margin-right: @spacing-small;
       }
     }
   }
@@ -275,23 +275,23 @@ nav.navbar {
   &.panel-dashboard,
   &.panel-analytics,
   &.panel-team {
-    padding: 5px;
+    padding: @spacing-small;
     p[ng-repeat*="comment"] {
       padding-left: 25px;
     }
     .team-details {
-      padding-left: 15px;
+      padding-left: @spacing-large;
     }
   }
   &.panel-dashboard {
-    margin-right: 15px;
-    margin-top: 5px;
+    margin-right: @spacing-large;
+    margin-top: @spacing-small;
     > div.ng-scope {
       &:first-child {
-        padding-left: 10px;
+        padding-left: @spacing-medium;
       }
       &:last-child {
-        padding-right: 10px;
+        padding-right: @spacing-medium;
       }
     }
     .ticket {
@@ -301,12 +301,12 @@ nav.navbar {
       padding-left: 0;
       padding-right: 0;
       .panel {
-        margin-bottom: 15px;
+        margin-bottom: @spacing-large;
       }
     }
   }
   &.panel-settings {
-    margin-top: 10px;
+    margin-top: @spacing-medium;
     .fa:hover {
       cursor: pointer;
     }
@@ -320,7 +320,7 @@ nav.navbar {
       }
       &.nav.ng-scope,
       .panel-settings .list-projects {
-        padding-left: 15px;
+        padding-left: @spacing-large;
       }
     }
     .list-projects .fa-edit {
@@ -329,7 +329,7 @@ nav.navbar {
   }
   > .panel-heading {
     background-color: @container-background;
-    padding: 5px 10px;
+    padding: @spacing-small @spacing-medium;
     > span > i[data-toggle*="collapse"] {
       cursor: pointer;
       line-height: 1.5;
@@ -338,21 +338,21 @@ nav.navbar {
 }
 
 .panel-body-dashboard {
-  padding: 5px;
+  padding: @spacing-small;
   > div[data-highcharts-chart] {
     height: 200px;
   }
   h1 {
     font-weight: 300;
-    font-size: 16px;
+    font-size: @font-size-large;
     text-align: center;
-    margin: 10px 0 10px 0;
+    margin: @spacing-medium 0 @spacing-medium 0;
   }
   .dashboard-ticket {
-    font-size: 12px;
-    margin: 0 5px;
+    font-size: @font-size-small;
+    margin: 0 @spacing-small;
     span {
-      margin-right: 10px;
+      margin-right: @spacing-medium;
     }
   }
 }
@@ -379,11 +379,11 @@ nav.navbar {
     }
   }
   .modal-header {
-    padding: 10px 15px;
+    padding: @spacing-medium @spacing-large;
   }
   .modal-body {
     .tab-content {
-      margin-top: 15px;
+      margin-top: @spacing-large;
     }
   }
   .modal-footer {
@@ -394,34 +394,34 @@ nav.navbar {
 .modal-comments {
   border-bottom: 1px solid @comments-border;
   padding-top: 0;
-  padding-bottom: 10px;
+  padding-bottom: @spacing-medium;
   div {
     padding: 0;
     font-weight: normal;
     &.comments-empty {
-      padding-bottom: 5px;
+      padding-bottom: @spacing-small;
     }
   }
   .fa-edit {
-    margin-left: 5px;
+    margin-left: @spacing-small;
   }
   em {
-    padding: 0 5px;
-    font-size: 12px;
+    padding: 0 @spacing-small;
+    font-size: @font-size-small;
     span[ng-show*="isEdited"] {
-      font-size: 10px;
+      font-size: @spacing-medium;
     }
   }
   p, strong, i.fa {
-    font-size: 12px;
+    font-size: @font-size-small;
   }
 }
 
 .modal-comments-post {
-  padding: 15px 0 0 0;
+  padding: @spacing-large 0 0 0;
   margin: 0;
   .form-group:first-child div {
-    padding: 0 15px 0 0;
+    padding: 0 @spacing-large 0 0;
   }
 }
 
@@ -436,7 +436,7 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
 .table {
   background-color: transparent;
   > thead > tr > th {
-    margin-bottom: 10px;
+    margin-bottom: @spacing-medium;
     font-weight: 300;
     text-align: center;
     border-bottom: 1px solid @secondary-menu;
@@ -477,6 +477,9 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
       }
       i.fa {
         margin-left: 0;
+        &-times {
+          color: inherit;
+        }
       }
       &:hover {
         background-color: @ticket-unassigned;
@@ -491,7 +494,7 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
   }
   > a {
     color: @bootstrap-default-dark;
-    padding: 5px 10px;
+    padding: @spacing-small @spacing-medium;
   }
   > a:hover {
     background-color: @container-background;

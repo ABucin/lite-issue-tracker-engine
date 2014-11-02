@@ -382,15 +382,15 @@ exports.deleteTicket = function (key, res) {
 		if (err) {
 			res.status(500).send(err);
 		} else {
-			_.each(users, function (user, i, list) {
-				_.each(user.tickets, function (ticket, ix, innerList) {
-					if (ticket.key == key) {
+			_.each(users, function (user) {
+				_.each(user.tickets, function (ticket, ix) {
+					if (ticket !== undefined && ticket.key == key) {
 						user.tickets.splice(ix, 1);
 					}
 				});
 
-				_.each(user.comments, function (comment, ix, innerList) {
-					if (comment.ticket == key) {
+				_.each(user.comments, function (comment, ix) {
+					if (comment !== undefined && comment.ticket == key) {
 						user.comments.splice(ix, 1);
 					}
 				});
