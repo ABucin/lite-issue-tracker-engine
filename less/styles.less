@@ -45,9 +45,6 @@ body {
   .login-form {
     padding-top: 10%;
   }
-  .comment-author {
-    //		color: @tracker-grey-dark;
-  }
   .bug-invert {
     color: @tracker-red;
   }
@@ -55,7 +52,7 @@ body {
     color: @tracker-blue;
   }
   .toggleable {
-    font-weight: 300;
+    font-weight: @font-weight-light;
   }
 }
 
@@ -73,11 +70,11 @@ body {
   margin-bottom: @spacing-medium;
   > ul > li {
     vertical-align: middle;
-    margin: 4px 0 4px 3px;
+    margin: 4px 0 4px @spacing-small-x;
     padding: 2px;
     &.header {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: @font-size-large-x;
+      font-weight: @font-weight-heavy;
       margin-top: 0;
     }
     &:first-child {
@@ -85,9 +82,9 @@ body {
     }
     > i.chart-icon {
       margin: 0 @spacing-small;
-      font-size: 18px;
+      font-size: @font-size-large-x;
       &.fa {
-        font-size: 14px;
+        font-size: @font-size-medium;
       }
     }
     &.active,
@@ -110,7 +107,7 @@ p[ng-show*='error'] {
 }
 
 p[ng-show*='loginForm.password'] {
-  margin: 0px;
+  margin: 0;
 }
 
 /**
@@ -118,10 +115,10 @@ p[ng-show*='loginForm.password'] {
  */
 .ticket-display {
   display: inline-block;
-  margin: 3px;
+  margin: @spacing-small-x;
   line-height: normal;
-  font-size: 80%;
-  font-weight: 500;
+  font-size: 70%;
+  font-weight: @font-weight-heavy;
   &:hover {
     cursor: pointer;
   }
@@ -129,7 +126,7 @@ p[ng-show*='loginForm.password'] {
 
 .ticket {
   .ticket-display;
-  margin: 6px 6px 0 6px;
+  margin: @spacing-small @spacing-small 0 @spacing-small;
   i {
     padding-left: @spacing-small;
     &.ion-arrow-up-c {
@@ -164,7 +161,7 @@ p[ng-show*='loginForm.password'] {
 .ticket-code {
   color: white;
   border-radius: @ticket-border-radius;
-  padding: 0px 0 0px 6px;
+  padding: 0 0 0 @spacing-small;
   display: inline-flex;
   align-items: center;
   &.ticket-unassigned {
@@ -178,9 +175,9 @@ p[ng-show*='loginForm.password'] {
   left: 1px;
   background-color: @tracker-grey-light;
   color: black;
-  padding: 3px 6px;
+  padding: @spacing-small-x @spacing-small;
   border-radius: 0 @ticket-border-radius @ticket-border-radius 0;
-  margin-left: 6px;
+  margin-left: @spacing-small;
 }
 
 /**
@@ -191,10 +188,10 @@ p[ng-show*='loginForm.password'] {
   vertical-align: middle;
   align-items: center;
   display: inline-flex;
-  padding-right: 6px;
+  padding-right: @spacing-small;
   line-height: normal;
   font-size: @font-size-small;
-  font-weight: 400;
+  font-weight: @font-weight-normal;
   i.fa {
     margin-left: @spacing-small;
     &:hover {
@@ -202,17 +199,20 @@ p[ng-show*='loginForm.password'] {
     }
   }
   .log-user {
-    padding: 3px 6px;
-    margin: 0 0px 0 @spacing-small;
-    font-weight: 500;
+    padding: @spacing-small-x @spacing-small;
+    margin: 0 0 0 @spacing-small;
+    font-weight: @font-weight-heavy;
   }
   .log-target {
-    padding: 3px 6px;
-    margin: 0 @spacing-small 0 0px;
+    padding: @spacing-small-x @spacing-small;
+    margin: 0 @spacing-small 0 0;
   }
   .log-comment {
-    margin-left: 6px;
-    padding-right: 6px;
+    margin-left: @spacing-small;
+    padding-right: @spacing-small;
+  }
+  .log-comment-narrow {
+    width: 50%;
   }
   .log-amount {
     font-size: 100%;
@@ -241,10 +241,10 @@ nav.navbar {
   }
   a.fa-bars {
     background-color: @nav-hover;
-    margin: 0 3px;
+    margin: 0 @spacing-small-x;
   }
   ul.nav > li {
-    margin: 0 3px;
+    margin: 0 @spacing-small-x;
     .icon {
       padding-right: @spacing-small;
     }
@@ -295,7 +295,7 @@ nav.navbar {
       }
     }
     .ticket {
-      margin: 3px;
+      margin: @spacing-small-x;
     }
     .dashboard-panel-right {
       padding-left: 0;
@@ -343,7 +343,7 @@ nav.navbar {
     height: 200px;
   }
   h1 {
-    font-weight: 300;
+    font-weight: @font-weight-light;
     font-size: @font-size-large;
     text-align: center;
     margin: @spacing-medium 0 @spacing-medium 0;
@@ -363,7 +363,7 @@ nav.navbar {
 }
 
 .modal-dialog {
-  font-weight: 300;
+  font-weight: @font-weight-light;
   form, .modal-body .form-group:last-child {
     margin-bottom: 0;
   }
@@ -437,7 +437,7 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
   background-color: transparent;
   > thead > tr > th {
     margin-bottom: @spacing-medium;
-    font-weight: 300;
+    font-weight: @font-weight-light;
     text-align: center;
     border-bottom: 1px solid @secondary-menu;
     border-left: 1px dashed @secondary-menu;
@@ -465,9 +465,9 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
         margin-bottom: 0;
       }
       > .ng-scope:last-child > .ticket {
-        margin-bottom: 6px;
+        margin-bottom: @spacing-small;
       }
-  }
+    }
     &.log {
       display: table-row;
       text-align: center;
