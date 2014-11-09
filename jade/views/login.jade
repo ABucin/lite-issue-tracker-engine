@@ -1,0 +1,41 @@
+.row.login-form
+    .col-md-5
+    .col-md-2
+        .panel.panel-default
+            .panel-heading.text-center Login
+            .panel-body
+                form.form-horizontal(role="form" name="loginForm" ng-submit="login(loginForm.$valid)" novalidate)
+                    .form-group(ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine && submitted }")
+                        .col-md-12
+                            input(type="text" name="username" class="form-control" placeholder="Username" ng-model="form.login.username" ng-minlength="2" ng-maxlength="12" ng-required="true")
+                            p(ng-show="loginForm.username.$error.minlength && submitted")
+                                i.fa.fa-warning
+                                | Username must have at least 2 characters.
+                            p(ng-show="loginForm.username.$error.maxlength && submitted")
+                                i.fa.fa-warning
+                                | Username must have at most 12 characters.
+                    .form-group(ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine && submitted }")
+                        .col-md-12
+                            input(type="password" name="password" class="form-control" placeholder="Password" ng-model="form.login.password" ng-minlength="6" ng-maxlength="12" ng-required="true")
+                            p(ng-show="loginForm.password.$error.minlength && submitted")
+                                i.fa.fa-warning
+                                | Password must have at least 6 characters.
+                            p(ng-show="loginForm.password.$error.maxlength && submitted")
+                                i.fa.fa-warning
+                                | Password must have at most 12 characters.
+                    .form-group
+                        .col-md-12
+                            p(ng-repeat="error in general.errors")
+                                i.fa.fa-warning
+                                | {{error.message}}
+                            p(ng-show="loginForm.password.$error.required && submitted")
+                                i.fa.fa-warning
+                                | Username and password must be provided.
+                    .form-group
+                        .col-md-12
+                            button.btn.btn-default.form-control(type="submit") Sign in
+                    .form-group
+                        .col-md-12
+                            button.btn.btn-default.form-control(type="button" ng-click="modal.registration('show')") Register
+div(ng-include='templateRegister.url')
+div(ng-include='templateRegisterSuccess.url')

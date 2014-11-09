@@ -5,7 +5,7 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		$scope.unassignedUsers = [];
 
 		$scope.modalTemplates = [{
-			url: 'partials/modals/team/user_assign.html'
+			url: 'views/modals/team/user_assign.html'
 			}];
 
 		$scope.templateUserAssignModal = $scope.modalTemplates[0];
@@ -32,7 +32,7 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		 */
 		$scope.selectTeamMember = function (userId) {
 			UserService.getUser(userId, $scope.selectedTeamMember);
-		}
+		};
 
 		/**
 		 * Retrieves the users that are unassigned to any project.
@@ -40,7 +40,7 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		$scope.getUnassignedUsers = function () {
 			$scope.unassignedUsers = [];
 			UserService.getUnassignedUsers($scope.unassignedUsers);
-		}
+		};
 
 		/**
 		 * Dismissses the modal responsible for user assignment to projects.
@@ -49,7 +49,7 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 			$rootScope.submitted = false;
 			$rootScope.general.errors = [];
 			$('#user-assignment-modal').modal('hide');
-		}
+		};
 
 		/**
 		 * Various project functions.
@@ -85,7 +85,7 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 				}
 			}
 			return openTickets;
-		}
+		};
 
 		/**
 		 * Computes effort-estimation ratio for selected user.

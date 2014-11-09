@@ -1,0 +1,33 @@
+nav.navbar.navbar-default(role="navigation" ng-show="isAuthenticated()")
+    .container-fluid
+        .navbar-header.text-center
+            ul.nav.navbar-nav.navbar-left
+                li
+                    a
+                        strong {{getAuthenticatedUser().username | uppercase}}
+            span(ng-include="templates.submenu[0].url")
+            ul.nav.navbar-nav.navbar-left
+                li.toggleable(url="dashboard")
+                    a(ng-click="navigate('dashboard')")
+                        i.fa.fa-home
+                        | Dashboard
+                li.toggleable(url="tickets")
+                    a(ng-click="navigate('tickets')")
+                        i.fa.fa-ticket
+                        | Tickets
+                li.toggleable(url="analytics")
+                    a(ng-click="navigate('analytics')")
+                        i.fa.fa-bar-chart-o
+                        | Analytics
+                li.toggleable(url="team")
+                    a(ng-click="navigate('team')")
+                        i.fa.fa-users
+                        | Team
+                li.toggleable(url="settings")
+                    a(ng-click="navigate('settings')")
+                        i.fa.fa-cog
+                        | Settings
+                li.toggleable(url="logout")
+                    a(ng-click="navigate('logout')")
+                        i.fa.fa-power-off
+                        | Logout

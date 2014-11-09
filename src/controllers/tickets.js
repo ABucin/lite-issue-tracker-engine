@@ -47,13 +47,13 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		};
 
 		$scope.templates = [{
-				url: 'partials/modals/tickets/ticket_create.html'
+				url: 'views/modals/tickets/ticket_create.html'
 			},
 			{
-				url: 'partials/modals/tickets/ticket_edit.html'
+				url: 'views/modals/tickets/ticket_edit.html'
 			},
 			{
-				url: 'partials/modals/tickets/ticket_delete.html'
+				url: 'views/modals/tickets/ticket_delete.html'
 			}];
 
 		$scope.templateCreate = $scope.templates[0];
@@ -85,7 +85,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 					return false;
 				}
 			}
-		}
+		};
 
 		$scope.filterByPriority = function (priority) {
 			var filter = $rootScope.menu.filters.byTicketPriority;
@@ -97,7 +97,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			}
 
 			return false;
-		}
+		};
 
 		$scope.general = {
 			log: {
@@ -132,11 +132,11 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 			if (isValid) {
 				CommentsService.addComment($rootScope.getAuthenticatedUser().key, $scope.updatedTicket.key, $scope.comment, $scope.comments);
 			}
-		}
+		};
 
 		$scope.deleteComment = function (commentKey) {
 			CommentsService.deleteComment($rootScope.getAuthenticatedUser().key, commentKey, $scope.comments, $scope.comment);
-		}
+		};
 
 		$scope.editComment = function (isValid) {
 			$rootScope.submitted = true;
@@ -146,7 +146,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 				$rootScope.general.errors = [];
 				CommentsService.editComment($rootScope.getAuthenticatedUser().key, $rootScope.getAuthenticatedUser().username, $scope.updatedTicket.key, $scope.editedCommentKey, $scope.comments, $scope.comment, $scope.status);
 			}
-		}
+		};
 
 		$scope.fetchComments = function (ticketKey) {
 			CommentsService.fetchComments(ticketKey, $scope.comments);
@@ -209,11 +209,7 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 
 		$scope.showTicketTab = function (tab) {
 			for (var k in $scope.ticketTabs) {
-				if (k === tab) {
-					$scope.ticketTabs[k] = true;
-				} else {
-					$scope.ticketTabs[k] = false;
-				}
+				$scope.ticketTabs[k] = k === tab;
 			}
 		};
 }]);

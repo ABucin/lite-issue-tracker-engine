@@ -43,7 +43,7 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 		 */
 		$scope.fetchSettingsData = function (type) {
 			$scope.subPageName.put(type);
-			$scope.general.template.url = 'partials/snippets/settings/' + type + '.html';
+			$scope.general.template.url = 'views/snippets/settings/' + type + '.html';
 		};
 
 		/**
@@ -94,7 +94,7 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 		 */
 		$scope.updateProject = function () {
 			ProjectsService.updateProject($scope.general.oldProject, $scope.general);
-		}
+		};
 
 		/**
 		 * Caches name of current subpage.

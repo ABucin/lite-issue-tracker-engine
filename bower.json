@@ -1,32 +1,32 @@
 {
-  "name": "issue-tracker",
-  "version": "1.1.0",
-  "homepage": "https://github.com/ABucin/issue-tracker",
-  "authors": [
-    "Andrei Bucin <abucin@gmail.com>"
-  ],
-  "description": "Application which allows project task management.",
-  "moduleType": [
-    "node"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "js/vendor",
-    "test",
-    "tests"
-  ],
-  "devDependencies": {
-    "ionicons": "*",
-    "angular": "*",
-    "angular-route": "*",
-    "angular-cookies": "*",
-    "jquery": "*",
-    "angular-touch": "*",
-    "components-font-awesome": "*",
-    "bootstrap": "*",
-    "highcharts": "*"
-  }
+    "name": "lite-issue-tracker-engine",
+    "version": "1.3.0",
+    "homepage": "https://github.com/ABucin/lite-issue-tracker-engine",
+    "authors": [
+        "Andrei Bucin <abucin@gmail.com>"
+    ],
+    "description": "Application which allows project task management.",
+    "moduleType": [
+        "node"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "js/vendor",
+        "test",
+        "tests"
+    ],
+    "devDependencies": {
+        "ionicons": "*",
+        "angular": "*",
+        "angular-route": "*",
+        "angular-cookies": "*",
+        "jquery": "*",
+        "angular-touch": "*",
+        "components-font-awesome": "*",
+        "bootstrap": "*",
+        "highcharts": "*"
+    }
 }

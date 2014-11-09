@@ -26,7 +26,7 @@ server.use(bodyParser.urlencoded({
 }));
 server.use(bodyParser.json());
 // Set the path to the index.html file.
-server.use(express.static(__dirname + "./../"));
+server.use(express.static(__dirname + "./../dist/"));
 server.use(session({
 	secret: config.secret
 }));
@@ -36,7 +36,7 @@ server.use(config.root, router);
 // Specify port and ip address of server
 server.listen(config.port, config.ip);
 
-console.log('Server started. Listening on port %s ...', config.port);
+console.log('Application server started. Listening on port %s ...', config.port);
 
 // Add default data to database.
 utils.populateDb();

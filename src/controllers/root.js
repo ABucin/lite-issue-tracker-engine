@@ -6,22 +6,22 @@ var app = angular.module('issueTracker', ['ngCookies', 'ngRoute', 'ngTouch']);
 app.config(['$routeProvider',
 function ($routeProvider) {
 		$routeProvider.when('/login', {
-			templateUrl: 'partials/login.html',
+			templateUrl: 'views/login.html',
 			controller: 'RootCtrl'
 		}).when('/dashboard', {
-			templateUrl: 'partials/dashboard.html',
+			templateUrl: 'views/dashboard.html',
 			controller: 'DashboardCtrl'
 		}).when('/tickets', {
-			templateUrl: 'partials/tickets.html',
+			templateUrl: 'views/tickets.html',
 			controller: 'TicketsCtrl'
 		}).when('/analytics', {
-			templateUrl: 'partials/analytics.html',
+			templateUrl: 'views/analytics.html',
 			controller: 'AnalyticsCtrl'
 		}).when('/team', {
-			templateUrl: 'partials/team.html',
+			templateUrl: 'views/team.html',
 			controller: 'TeamCtrl'
 		}).when('/settings', {
-			templateUrl: 'partials/settings.html',
+			templateUrl: 'views/settings.html',
 			controller: 'SettingsCtrl'
 		}).otherwise({
 			redirectTo: '/login',
@@ -125,16 +125,16 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 		$rootScope.users = [];
 
 		/**
-		 * Login and registration page templates.
+		 * Login and registration page views.
 		 */
 		$scope.templates = {
 			modals: [{
-				url: 'partials/modals/register/register.html'
+				url: 'views/modals/register/register.html'
 			}, {
-				url: 'partials/modals/register/register-success.html'
+				url: 'views/modals/register/register-success.html'
 			}],
 			submenu: [{
-				url: 'partials/snippets/menu/submenu.html'
+				url: 'views/snippets/menu/submenu.html'
 		}]
 		};
 
@@ -165,14 +165,14 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 			}
 
 			return "dashboard";
-		}
+		};
 
 		/**
 		 * Retrieves the settings for the current user.
 		 */
 		$rootScope.getSettings = function () {
 			return SettingsService.getSettings();
-		}
+		};
 
 		/**
 		 * Contains modal-related functions.
@@ -183,7 +183,7 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 				$rootScope.general.errors = [];
 				$('#register-modal').modal(toggle);
 			}
-		}
+		};
 
 		/**
 		 * Applies padding to the page body for displaying the menu correctly.
