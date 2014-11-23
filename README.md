@@ -3,6 +3,10 @@ issue-tracker
 
 Repository for the issue tracker application. You can check the latest release notes [here.] (https://github.com/ABucin/lite-issue-tracker-engine/releases)
 
+### Release Notes
+
+The release notes can be found [here](https://github.com/ABucin/lite-issue-tracker-engine/wiki/Release-Notes).
+
 ### Wiki
 
 The wiki can be found [here](https://github.com/ABucin/lite-issue-tracker-engine/wiki).
