@@ -1,6 +1,6 @@
 {
   "name": "lite-issue-tracker-engine",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Application which allows project task management.",
   "main": "root.js",
   "scripts": {

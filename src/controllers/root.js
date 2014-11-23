@@ -34,7 +34,7 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 
 		// CONFIGURATION
 		$rootScope.footer = {
-			version: "1.3.0",
+			version: "1.3.1",
 			year: "2014" + (new Date().getFullYear() !== 2014 ? "-" + new Date().getFullYear() : "")
 		};
 
