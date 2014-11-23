@@ -1,0 +1,10 @@
+div.modal.fade#register-success-modal(tabindex="-1" role="dialog" aria-hidden="true")
+    .modal-dialog.modal-sm
+        .modal-content
+            .modal-header
+                button.close(type="button" data-dismiss="modal" aria-hidden="true") &times;
+                h4.modal-title Success!
+            .modal-body
+                p Registration successful!
+            .modal-footer
+                button.btn.btn-primary(type="button" data-dismiss="modal" ng-click="navigate('dashboard')") Ok

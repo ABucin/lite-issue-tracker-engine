@@ -1,0 +1,20 @@
+.panel.panel-analytics
+    .row
+        .col-lg-2.col-md-2.col-sm-3.col-xs-4.secondary-menu
+            ul.nav(ng-init="fetchChartData(subPageName.get())")
+                li.header Metrics
+                li.toggleable(ng-class="toggleActive('loggedHours')" ng-click="fetchChartData('loggedHours')")
+                    i.fa.fa-fw.ion-arrow-graph-up-right.chart-icon
+                    | Logged Hours
+                li.toggleable(ng-class="toggleActive('ticketCompletion')" ng-click="fetchChartData('ticketCompletion')")
+                    i.fa.fa-fw.ion-stats-bars.chart-icon
+                    | Ticket Completion
+                li.toggleable(ng-class="toggleActive('effortEstimation')" ng-click="fetchChartData('effortEstimation')")
+                    i.fa.fa-fw.ion-ios7-keypad.chart-icon
+                    | Effort vs. Estimation
+                li.toggleable(ng-class="toggleActive('assignedTickets')" ng-click="fetchChartData('assignedTickets')")
+                    i.fa.fa-fw.ion-pie-graph.chart-icon
+                    | Assigned Tickets
+        .col-lg-10.col-md-4.col-sm-9.col-xs-8
+            .panel.panel-default
+                #chart.panel-body

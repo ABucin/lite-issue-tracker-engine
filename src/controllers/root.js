@@ -134,7 +134,7 @@ function ($scope, $rootScope, $location, $http, $cookieStore, ResourceService, U
 				url: 'views/modals/register/register-success.html'
 			}],
 			submenu: [{
-				url: 'views/snippets/menu/submenu.html'
+				url: 'views/layout/submenu.html'
 		}]
 		};
 

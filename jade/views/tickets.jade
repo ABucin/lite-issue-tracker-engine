@@ -1,0 +1,27 @@
+.panel-tickets
+    .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            table.table.table-condensed.table-tickets
+                thead
+                    tr
+                        th Created
+                        th In Progress
+                        th Testing
+                        th Done
+                tbdoy
+                    tr
+                        td(highlightable droppable ticket-container status="created")
+                            div(ng-repeat="ticket in tickets.created")
+                                ticket(ng-if="filterByOwner(ticket.owner) && filterByPriority(ticket.priority)")
+                        td(highlightable droppable ticket-container status="inProgress")
+                            div(ng-repeat="ticket in tickets.inProgress")
+                                ticket(ng-if="filterByOwner(ticket.owner) && filterByPriority(ticket.priority)")
+                        td(highlightable droppable ticket-container status="testing")
+                            div(ng-repeat="ticket in tickets.testing")
+                                ticket(ng-if="filterByOwner(ticket.owner) && filterByPriority(ticket.priority)")
+                        td(highlightable droppable ticket-container status="done")
+                            div(ng-repeat="ticket in tickets.done")
+                                ticket(ng-if="filterByOwner(ticket.owner) && filterByPriority(ticket.priority)")
+div(ng-include="templateCreate.url")
+div(ng-include="templateEdit.url")
+div(ng-include="templateDelete.url")

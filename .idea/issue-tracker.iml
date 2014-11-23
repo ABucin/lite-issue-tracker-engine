@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/projectFilesBackup" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -10,4 +11,3 @@
     <orderEntry type="library" name="issue-tracker node_modules" level="project" />
   </component>
 </module>
-

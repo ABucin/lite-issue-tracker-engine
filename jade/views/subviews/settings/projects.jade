@@ -1,0 +1,18 @@
+h4 Available Projects
+ul.list-unstyled.list-projects
+    li
+        span(ng-show="!edit.project") {{general.project}}
+        span(ng-show="edit.project")
+            input(type="text" ng-model="general.project")
+        i.fa.fa-edit.fa-fw(ng-show="!edit.project" ng-click="edit.project = true")
+        i.fa.fa-check.fa-fw(ng-show="edit.project" ng-click="edit.project = false; updateProject()")
+        i.fa.fa-times.fa-fw(ng-show="edit.project" ng-click="edit.project = false")
+h4 Ticket Prefix
+ul.list-unstyled.list-projects
+    li
+        span(ng-show="!edit.project") {{general.project}}
+        span(ng-show="edit.project")
+            input(type="text" ng-model="general.project")
+        i.fa.fa-edit.fa-fw(ng-show="!edit.project" ng-click="edit.project = true")
+        i.fa.fa-check.fa-fw(ng-show="edit.project" ng-click="edit.project = false; updateProject()")
+        i.fa.fa-times.fa-fw(ng-show="edit.project" ng-click="edit.project = false")

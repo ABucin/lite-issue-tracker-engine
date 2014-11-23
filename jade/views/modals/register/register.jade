@@ -1,0 +1,98 @@
+.modal.fade#register-modal(tabindex="-1" role="dialog" aria-hidden="true")
+    .modal-dialog.modal-sm
+        .modal-content
+            form.form-horizontal(role="form" name="registerForm" ng-submit="register(registerForm.$valid)" novalidate)
+                .modal-header
+                    button.close(type="button" ng-click="modal.registration('hide')" aria-hidden="true") &times;
+                    h4.modal-title Register Account
+                .modal-body
+                    p All the fields are mandatory.
+                    div.form-group(ng-class="{ 'has-error' : registerForm.username.$invalid && !registerForm.username.$pristine && submitted }")
+                        .col-md-12
+                            label(for="registerUsername") Username
+                            input.form-control#registerUsername(type="text" name="username" placeholder="Username" ng-model="registration.username" ng-minlength="3" ng-maxlength="8" ng-required="true")
+                            p(ng-show="registerForm.username.$error.minlength && submitted")
+                                i.fa.fa-warning
+                                | Username must have at least 3 characters.
+                            p(ng-show="registerForm.username.$error.maxlength && submitted")
+                                i.fa.fa-warning
+                                | Username must have at most 8 characters.
+                            p(ng-show="registerForm.username.$error.required && submitted")
+                                i.fa.fa-warning
+                                | Username must be provided.
+                    div.form-group(ng-class="{ 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine && submitted }")
+                        .col-md-12
+                            label(for="registerPassword") Password
+                            input.form-control#registerPassword(type="password" name="password" placeholder="Password" ng-model="registration.password" ng-minlength="3" ng-maxlength="8" ng-required="true")
+                            p(ng-show="registerForm.password.$error.minlength && submitted")
+                                i.fa.fa-warning
+                                | Password must have at least 3 characters.
+                            p(ng-show="registerForm.password.$error.maxlength && submitted")
+                                i.fa.fa-warning
+                                | Password must have at most 8 characters.
+                            p(ng-show="registerForm.password.$error.required && submitted")
+                                i.fa.fa-warning
+                                | Password must be provided.
+                    div.form-group(ng-class="{ 'has-error' : registerForm.confirmedPassword.$invalid && !registerForm.confirmedPassword.$pristine && submitted }")
+                        .col-md-12
+                            label(for="registerConfirmedPassword") Confirmed Password
+                            input.form-control#registerConfirmedPassword(type="password" name="passwordConfirmed" placeholder="Confirmed Password" ng-model="registration.confirmedPassword" ng-minlength="3" ng-maxlength="8" ng-required="true")
+                            p(ng-show="registerForm.passwordConfirmed.$error.minlength && submitted")
+                                i.fa.fa-warning
+                                | Confirmed password must have at least 3 characters.
+                            p(ng-show="registerForm.passwordConfirmed.$error.maxlength && submitted")
+                                i.fa.fa-warning
+                                | Confirmed password must have at most 8 characters.
+                            p(ng-show="registerForm.passwordConfirmed.$error.required && submitted")
+                                i.fa.fa-warning
+                                | Confirmed password must be provided.
+                    div.form-group(ng-class="{ 'has-error' : registerForm.email.$invalid && !registerForm.email.$pristine && submitted }")
+                        .col-md-12
+                            label(for="registerEmailAddress") Email Address
+                            input.form-control#registerEmailAddress(type="email" name="email" placeholder="Email Address" ng-model="registration.email" ng-minlength="10" ng-maxlength="20" ng-required="true")
+                            p(ng-show="registerForm.email.$error.minlength && submitted")
+                                i.fa.fa-warning
+                                | Email address must have at least 10 characters.
+                            p(ng-show="registerForm.email.$error.maxlength && submitted")
+                                i.fa.fa-warning
+                                | Email address must have at most 20 characters.
+                            p(ng-show="registerForm.email.$error.required && submitted")
+                                i.fa.fa-warning
+                                | Email address must be provided.
+                    div.form-group(ng-class="{ 'has-error' : registerForm.firstName.$invalid && !registerForm.firstName.$pristine && submitted }")
+                        .col-md-12
+                            label(for="registerFirstName") First Name
+                            input.form-control#registerFirstName(type="text" name="firstName" placeholder="First Name" ng-model="registration.firstName" ng-minlength="2" ng-maxlength="10" ng-required="true")
+                            p(ng-show="registerForm.firstName.$error.minlength && submitted")
+                                i.fa.fa-warning
+                                | First name must have at least 2 characters.
+                            p(ng-show="registerForm.firstName.$error.maxlength && submitted")
+                                i.fa.fa-warning
+                                | First name must have at most 10 characters.
+                            p(ng-show="registerForm.firstName.$error.required && submitted")
+                                i.fa.fa-warning
+                                | First name must be provided.
+                    div.form-group(ng-class="{ 'has-error' : registerForm.lastName.$invalid && !registerForm.lastName.$pristine && submitted }")
+                        .col-md-12
+                            label(for="registerLastName") Last Name
+                            input.form-control#registerLastName(type="text" name="lastName" placeholder="Last Name" ng-model="registration.lastName" ng-minlength="2" ng-maxlength="10" ng-required="true")
+                            p(ng-show="registerForm.lastName.$error.minlength && submitted")
+                                i.fa.fa-warning
+                                | Last name must have at least 2 characters.
+                            p(ng-show="registerForm.lastName.$error.maxlength && submitted")
+                                i.fa.fa-warning
+                                | Last name must have at most 10 characters.
+                            p(ng-show="registerForm.lastName.$error.required && submitted")
+                                i.fa.fa-warning
+                                | Last name must be provided.
+                    .form-group
+                        .col-md-12
+                            p(ng-repeat="error in general.errors")
+                                i.fa.fa-warning
+                                | {{error.message}}
+                .modal-footer
+                    .form-group
+                        .col-md-6
+                            button.btn.btn-default.form-control(type="button" ng-click="modal.registration('hide')") Close
+                        .col-md-6
+                            button.btn.btn-primary.form-control(type="submit") Submit

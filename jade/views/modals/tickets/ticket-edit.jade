@@ -1,0 +1,104 @@
+.modal.fade#ticket-preview-modal(tabindex="-1" role="dialog" aria-hidden="true")
+    .modal-dialog.modal-md
+        .modal-content
+            .modal-header
+                button.close(type="button" ng-click="hideTicketPreviewModal()" aria-hidden="true") &times;
+                h4.modal-title
+                    span(class="{{updatedTicket.type}}-invert") TC-{{updatedTicket.code}}
+                    | {{updatedTicket.title}}
+                .modal-body
+                    ul.nav.nav-tabs(role="tablist")
+                        li.active
+                            a(role="tab" data-toggle="tab" ng-click="showTicketTab('info')") Info
+                        li
+                            a(role="tab" data-toggle="tab" ng-click="showTicketTab('comments')") Comments
+                                span(ng-if="comments.length")  ({{comments.length}})
+                    .tab-content
+                        div.tab-pane(ng-class="ticketTabs['info'] ? 'active' : ''")
+                            form.form-horizontal(role="form" name="ticketEditForm" ng-submit="updateTicket(ticketEditForm.$valid)" novalidate)
+                                .form-group
+                                    .col-lg-12
+                                        .input-group
+                                            span.input-group-addon Title
+                                            input.form-control(type="text" placeholder="Title" name="title" ng-model="updatedTicket.title" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username" ng-class="{ 'has-error' : ticketEditForm.title.$invalid && !ticketEditForm.title.$pristine && submitted }" ng-required="true")
+                                            span.input-group-addon {{updatedTicket.loggedTime}} h
+                                        p(ng-show="ticketEditForm.title.$error.required && submitted")
+                                            i.fa.fa-warning
+                                            | Title is required.
+                                .form-group
+                                    .col-lg-12
+                                        label(for="ticketDescription") Description
+                                        textarea.form-control#ticketDescription(ng-model="updatedTicket.description" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username")
+                                div.form-group(ng-hide="updatedTicket.owner !== getAuthenticatedUser().username")
+                                    div.col-lg-6(ng-hide="updatedTicket.status === 'done'")
+                                        .input-group
+                                            span.input-group-addon Log
+                                            input.form-control(type="number" min="0" step="0.5" ng-model="loggedWork.amount")
+                                            span.input-group-addon h
+                                    .col-lg-6
+                                        .input-group
+                                            span.input-group-addon Initial Est.
+                                            input.form-control(type="number" min="0" step="0.5" ng-disabled="updatedTicket.status !== 'created'" ng-model="updatedTicket.estimatedTime")
+                                            span.input-group-addon h
+                                .form-group
+                                    .col-lg-6
+                                        .input-group
+                                            span.input-group-addon Assignee
+                                            input.form-control(type="text" ng-model="updatedTicket.owner")
+                                    .col-lg-6
+                                        .input-group
+                                            span.input-group-addon Creator
+                                            input.form-control(type="text" ng-model="updatedTicket.creator" disabled="true")
+                                .form-group
+                                    .col-lg-6
+                                        .input-group
+                                            span.input-group-addon Type
+                                            select.form-control(ng-model="updatedTicket.type" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username")
+                                                option task
+                                                option bug
+                                    .col-lg-6
+                                        .input-group
+                                            span.input-group-addon Priority
+                                            select.form-control(ng-model="updatedTicket.priority" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username")
+                                                option major
+                                                option standard
+                                                option minor
+                                .form-group
+                                    .col-lg-6
+                                        .input-group
+                                            span.input-group-addon Status
+                                            select.form-control(ng-model="updatedTicket.status" ng-disabled="updatedTicket.owner !== getAuthenticatedUser().username")
+                                                option created
+                                                option(value="inProgress") in progress
+                                                option testing
+                                                option done
+                                .form-group.modal-footer
+                                    .col-md-4
+                                    .col-md-4
+                                        button.btn.btn-default.form-control(type="button" ng-click="hideTicketPreviewModal()") Cancel
+                                    .col-md-4
+                                        button.btn.btn-primary.form-control(type="submit") Save
+                        div.tab-pane(ng-class="ticketTabs['comments'] ? 'active' : ''")
+                            form.form-horizontal(role="form" ng-submit="status.isEditingComment ? editComment(true) : addComment(true)" name="commentForm" novalidate)
+                                .modal-body.modal-comments
+                                    div.comments-empty(ng-show="!comments.length") There seems to be nothing here.
+                                    div.row(ng-repeat="c in comments")
+                                        div.col-lg-4(ng-class="(c.author == getAuthenticatedUser().username) ? 'comment-author' : ''")
+                                            strong {{c.author}}
+                                            em {{c.timestamp | momentInTime}}
+                                                span(ng-show="c.isEdited") *
+                                            i.fa.fa-times(ng-click="deleteComment(c.key)" ng-show="c.author == getAuthenticatedUser().username")
+                                        div.col-lg-8(ng-class="(c.author == getAuthenticatedUser().username)?'comment-author': ''")
+                                            p {{c.content}}
+                                                i.fa.fa-edit(ng-click="markForEdit(c.key, c.content)" ng-show="c.author == getAuthenticatedUser().username")
+                                .modal-body.modal-comments-post
+                                    .form-group
+                                        .col-lg-12
+                                            p Posting as:
+                                                strong  {{comment.author}}
+                                            textarea.form-control#commentContent(name="comment" ng-model="comment.content")
+                                    .form-group
+                                        .col-lg-4
+                                        .col-lg-4
+                                        .col-lg-4
+                                            button.btn.btn-primary {{(status.isEditingComment) ? 'Edit' : 'Add'}} Comment

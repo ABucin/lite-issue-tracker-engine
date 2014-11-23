@@ -1,0 +1,20 @@
+.modal.fade#user-assignment-modal(tabindex="-1" role="dialog" aria-hidden="true")
+    .modal-dialog
+        .modal-content
+            form.form-horizontal(role="form" name="userAssignmentForm" ng-submit="project.set(unassignedUser.username, userAssignmentForm.$valid)" novalidate)
+                .modal-header
+                    button.close(type="button" data-dismiss="modal" aria-hidden="true") &times;
+                    h4.modal-title Select User
+                .modal-body
+                    div.form-group(ng-class="{ 'has-error' : userAssignmentForm.availableUsers.$invalid && !loginForm.availableUsers.$pristine && submitted }")
+                        .col-md-6
+                            .input-group
+                                span.input-group-addon Available Users
+                                select.form-control(name="availableUsers" ng-model="unassignedUser.username" ng-required="true")
+                                    option(ng-repeat="u in unassignedUsers") {{u.username}}
+                            p(ng-show="userAssignmentForm.availableUsers.$error.required && submitted")
+                                i.fa.fa-warning
+                                | A user must be selected.
+                .modal-footer
+                    button.btn.btn-default(type="button" ng-click="dismissUserAssignmentModal()") Cancel
+                    button.btn.btn-primary(type="submit") Select

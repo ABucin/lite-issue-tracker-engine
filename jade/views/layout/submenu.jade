@@ -1,0 +1,33 @@
+ul.nav.navbar-nav.text-center(ng-show="menu.hasDropdown")
+    li
+        a.fa.fa-bars(data-toggle="dropdown")
+        ul.dropdown-menu.dropdown-menu-left.text-left(role="menu" aria-labelledby="ticketsMenu")
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="showTicketCreationModal()") Create Ticket
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="tickets.isDeleting = true") Delete Ticket
+            li.divider(role="presentation")
+            li.dropdown-header(role="presentation") Owner
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="menu.filters.byTicketOwner = 'all'") All
+                    i.fa.fa-check(ng-show="menu.filters.byTicketOwner === 'all'")
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="menu.filters.byTicketOwner = 'mine'") Mine
+                    i.fa.fa-check(ng-show="menu.filters.byTicketOwner === 'mine'")
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="menu.filters.byTicketOwner = 'unassigned'") Unassigned
+                    i.fa.fa-check(ng-show="menu.filters.byTicketOwner === 'unassigned'")
+            li.divider(role="presentation")
+            li.dropdown-header(role="presentation") Priority
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="menu.filters.byTicketPriority = 'all'") All
+                    i.fa.fa-check(ng-show="menu.filters.byTicketPriority === 'all'")
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="menu.filters.byTicketPriority = 'major'") Major
+                    i.fa.fa-check(ng-show="menu.filters.byTicketPriority === 'major'")
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="menu.filters.byTicketPriority = 'normal'") Normal
+                    i.fa.fa-check(ng-show="menu.filters.byTicketPriority === 'normal'")
+            li(role="presentation")
+                a(role="menuitem" tabindex="-1" ng-click="menu.filters.byTicketPriority = 'minor'") Minor
+                    i.fa.fa-check(ng-show="menu.filters.byTicketPriority === 'minor'")

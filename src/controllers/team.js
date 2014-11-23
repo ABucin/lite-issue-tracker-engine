@@ -5,7 +5,7 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		$scope.unassignedUsers = [];
 
 		$scope.modalTemplates = [{
-			url: 'views/modals/team/user_assign.html'
+			url: 'views/modals/team/user-assign.html'
 			}];
 
 		$scope.templateUserAssignModal = $scope.modalTemplates[0];

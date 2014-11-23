@@ -1,0 +1,41 @@
+.panel.panel-dashboard
+    .row
+        .col-lg-6(ng-if="getSettings().displayUserChart" ng-class="general.computeWidth(getSettings().displayUserActivity)")
+            .panel.panel-default
+                .panel-body.panel-body-dashboard
+                    #chartLoggedHours
+            .panel.panel-default
+                .panel-body.panel-body-dashboard
+                    #chartEffortEstimation
+        .col-lg-6.dashboard-panel-right(ng-if="getSettings().displayUserActivity" ng-class="general.computeWidth(getSettings().displayUserChart)")
+            .row
+                .col-lg-6
+                    .panel.panel-default
+                        .panel-body.panel-body-dashboard
+                            h1 Open Tickets
+                            .dashboard-ticket(ng-repeat="entry in tickets.inProgress | filter: {owner: getAuthenticatedUser().username}")
+                                span(class="ticket-{{entry.type}}-inverted") TC-{{entry.code}}
+                                span {{entry.title}}
+                                span
+                                    strong(ng-class="entry.remainingTime < 0 ? 'tracker-red' : ''") {{entry.remainingTime}} hrs.
+                            div(ng-show="!tickets.inProgress.length") There seems to be nothing here.
+                .col-lg-6
+                    .panel.panel-default
+                        .panel-body.panel-body-dashboard
+                            h1 Tickets in Testing
+                            .dashboard-ticket(ng-repeat="entry in tickets.testing | filter: {owner: getAuthenticatedUser().username}")
+                                span(class="ticket-{{entry.type}}-inverted") TC-{{entry.code}}
+                                span {{entry.title}}
+                            div(ng-show="!tickets.testing.length") There seems to be nothing here.
+            .panel.panel-default
+                .panel-body.panel-body-dashboard
+                    h1 Recent Activity
+                    div(ng-repeat="entry in dashboard.logEntries | limitTo: 5")
+                        .log
+                            i(class="fa fa-fw fa-{{entry.action}}")
+                            span.log-user {{entry.username}}
+                            span(class="log-target ticket-{{entry.targetType}}-inverted") TC-{{entry.target}}
+                            span.log-amount(ng-if="entry.amount") {{entry.amount}} hrs.
+                            span.log-comment(ng-if="entry.comment")
+                                em {{entry.comment | abbreviate}}
+                            span.log-timestamp {{entry.timestamp | momentInTime}}

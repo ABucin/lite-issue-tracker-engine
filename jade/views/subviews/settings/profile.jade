@@ -1,0 +1,37 @@
+h4 Avatar
+.form-group.col-sm-12
+    img.img-responsive.img-thumbnail(src="./img/{{getAuthenticatedUser().username}}.jpg" width="150")
+h4 Profile
+ul.nav.list-unstyled
+    li
+        strong First Name:
+        span(ng-show="!edit.firstName")  {{editedUser.firstName}}
+        span(ng-show="edit.firstName")
+            input(type="text" ng-model="editedUser.firstName")
+        i.fa.fa-edit.fa-fw(ng-show="!edit.firstName" ng-click="edit.firstName = true")
+        i.fa.fa-check.fa-fw(ng-show="edit.firstName" ng-click="edit.firstName = false; updateUser()")
+        i.fa.fa-times.fa-fw(ng-show="edit.firstName" ng-click="edit.firstName = false")
+    li
+        strong Last Name:
+        span(ng-show="!edit.lastName")  {{editedUser.lastName}}
+        span(ng-show="edit.lastName")
+            input(type="text" ng-model="editedUser.lastName")
+        i.fa.fa-edit.fa-fw(ng-show="!edit.lastName" ng-click="edit.lastName = true")
+        i.fa.fa-check.fa-fw(ng-show="edit.lastName" ng-click="edit.lastName = false; updateUser()")
+        i.fa.fa-times.fa-fw(ng-show="edit.lastName" ng-click="edit.lastName = false")
+    li
+        strong Email Address:
+        span(ng-show="!edit.email")  {{editedUser.email}}
+        span(ng-show="edit.email")
+            input(type="text" ng-model="editedUser.email")
+        i.fa.fa-edit.fa-fw(ng-show="!edit.email" ng-click="edit.email = true")
+        i.fa.fa-check.fa-fw(ng-show="edit.email" ng-click="edit.email = false; updateUser()")
+        i.fa.fa-times.fa-fw(ng-show="edit.email" ng-click="edit.email = false")
+    li
+        strong Expertise:
+        span(ng-show="!edit.expertise")  {{editedUser.expertise}}
+        span(ng-show="edit.expertise")
+            input(type="text" ng-model="editedUser.expertise")
+        i.fa.fa-edit.fa-fw(ng-show="!edit.expertise" ng-click="edit.expertise = true")
+        i.fa.fa-check.fa-fw(ng-show="edit.expertise" ng-click="edit.expertise = false; updateUser()")
+        i.fa.fa-times.fa-fw(ng-show="edit.expertise" ng-click="edit.expertise = false")

@@ -47,13 +47,13 @@ function ($scope, $rootScope, $location, TicketsService, CommentsService, LogsSe
 		};
 
 		$scope.templates = [{
-				url: 'views/modals/tickets/ticket_create.html'
+			url: 'views/modals/tickets/ticket-create.html'
 			},
 			{
-				url: 'views/modals/tickets/ticket_edit.html'
+				url: 'views/modals/tickets/ticket-edit.html'
 			},
 			{
-				url: 'views/modals/tickets/ticket_delete.html'
+				url: 'views/modals/tickets/ticket-delete.html'
 			}];
 
 		$scope.templateCreate = $scope.templates[0];

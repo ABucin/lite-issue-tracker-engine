@@ -1,0 +1,8 @@
+h4 Dashboard
+ul.list-unstyled
+    li(ng-click="setSettings('displayUserActivity', !getSettings().displayUserActivity)")
+        i.fa.fa-fw(ng-class="computeToggle(getSettings().displayUserActivity)")
+        | Display User Activity
+    li(ng-click="setSettings('displayUserChart', !getSettings().displayUserChart)")
+        i.fa.fa-fw(ng-class="computeToggle(getSettings().displayUserChart)")
+        | Display Workload Charts

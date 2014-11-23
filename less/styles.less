@@ -61,12 +61,12 @@ body {
  */
 .menu-hover {
   background-color: @nav-hover;
-  border-radius: .2em;
+  border-radius: @menu-border-radius;
   cursor: pointer;
 }
 
 .secondary-menu {
-  border-right: 1px solid @secondary-menu;
+  border-right: @border-width solid @secondary-menu;
   margin-bottom: @spacing-medium;
   > ul > li {
     vertical-align: middle;
@@ -117,7 +117,7 @@ p[ng-show*='loginForm.password'] {
   display: inline-block;
   margin: @spacing-small-x;
   line-height: normal;
-  font-size: 70%;
+  font-size: 75%;
   font-weight: @font-weight-heavy;
   &:hover {
     cursor: pointer;
@@ -264,6 +264,7 @@ nav.navbar {
   }
   ul.dropdown-menu .fa-check {
     color: @tracker-grey-dark;
+    padding-left: @spacing-small;
   }
 }
 
@@ -277,10 +278,16 @@ nav.navbar {
   &.panel-team {
     padding: @spacing-small;
     p[ng-repeat*="comment"] {
-      padding-left: 25px;
+      padding-left: @spacing-large-x;
     }
     .team-details {
       padding-left: @spacing-large;
+      strong {
+        padding-right: @spacing-small;
+      }
+      p > strong {
+        padding-left: @spacing-small;
+      }
     }
   }
   &.panel-dashboard {
@@ -307,8 +314,13 @@ nav.navbar {
   }
   &.panel-settings {
     margin-top: @spacing-medium;
-    .fa:hover {
-      cursor: pointer;
+    .fa {
+      &:hover {
+        cursor: pointer;
+      }
+      &.fa-edit {
+        padding-left: @spacing-small-x;
+      }
     }
     input[type="text"] {
       border: 0;
@@ -392,7 +404,7 @@ nav.navbar {
 }
 
 .modal-comments {
-  border-bottom: 1px solid @comments-border;
+  border-bottom: @border-width solid @comments-border;
   padding-top: 0;
   padding-bottom: @spacing-medium;
   div {
@@ -439,11 +451,11 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
     margin-bottom: @spacing-medium;
     font-weight: @font-weight-light;
     text-align: center;
-    border-bottom: 1px solid @secondary-menu;
-    border-left: 1px dashed @secondary-menu;
+    border-bottom: @border-width solid @secondary-menu;
+    border-left: @border-width dashed @secondary-menu;
     vertical-align: top;
     &:last-child {
-      border-right: 1px dashed @secondary-menu;
+      border-right: @border-width dashed @secondary-menu;
     }
   }
   &.table-tickets > thead > tr > th {
@@ -453,13 +465,13 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
     > td {
       border-top: none;
       padding: 0;
-      border-left: 1px dashed @secondary-menu;
+      border-left: @border-width dashed @secondary-menu;
       vertical-align: top;
       &[status] {
         min-height: 50px;
       }
       &:last-child {
-        border-right: 1px dashed @secondary-menu;
+        border-right: @border-width dashed @secondary-menu;
       }
       > div.progress {
         margin-bottom: 0;

@@ -1,0 +1,28 @@
+.table-responsive
+    table.table.table-condensed.table-hover
+        thead
+            tr
+                th Action
+                th User
+                th Ticket
+                th Amount
+                th Comment
+                th Timestamp
+        tbody(ng-init="loadLogData")
+            tr.log(ng-repeat="entry in dashboard.logEntries")
+                td
+                    div
+                        i.fa.fa-fw(class="fa-{{entry.action}}")
+                td
+                    .log-user {{entry.username}}
+                td
+                    div.log-target(class="ticket-{{entry.targetType}}-inverted") TC-{{entry.target}}
+                td
+                    div.log-amount(ng-if="entry.amount") {{entry.amount}} hrs.
+                    div.log-amount(ng-if="!entry.amount") -
+                td.log-comment-narrow
+                    div.log-comment(ng-if="entry.comment")
+                        em "{{entry.comment}}"
+                    div.log-comment(ng-if="!entry.comment") -
+                td
+                    .log-timestamp {{entry.timestamp | date : 'dd-MM-yyyy hh:mm:ss'}}

@@ -1,0 +1,51 @@
+div.modal.fade#ticket-creation-modal(tabindex="-1" role="dialog" aria-hidden="true")
+    .modal-dialog.modal-md
+        .modal-content
+            form.form-horizontal(role="form" name="ticketCreateForm" ng-submit="addTicket(ticketCreateForm.$valid)" novalidate)
+                .modal-header
+                    button.close(type="button" ng-click="hideTicketCreationModal()" aria-hidden="true") &times;
+                    h4.modal-title Create Ticket
+                .modal-body
+                    div.form-group(ng-class="{ 'has-error' : ticketCreateForm.title.$invalid && !ticketCreateForm.title.$pristine && submitted }")
+                        .col-md-12
+                            .input-group
+                                span.input-group-addon Title
+                                input.form-control(type="text" name="title" placeholder="Title" ng-model="ticket.title" ng-required="true")
+                            p(ng-show="ticketCreateForm.title.$error.required && submitted")
+                                i.fa.fa-warning
+                                | Title is required.
+                    .form-group
+                        .col-md-12
+                            label(for="ticketDescription") Description
+                            textarea.form-control#ticketDescription(ng-model="ticket.description")
+                    .form-group
+                        .col-md-6
+                            .input-group
+                                span.input-group-addon Initial Est.
+                                input.form-control(type="number" min="0" step="0.5" placeholder="0" ng-model="ticket.estimatedTime")
+                                span.input-group-addon h
+                        .col-md-6
+                            .input-group
+                                span.input-group-addon Assignee
+                                input.form-control(type="text" ng-model="ticket.user")
+                    .form-group
+                        .col-md-6
+                            .input-group
+                                span.input-group-addon Type
+                                select.form-control(ng-model="ticket.type")
+                                    option task
+                                    option bug
+                        .col-md-6
+                            .input-group
+                                span.input-group-addon Priority
+                                select.form-control(ng-model="ticket.type")
+                                    option major
+                                    option standard
+                                    option minor
+                .modal-footer
+                    .form-group
+                        .col-md-4
+                        .col-md-4
+                            button.btn.btn-default.form-control(type="button" ng-click="hideTicketCreationModal()") Cancel
+                        .col-md-4
+                            button.btn.btn-primary.form-control(type="submit") Create

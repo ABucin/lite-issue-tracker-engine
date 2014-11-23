@@ -1,0 +1,8 @@
+h4 Team
+ul.list-unstyled
+    li(ng-click="setGlobalSettings('displayUserRole', !getSettings().displayUserRole)")
+        i.fa.fa-fw(ng-class="computeToggle(getSettings().displayUserRole)")
+        | Display User Role
+    li(ng-click="setGlobalSettings('displayUserEmail', !getSettings().displayUserEmail)")
+        i.fa.fa-fw(ng-class="computeToggle(getSettings().displayUserEmail)")
+        | Display User Email

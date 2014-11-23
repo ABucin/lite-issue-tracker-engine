@@ -43,7 +43,7 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 		 */
 		$scope.fetchSettingsData = function (type) {
 			$scope.subPageName.put(type);
-			$scope.general.template.url = 'views/snippets/settings/' + type + '.html';
+			$scope.general.template.url = 'views/subviews/settings/' + type + '.html';
 		};
 
 		/**
