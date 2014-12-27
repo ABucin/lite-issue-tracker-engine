@@ -103,6 +103,6 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 				return 1;
 			}
 			return (totalLoggedTime / totalEstimatedTime).toFixed(2);
-		}
+		};
 
 }]);

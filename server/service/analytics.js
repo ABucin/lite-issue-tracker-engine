@@ -8,7 +8,6 @@ var persistenceService = require('./persistence'),
 	_ = require('underscore')._;
 
 exports.getChart = function (type, res) {
-	var result = {};
 	switch (type) {
 	case "loggedHours":
 		{
@@ -16,9 +15,9 @@ exports.getChart = function (type, res) {
 				var series = [];
 				var currentDate = new Date();
 
-				_.each(users, function (user, i, list) {
+				_.each(users, function (user) {
 					var logged = [0, 0, 0, 0, 0, 0, 0];
-					_.each(user.logs, function (log, j, list2) {
+					_.each(user.logs, function (log) {
 						var tstamp = log.timestamp;
 						if (tstamp !== undefined && utils.getWeekNumber(currentDate) === utils.getWeekNumber(tstamp)) {
 							logged[tstamp.getDay()] += log.amount;
@@ -57,7 +56,7 @@ exports.getChart = function (type, res) {
 					},
 					tooltip: {
 						formatter: function () {
-							var suffix = (this.y === 1) ? ' hr.' : ' hrs.'
+							var suffix = (this.y === 1) ? ' hr.' : ' hrs.';
 							return this.y + suffix;
 						}
 					},
@@ -92,12 +91,12 @@ exports.getChart = function (type, res) {
 					data: []
 	}];
 
-				_.each(users, function (user, i, list) {
+				_.each(users, function (user) {
 					usernames.push(user.username);
 					var bt = 0,
 						tt = 0;
 
-					_.each(user.tickets, function (ticket, j, list2) {
+					_.each(user.tickets, function (ticket) {
 						if (ticket.status === "done" && ticket.owner === user.username) {
 							if (ticket.type === "bug") {
 								bt++;
@@ -178,8 +177,8 @@ exports.getChart = function (type, res) {
 					taskEffortEstimation = [],
 					maxEstimation = 0;
 
-				_.each(users, function (user, i, list) {
-					_.each(user.tickets, function (ticket, j, list2) {
+				_.each(users, function (user) {
+					_.each(user.tickets, function (ticket) {
 						if (ticket.status !== "done") {
 							if (ticket.estimatedTime > maxEstimation) {
 								maxEstimation = ticket.estimatedTime;
@@ -288,7 +287,7 @@ exports.getChart = function (type, res) {
 				};
 
 				res.json(effortEstimation);
-			}
+			};
 			persistenceService.getAllUsersCallback(callback);
 			break;
 		}
@@ -298,9 +297,9 @@ exports.getChart = function (type, res) {
 				var data = [],
 					ut = 0;
 
-				_.each(users, function (user, i, list) {
+				_.each(users, function (user) {
 					var ct = 0;
-					_.each(user.tickets, function (ticket, j, list2) {
+					_.each(user.tickets, function (ticket) {
 						if (ticket.status !== "done") {
 							if (ticket.owner === user.username) {
 								ct++;

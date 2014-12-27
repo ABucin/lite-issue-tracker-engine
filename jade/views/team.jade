@@ -10,49 +10,51 @@
                 li.toggleable.text-center(ng-show="getAuthenticatedUser().role === 'admin'" ng-click="getUnassignedUsers()" data-toggle="modal" data-target="#user-assignment-modal")
                     i.fa.fa-fw.fa-plus.chart-icon
         .col-lg-10.col-md-4.col-sm-9.col-xs-7
-            img.img-responsive.img-thumbnail(ng-if="selectedTeamMember.username.length" ng-src="./img/{{selectedTeamMember.username}}.jpg" width="100")
-            h4 Contact
-            .team-details
-                strong Username:
-                span(ng-bind="selectedTeamMember.username")
-                br
-                strong First Name:
-                span(ng-bind="selectedTeamMember.firstName")
-                br
-                strong Last Name:
-                span(ng-bind="selectedTeamMember.lastName")
-                br
-                span(ng-if="getSettings().displayUserEmail")
-                    strong Email Address:
-                    span(ng-bind="selectedTeamMember.email")
-            h4 Project
-            .team-details
-                strong Name:
-                span(ng-bind="selectedTeamMember.project | capitalize")
-                br
-                span(ng-if="getSettings().displayUserRole")
-                    strong Role:
-                    span(ng-bind="selectedTeamMember.projectRole | capitalize")
-                    br
-                strong Expertise:
-                span(ng-bind="selectedTeamMember.expertise")
-                br
-                strong Open Tickets:
-                span(ng-bind="getOpenTickets()")
-                br
-                strong Effort-Estimation Ratio:
-                span(ng-bind="getEffortEstimationRatio()")
-            h4 Activity
-            .team-details
-                strong Latest Tickets:
-                span.ticket.ticket-code(class="ticket-{{ticket.type}}" ng-repeat="ticket in userTickets | filter: selectedTeamMember.username | limitTo: 5") TC-{{ticket.code}}
-                    span.ticket-title(ng-bind="ticket.title")
-                br
-                strong Latest Comments:
-                p(ng-repeat="comment in selectedTeamMember.comments | limitTo: 5")
-                    i.fa.fa-angle-double-right
-                    | "{{comment.content}}"
-                    strong (
-                        span(ng-bind="comment.timestamp | date:'yyyy-MM-dd HH:mm:ss'")
-                        | )
+            .row
+                .col-lg-4.col-md-4.col-sm-4.col-xs-4.panel-left
+                    img.img-responsive.img-thumbnail(ng-if="selectedTeamMember.username.length" ng-src="./img/{{selectedTeamMember.username}}.jpg" width="100")
+                    h4 Contact
+                    .team-details
+                        strong Username:
+                        span(ng-bind="selectedTeamMember.username")
+                        br
+                        strong First Name:
+                        span(ng-bind="selectedTeamMember.firstName")
+                        br
+                        strong Last Name:
+                        span(ng-bind="selectedTeamMember.lastName")
+                        br
+                        span(ng-if="getSettings().displayUserEmail")
+                            span.fa.fa-envelope-o
+                            span(ng-bind="selectedTeamMember.email")
+                    h4 Project
+                    .team-details
+                        strong Name:
+                        span(ng-bind="selectedTeamMember.project | capitalize")
+                        br
+                        span(ng-if="getSettings().displayUserRole")
+                            strong Role:
+                            span(ng-bind="selectedTeamMember.projectRole | capitalize")
+                            br
+                        strong Expertise:
+                        span(ng-bind="selectedTeamMember.expertise")
+                        br
+                        strong Open Tickets:
+                        span(ng-bind="getOpenTickets()")
+                        br
+                        strong Effort-Estimation Ratio:
+                        span(ng-bind="getEffortEstimationRatio()")
+                .col-lg-8.col-md-8.col-sm-8.col-xs-8
+                    h4 Activity
+                    .team-details
+                        strong Latest Comments:
+                        p(ng-repeat="comment in selectedTeamMember.comments | limitTo: 5")
+                            i.fa.fa-angle-double-right
+                            | "{{comment.content}}"
+                            strong (
+                                span(ng-bind="comment.timestamp | date:'yyyy-MM-dd HH:mm:ss'")
+                                | )
+                        strong Latest Tickets:
+                        span.ticket.ticket-code(class="ticket-{{ticket.type}}" ng-repeat="ticket in userTickets | filter: selectedTeamMember.username | limitTo: 5") TC-{{ticket.code}}
+                            span.ticket-title(ng-bind="ticket.title")
 div(ng-include="templateUserAssignModal.url")

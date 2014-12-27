@@ -1,13 +1,12 @@
-var dbURI = 'mongodb://localhost/issuetracker';
-
 var mongoose = require('mongoose'),
+	config = require('./../config.json'),
 	_ = require('underscore')._;
 
-mongoose.connect(dbURI);
+mongoose.connect(config.dbURI);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback() {
+db.once('open', function () {
 	console.log('Connection to DB established...');
 });
 
@@ -29,7 +28,7 @@ exports.updateProject = function (oldProject, body, res) {
 		if (err) {
 			res.status(500).send(err);
 		} else {
-			_.each(users, function (user, i, list) {
+			_.each(users, function (user) {
 				user.project = body.project;
 				user.save(function (err) {
 					if (err) {
@@ -64,7 +63,7 @@ exports.updateSettings = function (userId, settingId, settings, res) {
 		if (err) {
 			res.status(500).send(err);
 		} else {
-			_.each(user.settings, function (s, i, list) {
+			_.each(user.settings, function (s) {
 				if (s.key == settingId) {
 					s.displayUserActivity = settings.displayUserActivity;
 					s.displayUserChart = settings.displayUserChart;
@@ -89,7 +88,7 @@ exports.updateAllSettings = function (settings, res) {
 		if (err) {
 			res.status(500).send(err);
 		} else {
-			_.each(users, function (user, i, list) {
+			_.each(users, function (user) {
 				user.settings[0].displayUserEmail = settings.displayUserEmail;
 				user.settings[0].displayUserRole = settings.displayUserRole;
 
@@ -122,7 +121,7 @@ exports.register = function (req, res) {
 			displayUserEmail: true,
 			displayUserRole: true
 	}]
-	}), req.body.password, function (err, user) {
+	}), req.body.password, function (err) {
 		if (err) {
 			console.log("Registration error %s", err);
 			res.status(500).send(err);
@@ -152,7 +151,7 @@ exports.register = function (req, res) {
 			});
 		}
 	});
-}
+};
 
 exports.login = function (username, res) {
 	User.findOne({
@@ -286,7 +285,7 @@ exports.createTicket = function (userId, ticket, res) {
 				} else {
 					var tickets = [];
 
-					_.each(users, function (e, i, list) {
+					_.each(users, function (e) {
 						tickets = _.union(tickets, e.tickets);
 					});
 
@@ -330,8 +329,8 @@ exports.updateTicket = function (ticketId, ticket, res) {
 			if (err) {
 				res.status(500).send(err);
 			} else {
-				_.each(users, function (user, i, list) {
-					_.each(user.tickets, function (el, ix, innerList) {
+				_.each(users, function (user) {
+					_.each(user.tickets, function (el) {
 						if (el.key == ticketId) {
 
 							if (ticket.title != null && ticket.title.length) {
@@ -446,7 +445,7 @@ exports.deleteComment = function (commentId, userId, res) {
 		if (err) {
 			res.status(500).send(err);
 		} else {
-			_.each(user.comments, function (comment, ix, innerList) {
+			_.each(user.comments, function (comment, ix) {
 				if (comment.key == userId) {
 					user.comments.splice(ix, 1);
 				}
@@ -470,8 +469,8 @@ exports.getComments = function (ticketId, res) {
 		} else {
 			var comments = [];
 
-			_.each(users, function (user, i, list) {
-				_.each(user.comments, function (comment, ix, innerList) {
+			_.each(users, function (user) {
+				_.each(user.comments, function (comment) {
 					if (comment.ticket == ticketId) {
 						var c = {
 							key: comment.key,
@@ -498,7 +497,7 @@ exports.updateComment = function (ticketId, ticket, userId, comment, res) {
 		if (err) {
 			res.status(500).send(err);
 		} else {
-			_.each(user.comments, function (c, i, list) {
+			_.each(user.comments, function (c) {
 				if (c.key == ticketId && c.ticket == ticket) {
 
 					if (comment.content != null && comment.content.length) {
@@ -539,7 +538,7 @@ exports.getAllLogs = function (res) {
 			} else {
 				var logs = [];
 
-				_.each(users, function (e, i, list) {
+				_.each(users, function (e) {
 					logs = _.union(logs, e.logs);
 				});
 

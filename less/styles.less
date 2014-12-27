@@ -1,4 +1,5 @@
 @import "constants";
+@import "constants-color";
 
 * {
   margin: 0;
@@ -6,7 +7,7 @@
 }
 
 .tracker-red {
-  color: @tracker-red;
+  color: @color-tracker-red;
 }
 
 /**
@@ -18,10 +19,10 @@
     .tracker-red;
   }
   &-edit {
-    color: @tracker-orange;
+    color: @color-tracker-orange;
   }
   &-check {
-    color: @tracker-green;
+    color: @color-tracker-green;
   }
 }
 
@@ -46,10 +47,10 @@ body {
     padding-top: 10%;
   }
   .bug-invert {
-    color: @tracker-red;
+    color: @color-tracker-red;
   }
   .task-invert {
-    color: @tracker-blue;
+    color: @color-tracker-blue;
   }
   .toggleable {
     font-weight: @font-weight-light;
@@ -60,13 +61,13 @@ body {
  * Chart Secondary Menu CSS
  */
 .menu-hover {
-  background-color: @nav-hover;
+  background-color: @color-nav-hover;
   border-radius: @menu-border-radius;
   cursor: pointer;
 }
 
 .secondary-menu {
-  border-right: @border-width solid @secondary-menu;
+  border-right: @border-width solid @color-secondary-menu;
   margin-bottom: @spacing-medium;
   > ul > li {
     vertical-align: middle;
@@ -99,7 +100,7 @@ form[name*='Form'] .fa-warning, .login-form .fa-warning, p[ng-repeat*='comment']
 }
 
 form[name*='Form'] p[ng-show*='$error'], p[ng-repeat*='error'] {
-  color: @tracker-red;
+  color: @color-tracker-red;
 }
 
 p[ng-show*='error'] {
@@ -130,32 +131,32 @@ p[ng-show*='loginForm.password'] {
   i {
     padding-left: @spacing-small;
     &.ion-arrow-up-c {
-      color: @tracker-red;
+      color: @color-tracker-red;
     }
     &.ion-arrow-down-c {
-      color: @tracker-green;
+      color: @color-tracker-green;
     }
   }
 }
 
 .ticket-bug {
-  background-color: @tracker-red;
+  background-color: @color-tracker-red;
 }
 
 .ticket-bug-inverted {
-  color: @tracker-red;
+  color: @color-tracker-red;
 }
 
 .ticket-task {
-  background-color: @tracker-blue;
+  background-color: @color-tracker-blue;
 }
 
 .ticket-task-inverted {
-  color: @tracker-blue;
+  color: @color-tracker-blue;
 }
 
 .ticket-not-owned {
-  background-color: @tracker-grey-dark;
+  background-color: @color-tracker-grey-dark;
 }
 
 .ticket-code {
@@ -165,15 +166,15 @@ p[ng-show*='loginForm.password'] {
   display: inline-flex;
   align-items: center;
   &.ticket-unassigned {
-    background-color: @ticket-unassigned;
-    color: @tracker-grey-dark;
+    background-color: @color-ticket-unassigned;
+    color: @color-tracker-grey-dark;
   }
 }
 
 .ticket-title {
   position: relative;
   left: 1px;
-  background-color: @tracker-grey-light;
+  background-color: @color-tracker-grey-light;
   color: black;
   padding: @spacing-small-x @spacing-small;
   border-radius: 0 @ticket-border-radius @ticket-border-radius 0;
@@ -184,7 +185,7 @@ p[ng-show*='loginForm.password'] {
  * Log entry CSS.
  */
 .log {
-  color: @tracker-grey-dark;
+  color: @color-tracker-grey-dark;
   vertical-align: middle;
   align-items: center;
   display: inline-flex;
@@ -225,22 +226,22 @@ p[ng-show*='loginForm.password'] {
 }
 
 nav.navbar {
-  border-color: @secondary-menu;
+  border-color: @color-secondary-menu;
   min-height: 40px;
   margin-bottom: 0;
   .container-fluid {
-    background-color: @container-background;
+    background-color: @color-container-background;
   }
   li {
     > a.fa-bars:hover, &.open > a.fa-bars:hover, &.open > a.fa-bars {
-      background-color: @nav-hover;
+      background-color: @color-nav-hover;
     }
     ul.dropdown-menu {
       font-size: 90%;
     }
   }
   a.fa-bars {
-    background-color: @nav-hover;
+    background-color: @color-nav-hover;
     margin: 0 @spacing-small-x;
   }
   ul.nav > li {
@@ -259,11 +260,11 @@ nav.navbar {
     > li.toggleable:hover,
     > li.toggleable.active > a,
     > nav.navbar li.toggleable.active > a:hover {
-      background-color: @nav-hover;
+      background-color: @color-nav-hover;
     }
   }
   ul.dropdown-menu .fa-check {
-    color: @tracker-grey-dark;
+    color: @color-tracker-grey-dark;
     padding-left: @spacing-small;
   }
 }
@@ -288,6 +289,12 @@ nav.navbar {
       p > strong {
         padding-left: @spacing-small;
       }
+    }
+    .fa.fa-envelope-o {
+      padding-right: @spacing-small-x;
+    }
+    .panel-left {
+      border-right: @border-width solid @color-secondary-menu;
     }
   }
   &.panel-dashboard {
@@ -324,7 +331,7 @@ nav.navbar {
     }
     input[type="text"] {
       border: 0;
-      background-color: @ticket-unassigned;
+      background-color: @color-ticket-unassigned;
     }
     ul {
       &.list-unstyled li:hover {
@@ -336,11 +343,11 @@ nav.navbar {
       }
     }
     .list-projects .fa-edit {
-      color: @tracker-orange;
+      color: @color-tracker-orange;
     }
   }
   > .panel-heading {
-    background-color: @container-background;
+    background-color: @color-container-background;
     padding: @spacing-small @spacing-medium;
     > span > i[data-toggle*="collapse"] {
       cursor: pointer;
@@ -404,7 +411,7 @@ nav.navbar {
 }
 
 .modal-comments {
-  border-bottom: @border-width solid @comments-border;
+  border-bottom: @border-width solid @color-comments-border;
   padding-top: 0;
   padding-bottom: @spacing-medium;
   div {
@@ -451,11 +458,11 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
     margin-bottom: @spacing-medium;
     font-weight: @font-weight-light;
     text-align: center;
-    border-bottom: @border-width solid @secondary-menu;
-    border-left: @border-width dashed @secondary-menu;
+    border-bottom: @border-width solid @color-secondary-menu;
+    border-left: @border-width dashed @color-secondary-menu;
     vertical-align: top;
     &:last-child {
-      border-right: @border-width dashed @secondary-menu;
+      border-right: @border-width dashed @color-secondary-menu;
     }
   }
   &.table-tickets > thead > tr > th {
@@ -465,13 +472,13 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
     > td {
       border-top: none;
       padding: 0;
-      border-left: @border-width dashed @secondary-menu;
+      border-left: @border-width dashed @color-secondary-menu;
       vertical-align: top;
       &[status] {
         min-height: 50px;
       }
       &:last-child {
-        border-right: @border-width dashed @secondary-menu;
+        border-right: @border-width dashed @color-secondary-menu;
       }
       > div.progress {
         margin-bottom: 0;
@@ -494,7 +501,7 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
         }
       }
       &:hover {
-        background-color: @ticket-unassigned;
+        background-color: @color-ticket-unassigned;
       }
     }
   }
@@ -502,13 +509,13 @@ form[name*='commentForm'].form-horizontal .modal-comments-post .form-group {
 
 .nav.nav-tabs > li {
   &.active {
-    color: @tracker-grey-dark;
+    color: @color-tracker-grey-dark;
   }
   > a {
-    color: @bootstrap-default-dark;
+    color: @color-bootstrap-default-dark;
     padding: @spacing-small @spacing-medium;
   }
   > a:hover {
-    background-color: @container-background;
+    background-color: @color-container-background;
   }
 }

@@ -5,8 +5,7 @@
 /**
  * Dependent modules.
  */
-var mongoose = require('mongoose'),
-	utils = require('./utils'),
+var utils = require('./utils'),
 	Comment = require('../model/comment'),
 	Log = require('../model/log'),
 	Ticket = require('../model/ticket'),
@@ -39,7 +38,6 @@ exports.populateDb = function () {
 		user2Comments = [],
 		usernames = ["abucin", "psmith"],
 		priorities = ["minor", "standard", "major"],
-		sampleTicketKey = utils.generateKey(),
 		yesterday = new Date();
 
 	yesterday.setDate(yesterday.getDate() - 1);
@@ -61,7 +59,7 @@ exports.populateDb = function () {
 			loggedTime: loggedTime,
 			remainingTime: estimatedTime - loggedTime
 		});
-	}
+	};
 
 	/**
 	 * Generates a settings object for a user.
@@ -74,7 +72,7 @@ exports.populateDb = function () {
 			displayUserEmail: true,
 			displayUserRole: true
 		}];
-	}
+	};
 
 	/**
 	 * Generates a ticket comment.
@@ -85,7 +83,7 @@ exports.populateDb = function () {
 			content: content,
 			ticket: ticketKey
 		});
-	}
+	};
 
 	/**
 	 * Generates a log entry.
@@ -101,7 +99,7 @@ exports.populateDb = function () {
 			username: username,
 			timestamp: timestamp != null ? timestamp : new Date()
 		});
-	}
+	};
 
 	var generateUser = function (key, username, email, firstName, lastName, role, projectRole, project, expertise, tickets, logs, comments, settings) {
 		return new User({
@@ -121,7 +119,7 @@ exports.populateDb = function () {
 			logs: logs,
 			comments: comments
 		});
-	}
+	};
 
 	/**
 	 * Dummy-data generation.

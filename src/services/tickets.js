@@ -73,15 +73,15 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 						}
 					}
 				}
-			}
+			};
 
 			updatedTicket.loggedTime = loggedWork;
 
 			ResourceService.putData('tickets/' + key, updatedTicket, callback);
 		};
 
-		this.deleteTicket = function (key, username, tickets, createdTickets, inProgressTickets, testingTickets, doneTickets) {
-			var callback = function (data) {
+		this.deleteTicket = function (key, username, tickets, createdTickets, inProgressTickets, testingTickets) {
+			var callback = function () {
 				var deletedTicketStatus = "";
 
 				for (var i in tickets) {
@@ -140,13 +140,13 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 					{
 						for (var i in $rootScope.tickets.done) {
 							if ($rootScope.tickets.done[i].key == key) {
-								$rootScope.tickets.done.splice(i, 1);;
+								$rootScope.tickets.done.splice(i, 1);
 								break;
 							}
 						}
 					}
 				}
-			}
+			};
 			ResourceService.deleteData('tickets/' + key, callback);
 		};
 }]);

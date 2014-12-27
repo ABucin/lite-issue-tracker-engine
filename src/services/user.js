@@ -11,7 +11,7 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 
 		this.updateUser = function (userId, userData, users) {
 			var self = this;
-			var callback = function (data) {
+			var callback = function () {
 				self.fetchUserData();
 			};
 
@@ -28,7 +28,7 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 			ResourceService.getData('users', {
 				project: "unassigned"
 			}, callback);
-		}
+		};
 
 		this.fetchUserData = function () {
 			var callback = function (data) {
@@ -43,7 +43,6 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 
 				for (var i in data) {
 					var tickets = $rootScope.users[i].tickets;
-					var logs = $rootScope.users[i].logs;
 
 					for (var j in tickets) {
 						var status = tickets[j].status;
@@ -52,7 +51,7 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 						$rootScope.tickets[status].push(tickets[j]);
 					}
 				}
-			}
+			};
 
 			ResourceService.getData('users', null, callback);
 		};

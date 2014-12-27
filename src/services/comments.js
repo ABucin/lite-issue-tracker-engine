@@ -2,7 +2,7 @@ app.service('CommentsService', ['$rootScope', 'ResourceService',
 	function ($rootScope, ResourceService) {
 
 		this.deleteComment = function (userId, commentKey, comments, comment) {
-			var callback = function (data) {
+			var callback = function () {
 				for (var i in comments) {
 					if (comments[i].key == commentKey) {
 						comments.splice(i, 1);
@@ -36,7 +36,7 @@ app.service('CommentsService', ['$rootScope', 'ResourceService',
 				}
 			};
 			ResourceService.putData('users/' + userId + '/tickets/' + ticketKey + '/comments/' + commentKey, comment, callback);
-		}
+		};
 
 		this.fetchComments = function (ticketKey, comments) {
 			var callback = function (data) {

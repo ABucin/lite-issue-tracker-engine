@@ -8,14 +8,14 @@ html(ng-app="issueTracker")
         // Link to Google Web Fonts
         link(href="http://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100" rel="stylesheet" type="text/css")
         meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
-    body(ng-controller="RootCtrl")
-        tracker-menu
-        .container-fluid(ng-class="togglePadding()")
-            ng-view(secured)
-        .container-fluid
-            .row
-                .col-xs-12.col-sm-12.col-md-12.col-lg-12.text-center
-                    small Lite Issue Tracker Engine v{{footer.version}}. Copyright &copy; {{footer.year}} Andrei Bucin, All rights reserved.
+body(ng-controller="RootCtrl")
+    tracker-menu
+    .container-fluid(ng-class="togglePadding()")
+        ng-view(secured)
+    .container-fluid
+        .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12.text-center
+                small Lite Issue Tracker Engine v{{footer.version}}. Copyright &copy; {{footer.year}} Andrei Bucin, All rights reserved.
     footer
         // Link to imported JS libraries
         script(src="js/lite-issue-tracker-engine-libs.min.js")
