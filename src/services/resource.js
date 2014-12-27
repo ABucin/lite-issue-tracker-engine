@@ -1,6 +1,6 @@
 app.service('ResourceService', ['$rootScope', '$http',
     function ($rootScope, $http) {
-        var pathRoot = '/itr/api/',
+        var pathRoot = 'http://localhost:3000/itr/api/',
             resource = function (method, path, params, data, callback) {
                 $http({
                     method: method,

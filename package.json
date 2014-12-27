@@ -4,8 +4,7 @@
   "description": "Application which allows project task management.",
   "main": "root.js",
   "scripts": {
-    "start": "bin\\deploy_app.bat",
-    "start-linux": "./bin/deploy_app.sh",
+    "start": "grunt deploy",
     "update": "npm update -g && npm update --save-dev",
     "update-bower": "bower update --force --save-dev"
   },
@@ -20,9 +19,6 @@
   },
   "homepage": "https://github.com/ABucin/lite-issue-tracker-engine",
   "devDependencies": {
-    "body-parser": "*",
-    "express": "*",
-    "express-json": "*",
     "grunt": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-copy": "*",
@@ -30,11 +26,6 @@
     "grunt-contrib-less": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
-    "less": "*",
-    "mongoose": "*",
-    "passport": "*",
-    "passport-local": "*",
-    "passport-local-mongoose": "*",
-    "underscore": "*"
+    "less": "*"
   }
 }
