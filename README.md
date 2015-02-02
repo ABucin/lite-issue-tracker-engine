@@ -11,6 +11,10 @@ The release notes can be found [here](https://github.com/ABucin/lite-issue-track
 
 The wiki can be found [here](https://github.com/ABucin/lite-issue-tracker-engine/wiki).
 
+### Backend
+
+A backend for this project can be found here: https://github.com/ABucin/lite-backend
+
 ### Installation
 
 #### Pre-requisites:
