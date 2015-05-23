@@ -11,12 +11,15 @@ The release notes can be found [here](https://github.com/ABucin/lite-issue-track
 
 The wiki can be found [here](https://github.com/ABucin/lite-issue-tracker-engine/wiki).
 
+### Backend
+
+A backend for this project can be found here: https://github.com/ABucin/lite-backend
+
 ### Installation
 
 #### Pre-requisites:
 
-1. Install Node.js from `http://nodejs.org/` .
-2. Install MongoDB from `http://www.mongodb.org/downloads` .
+1. Clone the `lite-backend` project from `https://github.com/ABucin/lite-backend.git` .
 
 #### Steps:
 
@@ -24,6 +27,7 @@ The wiki can be found [here](https://github.com/ABucin/lite-issue-tracker-engine
 2. 
   1. **Windows:** open a console using `Shift + right-click on project folder > Open command window here` .
   2. **Linux:** go to the cloned files directory using the terminal.
-4. Run `install.bat` (Win) or `install.sh` (Linux).
-5. Deploy the application by using `npm start` (Win) or `npm start-linux` (Linux). This will start the application server, the DB server and will recompile all the client files.
-8. To access the application, go to `http://localhost:3000` using your favourite browser.
+3. Run `install.bat` (Win) or `install.sh` (Linux).
+4. Deploy the application by using `npm start`. Note that all client files will then be watched and recompiled in real-time.
+5. Deploy the backend using `npm start` (must be in the backend project dir). This will start the DB server and the Node server.
+6. To access the application, either run it from your favourite IDE or open the `index.html` file in your browser.

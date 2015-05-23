@@ -1,5 +1,5 @@
-app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 'AuthenticationService',
-function ($scope, $rootScope, $location, UserService, AuthenticationService) {
+app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 'SecurityService',
+	function ($scope, $rootScope, $location, UserService, SecurityService) {
 		$scope.selectedTeamMember = {};
 		$scope.unassignedUser = {};
 		$scope.unassignedUsers = [];
@@ -24,7 +24,7 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 		 * Document loading configuration.
 		 */
 		angular.element(document).ready(function () {
-			$scope.selectTeamMember(AuthenticationService.getAuthenticatedUser().key);
+			$scope.selectTeamMember(SecurityService.getAuthenticatedUser().key);
 		});
 
 		/**
@@ -103,6 +103,6 @@ function ($scope, $rootScope, $location, UserService, AuthenticationService) {
 				return 1;
 			}
 			return (totalLoggedTime / totalEstimatedTime).toFixed(2);
-		}
+		};
 
 }]);

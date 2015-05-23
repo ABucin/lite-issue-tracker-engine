@@ -1,19 +1,16 @@
-app.service('AuthenticationService', ['ResourceService', 'UserService', 'SettingsService', '$rootScope', '$cookieStore', '$cookies',
+app.service('AuthenticationService', ['HttpService', 'UserService', 'SettingsService', '$rootScope', '$cookies',
 
-	function (ResourceService, UserService, SettingsService, $rootScope, $cookieStore, $cookies) {
+	function (HttpService, UserService, SettingsService, $rootScope, $cookies) {
 
-		this.isAuthenticated = function () {
-			return $cookieStore.get('user') !== undefined && $cookieStore.get('user').username !== undefined;
-		};
-
-		this.getAuthenticatedUser = function () {
-			return ($cookieStore.get('user') !== undefined) ? $cookieStore.get('user') : {};
-		}
-
+		/**
+		 * Authenticates a user using the provided data.
+		 * @param data user information that is sent to the backend and cached locally
+		 */
 		this.login = function (data) {
-			var callback = function (data) {
+			var callback = function (response) {
 				if (!$rootScope.general.errors.length) {
-					$cookieStore.put('user', data);
+					response.password = data.password;
+					$cookies.putObject('user', response);
 					// disable when user auth in place
 					UserService.fetchUserData();
 					// caches the settings for the current user
@@ -22,26 +19,33 @@ app.service('AuthenticationService', ['ResourceService', 'UserService', 'Setting
 				}
 			};
 
-			ResourceService.postData('users/login', data, callback);
+			HttpService.postData('auth/login', data, callback);
 		};
 
+		/**
+		 * De-authenticates a user both locally and in the backend.
+		 */
 		this.logout = function () {
-			var callback = function (data) {
-				$cookieStore.remove('user');
-				$cookieStore.remove('page');
-				$cookieStore.remove('settings');
-				$cookieStore.remove('analytics-subpage');
-				$cookieStore.remove('settings-subpage');
+			var callback = function () {
+				$cookies.remove('user');
+				$cookies.remove('page');
+				$cookies.remove('settings');
+				$cookies.remove('analytics-subpage');
+				$cookies.remove('settings-subpage');
 				$rootScope.navigate('login');
 			};
 
-			ResourceService.getData('users/logout', null, callback);
+			HttpService.getData('auth/logout', null, callback);
 		};
 
+		/**
+		 * Registers a user and displays the appropriate modals.
+		 * @param data user information that is stored locally
+		 */
 		this.register = function (data) {
 			var callback = function (data) {
 				if (!$rootScope.general.errors.length) {
-					$cookieStore.put('user', data);
+					$cookies.putObject('user', data);
 					$rootScope.general.errors = [];
 					$("#register-modal").modal('hide');
 					$('#register-success-modal').modal('show');
@@ -52,6 +56,6 @@ app.service('AuthenticationService', ['ResourceService', 'UserService', 'Setting
 				}
 			};
 
-			ResourceService.postData('users/register', data, callback);
+			HttpService.postData('auth/register', data, callback);
 		};
-}]);
+	}]);
