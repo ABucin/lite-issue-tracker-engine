@@ -1,5 +1,5 @@
-app.service('AnalyticsService', ['ResourceService',
-    function (ResourceService) {
+app.service('AnalyticsService', ['HttpService',
+	function (HttpService) {
 
         /**
          * Retrieves chart data and attaches it to the provided div.
@@ -14,6 +14,7 @@ app.service('AnalyticsService', ['ResourceService',
                 params = {
                     type: type
                 };
-            ResourceService.getData('analytics', params, callback);
+
+	        HttpService.getData('analytics', params, callback);
         };
     }]);

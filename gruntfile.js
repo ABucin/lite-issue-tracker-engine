@@ -110,5 +110,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jade');
 
     // Register deployment task
+    grunt.registerTask('deploy_dev', ['copy', 'concat', 'less', 'jade', 'watch']);
     grunt.registerTask('deploy', ['copy', 'concat', 'uglify', 'less', 'jade', 'watch']);
 };

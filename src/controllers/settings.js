@@ -1,5 +1,5 @@
-app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'SettingsService', 'UserService', 'ProjectsService', 'LogsService',
-function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserService, ProjectsService, LogsService) {
+app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'SettingsService', 'UserService', 'ProjectsService', 'LogsService',
+	function ($scope, $rootScope, $location, $cookies, SettingsService, UserService, ProjectsService, LogsService) {
 
 		/**
 		 * General page configuration.
@@ -77,13 +77,13 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 		 * Updates the user both in the cache as well as in the DB.
 		 */
 		$scope.updateUser = function () {
-			if ($cookieStore.get('user') !== undefined) {
-				var temp = $cookieStore.get('user');
+			if ($cookies.getObject('user') !== undefined) {
+				var temp = $cookies.getObject('user');
 				temp.firstName = $scope.editedUser.firstName;
 				temp.lastName = $scope.editedUser.lastName;
 				temp.email = $scope.editedUser.email;
 				temp.expertise = $scope.editedUser.expertise;
-				$cookieStore.put('user', temp);
+				$cookies.putObject('user', temp);
 			}
 
 			UserService.updateUser($rootScope.getAuthenticatedUser().key, $scope.editedUser);
@@ -101,12 +101,12 @@ function ($scope, $rootScope, $location, $cookieStore, SettingsService, UserServ
 		 */
 		$scope.subPageName = {
 			put: function (name) {
-				$cookieStore.put('settings-subpage', {
+				$cookies.putObject('settings-subpage', {
 					name: name
 				});
 			},
 			get: function () {
-				var subpage = $cookieStore.get('settings-subpage');
+				var subpage = $cookies.getObject('settings-subpage');
 				if (subpage !== undefined && subpage.name !== undefined) {
 					return subpage.name;
 				}

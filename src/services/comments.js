@@ -1,5 +1,5 @@
-app.service('CommentsService', ['$rootScope', 'ResourceService',
-	function ($rootScope, ResourceService) {
+app.service('CommentsService', ['$rootScope', 'HttpService',
+	function ($rootScope, HttpService) {
 
 		this.deleteComment = function (userId, commentKey, comments, comment) {
 			var callback = function () {
@@ -10,7 +10,7 @@ app.service('CommentsService', ['$rootScope', 'ResourceService',
 					}
 				}
 			};
-			ResourceService.deleteData('users/' + userId + '/comments/' + commentKey, callback);
+			HttpService.deleteData('users/' + userId + '/comments/' + commentKey, callback);
 		};
 
 		this.addComment = function (userId, ticketKey, comment, comments) {
@@ -21,7 +21,7 @@ app.service('CommentsService', ['$rootScope', 'ResourceService',
 				});
 				comment.content = "";
 			};
-			ResourceService.postData('users/' + userId + '/tickets/' + ticketKey + '/comments', comment, callback);
+			HttpService.postData('users/' + userId + '/tickets/' + ticketKey + '/comments', comment, callback);
 		};
 
 		this.editComment = function (userId, username, ticketKey, commentKey, comments, comment, statusObj) {
@@ -35,13 +35,13 @@ app.service('CommentsService', ['$rootScope', 'ResourceService',
 					}
 				}
 			};
-			ResourceService.putData('users/' + userId + '/tickets/' + ticketKey + '/comments/' + commentKey, comment, callback);
+			HttpService.putData('users/' + userId + '/tickets/' + ticketKey + '/comments/' + commentKey, comment, callback);
 		};
 
 		this.fetchComments = function (ticketKey, comments) {
 			var callback = function (data) {
 				angular.copy(data, comments);
 			};
-			ResourceService.getData('tickets/' + ticketKey + '/comments', null, callback);
+			HttpService.getData('tickets/' + ticketKey + '/comments', null, callback);
 		};
 }]);

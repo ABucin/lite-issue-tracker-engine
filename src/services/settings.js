@@ -1,45 +1,46 @@
-app.service('SettingsService', ['$rootScope', '$cookieStore', 'ResourceService',
-	function ($rootScope, $cookieStore, ResourceService) {
+app.service('SettingsService', ['$rootScope', '$cookies', 'HttpService',
+	function ($rootScope, $cookies, HttpService) {
 
 		this.loadSettings = function () {
 			var callback = function (data) {
-				$cookieStore.put('settings', data[0]);
+				$cookies.putObject('settings', data[0]);
 			};
 
-			ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().key + '/settings', null, callback);
+			HttpService.getData('/settings', null, callback);
 		};
 
 		this.getSettings = function () {
-			return ($cookieStore.get('settings') !== undefined) ? $cookieStore.get('settings') : {};
+			return $cookies.getObject('settings') || {};
 		};
 
 		this.setSettings = function (property, value) {
 			var callback = function (data) {
-				$cookieStore.remove('settings');
-				$cookieStore.put('settings', data);
+				$cookies.remove('settings');
+				$cookies.putObject('settings', data);
 			};
 
-			if ($cookieStore.get('settings') !== undefined) {
-				var payload = $cookieStore.get('settings');
-				payload[property] = value;
-				ResourceService.putData('users/' + $rootScope.getAuthenticatedUser().key + '/settings/' + payload.key, payload, callback);
+			var storedSettings = $cookies.getObject('settings');
+
+			if (storedSettings !== undefined) {
+				storedSettings[property] = value;
+				HttpService.putData('users/' + $rootScope.getAuthenticatedUser().key + '/settings/' + storedSettings.key, storedSettings, callback);
 			} else {
-				ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().key + '/settings', null, callback);
+				HttpService.getData('/settings', null, callback);
 			}
 		};
 
 		this.setGlobalSettings = function (property, value) {
 			var callback = function (data) {
-				$cookieStore.remove('settings');
-				$cookieStore.put('settings', data);
+				$cookies.remove('settings');
+				$cookies.putObject('settings', data);
 			};
 
-			if ($cookieStore.get('settings') !== undefined) {
-				var payload = $cookieStore.get('settings');
+			if ($cookies.getObject('settings') !== undefined) {
+				var payload = $cookies.getObject('settings');
 				payload[property] = value;
-				ResourceService.putData('settings', payload, callback);
+				HttpService.putData('settings', payload, callback);
 			} else {
-				ResourceService.getData('users/' + $rootScope.getAuthenticatedUser().key + '/settings', null, callback);
+				HttpService.getData('users/' + $rootScope.getAuthenticatedUser().key + '/settings', null, callback);
 			}
 		};
 }]);

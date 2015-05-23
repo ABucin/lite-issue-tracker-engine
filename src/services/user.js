@@ -1,12 +1,12 @@
-app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
-	function ($rootScope, $cookieStore, ResourceService) {
+app.service('UserService', ['$rootScope', 'HttpService',
+	function ($rootScope, HttpService) {
 
 		this.getUser = function (userId, result) {
 			var callback = function (data) {
 				angular.copy(data[0], result);
 			};
 
-			ResourceService.getData('users/' + userId, null, callback);
+			HttpService.getData('users/' + userId, null, callback);
 		};
 
 		this.updateUser = function (userId, userData, users) {
@@ -15,7 +15,7 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 				self.fetchUserData();
 			};
 
-			ResourceService.putData('users/' + userId, userData, callback);
+			HttpService.putData('users/' + userId, userData, callback);
 		};
 
 		this.getUnassignedUsers = function (result) {
@@ -25,7 +25,7 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 				}
 			};
 
-			ResourceService.getData('users', {
+			HttpService.getData('users', {
 				project: "unassigned"
 			}, callback);
 		};
@@ -53,6 +53,6 @@ app.service('UserService', ['$rootScope', '$cookieStore', 'ResourceService',
 				}
 			};
 
-			ResourceService.getData('users', null, callback);
+			HttpService.getData('users', null, callback);
 		};
-}]);
+	}]);

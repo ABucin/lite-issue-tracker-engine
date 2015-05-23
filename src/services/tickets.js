@@ -1,5 +1,5 @@
-app.service('TicketsService', ['$rootScope', 'ResourceService',
-	function ($rootScope, ResourceService) {
+app.service('TicketsService', ['$rootScope', 'HttpService',
+	function ($rootScope, HttpService) {
 
 		this.addTicket = function (userId, ticket, tickets, createdTickets, logger) {
 			var callback = function (data) {
@@ -7,7 +7,7 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 				createdTickets.push(data);
 				logger("create", data);
 			};
-			ResourceService.postData('users/' + userId + '/tickets', ticket, callback);
+			HttpService.postData('users/' + userId + '/tickets', ticket, callback);
 		};
 
 		this.updateTicket = function (key, username, updatedTicket, tickets, createdTickets, inProgressTickets, testingTickets, doneTickets, loggedWork) {
@@ -77,7 +77,7 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 
 			updatedTicket.loggedTime = loggedWork;
 
-			ResourceService.putData('tickets/' + key, updatedTicket, callback);
+			HttpService.putData('tickets/' + key, updatedTicket, callback);
 		};
 
 		this.deleteTicket = function (key, username, tickets, createdTickets, inProgressTickets, testingTickets) {
@@ -147,6 +147,6 @@ app.service('TicketsService', ['$rootScope', 'ResourceService',
 					}
 				}
 			};
-			ResourceService.deleteData('tickets/' + key, callback);
+			HttpService.deleteData('tickets/' + key, callback);
 		};
 }]);

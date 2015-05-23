@@ -1,4 +1,4 @@
-app.directive('resource', ['$rootScope', function ($rootScope) {
+app.directive('resource', ['', function () {
 	return {
 		restrict: 'E',
 		link: function (scope, element, attr) {
@@ -10,7 +10,7 @@ app.directive('resource', ['$rootScope', function ($rootScope) {
 app.directive('secured', ['$rootScope', '$location', function ($rootScope, $location) {
 	return {
 		restrict: 'A',
-		link: function (scope, element, attr) {
+		link: function () {
 			if (!$rootScope.isAuthenticated()) {
 				$location.path('/login');
 			}
@@ -21,7 +21,7 @@ app.directive('secured', ['$rootScope', '$location', function ($rootScope, $loca
 app.directive('highlightable', function () {
 	return {
 		restrict: 'A',
-		link: function (scope, element, attr) {
+		link: function (scope, element) {
 			element[0].addEventListener('dragenter', function (e) {
 				element.css({
 					"background-color": "#e6e6e6"

@@ -1,18 +1,18 @@
-app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'AnalyticsService',
+app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'AnalyticsService',
 
-function ($scope, $rootScope, $location, $cookieStore, AnalyticsService) {
+	function ($scope, $rootScope, $location, $cookies, AnalyticsService) {
 
 		/**
 		 * Caches name of current subpage.
 		 */
 		$scope.subPageName = {
 			put: function (name) {
-				$cookieStore.put('analytics-subpage', {
+				$cookies.putObject('analytics-subpage', {
 					name: name
 				});
 			},
 			get: function () {
-				var subpage = $cookieStore.get('analytics-subpage');
+				var subpage = $cookies.getObject('analytics-subpage');
 				if (subpage !== undefined && subpage.name !== undefined) {
 					return subpage.name;
 				}
