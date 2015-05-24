@@ -1,46 +1,35 @@
-app.service('SettingsService', ['$rootScope', '$cookies', 'HttpService',
-	function ($rootScope, $cookies, HttpService) {
+app.service('SettingsService', ['$cookies', 'HttpService',
+	function ($cookies, HttpService) {
 
 		this.loadSettings = function () {
-			var callback = function (data) {
-				$cookies.putObject('settings', data[0]);
-			};
-
-			HttpService.getData('/settings', null, callback);
+			return HttpService._get('settings');
 		};
 
 		this.getSettings = function () {
 			return $cookies.getObject('settings') || {};
 		};
 
-		this.setSettings = function (property, value) {
-			var callback = function (data) {
-				$cookies.remove('settings');
-				$cookies.putObject('settings', data);
-			};
-
+		this.setSettings = function (property, value, authUserKey) {
 			var storedSettings = $cookies.getObject('settings');
+			var outcome = HttpService._get('settings');
 
 			if (storedSettings !== undefined) {
 				storedSettings[property] = value;
-				HttpService.putData('users/' + $rootScope.getAuthenticatedUser().key + '/settings/' + storedSettings.key, storedSettings, callback);
-			} else {
-				HttpService.getData('/settings', null, callback);
+				outcome = HttpService._put('users/' + authUserKey + '/settings/' + storedSettings.key, storedSettings);
 			}
+
+			return outcome;
 		};
 
-		this.setGlobalSettings = function (property, value) {
-			var callback = function (data) {
-				$cookies.remove('settings');
-				$cookies.putObject('settings', data);
-			};
+		this.setGlobalSettings = function (property, value, authUserKey) {
+			var outcome = HttpService._get('users/' + authUserKey + '/settings');
 
 			if ($cookies.getObject('settings') !== undefined) {
 				var payload = $cookies.getObject('settings');
 				payload[property] = value;
-				HttpService.putData('settings', payload, callback);
-			} else {
-				HttpService.getData('users/' + $rootScope.getAuthenticatedUser().key + '/settings', null, callback);
+				outcome = HttpService._put('settings', payload);
 			}
+
+			return outcome;
 		};
-}]);
+	}]);

@@ -50,11 +50,17 @@ app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookies',
 		 * Retrieves settings from DB.
 		 */
 		$scope.loadSettings = function () {
-			SettingsService.loadSettings();
+			SettingsService.loadSettings()
+				.then(function (response) {
+					$cookies.putObject('settings', response[0]);
+				});
 		};
 
         $scope.loadLogData = function() {
-            LogsService.fetchLogData($rootScope.dashboard.logEntries);
+	        LogsService.fetchLogData()
+		        .then(function (response) {
+			        angular.copy(response, $rootScope.dashboard.logEntries);
+		        });
         };
 
         $scope.loadLogData();
@@ -63,16 +69,45 @@ app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookies',
 		 * Sets the given property with the given value for the current user.
 		 */
 		$scope.setSettings = function (property, value) {
-			SettingsService.setSettings(property, value);
+			SettingsService.setSettings(property, value, $rootScope.getAuthenticatedUser().key)
+				.then(function (response) {
+					$cookies.remove('settings');
+					$cookies.putObject('settings', response);
+				});
 		};
 
 		/**
 		 * Sets the settings for all users.
 		 */
 		$scope.setGlobalSettings = function (property, value) {
-			SettingsService.setGlobalSettings(property, value);
+			SettingsService.setGlobalSettings(property, value, $rootScope.getAuthenticatedUser().key)
+				.then(function (response) {
+					$cookies.remove('settings');
+					$cookies.putObject('settings', response);
+				});
 		};
 
+		var handleUpdateUser = function (response) {
+			$rootScope.users = response;
+			$rootScope.userTickets = [];
+			$rootScope.tickets = {
+				created: [],
+				inProgress: [],
+				testing: [],
+				done: []
+			};
+
+			for (var i in response) {
+				var tickets = $rootScope.users[i].tickets;
+
+				for (var j in tickets) {
+					var status = tickets[j].status;
+					tickets[j].creator = $rootScope.users[i].username;
+					$rootScope.userTickets.push(tickets[j]);
+					$rootScope.tickets[status].push(tickets[j]);
+				}
+			}
+		};
 		/**
 		 * Updates the user both in the cache as well as in the DB.
 		 */
@@ -86,14 +121,20 @@ app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookies',
 				$cookies.putObject('user', temp);
 			}
 
-			UserService.updateUser($rootScope.getAuthenticatedUser().key, $scope.editedUser);
+			UserService.updateUser($rootScope.getAuthenticatedUser().key, $scope.editedUser)
+				.then(handleUpdateUser);
 		};
 
 		/**
 		 * Updates the current project.
 		 */
 		$scope.updateProject = function () {
-			ProjectsService.updateProject($scope.general.oldProject, $scope.general);
+			ProjectsService.updateProject($scope.general.oldProject, $scope.general)
+				.then(function (response) {
+					var temp = $cookies.getObject('user');
+					temp.project = response.project;
+					$cookies.putObject('user', temp);
+				});
 		};
 
 		/**
@@ -107,11 +148,7 @@ app.controller('SettingsCtrl', ['$scope', '$rootScope', '$location', '$cookies',
 			},
 			get: function () {
 				var subpage = $cookies.getObject('settings-subpage');
-				if (subpage !== undefined && subpage.name !== undefined) {
-					return subpage.name;
-				}
-
-				return "profile";
+				return subpage.name || "profile";
 			}
 		};
 

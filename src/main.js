@@ -1,0 +1,1 @@
+var app = angular.module('issueTracker', ['ngCookies', 'ngRoute', 'ngTouch', 'base64']);

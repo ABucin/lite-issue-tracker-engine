@@ -1,5 +1,5 @@
 app.controller('DashboardCtrl', ['$scope', '$rootScope', '$location', 'AnalyticsService', 'LogsService',
-function ($scope, $rootScope, $location, AnalyticsService, LogsService) {
+	function ($scope, $rootScope, $location, AnalyticsService, LogsService) {
 
 		/**
 		 * Document loading configuration.
@@ -7,7 +7,10 @@ function ($scope, $rootScope, $location, AnalyticsService, LogsService) {
 		angular.element(document).ready(function () {
 			AnalyticsService.fetchChartData('loggedHours', '#chartLoggedHours');
 			AnalyticsService.fetchChartData('effortEstimation', '#chartEffortEstimation');
-			LogsService.fetchLogData($rootScope.dashboard.logEntries);
+			LogsService.fetchLogData()
+				.then(function (response) {
+					angular.copy(response, $rootScope.dashboard.logEntries);
+				});
 		});
 
 		/**
@@ -23,4 +26,4 @@ function ($scope, $rootScope, $location, AnalyticsService, LogsService) {
 			}
 		};
 
-}]);
+	}]);

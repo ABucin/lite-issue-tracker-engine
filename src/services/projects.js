@@ -1,13 +1,7 @@
-app.service('ProjectsService', ['$rootScope', '$cookies', 'HttpService',
-	function ($rootScope, $cookies, HttpService) {
+app.service('ProjectsService', ['HttpService',
+	function (HttpService) {
 
 		this.updateProject = function(oldProjectId, project){
-			var callback = function(data) {
-				var temp = $cookies.getObject('user');
-				temp.project = data.project;
-				$cookies.putObject('user', temp);
-			};
-
-			HttpService.putData('projects/' + oldProjectId, project, callback);
+			return HttpService._put('projects/' + oldProjectId, project);
 		};
 }]);
