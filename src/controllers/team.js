@@ -6,7 +6,7 @@ app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 
 
 		$scope.modalTemplates = [{
 			url: 'views/modals/team/user-assign.html'
-			}];
+		}];
 
 		$scope.templateUserAssignModal = $scope.modalTemplates[0];
 
@@ -31,7 +31,10 @@ app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 
 		 * Selects a team member.
 		 */
 		$scope.selectTeamMember = function (userId) {
-			UserService.getUser(userId, $scope.selectedTeamMember);
+			UserService.getUser(userId)
+				.then(function (response) {
+					angular.copy(response[0], $scope.selectedTeamMember);
+				});
 		};
 
 		/**
@@ -39,7 +42,12 @@ app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 
 		 */
 		$scope.getUnassignedUsers = function () {
 			$scope.unassignedUsers = [];
-			UserService.getUnassignedUsers($scope.unassignedUsers);
+			UserService.getUnassignedUsers()
+				.then(function (response) {
+					for (var i in response) {
+						$scope.unassignedUsers.push(response[i]);
+					}
+				});
 		};
 
 		/**
@@ -49,6 +57,28 @@ app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 
 			$rootScope.submitted = false;
 			$rootScope.general.errors = [];
 			$('#user-assignment-modal').modal('hide');
+		};
+
+		var handleUpdateUser = function (response) {
+			$rootScope.users = response;
+			$rootScope.userTickets = [];
+			$rootScope.tickets = {
+				created: [],
+				inProgress: [],
+				testing: [],
+				done: []
+			};
+
+			for (var i in response) {
+				var tickets = $rootScope.users[i].tickets;
+
+				for (var j in tickets) {
+					var status = tickets[j].status;
+					tickets[j].creator = $rootScope.users[i].username;
+					$rootScope.userTickets.push(tickets[j]);
+					$rootScope.tickets[status].push(tickets[j]);
+				}
+			}
 		};
 
 		/**
@@ -62,7 +92,8 @@ app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 
 					$('#user-assignment-modal').modal('hide');
 					UserService.updateUser(username, {
 						project: $rootScope.project
-					}, $rootScope.users);
+					})
+						.then(handleUpdateUser);
 				}
 			},
 			unset: function (username, event) {
@@ -70,7 +101,8 @@ app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 
 				event.stopPropagation();
 				UserService.updateUser(username, {
 					project: "unassigned"
-				}, $rootScope.users);
+				})
+					.then(handleUpdateUser);
 			}
 		};
 
@@ -105,4 +137,4 @@ app.controller('TeamCtrl', ['$scope', '$rootScope', '$location', 'UserService', 
 			return (totalLoggedTime / totalEstimatedTime).toFixed(2);
 		};
 
-}]);
+	}]);

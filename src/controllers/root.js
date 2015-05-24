@@ -1,5 +1,3 @@
-var app = angular.module('issueTracker', ['ngCookies', 'ngRoute', 'ngTouch', 'base64']);
-
 app.config(['$routeProvider',
 	function ($routeProvider) {
 		/**
@@ -37,15 +35,40 @@ app.config(['$routeProvider',
 	.controller('RootCtrl',
 	['$scope', '$rootScope', '$location', '$http', '$cookies', 'HttpService', 'UserService', 'AuthenticationService', 'SettingsService', 'SecurityService',
 		function ($scope, $rootScope, $location, $http, $cookies, HttpService, UserService, AuthenticationService, SettingsService, SecurityService) {
+			var handleFetchUser = function (response) {
+				$rootScope.users = response;
+				$rootScope.userTickets = [];
+				$rootScope.tickets = {
+					created: [],
+					inProgress: [],
+					testing: [],
+					done: []
+				};
+
+				for (var i in response) {
+					var tickets = $rootScope.users[i].tickets;
+
+					for (var j in tickets) {
+						var status = tickets[j].status;
+						tickets[j].creator = $rootScope.users[i].username;
+						$rootScope.userTickets.push(tickets[j]);
+						$rootScope.tickets[status].push(tickets[j]);
+					}
+				}
+			};
+
 			/**
 			 * Document loading configuration.
 			 */
 			angular.element(document).ready(function () {
 				if ($rootScope.isAuthenticated()) {
 					// disable when user auth in place
-					UserService.fetchUserData();
-					// caches the settings for the current user
-					SettingsService.loadSettings();
+					UserService.fetchUserData()
+						.then(function (response) {
+							handleFetchUser(response);
+							// caches the settings for the current user
+							SettingsService.loadSettings();
+						});
 				}
 			});
 
@@ -208,7 +231,17 @@ app.config(['$routeProvider',
 
 				if (isValid) {
 					$scope.modal.registration('hide');
-					AuthenticationService.register($rootScope.registration);
+					AuthenticationService.register($rootScope.registration)
+						.then(function (response) {
+							$cookies.putObject('user', response);
+							$rootScope.general.errors = [];
+							$("#register-modal").modal('hide');
+							$('#register-success-modal').modal('show');
+							// caches the settings for the current user
+							return SettingsService.loadSettings();
+						}, function (error) {
+							$rootScope.general.errors.push(error);
+						});
 				}
 			};
 
@@ -221,7 +254,18 @@ app.config(['$routeProvider',
 
 				if (isValid) {
 					$rootScope.submitted = false;
-					AuthenticationService.login($rootScope.form.login);
+					AuthenticationService.login($rootScope.form.login)
+						.then(function (response) {
+							response.password = $rootScope.form.login.password;
+							$cookies.putObject('user', response);
+							// caches the settings for the current user
+							return SettingsService.loadSettings();
+						}, function (error) {
+							$rootScope.general.errors.push(error);
+						})
+						.then(function () {
+							$rootScope.navigate('dashboard');
+						});
 				}
 			};
 
@@ -229,7 +273,15 @@ app.config(['$routeProvider',
 			 * Logs out the current user.
 			 */
 			$scope.logout = function () {
-				AuthenticationService.logout();
+				AuthenticationService.logout()
+					.then(function () {
+						$cookies.remove('user');
+						$cookies.remove('page');
+						$cookies.remove('settings');
+						$cookies.remove('analytics-subpage');
+						$cookies.remove('settings-subpage');
+						$rootScope.navigate('login');
+					});
 			};
 
 			/**

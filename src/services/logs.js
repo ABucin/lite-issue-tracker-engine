@@ -1,17 +1,11 @@
 app.service('LogsService', ['HttpService',
 	function (HttpService) {
 
-		this.logData = function (userId, log, logEntries) {
-			var callback = function (data) {
-				logEntries.push(data);
-			};
-			HttpService.postData('users/' + userId + '/logs', log, callback);
+		this.logData = function (log) {
+			return HttpService._post('logs', log);
 		};
 
-		this.fetchLogData = function (logEntries) {
-			var callback = function (data) {
-				angular.copy(data, logEntries);
-			};
-			HttpService.getData('logs', null, callback);
+		this.fetchLogData = function () {
+			return HttpService._get('logs');
 		};
 }]);
